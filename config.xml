@@ -4,15 +4,15 @@
 	id		= "com.phonegap.getting.started"
 	version 	= "1.0.0">
 
-	<name>PhoneGap: Getting Started</name>
+	<name>FrancesGO Mobile - Argentina</name>
 
 	<description>
-		A template for getting started with PhoneGap development and build.phonegap.com
+		FrancesGO Mobile Client for BVBA Frances Argentina
 	</description>
 
-	<author href="http://alunny.github.com"
-		email="andrew.lunny@nitobi.com">
-		Andrew Lunny
+	<author href="http://www.artdecode.com.ar"
+		email="gustavo.garcia@artdecode.com.ar">
+		Gustavo Felipe Garcia
 	</author>
 
 	<icon src="icon.png" gap:role="default" />
