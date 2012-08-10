@@ -16,14 +16,14 @@
 	</author>
 
 	<icon src="icon.png" gap:role="default" />
-	<icon src="images/icons/ios/icon_57x57.png" width="57" height="57" />
-	<icon src="images/icons/ios/icon_72x72.png" gap:platform="ios" width="72" height="72" />
-	<icon src="images/icons/ios/icon_114x114.png" width="114" height="114" />
-	<icon src="images/icons/android/icon_48x48.png" gap:platform="android" gap:density="mdpi" />
-	<icon src="images/icons/android/icon_72x72.png" gap:platform="android" gap:density="hdpi" />
-	<icon src="images/icons/android/icon_96x96.png" gap:platform="android" gap:density="xhdpi" />
-	<icon src="images/icons/blackberry/icon.png" gap:platform="blackberry" />
-	<icon src="images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
+	<icon src="assets/images/icons/ios/icon_57x57.png" width="57" height="57" />
+	<icon src="assets/images/icons/ios/icon_72x72.png" gap:platform="ios" width="72" height="72" />
+	<icon src="assets/images/icons/ios/icon_114x114.png" width="114" height="114" />
+	<icon src="assets/images/icons/android/icon_48x48.png" gap:platform="android" gap:density="mdpi" />
+	<icon src="assets/images/icons/android/icon_72x72.png" gap:platform="android" gap:density="hdpi" />
+	<icon src="assets/images/icons/android/icon_96x96.png" gap:platform="android" gap:density="xhdpi" />
+	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
+	<icon src="assets/images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
 	
 	<gap:splash src="splash.png" />
 
