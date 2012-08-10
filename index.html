@@ -3,15 +3,15 @@
   <head>
     <title>Frances Go</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.min.css" />
-    <link href='assets/stylesheets/css/themes/bbva.css' rel='stylesheet' />
-    <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
-	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript"  src="assets/js/jquery.mobile-1.1.0.min.js"></script>
-	<script type="text/javascript"  src="assets/js/francesgo.js"></script>
+	<link rel="stylesheet"  href="stylesheets/jquery.mobile-1.1.0.min.css" />
+    <link href='stylesheets/css/themes/bbva.css' rel='stylesheet' id="theme-css"/>
+    <link href='stylesheets/css/style.css' rel='stylesheet' />
+	<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript"  src="js/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript"  src="js/francesgo.js"></script>
   </head>
   <body>
-    <div data-role='page' data-theme='d' id="listar-beneficios">
+    <div class="banner" data-role='page' data-theme='d' id="listar-beneficios">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
         <h1>Beneficios</h1>
@@ -19,8 +19,7 @@
       </div>
   	  <div data-role="content">
 		
-		<div class="content-primary">
-		<img src='assets/images/frances_top_banner.png' />
+		<img src='images/frances_top_banner.png' />
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-beneficios" data-inset='true' data-role='listview'>
           
@@ -31,13 +30,14 @@
             <a data-role='button' data-theme='f' href='#buscar-beneficios'>Buscar Beneficios</a>
           </div>
         </div>
-        </div>
+        
       </div>
+      <div  data-role="footer" data-theme="b" ><img id="bannerImage"  /></div>
       </div>
      
      <!-- ********************* listar beneficios ************************** -->
      
-    <div data-role='page' data-theme='d' id="menu-principal">
+    <div class="banner" data-role='page' data-theme='d' id="menu-principal">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
         <h1>Menu principal</h1>
@@ -45,7 +45,7 @@
         <div class="content">
 					<ul data-role="listview">
 						<li data-role="list-divider">Frances GO</li>
-						<li><a href="#listar-beneficios">Baneficios</a></li>
+						<li><a href="#listar-beneficios">Beneficios</a></li>
 						<li><a href="#listar-sucursales">Sucursales</a></li>				
 						<li><a href="#listar-cajeros">Cajeros</a></li>
 						<li>Notificaciones SMS
@@ -55,32 +55,45 @@
 						</ul>	
 						</li>
 						<li><a href="#preferencias">Preferencias</a></li>
+						<li><a href="#ayuda">Ayuda</a></li>
 					</ul>
 		</div>
      </div>
      
      <!-- ********************* menu principal ************************** -->
+    <div class="banner" data-role='page' data-theme='d' id="ayuda">
+      <div data-position='fixed' data-role='header' data-theme='e'>
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+        <h1>Ayuda</h1>
+      </div>
+        <div class="content">
+        
+		</div>
+     </div>
      
-         <div data-role='page' data-theme='d' id="preferencias">
+     <!-- ********************* ayuda ************************** -->
+     
+         <div class="banner" data-role='page' data-theme='d' id="preferencias">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
         <h1>Preferencias</h1>
       </div>
         <div class="content">
-					<ul data-role="listview">
-						<li data-role="list-divider">Frances GO</li>
-						<li><a href="#listar-beneficios">Baneficios</a></li>
-						<li><a href="">Sucursales</a></li>				
-						<li><a href="">Cajeros</a></li>
-						<li><a href="#registracion">Registrarse</a></li>
-						<li><a href="">Preferencias</a></li>
-					</ul>
+        	<h3>Tema:</h3>
+			<select id="preferencias-theme" data-mini='true'  onchange="changeTheme(this)" >
+              <option >Bbva</option>
+              <option >Boca</option>
+              <option >River</option>
+            </select>
+            <h3>Eliminar cache</h3>
+			<a id="preferencias-eliminar-cache" data-role='button' data-theme='f'>Eliminar cache</a>
+            					
 		</div>
      </div>
    
      <!-- ********************* fin preferencias ************************** -->
      
-    <div data-role='page' data-theme='d' id="ver-beneficios">
+    <div  data-role='page' data-theme='d' id="ver-beneficios">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1>Beneficio</h1>
@@ -103,7 +116,15 @@
           Vigencia:
           <p id='beneficio-vigencia'>
           </p>
+          Tarjetas:
+          <p id='beneficio-listaTarjetasAsociadas'>
+          </p>
           <div id='beneficio-direccion' class='address'>
+            
+          </div>
+          <p id='beneficio-infoContacto'>
+          </p>
+          <div id='beneficio-rubros' class='address'>
             
           </div>
         </div>
@@ -122,7 +143,7 @@
      <!-- ********************* ver-beneficios ************************** -->
      
      
-    <div data-role='page' data-theme='d' id="buscar-beneficios">
+    <div class="banner" data-role='page' data-theme='d' id="buscar-beneficios">
       <div  data-role='header' data-position='fixed'  data-theme='e'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1>Beneficios</h1>
@@ -146,7 +167,7 @@
               </fieldset>
             </div>
             <div data-role='collapsible'>
-              <h3>Campañas</h3>
+              <h3>Campa&ntilde;as</h3>
               <fieldset id="campanias-filter" data-role='controlgroup'>
               </fieldset>
             </div>
@@ -219,7 +240,7 @@
           <tbody>
           <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo documento</label></td>
           <td><select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  >
-              <option data-placeholder="true">Seleccionar...</option>
+              <option data-placeholder="true" value="-1">Seleccionar...</option>
             </select></td><td><input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /></td> </tr>
           </tbody>
           </table>
@@ -344,6 +365,8 @@
 		        </div>
 
 		  </div>	      
+		  
+		  
       </div>
       
       <!-- ************************************ registracion baja ************************************* -->
@@ -365,33 +388,28 @@
       </div>
       <!-- ************************************ registracion baja confirmacion ************************************* -->
       
-     <div data-role='page' data-theme='d' id="listar-sucursales">
+     <div class="banner" data-role='page' data-theme='d' id="listar-sucursales">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
         <h1>Sucursales</h1>
         <a data-theme='f' id='sucursales-mapa'>Mapa</a>
       </div>
   	  <div data-role="content">
-		
-		<div class="content-primary">
-		<img src='assets/images/frances_top_banner.png' />
+		<img src='images/frances_top_banner.png' />
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-sucursales" data-inset='true' data-role='listview'>
-          
-          
           
           </ul>
           <div class='submit'>
             <a data-role='button' data-theme='f' href='#buscar-sucursales'>Buscar Sucursales</a>
           </div>
         </div>
-        </div>
       </div>
       </div>
       
       <!-- ************************* listar sucursales -->
  
-    <div data-role='page' data-theme='d' id="buscar-sucursales">
+    <div class="banner" data-role='page' data-theme='d' id="buscar-sucursales">
       <div  data-role='header' data-position='fixed'  data-theme='e'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1>Sucursales</h1>
@@ -452,16 +470,15 @@
      <!-- ********************* ver-sucursales ************************** -->
    
          
-     <div data-role='page' data-theme='d' id="listar-cajeros">
+     <div class="banner" data-role='page' data-theme='d' id="listar-cajeros">
       <div data-position='fixed' data-role='header' data-theme='e'>
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
-        <h1>cajeros</h1>
+        <h1>Cajeros</h1>
         <a data-theme='f' id='cajeros-mapa'>Mapa</a>
       </div>
   	  <div data-role="content">
 		
-		<div class="content-primary">
-		<img src='assets/images/frances_top_banner.png' />
+		<img src='images/frances_top_banner.png' />
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-cajeros" data-inset='true' data-role='listview'>
           
@@ -473,7 +490,6 @@
           </div>
         </div>
         </div>
-      </div>
       </div>
       
       <!-- ************************* listar cajeros -->
@@ -496,7 +512,7 @@
         <div class='options'>
               <h3>Tipo Cajero</h3>
               <select id='buscar-cajeros-tipoCajero-filter' name='tipoCajero'    >
-            	<option data-placeholder="true">Seleccionar...</option>
+            	<option data-placeholder="true" value="-1" >Seleccionar...</option>
               </select>
         </div>
        	<label for="buscar-cajeros-expendeDolares" class="checkbox">Cajeros que expendan dolares</label>

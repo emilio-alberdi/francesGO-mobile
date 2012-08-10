@@ -50,7 +50,7 @@
 	
 	
 	
-	Preferences.userPreferences = new UserPreferences();
+	Preferences.userPreferences;
 
 	Preferences.update = function() {
 		localStorage.setObject('preferences', Preferences.userPreferences)
@@ -70,7 +70,7 @@
 	Preferences.get = function() {
 		
 		if (!Preferences.userPreferences) {
-			load();
+			return Preferences.load();
 		}
 		
 		return Preferences.userPreferences;
@@ -296,6 +296,11 @@
 	PersistService.prototype.createCache = function(collection) {
 		
 		var getById = function(item) {
+			try {
+				return parseInt(item.id)
+			}
+			catch (e) {
+			} 
 			return item.id
 		}
 		
@@ -312,12 +317,22 @@
 			persistService.collectionCache[getById(item)] = item;
 			
 		});
+		
+		persistService.collectionCache.init = true;
 	}
 	
 	PersistService.prototype.getById = function(id) {
 		
-		if (this.collectionCache) {
-			return this.collectionCache[id]
+		var value;
+		
+		
+		
+		if (this.collectionCache || !this.collectionCache.init) {
+			value =  this.collectionCache[id]
+		}
+		
+		if (value) {
+			return value;
 		}
 		else {
 		
@@ -483,14 +498,23 @@
 				})
 			
 				processCollection();
+				
+				//$.mobile.pageLoading(true);
+				
 			}
 			catch(e) {
 				console.log('error', e);
 			}
 		}
-	
+		
+		//$.mobile.pageLoading();
+		
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+			  
 			  console.log(textStatus, errorThrown);
+			  
+			  //$.mobile.pageLoading(true);
+				
 			  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 		}})
 		
@@ -544,57 +568,85 @@
 					filter.latitude = Preferences.get().latitude;
 					filter.longitude = Preferences.get().longitude;
 			   },
-			   filterCollection:function(data) { return data.beneficios}
+			   filterCollection:function(data) { return data.beneficios[0]}
 			   
 	});
 	
-	 beneficiosPersistenceService.showBeneficio = function(beneficio) {
+	beneficiosPersistenceService.getLogo = function(beneficio) {
+		var image = '';
 		
-	   
-		beneficio.comercios.forEach(function(comercio) {
+		if (beneficio.logoSmall) {
 			
-			if (!comercio.sucursales) {
-				return;
+			image = 'image-resources/'  + beneficio.logoSmall;
+		
+			console.log("beneficio.logoSmall",image);
+		}
+		else if (beneficio.listaRubrosAsociados) {
+			
+			var rubros = beneficio.listaRubrosAsociados.split(",");
+			
+			if (rubros.length > 0) {
+				
+				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]))
+				
+				if (rubro) {
+					
+					image = 'image-resources/'  + rubro.logoSmall;	
+				}
+				
 			}
 			
-			$("#ul-beneficios").append("<li><a id='" + comercio.uri + "' ><h3>" + comercio.nombre + "</h3><p id='" + comercio.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> <p>" + beneficio.descripcionPortal  +"</p></a></li>")
+		}
+	
+		return image;
+	}
+	
+	beneficiosPersistenceService.showBeneficio = function(beneficio) {
+		
+			var image = this.getLogo(beneficio);
+		
+			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img id='beneficio-" + beneficio.hash + "-logo' src='" + image + "' ></img> <div class='benefit'><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> <p>" + beneficio.descripcionPortal  +"</p></div></a></li>")
+			
+			$("#beneficio-" + beneficio.hash ).data("beneficio", beneficio)
 
-			
-			$("#" + comercio.uri).data("beneficio", beneficio)
-			$("#" + comercio.uri).data("comercio", comercio)
-			
-			try {
-				ensureGMaps(function () {
-					var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
-					
-					var sucursalPostion = new google.maps.LatLng(comercio.sucursales[0].coordenadaX, comercio.sucursales[0].coordenadaY);
-					
-					var distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
-					
-					distance = Math.ceil(distance/1000 )
-					
-					console.log("Comercio " + comercio.nombre, distance)
-					
-					$("#" + comercio.uri + "-distance").text(distance)
-				})
-				
-			}
-			catch(e) {
-				
-			}
-			
-			
-			$("#" + comercio.uri).click(function(e) {
+			$("#beneficio-" + beneficio.hash).click(function(e) {
 				
 				$.mobile.changePage("#ver-beneficios")
 				
-				$("#ver-beneficios").trigger({type:"display-data", beneficio:$(this).data("beneficio"), comercio:$(this).data("comercio")})
+				$("#ver-beneficios").trigger({type:"display-data", beneficio:$(this).data("beneficio")})
 				
 			})
 
 			
-		}) 
-		
+			try {
+				ensureGMaps(function () {
+					
+					try {
+						var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+						
+						var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
+						
+						var distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
+						
+						distance = Math.ceil(distance/1000 )
+						
+						console.log("Comercio " + beneficio.nombreComercio, distance)
+						
+						$("#beneficio-" + beneficio.hash + "-distance").text(distance + "km.")
+							
+					}
+					catch(e) {
+						console.log("Comercio error " ,e)
+					}
+				
+				})
+				
+			}
+			catch(e) {
+				console.log("Comercio error " ,e)
+			}
+			
+	
    };
 
    var sucursalesPersistenceService = new PersistService({name:'sucursales', 
@@ -722,6 +774,7 @@
 														   collection.forEach(function(rubro) {
 															   rubro.selected = false; 
 														   });
+														   
 												       },
 	                                                   mergeFunction:function(rubroPersistedItem,rubroItem) {
 	                                                	   rubro.selected = rubroPersistedItem.selected;
@@ -729,6 +782,50 @@
 	                                                   }
 													   
 	});
+	
+	rubrosPersistenceService.subRubros = {}
+	
+	
+	rubrosPersistenceService.createSubRubroList = function() {
+		
+		this.getCollection(function (rubros) {
+			
+			rubros.forEach(function(rubro) {
+				
+				if (!rubro.subRubros) {
+					return;
+				}
+					
+				rubro.subRubros.forEach(function (subRubro) {
+					rubrosPersistenceService.subRubros[subRubro.id] = rubro.id
+				})
+				
+				rubrosPersistenceService.subRubros.init = true;
+					
+			})
+		
+			
+		}) 
+		
+	}
+
+	rubrosPersistenceService.getRubroPadre = function(id) {
+		
+		if (!this.subRubros.init) {
+			
+			this.createSubRubroList()
+		}
+	
+		var rubro = this.getById(id)
+		
+		if (rubro) {
+			return rubro;
+		}
+		
+		var rubroId =  this.subRubros[id]
+		
+		return this.getById(rubroId);
+	}
 	
 	var zonasPersistenceService = new PersistService({name:'regionesOrdenables', 
 		   											  remoteService:remoteService, 
@@ -771,6 +868,10 @@
 		  remoteService:remoteService, 
 	      filterCollection:function(data) { return data.codigosAreaCelular[0];}
 	      });	
+	var bannersPersistenceService = new PersistService({name:'banners', 
+		  service:baseUrl + 'mobile-banners.json',
+		  filterCollection:function(data) { return data.banners[0];}
+	      });	
 
 	var campaniasPersistenceService = new PersistService({name:'campanias', 
 	       service:baseUrl + 'mobile-campanias.json',
@@ -809,6 +910,21 @@
         'streetViewControl' : false
     }
 	
+	function releaseData() {
+			
+		beneficiosPersistenceService.remove()
+		sucursalesPersistenceService.remove()
+		cajerosPersistenceService.remove()
+		rubrosPersistenceService.remove()
+		zonasPersistenceService.remove()
+		tiposDocumentoPersistenceService.remove()
+		operadoresTelefonicoPersistenceService.remove()
+		tipoCajerosPersistenceService.remove()
+		codigosAreaCelularPersistenceService.remove()
+		bannersPersistenceService.remove()
+		
+	}
+	
 	function registerGMapsToPage(pageName) {
 		$("#" + pageName).live('pagebeforehide',function() {
 		//	$('#'+ pageName + '-mapa').gmap('clear', 'markers');
@@ -826,17 +942,68 @@
 		
 	}
 
+
+	function changeTheme(select) {
+		
+		Preferences.get().theme = $(select).val()
+		
+		Preferences.update();
+		
+		$("#theme-css").attr("href",'stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()   + '.css');
+		
+	}
+	
+	
 	
 	function francesGORegisterEvents() {
-
-		
 
 	registerGMapsToPage('object-mapa');
 	registerGMapsToPage('objects-mapa');
 	registerGMapsToPage('ver-sucursal');
 	registerGMapsToPage('ver-cajero');
+	
+	$('#preferencias-eliminar-cache').click(releaseData)
+	
+	if (Preferences.get().theme && Preferences.get().theme.length > 0) {
+		$("#theme-css").attr("href",'stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()  + '.css')
 		
-	console.log('start francesGORegisterEvents ');	
+		$("#preferencias-theme").val(Preferences.get().theme)
+		
+	}
+	
+		
+	console.log('start francesGORegisterEvents ');
+	
+	$(".banner").live("pageinit", function(event) {
+		
+		var page = $(this).page()
+		
+		page.append('<div  data-role="footer" data-theme="b" ><img id="bannerImage"  /></div>').trigger('create');
+		
+	})
+	
+	$(".banner").live("pageshow", function(event) {
+		
+		var page = $(this).page()
+		
+		
+		bannersPersistenceService.getCollection(function(collection) {
+			
+			if (!collection || collection.length == 0) {
+				return;
+			}
+			
+			var index=Math.floor(Math.random()*collection.length)
+			
+			var nombreArchivo = collection[index].nombreArchivo;
+			
+			var image = page.find('#bannerImage');
+			
+			image.attr("src", 'image-resources/' + nombreArchivo);
+			
+		});
+	})
+
 		
 	$("#registracion-baja").bind('display-data',function(e) {
 		
@@ -1126,9 +1293,7 @@
 	
 		var beneficio = e.beneficio;
 		
-		var comercio = e.comercio;
-	
-		$("#beneficio-legales-comercio").text(comercio.nombre)
+		$("#beneficio-legales-comercio").text(beneficio.nombreComercio)
 	
 		$("#beneficio-legales-vigencia").text(beneficio.textoVigencia)
 		
@@ -1143,9 +1308,7 @@
 		
 		var beneficio = e.beneficio;
 		
-		var comercio = e.comercio;
-				
-		$("#beneficio-title").html("<h1>" + comercio.nombre + "</h1>")
+		$("#beneficio-title").html("<h1>" + beneficio.nombreComercio + "</h1>")
 	
 		$("#beneficio-descripcionPortal").text(beneficio.descripcionPortal)
 		
@@ -1153,52 +1316,90 @@
 		
 		$("#beneficio-vigencia").text(beneficio.textoVigencia)
 		
-		$("#beneficio-dias").text(beneficio.dias.join(","))
+		$("#beneficio-dias").text(beneficio.dias)
+		
+		$("#beneficio-listaTarjetasAsociadas").text(beneficio.listaTarjetasAsociadas)
+		
+		$("#beneficio-infoContacto").empty();
+		
+		if (beneficio.telefono1)  {
+			$("#beneficio-infoContacto").text($("#beneficio-infoContacto").text() + beneficio.telefono1 + ' ')
+		}
+		if (beneficio.telefono2)  {
+			$("#beneficio-infoContacto").text($("#beneficio-infoContacto").text() + beneficio.telefono2 + ' ')
+		}
+		if (beneficio.websiteVenta)  {
+			$("#beneficio-infoContacto").text($("#beneficio-infoContacto").text() + beneficio.websiteVenta + ' ')
+		}
 		
 		$("#beneficio-direccion").empty();
+			
+		var distance;
 		
-		comercio.sucursales.forEach(function(sucursal){
+		try {
+			var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 			
-			var distance;
+			var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
 			
-			try {
-				var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
-				
-				var sucursalPostion = new google.maps.LatLng(sucursal.localizacion.coordenadaX, sucursal.localizacion.coordenadaY);
-				
-				distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
-				
-				distance = Math.ceil(distance/1000 )
-			}
-			catch(e) {
-				console.log("Error", e);
-			}
+			distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
 			
-			if (sucursal.localizacion) {
+			distance = Math.ceil(distance/1000 )
+		}
+		catch(e) {
+			console.log("Error", e);
+		}
 		
-				$("#beneficio-direccion").append("Sucursal: " + sucursal.nombre +"  <p class='direccion'><strong>Direcci�n:</strong> " + sucursal.localizacion.calle + " " + sucursal.localizacion.numero +"<span>(" + distance +" km)</span></p>");
-				
-				var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ comercio.nombre+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+		$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Direcci�n:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
+		
+		if (beneficio.listaRubrosAsociados) {
+		
+			$("#beneficio-rubros").empty()
 			
-				$('#ver-beneficio-mapa').gmap({ 'center': sucursal.localizacion.coordenadaX + ','+ sucursal.localizacion.coordenadaY})
+			var rubros = beneficio.listaRubrosAsociados.split(",");
+			
+			rubros.forEach(function(rubroId) {
 				
-				$('#ver-beneficio-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-					$('#ver-beneficio-mapa').gmap('addMarker', {'position': sucursal.localizacion.coordenadaX + ','+ sucursal.localizacion.coordenadaY, 'bounds': true}).click(function() {
-						$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-					});
-				});
+				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]))
 				
-				$('#ver-beneficio-mapa').gmap('refresh')
+				if (rubro && rubro.logoSmall) {
 					
+					$("#beneficio-rubros").append("<img alt='" + rubro.nombre + "' src='image-resources/" + rubro.logoSmall + "' />")
+					
+				}
+				
+			})
+			
+			
+		}
+		
+		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+		
+		$('#ver-beneficio-mapa').gmap({ 'center': beneficio.latitud + ','+ beneficio.longitud})
+			
+		$('#ver-beneficio-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
+	
+			var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
+			
+			var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
+			
+			if (imageIcon) {
+				marker.icon = imageIcon;
 			}
 			
-		})
+			$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
+				$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
+			});
+		});
+		
+		$('#ver-beneficio-mapa').gmap('refresh')
+		
+		
 		
 		$("#ver-beneficio-legales-link").click(function() {
 			
 			$.mobile.changePage("#beneficio-legales")
 			
-			$("#beneficio-legales").trigger({type:"display-data", beneficio:beneficio, comercio:comercio})
+			$("#beneficio-legales").trigger({type:"display-data", beneficio:beneficio})
 				
 		})
 		
@@ -1206,13 +1407,13 @@
 			
 			$.mobile.changePage("#object-mapa")
 			
-			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, comercio:comercio, title:'Beneficio'})
+			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
 		})
 		
 	})
 	
-	$("#beneficio-mapa").click(function() {
+	$("#beneficios-mapa").click(function() {
 		
 		$("#objects-mapa").trigger({type:"display-data-beneficio",title:'Beneficios'})
 		
@@ -1231,20 +1432,23 @@
 		beneficiosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(beneficio) {
 	
-				beneficio.comercios.forEach(function(comercio) {
-		
-					var sucursal = comercio.sucursales[0]
+				var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 				
-					var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ comercio.nombre+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+				$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
 					
-					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': sucursal.localizacion.coordenadaX + ','+ sucursal.localizacion.coordenadaY, 'bounds': true}).click(function() {
-							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-						});
+					var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
+					
+					var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
+					
+					if (imageIcon) {
+						marker.icon = imageIcon;
+					}
+					
+					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
+						$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
 					});
-					
 				});
-				
+			
 			});
 			
 		});	
@@ -1258,27 +1462,29 @@
 		}
 		var beneficio = e.beneficio;
 		
-		var comercio = e.comercio;
-		
-		var sucursal = comercio.sucursales[0]
-	
-		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ comercio.nombre+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 
 		$('#object-mapa-mapa').gmap('clear', 'markers');
 		
-		console.log("map init", sucursal)
-		
-		$('#ver-beneficio-mapa').gmap({ 'center': sucursal.localizacion.coordenadaX + ','+ sucursal.localizacion.coordenadaY})
+		$('#ver-beneficio-mapa').gmap({ 'center': beneficio.latitud + ','+ beneficio.longitud})
 				
+		var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
 		
-		$('#object-mapa-mapa').gmap('addMarker', {'position': sucursal.localizacion.coordenadaX + ','+ sucursal.localizacion.coordenadaY, 'bounds': true}).click(function() {
+		var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
+		
+		if (imageIcon) {
+			marker.icon = imageIcon;
+		}
+		
+		$('#object-mapa-mapa').gmap('addMarker', marker).click(function() {
 			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
 		});
+		
 		$('#object-mapa-mapa').gmap('addShape', 'Circle', { 
 			'strokeWeight': 0, 
 			'fillColor': "#008595", 
 			'fillOpacity': 0.25, 
-			'center': new google.maps.LatLng(sucursal.localizacion.coordenadaX ,+ sucursal.localizacion.coordenadaY), 
+			'center': new google.maps.LatLng(beneficio.latitud,beneficio.longitud), 
 			'radius': 15, 
 			'clickable': false 
 		});
@@ -1380,7 +1586,7 @@
 					var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 					
 					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true}).click(function() {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 						});
 					});
@@ -1411,7 +1617,7 @@
 		
 		$('#object-mapa-mapa').gmap({ 'center': new google.maps.LatLng(sucursal.latitud , sucursal.longitud) })
 		
-		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(sucursal.latitud , sucursal.longitud) , 'bounds': true}).click(function() {
+		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(sucursal.latitud , sucursal.longitud) , 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
 			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 		});
 	
@@ -1464,7 +1670,7 @@
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 	
-		$('#ver-sucursal-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true}).click(function() {
+		$('#ver-sucursal-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
 			$('#ver-sucursal-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 		});
 		
@@ -1641,7 +1847,7 @@
 					var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ cajero.nombre+'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 					
 					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true}).click(function() {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true, icon:'images/cajero.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 						});
 					});
@@ -1672,7 +1878,7 @@
 		
 		$('#object-mapa-mapa').gmap({ 'center': new google.maps.LatLng(cajero.latitud , cajero.longitud) })
 		
-		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(cajero.latitud , cajero.longitud) , 'bounds': true}).click(function() {
+		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(cajero.latitud , cajero.longitud) , 'bounds': true,icon:'images/cajero.gif'}).click(function() {
 			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 		});
 	
@@ -1723,7 +1929,7 @@
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 	
-		$('#ver-cajero-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true}).click(function() {
+		$('#ver-cajero-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true,icon:'images/cajero.gif'}).click(function() {
 			$('#ver-cajero-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 		});
 		
@@ -1742,8 +1948,6 @@
 		})
 		
 	})
-
-
 	
 	$("#buscar-cajeros").live('pageshow',function() {
 
@@ -1793,8 +1997,11 @@
 				
 			}
 		})
-	
+
+		
 	});
+	
+
 	
 	$(document).ready(function(){
 	   var s = document.createElement("script");
