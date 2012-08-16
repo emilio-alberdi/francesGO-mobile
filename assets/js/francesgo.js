@@ -579,7 +579,7 @@
 		
 		if (beneficio.logoSmall) {
 			
-			image = 'image-resources/'  + beneficio.logoSmall;
+			image = baseUrl + 'image-resources/'  + beneficio.logoSmall;
 		
 			console.log("beneficio.logoSmall",image);
 		}
@@ -593,7 +593,7 @@
 				
 				if (rubro) {
 					
-					image = 'image-resources/'  + rubro.logoSmall;	
+					image = baseUrl + 'image-resources/'  + rubro.logoSmall;	
 				}
 				
 			}
@@ -951,7 +951,7 @@
 		
 		Preferences.update();
 		
-		$("#theme-css").attr("href",'stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()   + '.css');
+		$("#theme-css").attr("href",'assets/stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()   + '.css');
 		
 	}
 	
@@ -967,7 +967,7 @@
 	$('#preferencias-eliminar-cache').click(releaseData)
 	
 	if (Preferences.get().theme && Preferences.get().theme.length > 0) {
-		$("#theme-css").attr("href",'stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()  + '.css')
+		$("#theme-css").attr("href",'assets/stylesheets/css/themes/' + Preferences.get().theme.toLowerCase()  + '.css')
 		
 		$("#preferencias-theme").val(Preferences.get().theme)
 		
@@ -1001,7 +1001,7 @@
 			
 			var image = page.find('#bannerImage');
 			
-			image.attr("src", 'image-resources/' + nombreArchivo);
+			image.attr("src", baseUrl + 'image-resources/' + nombreArchivo);
 			
 		});
 	})
@@ -1365,7 +1365,7 @@
 				
 				if (rubro && rubro.logoSmall) {
 					
-					$("#beneficio-rubros").append("<img alt='" + rubro.nombre + "' src='image-resources/" + rubro.logoSmall + "' />")
+					$("#beneficio-rubros").append("<img alt='" + rubro.nombre + "' src='" + baseUrl + "image-resources/" + rubro.logoSmall + "' />")
 					
 				}
 				
@@ -1588,7 +1588,7 @@
 					var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 					
 					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'assets/images/sucursal.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 						});
 					});
@@ -1619,7 +1619,7 @@
 		
 		$('#object-mapa-mapa').gmap({ 'center': new google.maps.LatLng(sucursal.latitud , sucursal.longitud) })
 		
-		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(sucursal.latitud , sucursal.longitud) , 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
+		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(sucursal.latitud , sucursal.longitud) , 'bounds': true,icon:'assets/images/sucursal.gif'}).click(function() {
 			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 		});
 	
@@ -1672,7 +1672,7 @@
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 	
-		$('#ver-sucursal-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'images/sucursal.gif'}).click(function() {
+		$('#ver-sucursal-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'assets/images/sucursal.gif'}).click(function() {
 			$('#ver-sucursal-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 		});
 		
@@ -1849,7 +1849,7 @@
 					var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ cajero.nombre+'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 					
 					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true, icon:'images/cajero.gif'}).click(function() {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true, icon:'assets/images/cajero.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 						});
 					});
@@ -1880,7 +1880,7 @@
 		
 		$('#object-mapa-mapa').gmap({ 'center': new google.maps.LatLng(cajero.latitud , cajero.longitud) })
 		
-		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(cajero.latitud , cajero.longitud) , 'bounds': true,icon:'images/cajero.gif'}).click(function() {
+		$('#object-mapa-mapa').gmap('addMarker', {'position':new google.maps.LatLng(cajero.latitud , cajero.longitud) , 'bounds': true,icon:'assets/images/cajero.gif'}).click(function() {
 			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 		});
 	
@@ -1931,7 +1931,7 @@
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 	
-		$('#ver-cajero-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true,icon:'images/cajero.gif'}).click(function() {
+		$('#ver-cajero-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true,icon:'assets/images/cajero.gif'}).click(function() {
 			$('#ver-cajero-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 		});
 		
@@ -2013,7 +2013,7 @@
 	     
 		   var s = document.createElement("script");
 		   s.type = "text/javascript";
-		   s.src  = "js/jquery.ui.map.full.min.js";
+		   s.src  = "assets/js/jquery.ui.map.full.min.js";
 		   $("head").append(s);
 
 		   $(document).trigger("google-loaded")
