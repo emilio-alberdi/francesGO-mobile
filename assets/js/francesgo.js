@@ -4,16 +4,15 @@
 
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 	
-   //baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   baseUrl = 'http://192.168.1.111:8080/francesGo2-portal/mobile/';
-   baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   
-   $( document ).bind( "mobileinit", function() {
+   	baseUrl = '';
+   	//baseUrl = 'http://192.168.1.111:8080/francesGo2-portal/mobile/';
+   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+   	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
 	    $.mobile.allowCrossDomainPages = true;
 	});
-		
+
 	navigator.geolocation.getCurrentPosition(function(position){
 		
 		Preferences.get().latitude = position.coords.latitude;
@@ -271,6 +270,11 @@
 		try {
 			var result =  persistService.loadCollection(data)
 			
+			if (!result) {
+				console.log('Collection is empty ', this.options.name)
+				return;
+			}
+			
 			this.createCache(result)
 			
 			if (processCollection){
@@ -328,7 +332,6 @@
 		var value;
 		
 		
-		
 		if (this.collectionCache || !this.collectionCache.init) {
 			value =  this.collectionCache[id]
 		}
@@ -339,6 +342,12 @@
 		else {
 		
 			var collection = localStorage.getObject(this.options.name);
+			
+			if (!collection) {
+				
+				
+				return;
+			}
 			
 			this.createCache(collection)
 			
@@ -412,6 +421,18 @@
 		this.remoteService.callFilter(filter, callback);
 	
 		
+	}
+
+
+	PersistService.prototype.forceReloadCollection = function() {
+		this.remove()
+		
+		if (this.getFilter()) {
+			this.getFilteredCollection(this.getFilter(), function(collection) {})
+		}
+		else {
+			this.getCollection(function(collection) {})
+		}
 	}
 
 	
@@ -501,7 +522,7 @@
 			
 				processCollection();
 				
-				//$.mobile.pageLoading(true);
+				$.mobile.hidePageLoadingMsg();
 				
 			}
 			catch(e) {
@@ -509,14 +530,14 @@
 			}
 		}
 		
-		//$.mobile.pageLoading();
+		$.mobile.showPageLoadingMsg();
 		
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
 			  console.log(textStatus, errorThrown);
 			  
-			  //$.mobile.pageLoading(true);
-				
+			  $.mobile.hidePageLoadingMsg();
+			  
 			  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 		}})
 		
@@ -914,16 +935,17 @@
 	
 	function releaseData() {
 			
-		beneficiosPersistenceService.remove()
-		sucursalesPersistenceService.remove()
-		cajerosPersistenceService.remove()
-		rubrosPersistenceService.remove()
-		zonasPersistenceService.remove()
-		tiposDocumentoPersistenceService.remove()
-		operadoresTelefonicoPersistenceService.remove()
-		tipoCajerosPersistenceService.remove()
-		codigosAreaCelularPersistenceService.remove()
-		bannersPersistenceService.remove()
+		beneficiosPersistenceService.forceReloadCollection()
+		sucursalesPersistenceService.forceReloadCollection()
+		cajerosPersistenceService.forceReloadCollection()
+		rubrosPersistenceService.forceReloadCollection()
+		zonasPersistenceService.forceReloadCollection()
+		tiposDocumentoPersistenceService.forceReloadCollection()
+		operadoresTelefonicoPersistenceService.forceReloadCollection()
+		tipoCajerosPersistenceService.forceReloadCollection()
+		codigosAreaCelularPersistenceService.forceReloadCollection()
+		bannersPersistenceService.forceReloadCollection()
+		
 		
 	}
 	
@@ -1069,27 +1091,48 @@
 		
 		 var callback = function(data) {
 			 $.mobile.changePage("#registracion-resultado")
+		
+			 $.mobile.hidePageLoadingMsg();
 			 
 			 $("#registracion-resultado-message").text("Para confirmar la baja le enviaremos un SMS al n�mero de celular registrado.")
 		 }
 		 
-		 $.ajax({url:baseUrl + "/mobile-registracion-baja.json", type:'POST', data:$('#registracion-baja-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+		 $.mobile.showPageLoadingMsg();
+		 
+		 $.ajax({url:baseUrl + "mobile-registracion-baja.json", type:'POST', data:$('#registracion-baja-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  console.log(textStatus, errorThrown);
+		
+			  $.mobile.hidePageLoadingMsg();
+				 
 		 }})
 		
 		
 	}) 
 	
 	$("#registracion-confirmation-send-link").click(function(e){
-		 
+		
+		
+		var aceptaTerminosLegales = $("#aceptaTerminosLegales").is(':checked') ;
+		
+		if (!aceptaTerminosLegales) {
+			alert("Debe aceptar los terminos y condiciones")
+			return;
+		}
+		
 		 var callback = function(data) {
+			 
 			 $.mobile.changePage("#registracion-resultado")
+			 
+			 $.mobile.hidePageLoadingMsg();
 			 
 			 $("#registracion-resultado-message").text(" Ha sido registrado satisfactoriamente. Le enviaremos un mensaje de bienvenida")
 		 }
 		 
-		 $.ajax({url:baseUrl + "/mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			  console.log(textStatus, errorThrown);
+		 $.mobile.showPageLoadingMsg();
+		 
+		 $.ajax({url:baseUrl + "mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+			 $.mobile.hidePageLoadingMsg();
+			 console.log(textStatus, errorThrown);
 		 }})
 		 
 			 
@@ -2049,6 +2092,7 @@
 		
 		callbackList = []
 	});
+	
 	
 
 	beneficiosPersistenceService.getCollection(function(collection) {
