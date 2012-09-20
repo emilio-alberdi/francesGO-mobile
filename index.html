@@ -1,70 +1,65 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Frances Go</title>
+    <title>Francés Go</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.min.css" />
-    <link href='assets/stylesheets/css/themes/bbva.css' rel='stylesheet' id="theme-css"/>
+    <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
     <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
 	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
-	<script type="text/javascript"  src="assets/js/jquery.mobile-1.1.0.min.js"></script>
-	<script type="text/javascript"  src="assets/js/francesgo.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="assets/js/francesgo.js"></script>
   </head>
   <body>
-    <div class="banner" data-role='page' data-theme='d' id="listar-beneficios">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+<!--   class="banner" data-theme='d' -->
+    <div  class="banner background" data-role='page'  id="listar-beneficios">
+      <div data-position='fixed' data-role='header' >
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
         <h1>Beneficios</h1>
-        <a data-theme='f' id='beneficios-mapa'>Mapa</a>
+        <a  id='beneficios-mapa'>Mapa</a>
       </div>
   	  <div data-role="content">
 		
-		<img src='assets/images/frances_top_banner.png' />
+		<img src='assets/images/francesGo-logo.png' />
+          <div class='submit'>
+            <a data-role='button'  href='#buscar-beneficios'>Buscar Beneficios</a>
+          </div>
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-beneficios" data-inset='true' data-role='listview'>
           
           
           
           </ul>
-          <div class='submit'>
-            <a data-role='button' data-theme='f' href='#buscar-beneficios'>Buscar Beneficios</a>
-          </div>
         </div>
         
       </div>
-      <div  data-role="footer" data-theme="b" ><img id="bannerImage"  /></div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
      
      <!-- ********************* listar beneficios ************************** -->
-     
-    <div class="banner" data-role='page' data-theme='d' id="menu-principal">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+    <div class="banner background " data-role='page'  id="menu-principal">
+      <div data-position='fixed'  data-role='header' >
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
         <h1>Menu principal</h1>
       </div>
-        <div class="content">
-					<ul data-role="listview">
-						<li data-role="list-divider">Frances GO</li>
-						<li><a href="#listar-beneficios">Beneficios</a></li>
-						<li><a href="#listar-sucursales">Sucursales</a></li>				
-						<li><a href="#listar-cajeros">Cajeros</a></li>
-						<li>Notificaciones SMS
-						<ul>
-							<li><a href="#registracion">Registración envio SMS</a></li>
-							<li><a href="#registracion-baja">Baja envio SMS</a></li>
-						</ul>	
-						</li>
-						<li><a href="#preferencias">Preferencias</a></li>
-						<li><a href="#ayuda">Ayuda</a></li>
-					</ul>
+        <img src='assets/images/francesGo-logo.png' />
+        <div class="content" align="center">
+						<a href='#listar-beneficios'><img src='assets/images/Beneficios-02.png'/></a><br/>
+						<a href='#listar-sucursales'><img src='assets/images/Sucursales-02.png'/></a><br/>
+						<a href='#listar-cajeros'><img src='assets/images/Cajeros-02.png'/></a><br/>
+						<a href='#notificacionesSMS'><img src='assets/images/SMS-02.png'/></a><br/>
+						<a href='#preferencias'><img src='assets/images/Preferencias-02.png'/></a><br/>
+						<a href='#ayuda'><img src='assets/images/Ayuda-02.png'/></a>
+					
 		</div>
+<!-- 		<div  data-role="footer" ><img id="bannerImage"  /></div> -->
      </div>
      
      <!-- ********************* menu principal ************************** -->
-    <div class="banner" data-role='page' data-theme='d' id="ayuda">
-      <div data-position='fixed' data-role='header' data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+    <div class="background banner" data-role='page' id="ayuda">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal'>Volver</a>
         <h1>Ayuda</h1>
       </div>
         <div class="content">
@@ -74,79 +69,71 @@
      
      <!-- ********************* ayuda ************************** -->
      
-         <div class="banner" data-role='page' data-theme='d' id="preferencias">
-      <div data-position='fixed' data-role='header' data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+         <div class="background" data-role='page' id="preferencias">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#menu-principal'>Volver</a>
         <h1>Preferencias</h1>
       </div>
         <div class="content">
         	<h3>Tema:</h3>
 			<select id="preferencias-theme" data-mini='true'  onchange="changeTheme(this)" >
-              <option >Bbva</option>
-              <option >Boca</option>
-              <option >River</option>
+              <option >FrancesGo</option>
+              <option >FrancesGoBeneficios</option>
+<!--               <option >River</option> -->
             </select>
             <h3>Eliminar cache</h3>
-			<a id="preferencias-eliminar-cache" data-role='button' data-theme='f'>Eliminar cache</a>
+			<a id="preferencias-eliminar-cache" data-role='button'>Eliminar cache</a>
             					
 		</div>
      </div>
    
      <!-- ********************* fin preferencias ************************** -->
      
-    <div  data-role='page' data-theme='d' id="ver-beneficios">
-      <div data-position='fixed' data-role='header' data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+    <div  class= 'banner background' data-role='page' id="ver-beneficios">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#listar-beneficios'>Back</a>
         <h1>Beneficio</h1>
-        <a data-theme='f' id="ver-beneficio-mapa-link2">Mapa</a>
       </div>
       <div id="beneficio-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->
-        <div class='title-image'>
+		<div class='title-image'>
           <div id='beneficio-title' class="title">
           </div>
-        </div>
         <div class='padding'>
-          <p id='beneficio-descripcionPortal'>
-          </p>
-          <p id='beneficio-mensajeCorto'>
-          </p>
-          Dias:
-          <p id='beneficio-dias'>
-          </p>
-          Vigencia:
-          <p id='beneficio-vigencia'>
-          </p>
-          Tarjetas:
-          <p id='beneficio-listaTarjetasAsociadas'>
-          </p>
+          <p id='beneficio-descripcionPortal'> </p> 
           <div id='beneficio-direccion' class='address'>
-            
           </div>
           <p id='beneficio-infoContacto'>
           </p>
-          <div id='beneficio-rubros' class='address'>
-            
-          </div>
-        </div>
+          
+       </div>
         <div class='mapa'>
           <a class='see' id="ver-beneficio-mapa-link">Ver en el Mapa &rarr;</a>
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
+        
+        <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-beneficio-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
+        
         <div class='legales'>
           <div class='padding'>
             <a id='ver-beneficio-legales-link'>Ver Legales</a>
           </div>
         </div>
       </div>
-    </div> 
+    </div>
+<!--     <div  data-role="footer" ><img id="bannerImage"  /></div>  -->
+    </div>
      
      <!-- ********************* ver-beneficios ************************** -->
      
      
-    <div class="banner" data-role='page' data-theme='d' id="buscar-beneficios">
-      <div  data-role='header' data-position='fixed'  data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+    <div class="banner background" data-role='page' id="buscar-beneficios">
+      <div  data-role='header' data-position='fixed'  >
+        <a data-icon='arrow-l' href='#menu-principal'>Back</a>
         <h1>Beneficios</h1>
       </div>
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
@@ -167,21 +154,23 @@
               <fieldset id="regionesOrdenables-filter" data-role='controlgroup'>
               </fieldset>
             </div>
-            <div data-role='collapsible'>
-              <h3>Campañas</h3>
-              <fieldset id="campanias-filter" data-role='controlgroup'>
-              </fieldset>
-            </div>
+<!--             <div data-role='collapsible'> -->
+<!--               <h3>Campañas</h3> -->
+<!--               <fieldset id="campanias-filter" data-role='controlgroup'> -->
+<!--               </fieldset> -->
+<!--             </div> -->
           </div>
         </div>
         <div class='submit'>
-          <a id="buscar-beneficios-link" data-role='button' data-theme='f'>Buscar</a>
+          <a id="buscar-beneficios-link" data-role='button' >Buscar</a>
         </div>
       </div>
       </div>
       <!-- ************************* buscar beneficios -->
-     <div data-role='page' data-theme='d' id="beneficio-legales">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+      
+      
+     <div class='background' data-role='page'  id="beneficio-legales">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1>Legales</h1>
       </div>
@@ -201,20 +190,21 @@
       
       <!-- ************************* beneficio legales -->
       
-      <div data-role='page' data-theme='d' id="object-mapa">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+      <div data-role='page' class='background' id="object-mapa">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1 id="object-mapa-title" >Beneficio</h1>
       </div>
       <div class='ui-content  show-map' data-role='content' data-scroll='y' role='main' style="height: 100%;width: 100%">
         <!-- /Contenido -->
        	<div class='map' id='object-mapa-mapa' style="height: 100%;width: 100%"></div>
+       	<div id="direcciones" style="width: 500px;"></div> 
       </div>
   	 </div>	
       
       <!-- ************************* beneficio mapa -->
-      <div data-role='page' data-theme='d' id="objects-mapa">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+      <div data-role='page' class='background' id="objects-mapa">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1 id="objects-mapa-title" >Beneficios</h1>
       </div>
@@ -226,9 +216,24 @@
   	  </div>	
       
       <!-- ************************* beneficios mapa -->
-       <div data-role='page' data-theme='d' id="registracion">
-      <div data-position='fixed' data-role='header' data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+      
+  	  <div data-role='page' class='banner background' id="notificacionesSMS">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal'>Back</a>
+        <h1>Notificaciones SMS</h1>
+      </div>
+    		<ul data-role="listview">
+	   			<li><a href="#registracion">Registrate para recibir avisos de promociones</a></li>
+				<li><a href="#registracion-baja">Baja de la recepcion de avisos de promociones</a></li>
+			</ul>
+<!-- 			<div  data-role="footer" ><img id="bannerImage"  /></div> -->
+  	 </div>	
+      
+      
+      
+       <div data-role='page' class='background' id="registracion">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#notificacionesSMS' >Volver</a>
         <h1>Registración SMS</h1>
       </div>
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
@@ -239,7 +244,7 @@
           <h3>Datos personales</h3>
           <table class="registracion">
           <tbody>
-          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo documento</label></td>
+          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>DNI</label></td>
           <td><select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  >
               <option data-placeholder="true" value="-1">Seleccionar...</option>
             </select></td><td><input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /></td> </tr>
@@ -261,7 +266,7 @@
 	          <tr><td> <label data-mini='true' for='registracion-codigoAreaCelular'>Código Area</label></td>
 	          <td><input data-mini='true' id='registracion-codigoAreaCelular' name='codigoAreaCelular' type='number' value='' max="4" maxlength="4" placeholder="Cod Area" class="required" /></td>
 	          <td> <label data-mini='true' for='registracion-numeroCelular'>Número:</label></td>
-	          <td><input data-mini='true' id='registracion-numeroCelular' name='numeroCelular' type='number' value='' max="8" maxlength="8" placeholder="Numero" class="required" /></td> </tr>
+	          <td><input data-mini='true' id='registracion-numeroCelular' name='numeroCelular' type='number' value='' max="8" maxlength="8" placeholder="Número" class="required" /></td> </tr>
 	          </tbody>
 	          </table>
 	       </div>
@@ -287,15 +292,15 @@
           </div>
         </form>
         <div class='submit'>
-          <a data-role='button' id="registracion-confirmation-link" data-theme='f' href='#registracion-confirmation'>Registrarse</a>
+          <a data-role='button' id="registracion-confirmation-link" href='#registracion-confirmation'>Registrarse</a>
         </div>
       </div>
     </div>
       <!-- ************************************ Registracion ************************************* -->
       
-       <div data-role='page' data-theme='d' id="registracion-confirmation">
-	      <div data-position='fixed' data-role='header' data-theme='e'>
-	        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+       <div data-role='page' class='background' id="registracion-confirmation">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#registracion'>Volver</a>
 	        <h1>Confirmacion</h1>
 	      </div>
 
@@ -309,14 +314,14 @@
 				</div>
 
 		        <div class='submit'>
-		          <a id="registracion-confirmation-send-link" data-role='button' data-theme='f' >Confirmar</a>
+		          <a id="registracion-confirmation-send-link" data-role='button' >Confirmar</a>
 		        </div>
 
 		  </div>	      
       </div>
       
-      <div data-role='page' data-theme='d' id="registracion-resultado">
-	      <div data-position='fixed' data-role='header' data-theme='e'>
+      <div data-role='page' class='background' id="registracion-resultado">
+	      <div data-position='fixed' data-role='header' >
 	        <h1>Registracion SMS</h1>
 	      </div>
 
@@ -327,7 +332,7 @@
 	             </div>
 			    
 		        <div class='submit'>
-		          <a  data-role='button' data-theme='f' href="#menu-principal">Menu Principal</a>
+		          <a  data-role='button'  href="#menu-principal">Menu Principal</a>
 		        </div>
 
 		  </div>	      
@@ -336,9 +341,9 @@
       
       <!-- ************************************ Confirmacion ************************************* -->
 
-       <div data-role='page' data-theme='d' id="registracion-baja">
-	      <div data-position='fixed' data-role='header' data-theme='e'>
-	        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+       <div data-role='page' class='background' id="registracion-baja">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#notificacionesSMS' >Volver</a>
 	        <h1>Baja envio SMS</h1>
 	      </div>
 
@@ -362,7 +367,7 @@
 		         </form>  
 	         
 		        <div class='submit'>
-		          <a data-role='button' data-theme='f' data-rel="dialog" href="#registracion-baja-confirmacion" >Confirmar</a>
+		          <a data-role='button' data-rel="dialog" href="#registracion-baja-confirmacion" >Confirmar</a>
 		        </div>
 
 		  </div>	      
@@ -371,9 +376,9 @@
       </div>
       
       <!-- ************************************ registracion baja ************************************* -->
-       <div data-role='page' data-theme='d' id="registracion-baja-confirmacion">
-	      <div data-position='fixed' data-role='header' data-theme='e'>
-	        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Volver</a>
+       <div data-role='page' class='background' id="registracion-baja-confirmacion">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#registracion-baja'>Volver</a>
 	        <h1>Confirmacion baja</h1>
 	      </div>
 
@@ -389,29 +394,30 @@
       </div>
       <!-- ************************************ registracion baja confirmacion ************************************* -->
       
-     <div class="banner" data-role='page' data-theme='d' id="listar-sucursales">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+     <div class="banner background" data-role='page' id="listar-sucursales">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
         <h1>Sucursales</h1>
-        <a data-theme='f' id='sucursales-mapa'>Mapa</a>
+        <a id='sucursales-mapa'>Mapa</a>
       </div>
+		<img src='assets/images/francesGo-logo.png' />
+          <div class='submit'>
+            <a data-role='button'  href='#buscar-sucursales'>Buscar Sucursales</a>
+          </div>
   	  <div data-role="content">
-		<img src='assets/images/frances_top_banner.png' />
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-sucursales" data-inset='true' data-role='listview'>
           
           </ul>
-          <div class='submit'>
-            <a data-role='button' data-theme='f' href='#buscar-sucursales'>Buscar Sucursales</a>
-          </div>
         </div>
       </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
       
-      <!-- ************************* listar sucursales -->
+      <!-- ************************* listar sucursales HASTA ACA -->
  
-    <div class="banner" data-role='page' data-theme='d' id="buscar-sucursales">
-      <div  data-role='header' data-position='fixed'  data-theme='e'>
+    <div class="banner background" data-role='page' id="buscar-sucursales">
+      <div  data-role='header' data-position='fixed'>
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
         <h1>Sucursales</h1>
       </div>
@@ -431,17 +437,18 @@
           </div>
         </div>
         <div class='submit'>
-          <a id="buscar-sucursales-link" data-role='button' data-theme='f'>Buscar</a>
+          <a id="buscar-sucursales-link" data-role='button'>Buscar</a>
         </div>
       </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
       <!-- ************************* buscar sucursales -->
    
-    <div data-role='page' data-theme='d' id="ver-sucursal">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+    <div data-role='page' class='banner background' id="ver-sucursal">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#listar-sucursales' >Back</a>
         <h1>Sucursal</h1>
-        <a data-theme='f' id="ver-sucursal-mapa-link2">Mapa</a>
+        <a id="ver-sucursal-mapa-link2">Mapa</a>
       </div>
       <div id="sucursal-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->
@@ -465,21 +472,28 @@
         <div class='mapa'>
           <div class='map' id='ver-sucursal-mapa'></div>
         </div>
+        
+         <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-sucursal-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
       </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
     </div> 
      
      <!-- ********************* ver-sucursales ************************** -->
    
          
-     <div class="banner" data-role='page' data-theme='d' id="listar-cajeros">
-      <div data-position='fixed' data-role='header' data-theme='e'>
+     <div class="banner background" data-role='page' id="listar-cajeros">
+      <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
         <h1>Cajeros</h1>
-        <a data-theme='f' id='cajeros-mapa'>Mapa</a>
+        <a id='cajeros-mapa'>Mapa</a>
       </div>
   	  <div data-role="content">
 		
-		<img src='assets/images/frances_top_banner.png' />
+		<img src='assets/images/francesGo-logo.png' />
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-cajeros" data-inset='true' data-role='listview'>
           
@@ -487,17 +501,18 @@
           
           </ul>
           <div class='submit'>
-            <a data-role='button' data-theme='f' href='#buscar-cajeros'>Buscar cajeros</a>
+            <a data-role='button' href='#buscar-cajeros'>Buscar cajeros</a>
           </div>
         </div>
         </div>
+<!--         <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
       
       <!-- ************************* listar cajeros -->
  
-    <div data-role='page' data-theme='d' id="buscar-cajeros">
-      <div  data-role='header' data-position='fixed'  data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+    <div data-role='page' class='banner background' id="buscar-cajeros">
+      <div  data-role='header' data-position='fixed'>
+        <a data-icon='arrow-l' href='#menu-principal'>Back</a>
         <h1>Cajeros</h1>
       </div>
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
@@ -516,19 +531,20 @@
             	<option data-placeholder="true" value="-1" >Seleccionar...</option>
               </select>
         </div>
-       	<label for="buscar-cajeros-expendeDolares" class="checkbox">Cajeros que expendan dolares</label>
-		<input id="buscar-cajeros-expendeDolares" type="checkbox" name="expendeDolares" />
+<!--        	<label for="buscar-cajeros-expendeDolares" class="checkbox">Cajeros que expendan dolares</label> -->
+<!-- 		<input id="buscar-cajeros-expendeDolares" type="checkbox" name="expendeDolares" /> -->
 				
         <div class='submit'>
-          <a id="buscar-cajeros-link" data-role='button' data-theme='f'>Buscar</a>
+          <a id="buscar-cajeros-link" data-role='button'>Buscar</a>
         </div>
       </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
       <!-- ************************* buscar cajeros -->
    
-    <div data-role='page' data-theme='d' id="ver-cajero">
-      <div data-position='fixed' data-role='header' data-theme='e'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+    <div data-role='page' class='banner background' id="ver-cajero">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#listar-cajeros'>Back</a>
         <h1>Cajero</h1>
         <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a>
       </div>
@@ -554,7 +570,14 @@
         <div class='mapa'>
           <div class='map' id='ver-cajero-mapa'></div>
         </div>
+        
+         <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-sucursal-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
       </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
     </div> 
      
      <!-- ********************* ver-cajeros ************************** -->
@@ -572,6 +595,8 @@
 			console.log('start francesGORegisterEvents error' ,e);	
 			
 		}
+		
+		
 	});
 	//-->
 	</script>
