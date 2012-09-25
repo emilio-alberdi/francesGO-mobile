@@ -952,9 +952,22 @@
 		
 	}
 	
+	//TODO 
+	function refreshMap(pageName){
+		$('#'+ pageName).gmap('clear', 'markers');
+		$('#'+ pageName).gmap('clear' , 'directionsRenderer');
+		var directionsRenderer = $('#' + pageName).gmap('get', 'services > DirectionsRenderer');
+		if (directionsRenderer) {
+			console.log("Ruta BORRADA OK")
+			directionsRenderer.setMap(null);
+			directionsRenderer.setPanel(null);
+		}
+	}
+	
+	//TODO 
 	function registerGMapsToPage(pageName) {
 		$("#" + pageName).live('pagebeforehide',function() {
-		//	$('#'+ pageName + '-mapa').gmap('clear', 'markers');
+			$('#'+ pageName + '-mapa').gmap('clear', 'markers');
 		//	$('#'+ pageName + '-mapa').gmap('destroy');
 		})
 
@@ -981,13 +994,13 @@
 	}
 	
 	
-	
 	function francesGORegisterEvents() {
 
 	registerGMapsToPage('object-mapa');
 	registerGMapsToPage('objects-mapa');
 	registerGMapsToPage('ver-sucursal');
 	registerGMapsToPage('ver-cajero');
+	registerGMapsToPage('ver-beneficio');
 	
 	$('#preferencias-eliminar-cache').click(releaseData)
 	
@@ -1353,6 +1366,11 @@
 		
 		$("#beneficio-legales-ctf").text(beneficio.ctf)
 		
+	});
+	
+	$("#ver-beneficio").live('pagebeforehide',function() {
+		var pageName = 'ver-beneficio-mapa';
+		refreshMap(pageName);
 	})
 	
 	
@@ -1418,13 +1436,15 @@
 		
 		$("#beneficio-direccion").empty();
 			
-		
 		if(beneficio.idShopping){
 			$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
 		}else
 			$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
-		$('#ver-beneficio-mapa').gmap('clear' , 'markers');
 		
+			$('#ver-beneficio-mapa').gmap('clear' , 'markers');
+			$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
+			
+			
 		
 			var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 		
@@ -1489,11 +1509,11 @@
 			
 			img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
 			
-			var image = new google.maps.MarkerImage(img.src,null,null,null, scale);		
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
 			
 			currentMarker.icon = image
 
-//			$('#ver-beneficio-mapa').gmap('clearDirections');
+			
 			
 			$('#ver-beneficio-mapa').gmap('addMarker', currentMarker).click(function() {
 				
@@ -1514,7 +1534,9 @@
 												'origin' : origin,
 												'destination' : destino, 
 												'travelMode' : google.maps.DirectionsTravelMode.DRIVING
-											},{suppressMarkers: true},function(result,status) {
+											},
+											{suppressMarkers: true},
+											function(result,status) {
 													( status === 'OK' ) ? console.log('status OK ruta generada') : console.log('ruta no generada');
 									});
 							}
@@ -1808,7 +1830,10 @@
 		
 	})
 	
-		
+	$("#ver-sucursal").live('pagebeforehide',function() {
+		var pageName = 'ver-sucursal-mapa';
+		refreshMap(pageName);
+	})	
 
 	$("#ver-sucursal").bind('display-data',function(e) {
 		
@@ -1861,9 +1886,61 @@
 		
 			
 		})
-		
-	})
+		$("#ver-sucursal-como-llegar-link").click(function(){
+			
+			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
 
+			var img = new Image();
+			
+			img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+			
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+			
+			currentMarker.icon = image;
+			
+			$('#ver-sucursal-mapa').gmap('addMarker', currentMarker).click(function() {
+				
+				$('#ver-sucursal-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+			
+			});
+			var sucursal = e.sucursal;
+			
+			var destino  = new google.maps.LatLng(sucursal.latitud , sucursal.longitud);
+			
+			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+			
+					$('#ver-sucursal-mapa').gmap('search',({'location': currentlatlng}),function(results,status){
+							if ( status === 'OK' ) {
+								var origin = results[0].formatted_address;
+								$('#ver-sucursal-mapa').gmap('displayDirections',
+											{
+												'origin' : origin,
+												'destination' : destino, 
+												'travelMode' : google.maps.DirectionsTravelMode.DRIVING
+											},
+											{suppressMarkers: true},
+											function(result,status) {
+													( status === 'OK' ) ? console.log('status OK ruta generada') : console.log('ruta no generada');
+									});
+							}
+							else {
+								 alert("no se pudo localizar su ubicacion actual ");
+							 }
+						}
+					);
+					
+			$('#ver-sucursal-mapa').gmap('addShape', 'Circle', { 
+				'strokeWeight': 0, 
+				'fillColor': "#008595", 
+				'fillOpacity': 0.25, 
+				'bounds': true,
+				'center': new google.maps.LatLng(sucursal.latitud,sucursal.longitud), 
+				'radius': 15, 
+				'clickable': false 
+			});
+		
+		})
+	})
 		
 
 		
@@ -2070,6 +2147,12 @@
 		
 	})
 	
+	$("#ver-cajero").live('pagebeforehide',function() {
+		var pageName = 'ver-cajero-mapa';
+		refreshMap(pageName);
+	})	
+	
+	
 	$("#ver-cajero").bind('display-data',function(e) {
 		
 		var cajero = e.cajero;
@@ -2122,6 +2205,61 @@
 			$("#object-mapa").trigger({type:"display-data-cajero", cajero:cajero, title:'Cajero'})
 		
 			
+		})
+		//TODO
+		$("#ver-cajero-como-llegar-link").click(function(){
+			
+			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
+
+			var img = new Image();
+			
+			img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+			
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+			
+			currentMarker.icon = image;
+			
+			$('#ver-cajero-mapa').gmap('addMarker', currentMarker).click(function() {
+				
+				$('#ver-cajero-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+			
+			});
+			var cajero = e.cajero;
+			
+			var destino  = new google.maps.LatLng(cajero.latitud , cajero.longitud);
+			
+			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+			
+					$('#ver-cajero-mapa').gmap('search',({'location': currentlatlng}),function(results,status){
+							if ( status === 'OK' ) {
+								var origin = results[0].formatted_address;
+								$('#ver-cajero-mapa').gmap('displayDirections',
+											{
+												'origin' : origin,
+												'destination' : destino, 
+												'travelMode' : google.maps.DirectionsTravelMode.DRIVING
+											},
+											{suppressMarkers: true},
+											function(result,status) {
+													( status === 'OK' ) ? console.log('status OK ruta generada') : console.log('ruta no generada');
+									});
+							}
+							else {
+								 alert("no se pudo localizar su ubicacion actual ");
+							 }
+						}
+					);
+					
+			$('#ver-cajero-mapa').gmap('addShape', 'Circle', { 
+				'strokeWeight': 0, 
+				'fillColor': "#008595", 
+				'fillOpacity': 0.25, 
+				'bounds': true,
+				'center': new google.maps.LatLng(cajero.latitud,cajero.longitud), 
+				'radius': 15, 
+				'clickable': false 
+			});
+		
 		})
 		
 	})
