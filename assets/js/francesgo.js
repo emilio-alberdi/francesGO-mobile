@@ -604,8 +604,6 @@
 			
 			image = baseUrl + 'image-resources/'  + beneficio.logoSmall;
 		
-			console.log("beneficio.logoSmall",image);
-			console.log("Beneficio tiene : " + beneficio);
 		}
 		else if (beneficio.listaRubrosAsociados) {
 			
@@ -672,7 +670,6 @@
 			
 	
    };
-//TODO
    var sucursalesPersistenceService = new PersistService({name:'sucursales', 
        service:baseUrl + 'mobile-sucursales.json',
        expirationDays:1,
@@ -753,7 +750,7 @@
 
 		cajerosPersistenceService.showCajero = function(cajero) {
 //			+ cajero.codigoCajero + " " <p>" + cajero.localidad.nombre  +"</p>
-			$("#ul-cajeros").append("<li><a id='" + cajero.uri + "' ><h3>" +  cajero.codigoCajero + " - " +((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : ' BBVA Banco Frances') +  "</h3><p id='" + cajero.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + cajero.domicilio  + " (" + cajero.tipoCajeroBanco.descripcion + ") </p> </a></li>")
+			$("#ul-cajeros").append("<li><a id='" + cajero.uri + "' ><h3>" +  ((cajero.sucursalBanco.id) ? cajero.sucursalBanco.id + " - " : "") +((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : ' BBVA Banco Frances') +  "</h3><p id='" + cajero.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + cajero.domicilio  + " (" + cajero.tipoCajeroBanco.descripcion + ") </p> </a></li>")
 			
 			$("#" + cajero.uri).data("cajero", cajero)
 			
@@ -1353,33 +1350,32 @@
 	
 		var beneficio = e.beneficio;
 		
-		
-		
 		$("#beneficio-legales-comercio").text(beneficio.nombreComercio)
 	
 		$("#beneficio-legales-datos").text(beneficio.textoVigencia + beneficio.legales + beneficio.cft)
 		
-		$("#back-legales").click(function(){
+		$("#back-legales").unbind();
+		
+		$("#back-legales").one("click" , function(event){
+			
+		
 			
 			$.mobile.changePage("#ver-beneficio");
 			
 			$("#ver-beneficio").trigger({type:"display-data", beneficio: beneficio});
+			
+			console.log("Cambiando a la vista del beneficio: " + beneficio.nombreComercio);
+			
+			
 		})	
-		
-//		$("#beneficio-legales-vigencia").text(beneficio.textoVigencia)
-		
-//		$("#beneficio-legales-legales").text(beneficio.legales)
-		
-//		$("#beneficio-legales-ctf").text(beneficio.ctf)
 		
 	});
 	
-//	$("#ver-beneficio").live('pagebeshow',function() {
-//		var pageName = 'ver-beneficio-mapa';
-//		refreshMap(pageName);
-//	})
 
 	$("#ver-beneficio").bind('display-data',function(e) {
+		
+		console.log("Pagina 'ver-beneficio' nombre del comercio asociado al beneficio : " + e.beneficio.nombreComercio);
+		
 		var beneficio = e.beneficio;
 		var distance;
 		
@@ -1388,10 +1384,6 @@
 			console.log("Ruta al darle 'click' BORRADA OK")
 			directions.setMap(null);
 			directions.setPanel(null);
-			directions.route(null, null);
-			console.log("I see if set route in null make anything");
-//			directionsRenderer.setDirections(null);
-//			directionsRenderer = null;
 		}
 		
 		try {
@@ -1502,12 +1494,16 @@
 				$('#ver-beneficio-mapa').gmap('option', 'zoom', 18);
 				$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
 		
-		$("#ver-beneficio-legales-link").click(function() {
+		$("#ver-beneficio-legales-link").unbind();
+				
+		$("#ver-beneficio-legales-link").one("click" , function(event) {
+	
 			
 			$.mobile.changePage("#beneficio-legales")
 			
 			$("#beneficio-legales").trigger({type:"display-data", beneficio:beneficio})
-				
+			
+			
 		})
 		
 		$("#ver-beneficio-mapa-link2,#ver-beneficio-mapa-link").click(function() {
@@ -1517,9 +1513,12 @@
 			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
 		})
-		$("#ver-beneficio-como-llegar-link").click(function(){
+		$("#ver-beneficio-como-llegar-link").unbind();
 		
+		$("#ver-beneficio-como-llegar-link").one("click", function(){
 		
+			$("#ver-beneficio-como-llegar-link").unbind('click');
+			
 			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 
 			var currentMarker = {'position': currentlatlng, 'bounds' : true}
@@ -1556,13 +1555,14 @@
 				'radius': 15, 
 				'clickable': false 
 			});
-			
+			$("#ver-beneficio-como-llegar-link").unbind();
 			 
 		});
 		
 	})
+	$("#beneficios-mapa").unbind();
 	
-	$("#beneficios-mapa").click(function() {
+	$("#beneficios-mapa").one("click" , function() {
 		
 		$("#objects-mapa").trigger({type:"display-data-beneficio",title:'Beneficios'})
 		
@@ -1941,7 +1941,9 @@
 		
 			
 		})
-		$("#ver-sucursal-como-llegar-link").click(function(){
+		$("#ver-sucursal-como-llegar-link").unbind();
+		
+		$("#ver-sucursal-como-llegar-link").one("click" , function(){
 			
 			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
 
@@ -2284,7 +2286,9 @@
 		
 			
 		})
-		$("#ver-cajero-como-llegar-link").click(function(){
+		$("#ver-cajero-como-llegar-link").unbind();
+		
+		$("#ver-cajero-como-llegar-link").one("click", function(){
 			
 			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
 
@@ -2403,7 +2407,6 @@
 		   var s = document.createElement("script");
 		   s.type = "text/javascript";
 		   s.src  = "assets/js/jquery.ui.map.full.min.js";
-		   console.log("creating src script " + s.src);
 		   $("head").append(s);
 		   $(document).trigger("google-loaded")
 	   };
@@ -2440,17 +2443,17 @@
 	
 	
 
-//	beneficiosPersistenceService.getCollection(function(collection) {
-//
-//		$("#ul-beneficios").empty();
-//
-//		collection.forEach(function(beneficio) {
-//
-//			beneficiosPersistenceService.showBeneficio(beneficio);
-//				
-//		})
-//		
-//		$("#ul-beneficios").listview('refresh');
-//
-//	});
+	beneficiosPersistenceService.getCollection(function(collection) {
+
+		$("#ul-beneficios").empty();
+
+		collection.forEach(function(beneficio) {
+
+			beneficiosPersistenceService.showBeneficio(beneficio);
+				
+		})
+		
+		$("#ul-beneficios").listview('refresh');
+
+	});
 }
