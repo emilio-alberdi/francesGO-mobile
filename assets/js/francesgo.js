@@ -2440,17 +2440,17 @@
 	
 	
 
-	beneficiosPersistenceService.getCollection(function(collection) {
-
-		$("#ul-beneficios").empty();
-
-		collection.forEach(function(beneficio) {
-
-			beneficiosPersistenceService.showBeneficio(beneficio);
-				
-		})
-		
-		$("#ul-beneficios").listview('refresh');
-
-	});
+//	beneficiosPersistenceService.getCollection(function(collection) {
+//
+//		$("#ul-beneficios").empty();
+//
+//		collection.forEach(function(beneficio) {
+//
+//			beneficiosPersistenceService.showBeneficio(beneficio);
+//				
+//		})
+//		
+//		$("#ul-beneficios").listview('refresh');
+//
+//	});
 }
