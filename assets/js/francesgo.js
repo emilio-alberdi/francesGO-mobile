@@ -1704,16 +1704,20 @@
 		
 		
 	})
-
+//TODO 
 	$("#listar-beneficios").live('pageshow',function() {
 
 		$("#ul-beneficios").empty();
 		
 		beneficiosPersistenceService.getCollection(function(collection) {
+			
+			if(collection.length > 50){
+				collection.length = 50 ;
+			}
+			console.log("Largo de la collecion luego de modificarlo: " + collection.length );
 			collection.forEach(function(beneficio) {
-	
+				
 				beneficiosPersistenceService.showBeneficio(beneficio);
-					
 			})
 			
 			$("#ul-beneficios").listview('refresh');
