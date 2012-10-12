@@ -4,9 +4,10 @@
     <title>Francés Go</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.min.css" />
+	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.css" />
     <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
     <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
+<!--     <link rel="stylesheet" href="assets/stylesheets/css/themes/jquery-mobile-theme-BENEFICIOS.min.css" /> -->
 	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/francesgo.js"></script>
@@ -45,12 +46,12 @@
       </div>
         <img src='assets/images/francesGo-logo.png' />
         <div class="content" align="center">
-						<a href='#listar-beneficios'><img src='assets/images/Beneficios-02.png'/></a><br/>
-						<a href='#listar-sucursales'><img src='assets/images/Sucursales-02.png'/></a><br/>
-						<a href='#listar-cajeros'><img src='assets/images/Cajeros-02.png'/></a><br/>
-						<a href='#notificacionesSMS'><img src='assets/images/SMS-02.png'/></a><br/>
-						<a href='#preferencias'><img src='assets/images/Preferencias-02.png'/></a><br/>
-						<a href='#ayuda'><img src='assets/images/Ayuda-02.png'/></a>
+						<a href='#listar-beneficios'><img src='assets/images/Beneficios-01.png'/></a>
+						<a href='#listar-sucursales'><img src='assets/images/Sucursales-01.png'/></a><br/>
+						<a href='#listar-cajeros'><img src='assets/images/Cajeros-01.png'/></a>
+						<a href='#notificacionesSMS'><img src='assets/images/Avisodepromociones-01.png'/></a><br/>
+						<a href='#preferencias'><img src='assets/images/Preferencias-01.png'/></a>
+						<a href='#ayuda'><img src='assets/images/Ayuda-01.png'/></a>
 					
 		</div>
 <!-- 		<div  data-role="footer" ><img id="bannerImage"  /></div> -->
@@ -89,15 +90,17 @@
    
      <!-- ********************* fin preferencias ************************** -->
      
-    <div  class= 'banner background' data-role='page' id="ver-beneficios">
+    <div  class= 'banner background' data-role='page' id="ver-beneficio">
       <div data-position='fixed' data-role='header' >
         <a data-icon='arrow-l' href='#listar-beneficios'>Back</a>
         <h1>Beneficio</h1>
       </div>
       <div id="beneficio-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->
+        
 		<div class='title-image'>
           <div id='beneficio-title' class="title">
+<!--         <img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/> -->
           </div>
         <div class='padding'>
           <p id='beneficio-descripcionPortal'> </p> 
@@ -108,7 +111,7 @@
           
        </div>
         <div class='mapa'>
-          <a class='see' id="ver-beneficio-mapa-link">Ver en el Mapa &rarr;</a>
+<!--           <a class='see' id="ver-beneficio-mapa-link">Ver en el Mapa &rarr;</a> -->
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
         
@@ -171,19 +174,22 @@
       
      <div class='background' data-role='page'  id="beneficio-legales">
       <div data-position='fixed' data-role='header'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+        <a data-icon='arrow-l' href='#' id = 'back-legales'>Back</a>
         <h1>Legales</h1>
       </div>
       <div class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->
         <div class='padding'>
           <h4 id="beneficio-legales-comercio"></h4>
-          <p id="beneficio-legales-vigencia">
-          </p>
-          <br />
-          <p id="beneficio-legales-legales"></p>
-          <br />
-          <p id="beneficio-legales-cft"></p>
+          <div id= "beneficio-legales-datos">
+          
+          </div>
+<!--           <p id="beneficio-legales-vigencia"> -->
+<!--           </p> -->
+<!--           <br /> -->
+<!--           <p id="beneficio-legales-legales"></p> -->
+<!--           <br /> -->
+<!--           <p id="beneficio-legales-cft"></p> -->
         </div>
       </div>
   	 </div>	
@@ -205,16 +211,15 @@
       <!-- ************************* beneficio mapa -->
       <div data-role='page' class='background' id="objects-mapa">
       <div data-position='fixed' data-role='header'>
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Back</a>
+        <a data-icon='arrow-l' href='#' id='back-listar'>Back</a>
         <h1 id="objects-mapa-title" >Beneficios</h1>
       </div>
         <!-- /Contenido -->
-       <div class='ui-content  show-map' data-role='content' data-scroll='y' role='main' style="height: 100%;width: 100%">
+       <div class='ui-content  show-map'  data-fullscreen="true" data-role='content' data-scroll='y' role='main' style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; ">
         <!-- /Contenido -->
-       	<div class='map' id='objects-mapa-mapa' style="height: 100%;width: 100%"></div>
+       	<div class='map' id='objects-mapa-mapa'  data-fullscreen="true" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; "></div>
       </div>
   	  </div>	
-      
       <!-- ************************* beneficios mapa -->
       
   	  <div data-role='page' class='banner background' id="notificacionesSMS">
@@ -223,8 +228,8 @@
         <h1>Notificaciones SMS</h1>
       </div>
     		<ul data-role="listview">
-	   			<li><a href="#registracion">Registrate para recibir avisos de promociones</a></li>
-				<li><a href="#registracion-baja">Baja de la recepcion de avisos de promociones</a></li>
+	   			<li><a href="#registracion">Registrate</a></li>
+				<li><a href="#registracion-baja">Darse de baja</a></li>
 			</ul>
 <!-- 			<div  data-role="footer" ><img id="bannerImage"  /></div> -->
   	 </div>	
@@ -448,7 +453,7 @@
       <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#listar-sucursales' >Back</a>
         <h1>Sucursal</h1>
-        <a id="ver-sucursal-mapa-link2">Mapa</a>
+<!--         <a id="ver-sucursal-mapa-link2">Mapa</a> -->
       </div>
       <div id="sucursal-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->
@@ -494,15 +499,16 @@
   	  <div data-role="content">
 		
 		<img src='assets/images/francesGo-logo.png' />
+		<div class='submit'>
+            <a data-role='button' href='#buscar-cajeros'>Buscar cajeros</a>
+          </div>
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-cajeros" data-inset='true' data-role='listview'>
           
           
           
           </ul>
-          <div class='submit'>
-            <a data-role='button' href='#buscar-cajeros'>Buscar cajeros</a>
-          </div>
+          
         </div>
         </div>
 <!--         <div  data-role="footer" ><img id="bannerImage"  /></div> -->
@@ -546,7 +552,7 @@
       <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#listar-cajeros'>Back</a>
         <h1>Cajero</h1>
-        <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a>
+<!--         <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a> -->
       </div>
       <div id="cajero-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
         <!-- /Contenido -->

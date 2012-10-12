@@ -176,17 +176,17 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 	background: url("../../images/Background_hd.jpg")
 }
 .float-rigth-beneficio{
-    color: white;
+    color: #0088DA;
     float: right;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: normal;
     margin-bottom: 99px;
     margin-right: 18px;
-    margin-top: -3px;
+    margin-top: 9px;
     text-shadow: 1px 1px black;
 }
 .rigth-sucursal{
-	color: white;
+	color: #0088DA;
     float: right;
     font-size: 16px;
     font-weight: normal;
@@ -195,7 +195,7 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
     text-shadow: 1px 1px black;
 }
 .float-left{
-	color: white;
+	color: #0088DA;
     font-size: 16px;
     font-weight: normal;
     margin-right: 18px;
@@ -203,14 +203,16 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
     text-shadow: 1px 1px black;
 }
 .float{
-   color: white;
-    font-size: 16px;
+    color: #0088DA;
+    font-size: 20px;
     font-weight: normal;
-    margin-left: 556px;
+    margin-left: 417px;
     margin-top: 1px;
     text-shadow: 1px 1px black;
 }
 
+ #objects-mapa-mapa { height: 100% }
+ 
 .show {
 	padding: 0
 }
@@ -250,16 +252,21 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 
 .show-benefit .title-image .title {
 	padding: 10px;
-	background: rgba(0, 0, 0, 0.8);
-	width: 100%
+/* 	background: rgba(0, 0, 0, 0.8); */
+	width: 100%;
+	background: #E7E6E4;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#E7E6E4), to(#CBCBCB));
+	background: -moz-linear-gradient(#E7E6E4, #CBCBCB);
+	background: linear-gradient(#E7E6E4, #CBCBCB);
+	-pie-background: linear-gradient(#E7E6E4, #CBCBCB);
 }
 
 .show-benefit .title-image .title h1 {
-	color: white;
-	text-shadow: 1px 1px black;
-	font-weight: normal;
-	margin: 0;
-	font-size: 19px
+	    color: white;
+    font-size: 19px;
+    font-weight: normal;
+    margin: -34px 0 0 235px;
+    text-shadow: 1px 1px black;
 }
 
 .show-benefit .title-image .image {
@@ -268,6 +275,7 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 
 .show-benefit .legales a {
 	margin-bottom: 15px;
+	margin-right: -240px;
 	float: right;
 	background: #888;
 	color: white;
@@ -287,8 +295,17 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 		), color-stop(0.68, #999) )
 }
 
+.imgLogoFrances{
+	 color: transparent;
+    font-size: 0;
+    margin-left: 0px;
+    vertical-align: middle;
+}
+
 .show-benefit .comoLlegar a {
 	margin-bottom: -4px;
+	margin-top: 29px;
+	margin-right: 116px;
 	float: right;
 	background: #888;
 	color: white;
@@ -299,7 +316,6 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 	-moz-border-radius: 6px;
 	-webkit-border-radius: 6px;
 	cursor: pointer;
-	margin-right: 120px;
 	background-image: linear-gradient(bottom, #8c8c8c 35%, #999 68%);
 	background-image: -o-linear-gradient(bottom, #8c8c8c 35%, #999 68%);
 	background-image: -moz-linear-gradient(bottom, #8c8c8c 35%, #999 68%);
@@ -307,6 +323,9 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 	background-image: -ms-linear-gradient(bottom, #8c8c8c 35%, #999 68%);
 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.35, #8c8c8c
 		), color-stop(0.68, #999) )
+		
+		
+		    background: -moz-linear-gradient(center bottom , #8C8C8C 35%, #999999 68%) repeat scroll 0 0 #888888;
 }
 
 .show-benefit .legales a:hover {
@@ -347,7 +366,9 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 }
 
 .show-map {
-	padding: 0
+	padding: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .show-map .map {

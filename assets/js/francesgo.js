@@ -5,8 +5,8 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 	
    	baseUrl = '';
-   	//baseUrl = 'http://192.168.1.111:8080/francesGo2-portal/mobile/';
-   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+   	baseUrl = 'http://192.168.1.104:8080/francesGo2-portal/mobile/';
+//   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
@@ -631,22 +631,19 @@
 		
 			var image = this.getLogo(beneficio);
 		
-			//<p>" + beneficio.descripcionPortal  +"</p>
-			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> <span class=''><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> </span></a></li>")
+			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img  height='30' width='30' id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> <span class=''><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> </span></a></li>")
 			$("#beneficio-" + beneficio.hash ).data("beneficio", beneficio)
 
 			$("#beneficio-" + beneficio.hash).click(function(e) {
 				
-				$.mobile.changePage("#ver-beneficios")
+				$.mobile.changePage("#ver-beneficio")
 				
-				$("#ver-beneficios").trigger({type:"display-data", beneficio:$(this).data("beneficio")})
-				
+				$("#ver-beneficio").trigger({type:"display-data", beneficio:$(this).data("beneficio")})
 			})
 
 			
 			try {
 				ensureGMaps(function () {
-					
 					try {
 						var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 						
@@ -674,7 +671,7 @@
 			
 	
    };
-
+//TODO
    var sucursalesPersistenceService = new PersistService({name:'sucursales', 
        service:baseUrl + 'mobile-sucursales.json',
        expirationDays:1,
@@ -697,9 +694,7 @@
   
    sucursalesPersistenceService.showSucursal = function(sucursal) {
 			
-		   
-//	   <p>" + sucursal.localidad.nombre  +"</p>
-				$("#ul-sucursales").append("<li><a id='" + sucursal.uri + "' ><h3>" + sucursal.nombre + "</h3><p id='" + sucursal.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + sucursal.domicilio  +"</p> </a></li>")
+				$("#ul-sucursales").append("<li><a id='" + sucursal.uri + "' ><h3>" + sucursal.codigo + " - "+ sucursal.nombre +"</h3><p id='" + sucursal.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + sucursal.domicilio  +"</p> </a></li>")
 				
 				$("#" + sucursal.uri).data("sucursal", sucursal)
 				
@@ -715,7 +710,7 @@
 						
 						console.log("Sucursal " + sucursal.nombre, distance)
 						
-						$("#" + sucursal.uri + "-distance").text(distance)
+						$("#" + sucursal.uri + "-distance").text(distance + "km")
 					})
 					
 				}
@@ -757,7 +752,7 @@
 
 		cajerosPersistenceService.showCajero = function(cajero) {
 //			+ cajero.codigoCajero + " " <p>" + cajero.localidad.nombre  +"</p>
-			$("#ul-cajeros").append("<li><a id='" + cajero.uri + "' ><h3>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +  "</h3><p id='" + cajero.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + cajero.domicilio  + " (" + cajero.tipoCajeroBanco.descripcion + ") </p> </a></li>")
+			$("#ul-cajeros").append("<li><a id='" + cajero.uri + "' ><h3>" +  cajero.codigoCajero + " - " +((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : ' BBVA Banco Frances') +  "</h3><p id='" + cajero.uri + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + cajero.domicilio  + " (" + cajero.tipoCajeroBanco.descripcion + ") </p> </a></li>")
 			
 			$("#" + cajero.uri).data("cajero", cajero)
 			
@@ -771,7 +766,7 @@
 					
 					distance = Math.ceil(distance/1000 )
 					
-					$("#" + cajero.uri + "-distance").text(distance)
+					$("#" + cajero.uri + "-distance").text(distance + "km")
 				})
 				
 			}
@@ -952,9 +947,9 @@
 		
 	}
 	
-	//TODO 
 	function refreshMap(pageName){
 		$('#'+ pageName).gmap('clear', 'markers');
+		$('#'+ pageName).gmap('clear', 'listeners');
 		$('#'+ pageName).gmap('clear' , 'directionsRenderer');
 		var directionsRenderer = $('#' + pageName).gmap('get', 'services > DirectionsRenderer');
 		if (directionsRenderer) {
@@ -964,7 +959,6 @@
 		}
 	}
 	
-	//TODO 
 	function registerGMapsToPage(pageName) {
 		$("#" + pageName).live('pagebeforehide',function() {
 			$('#'+ pageName + '-mapa').gmap('clear', 'markers');
@@ -1018,7 +1012,6 @@
 		
 		var page = $(this).page()
 //		data-theme="b"
-		console.log("Creando el div para la carga del banner");
 		page.append('<div  data-role="footer"  ><img id="bannerImage"  /></div>').trigger('create');
 		
 	})
@@ -1047,6 +1040,10 @@
 		});
 	})
 
+	$("#ver-beneficio").live('pagebeforehide',function() {
+		var pageName = 'ver-beneficio-mapa';
+		refreshMap(pageName);
+	})
 		
 	$("#registracion-baja").bind('display-data',function(e) {
 		
@@ -1283,7 +1280,6 @@
 	
 	
 });
-
 	$("#buscar-beneficios-link").click(function(e) {
 		
 		try {
@@ -1360,24 +1356,42 @@
 		
 		$("#beneficio-legales-comercio").text(beneficio.nombreComercio)
 	
-		$("#beneficio-legales-vigencia").text(beneficio.textoVigencia)
+		$("#beneficio-legales-datos").text(beneficio.textoVigencia + beneficio.legales + beneficio.cft)
 		
-		$("#beneficio-legales-legales").text(beneficio.legales)
+		$("#back-legales").click(function(){
+			
+			$.mobile.changePage("#ver-beneficio");
+			
+			$("#ver-beneficio").trigger({type:"display-data", beneficio: beneficio});
+		})	
 		
-		$("#beneficio-legales-ctf").text(beneficio.ctf)
+//		$("#beneficio-legales-vigencia").text(beneficio.textoVigencia)
+		
+//		$("#beneficio-legales-legales").text(beneficio.legales)
+		
+//		$("#beneficio-legales-ctf").text(beneficio.ctf)
 		
 	});
 	
-	$("#ver-beneficio").live('pagebeforehide',function() {
-		var pageName = 'ver-beneficio-mapa';
-		refreshMap(pageName);
-	})
-	
-	
-	$("#ver-beneficios").bind('display-data',function(e) {
-		
+//	$("#ver-beneficio").live('pagebeshow',function() {
+//		var pageName = 'ver-beneficio-mapa';
+//		refreshMap(pageName);
+//	})
+
+	$("#ver-beneficio").bind('display-data',function(e) {
 		var beneficio = e.beneficio;
 		var distance;
+		
+		var directions = $('#ver-beneficio-mapa').gmap('get', 'services > DirectionsRenderer');
+		if (directions) {
+			console.log("Ruta al darle 'click' BORRADA OK")
+			directions.setMap(null);
+			directions.setPanel(null);
+			directions.route(null, null);
+			console.log("I see if set route in null make anything");
+//			directionsRenderer.setDirections(null);
+//			directionsRenderer = null;
+		}
 		
 		try {
 			var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
@@ -1414,7 +1428,9 @@
 		
 		var comercioLogo = beneficiosPersistenceService.getLogo(beneficio);
 		
-		$("#beneficio-title").html("<span class='float-left'><img class='comercioLogo'src='"+baseUrl + comercioLogo +"'/></span>")
+		$("#beneficio-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
+		
+		$("#beneficio-title").append("<span class='float-left'><img width=30, height=30 class='comercioLogo'src='"+baseUrl + comercioLogo +"'/></span>")
 		
 		$("#beneficio-title").append("<span class='float'>" + beneficio.nombreComercio + "</span>")
 		
@@ -1451,7 +1467,6 @@
 				var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
 				
 				var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
-				
 				
 				if (imageIcon) {
 					
@@ -1501,9 +1516,12 @@
 			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
 		})
-		$("#ver-beneficio-como-llegar-link").click(function(beneficio){
+		$("#ver-beneficio-como-llegar-link").click(function(){
 		
-			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
+		
+			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+
+			var currentMarker = {'position': currentlatlng, 'bounds' : true}
 
 			var img = new Image();
 			
@@ -1513,39 +1531,21 @@
 			
 			currentMarker.icon = image
 
-			
-			
 			$('#ver-beneficio-mapa').gmap('addMarker', currentMarker).click(function() {
 				
 				$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
 			
 			});
-			var ben = e.beneficio;
-			
-			var destino  = new google.maps.LatLng(ben.latitud , ben.longitud);
-			
-			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
-			
-					$('#ver-beneficio-mapa').gmap('search',({'location': currentlatlng}),function(results,status){
-							if ( status === 'OK' ) {
-								var origin = results[0].formatted_address;
-								$('#ver-beneficio-mapa').gmap('displayDirections',
-											{
-												'origin' : origin,
-												'destination' : destino, 
-												'travelMode' : google.maps.DirectionsTravelMode.DRIVING
-											},
-											{suppressMarkers: true},
-											function(result,status) {
-													( status === 'OK' ) ? console.log('status OK ruta generada') : console.log('ruta no generada');
-									});
-							}
-							else {
-								 alert("no se pudo localizar su ubicacion actual ");
-							 }
-						}
-					);
-					
+
+			var destino  = new google.maps.LatLng(beneficio.latitud , beneficio.longitud);
+					$('#ver-beneficio-mapa').gmap('displayDirections',{
+									'origin' : currentlatlng,
+									'destination' : destino, 
+									'travelMode' : google.maps.DirectionsTravelMode.DRIVING
+								},{suppressMarkers: true},	function(result,status) {
+										( status === 'OK' ) ? console.log('status OK ruta generada') : console.log('ruta no generada');
+									}
+						);
 			$('#ver-beneficio-mapa').gmap('addShape', 'Circle', { 
 				'strokeWeight': 0, 
 				'fillColor': "#008595", 
@@ -1568,25 +1568,26 @@
 		$.mobile.changePage("#objects-mapa")
 				
 	})
-	
 	$("#objects-mapa").bind('display-data-beneficio',function(e) {
-		
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
-
+		$("#back-listar").unbind("click");
+		
+		$("#back-listar").click(function(){
+			$.mobile.changePage("#listar-beneficios");
+		})	
+		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
+		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
 		
 		beneficiosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(beneficio) {
 	
 				var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 				
-//				$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-					
 					var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
-					
-					var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
+					var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), bounds: false}
 					
 					if (imageIcon) {
 						var img = new Image();
@@ -1614,15 +1615,33 @@
 					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
 						$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
 					});
-					$('#objects-mapa-mapa').gmap('option', 'zoom', 18);
-					$('#objects-mapa-mapa').gmap('addBounds',new google.maps.LatLng(beneficio.latitud , beneficio.longitud) )
-//					$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
-//				});
-			
+					
 			});
 			
 		});	
 		
+		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
+		
+		var currentMarker = {'position': currentLatLng,bounds: true}
+		
+		var img = new Image();
+		
+		img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+		
+		var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+		
+		currentMarker.icon = image;
+		console.log("Current Position " + currentLatLng + "URL image: " + image.url);
+			
+				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+
+					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+				
+				});
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
+	
 	})
 
 	$("#object-mapa").bind('display-data-beneficio',function(e) {
@@ -1703,7 +1722,6 @@
 	})
 
 	
-	
 	$("#buscar-sucursales-link").click(function(e) {
 		
 		try {
@@ -1711,9 +1729,12 @@
 			console.log("start filter");
 			
 			var filter = {}
-			
-			filter.searchText = $("#buscar-sucursales-nombre").val();
-			
+			var searchCode = $("#buscar-sucursal-nombre").val();
+			if(!isNaN(searchCode)){
+				filter.searchCode = searchCode;
+			}else
+			filter.searchText = $("#buscar-sucursal-nombre").val();
+
 			zonasPersistenceService.getCollection(function(collection) {
 				filter.zonas = collection.filter(function(zona) {
 					return zona.sucursalSelected && zona.id != -1
@@ -1766,31 +1787,58 @@
 
 	
 	$("#objects-mapa").bind('display-data-sucursales',function(e) {
+		$("#back-listar").unbind("click");
 		
 		console.log("object-mapa init", e.title)
 		
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
+		$("#back-listar").click(function(){
+			$.mobile.changePage("#listar-sucursales");
+		})	
 		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
+		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
 		
 		sucursalesPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(sucursal) {
 				
 					var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 					
-					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true,icon:'assets/images/sucursal.gif'}).click(function() {
+//					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), bounds: false,icon:'assets/images/sucursal.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 						});
-					});
+//					});
 				
 			});
 			
-			$('#objects-mapa-mapa').gmap('refresh')
-			
 		});	
+		
+		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
+		
+		var currentMarker = {'position': currentLatLng,bounds: true}
+		
+		var img = new Image();
+		
+		img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+		
+		var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+		
+		currentMarker.icon = image;
+		console.log("Current Position " + currentLatLng + "URL image: " + image.url);
+			
+//			$('#objects-mapa-mapa').gmap().bind('init', function(ev,map) {
+				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+
+					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+				
+				});
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
+//			});
 		
 	})
 	
@@ -1853,7 +1901,9 @@
 			console.log("Error", e);
 		}
 		
-		$("#ver-sucursal-title").html("<span><h1>" + sucursal.nombre + "</h1></span>")
+		$("#ver-sucursal-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
+		
+		$("#ver-sucursal-title").append("<span><h1>" + sucursal.nombre + "</h1></span>")
 		
 		$("#ver-sucursal-title").append("<span class='rigth-sucursal'>" +distance+"KM"+"</span>")
 	
@@ -1961,8 +2011,7 @@
 
 		})
 	})
-	
-	$("#buscar-sucursales").live('pageshow',function() {
+	$("#buscar-sucursales").live('pageinit',function() {
 		
 		var filter = sucursalesPersistenceService.getFilter();
 		
@@ -2084,31 +2133,53 @@
 	$("#objects-mapa").bind('display-data-cajeros',function(e) {
 		
 		console.log("object-mapa init", e.title)
+		$("#back-listar").unbind("click");
 		
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
 		
+		$("#back-listar").click(function(){
+			$.mobile.changePage("#listar-cajeros");
+		})	
+		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
-
+		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
 		
 		cajerosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(cajero) {
 				
 					var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ cajero.nombre+'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 					
-					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
-						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud), 'bounds': true, icon:'assets/images/cajero.gif'}).click(function() {
+//					$('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map) {
+						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud),bounds: false, icon:'assets/images/cajero.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 						});
-					});
+//					});
 				
 			});
 			
-			$('#objects-mapa-mapa').gmap('refresh')
-			
 		});	
+		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
 		
+		var currentMarker = {'position': currentLatLng,bounds: false}
+		
+		var img = new Image();
+		
+		img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+		
+		var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+		
+		currentMarker.icon = image;
+		console.log("Current Position " + currentLatLng + "URL image: " + image.url);
+				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+
+					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+				
+				});
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
 	})
 	
 	
@@ -2172,7 +2243,9 @@
 		}
 		
 //		 + cajero.codigoCajero + " "
-		$("#ver-cajero-title").html("<span><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') + "</h1></span>")
+		$("#ver-cajero-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
+		
+		$("#ver-cajero-title").append("<span><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') + "</h1></span>")
 	
 		$("#ver-cajero-title").append("<span class='rigth-sucursal'>" + distance +"km"+"</span>")
 		
@@ -2206,7 +2279,6 @@
 		
 			
 		})
-		//TODO
 		$("#ver-cajero-como-llegar-link").click(function(){
 			
 			var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
@@ -2263,8 +2335,7 @@
 		})
 		
 	})
-	
-	$("#buscar-cajeros").live('pageshow',function() {
+	$("#buscar-cajeros").live('pageinit',function() {
 
 		console.log("buscar-cajeros init")
 
@@ -2280,7 +2351,6 @@
 			$("#buscar-cajeros-tipoCajero-filter").trigger("create");
 		})
 		
-	
 		zonasPersistenceService.getCollection(function(collection) {
 	
 			console.log("buscar-cajeros-regionesOrdenables-filter " , collection.length)
@@ -2328,11 +2398,9 @@
 		   var s = document.createElement("script");
 		   s.type = "text/javascript";
 		   s.src  = "assets/js/jquery.ui.map.full.min.js";
+		   console.log("creating src script " + s.src);
 		   $("head").append(s);
-
 		   $(document).trigger("google-loaded")
-		   
-		   
 	   };
 	   
 	   $("head").append(s);
