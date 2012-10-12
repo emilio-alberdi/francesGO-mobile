@@ -7,6 +7,7 @@
    	baseUrl = '';
    	baseUrl = 'http://192.168.1.104:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+//   	baseUrl = 'https://m.francesgo.com.ar/francesGo2-portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
