@@ -5,9 +5,9 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 	
    	baseUrl = '';
-//   	baseUrl = 'http://192.168.1.104:8080/francesGo2-portal/mobile/';
+   	baseUrl = 'http://192.168.1.103:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   	baseUrl = 'https://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+//   	baseUrl = 'm.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
