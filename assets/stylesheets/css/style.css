@@ -262,10 +262,10 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 }
 
 .show-benefit .title-image .title h1 {
-	    color: white;
+	color: #0088DA;
     font-size: 19px;
     font-weight: normal;
-    margin: -34px 0 0 235px;
+    margin: -34px 0 0 582px;
     text-shadow: 1px 1px black;
 }
 

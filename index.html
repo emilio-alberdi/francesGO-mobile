@@ -23,19 +23,27 @@
   	  <div data-role="content">
 		
 		<img src='assets/images/francesGo-logo.png' />
-          <div class='submit'>
+          <div class='submit hide'>
             <a data-role='button'  href='#buscar-beneficios'>Buscar Beneficios</a>
           </div>
+         
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
           <ul id="ul-beneficios" data-inset='true' data-role='listview'>
           
           
           
           </ul>
+
+          <div class='ui-content ui-scrollview-clip hide' id='buscar-mas-beneficios' data-role='content' data-scroll='y' >
+          	<a data-role='button'>Ver mas</a>
+          </div>
+           <div data-role='fieldcontain' id='fin-beneficios'>
+            <h3>No hay mas beneficios para mostrar</h3>
+           </div>
+          
         </div>
         
       </div>
-<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
      
      <!-- ********************* listar beneficios ************************** -->
@@ -226,7 +234,7 @@
   	  <div data-role='page' class='banner background' id="notificacionesSMS">
       <div data-position='fixed' data-role='header'>
         <a data-icon='arrow-l' href='#menu-principal'>Back</a>
-        <h1>Notificaciones SMS</h1>
+        <h1>Alerta de promociones</h1>
       </div>
     		<ul data-role="listview">
 	   			<li><a href="#registracion">Registrate</a></li>
@@ -417,7 +425,14 @@
           </ul>
         </div>
       </div>
-<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+		<div class='ui-content ui-scrollview-clip hide' id='buscar-mas-sucursales' data-role='content' data-scroll='y' >
+        	<a data-role='button'>Ver mas</a>
+        </div>
+        <div data-role='fieldcontain' id='fin-sucursales'>
+          	<h3>No hay mas sucursales para mostrar</h3>
+        </div>
+
+
       </div>
       
       <!-- ************************* listar sucursales HASTA ACA -->
@@ -442,11 +457,16 @@
               </fieldset>
             </div>
           </div>
+              <h3>Tipos de Sucursal</h3>
+              <select id="buscar-sucursales-tipoSucursal" name='tipoSucursal'>
+              	<option value='' >Seleccionar</option>
+              </select>
+          </div>
+          
         </div>
         <div class='submit'>
           <a id="buscar-sucursales-link" data-role='button'>Buscar</a>
         </div>
-      </div>
 <!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
       <!-- ************************* buscar sucursales -->
@@ -512,6 +532,14 @@
           </ul>
           
         </div>
+        
+        <div class='ui-content ui-scrollview-clip hide' id='buscar-mas-cajeros' data-role='content' data-scroll='y' >
+          	<a data-role='button'>Ver mas</a>
+        </div>
+        <div data-role='fieldcontain' id='fin-cajeros'>
+            <h3>No hay mas cajeros para mostrar</h3>
+        </div>
+        
         </div>
 <!--         <div  data-role="footer" ><img id="bannerImage"  /></div> -->
       </div>
