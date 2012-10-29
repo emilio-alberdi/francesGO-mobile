@@ -423,17 +423,22 @@
 	
 		
 	}
-
-
+	
+//TODO
 	PersistService.prototype.forceReloadCollection = function() {
-		this.remove()
-		
-		if (this.getFilter()) {
-			this.getFilteredCollection(this.getFilter(), function(collection) {})
-		}
-		else {
+		this.remove();
+		console.log("----------------------------------------------");
+		console.log("delete " + this.options.name + " from localStorage");
+		console.log("----------------------------------------------");
+		if(!this.getFilter()){
 			this.getCollection(function(collection) {})
 		}
+//		if (this.getFilter()) {
+//			this.getFilteredCollection(this.getFilter(), function(collection) {})
+//		}
+//		else {
+//			this.getCollection(function(collection) {})
+//		}
 	}
 
 	
@@ -1206,8 +1211,14 @@
 
 	})
 
-
-	$("#buscar-beneficios").live('pageinit',function() {
+//	$("#buscar-sucursales").live('pageinit',function() {
+	$("#buscar-beneficios").live('pageshow',function() {
+		
+		$("#fin-beneficios").hide();
+		
+		$("#rubros-filter").empty();
+		
+		$("#regionesOrdenables-filter").empty();
 		
 		var filter = beneficiosPersistenceService.getFilter();
 		if (filter) {
@@ -1257,6 +1268,21 @@
 		
 			$("#" + zona.uri).prop("checked", zona.selected);
 		
+			
+			if(zona.id == -1){
+				
+				var checkbox = $("#" + zona.uri);
+				
+				checkbox.attr("checked","checked");
+				
+				var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+				
+				zona.selected = checkbox.prop("checked")
+				
+				zonasPersistenceService.update(zona);
+			}
+			
+			
 			$("#" + zona.uri).click(function(e) {
 				
 				var checkbox = $("#" + e.target.id);
@@ -1355,8 +1381,9 @@
 
 			console.log("start filter");
 			
-			$("#buscar-mas-beneficios").show();
 			
+			$("#buscar-mas-beneficios").show();
+			$("#fin-beneficios").hide();
 			var filter = {}
 			filter.searchText = $("#buscar-beneficios-search").val();
 			
@@ -2045,15 +2072,25 @@
 			console.log("buscar-sucursales-regionesOrdenables-filter " , collection.length)
 			
 			collection.forEach(function(zona) {
-				console.log("----------------------------------------------")
-				console.log("nombre de la zona");
-				console.log(zona.nombre);
-				console.log("----------------------------------------------")
+
 				$("#buscar-sucursales-regionesOrdenables-filter").append("<input id='" + zona.uri + "' type='checkbox' class='regionesOrdenables-update' /><label for='" + zona.uri + "'>" + zona.nombre +"</label>")
 					
 					$("#" + zona.uri).prop("zonaId", zona.id);
 					
 					$("#" + zona.uri).prop("checked", zona.sucursalSelected);
+					
+					if(zona.id == -1){
+						
+						var checkbox = $("#" + zona.uri);
+						
+						checkbox.attr("checked","checked");
+						
+						var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+						
+						zona.sucursalSelected = checkbox.prop("checked")
+						
+						zonasPersistenceService.update(zona);
+					}
 	
 					$("#" + zona.uri).click(function(e) {
 						
@@ -2064,8 +2101,6 @@
 						zona.sucursalSelected = checkbox.prop("checked")
 						
 						zonasPersistenceService.update(zona);
-						
-						console.log(zona.sucursalSelected);
 						
 					})
 				});
@@ -2132,7 +2167,7 @@
 			
 			var filter = {}
 			
-			filter.numberFirstIndex = 49;
+			filter.numberFirstIndex = 1;
 			
 			filter.numberLastIndex = 50;
 			
@@ -2541,16 +2576,26 @@
 			
 			
 			collection.forEach(function(zona) {
-				console.log("----------------------------------------------")
-				console.log("nombre de la zona");
-				console.log(zona.nombre);
-				console.log("----------------------------------------------")
 
 				$("#buscar-cajeros-regionesOrdenables-filter").append("<input id='" + zona.uri + "' type='checkbox' class='regionesOrdenables-update' /><label for='" + zona.uri + "'>" + zona.nombre +"</label>")
 					
 					$("#" + zona.uri).prop("zonaId", zona.id);
 				
 					$("#" + zona.uri).prop("checked", zona.cajeroSelected);
+					
+					if(zona.id == -1){
+						
+						var checkbox = $("#" + zona.uri);
+						
+						checkbox.attr("checked","checked");
+						
+						var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+						
+						zona.cajeroSelected = checkbox.prop("checked")
+						
+						zonasPersistenceService.update(zona);
+						
+					}
 				
 					$("#" + zona.uri).click(function(e) {
 						
