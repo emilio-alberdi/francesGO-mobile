@@ -2904,5 +2904,7 @@
 		generateBannerForBeneficios();
 		$("#ul-beneficios").listview('refresh');
 	});
+	
+	zonasPersistenceService.forceReloadCollection();
 }
 	
