@@ -424,22 +424,14 @@
 	
 		
 	}
-	
-//TODO
 	PersistService.prototype.forceReloadCollection = function() {
 		this.remove();
-		console.log("----------------------------------------------");
-		console.log("delete " + this.options.name + " from localStorage");
-		console.log("----------------------------------------------");
-		if(!this.getFilter()){
+		if (this.getFilter()) {
+			this.getFilteredCollection(this.getFilter(), function(collection) {})
+		}
+		else {
 			this.getCollection(function(collection) {})
 		}
-//		if (this.getFilter()) {
-//			this.getFilteredCollection(this.getFilter(), function(collection) {})
-//		}
-//		else {
-//			this.getCollection(function(collection) {})
-//		}
 	}
 
 	
@@ -569,7 +561,12 @@
 				console.log('error', e);
 			}
 		}
-	
+		if(data.zonas){
+			data.zonas = data.zonas.toString(); 
+		}
+		if(data.rubros){
+			data.rubros = data.rubros.toString();
+		}
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  console.log(textStatus, errorThrown);
 		}})
@@ -940,14 +937,8 @@
 		beneficiosPersistenceService.forceReloadCollection()
 		sucursalesPersistenceService.forceReloadCollection()
 		cajerosPersistenceService.forceReloadCollection()
-		rubrosPersistenceService.forceReloadCollection()
 		zonasPersistenceService.forceReloadCollection()
-		tiposDocumentoPersistenceService.forceReloadCollection()
-		operadoresTelefonicoPersistenceService.forceReloadCollection()
-		tipoCajerosPersistenceService.forceReloadCollection()
-		codigosAreaCelularPersistenceService.forceReloadCollection()
 		bannersPersistenceService.forceReloadCollection()
-		
 		
 	}
 	
@@ -961,6 +952,50 @@
 			directionsRenderer.setMap(null);
 			directionsRenderer.setPanel(null);
 		}
+	}
+	function unCheckAll(idName){
+		var idNameBox = idName.toLowerCase();
+		
+		$(".regionesOrdenables"+idName+"-update").each(function(){
+			
+			if(this.id != idNameBox+'-zona-undefined' && this.checked){
+
+				this.checked = false;
+				
+				var checkBox = $("#"+ this.id); 
+		
+				checkBox.prop("checked",false).checkboxradio("refresh");
+
+				var zonaMiUbicacion = zonasPersistenceService.getById(checkBox.prop('zonaId'))
+				
+				if(idName == 'Sucursal'){
+					zonaMiUbicacion.sucursalSelected = checkBox.prop("checked")
+				}
+				if(idName == 'Cajero'){
+					zonaMiUbicacion.cajeroSelected = checkBox.prop("checked")
+				}else{
+					zonaMiUbicacion.selected = checkBox.prop("checked")
+				}
+				
+				zonasPersistenceService.update(zonaMiUbicacion)
+				
+			}
+		});
+	}
+	
+	function checkearActivos(idClass){
+		
+		var idCheckBox = idClass.toLowerCase();
+		var statusTrue = false; 
+		var statusFalse = false
+		$(".regionesOrdenables"+idClass+"-update").each(function(){ 
+			if(this.checked && this.id != idCheckBox+"-zona-undefined"){
+				statusTrue = true; 
+			}else
+				statusFalse = false;
+		});
+		
+		return (statusTrue == true) ? statusTrue : statusFalse
 	}
 	
 	function registerGMapsToPage(pageName) {
@@ -1211,11 +1246,14 @@
 	    }
 
 	})
-
-//	$("#buscar-sucursales").live('pageinit',function() {
+	
 	$("#buscar-beneficios").live('pageshow',function() {
 		
+		console.log("pageShow Beneficios");
+
 		$("#fin-beneficios").hide();
+		
+		$("#sin-resultados-beneficios").hide();
 		
 		$("#rubros-filter").empty();
 		
@@ -1258,33 +1296,17 @@
 	
 	zonasPersistenceService.getCollection(function(collection) {
 		
-		console.log("buscar-sucursales-regionesOrdenables-filter " , collection.length)
+		console.log("buscar-beneficios-regionesOrdenables-filter " , collection.length)
 
 		collection.forEach(function(zona) {
+			
+			$("#regionesOrdenables-filter").append("<input id='beneficio-zona-" + zona.uri + "' type='checkbox' class='regionesOrdenablesBeneficio-update' /><label for='beneficio-zona-" + zona.uri + "'>" + zona.nombre +"</label>")
+			
+			$("#beneficio-zona-" + zona.uri).prop("zonaId", zona.id);
 		
+			$("#beneficio-zona-" + zona.uri).prop("checked", zona.selected);
 			
-			$("#regionesOrdenables-filter").append("<input id='" + zona.uri + "' type='checkbox' class='regionesOrdenables-update' /><label for='" + zona.uri + "'>" + zona.nombre +"</label>")
-			
-			$("#" + zona.uri).prop("zonaId", zona.id);
-		
-			$("#" + zona.uri).prop("checked", zona.selected);
-		
-			
-			if(zona.id == -1){
-				
-				var checkbox = $("#" + zona.uri);
-				
-				checkbox.attr("checked","checked");
-				
-				var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
-				
-				zona.selected = checkbox.prop("checked")
-				
-				zonasPersistenceService.update(zona);
-			}
-			
-			
-			$("#" + zona.uri).click(function(e) {
+			$("#beneficio-zona-" + zona.uri).click(function(e) {
 				
 				var checkbox = $("#" + e.target.id);
 				
@@ -1294,8 +1316,60 @@
 				
 				zonasPersistenceService.update(zona);
 				
+				if(zona.id == -1){
+					unCheckAll('Beneficio');
+				}
+				
+				var checkBoxMiUbicacion = $("#beneficio-zona-undefined");
+				
+				if($(this).is(":checked")){
+					if(checkBoxMiUbicacion.is(':checked') && e.target.id != "beneficio-zona-undefined"){
+						
+						checkBoxMiUbicacion.prop("checked",false).checkboxradio("refresh");
+						
+						$("#beneficio-zona-undefined").removeAttr('checked')
+						
+						var zonaMiUbicacion = zonasPersistenceService.getById(checkBoxMiUbicacion.prop('zonaId'))
+						
+						zonaMiUbicacion.selected = checkBoxMiUbicacion.prop("checked")
+						
+						zonasPersistenceService.update(zonaMiUbicacion)
+					}
+					
+				}
 			})
 		});
+		
+		var checkbox = $("#beneficio-zona-undefined");
+		
+		var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'));
+
+		if(zona.id == -1){
+			if(!checkearActivos("Beneficio")){
+				
+				checkbox.attr("checked","checked");
+				
+				zona.selected = checkbox.prop("checked")
+				
+				zonasPersistenceService.update(zona);
+			}else{
+				if(checkbox.is(':checked')){
+					
+					checkbox.prop("checked",false)
+					
+					$("#beneficio-zona-undefined").removeAttr('checked')
+					
+					var zonaMiUbicacion = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+					
+					zonaMiUbicacion.selected = checkbox.prop("checked")
+					
+					zonasPersistenceService.update(zonaMiUbicacion)
+				}	
+			}
+				
+			
+		}
+		
 		try{
 			$("#buscar-beneficios").trigger("create");
 		}
@@ -1345,7 +1419,7 @@
 		var filter = beneficiosPersistenceService.getFilter();
 		
 		if(filter){
-			filter.numberFirstIndex += 49;
+			filter.numberFirstIndex += 50;
 			filter.numberLastIndex += 50;
 		}else{
 			filter.numberFirstIndex = 1;
@@ -1379,11 +1453,9 @@
 	$("#buscar-beneficios-link").click(function(e) {
 		
 		try {
-
 			console.log("start filter");
 			
 			
-			$("#buscar-mas-beneficios").show();
 			$("#fin-beneficios").hide();
 			var filter = {}
 			filter.searchText = $("#buscar-beneficios-search").val();
@@ -1399,22 +1471,14 @@
 				})
 			})
 			
+			
 			zonasPersistenceService.getCollection(function(collection) {
 				filter.zonas = collection.filter(function(zona) {
 					return zona.selected && zona.id != -1
 				}).map(function(zona) {
 					return zona.id
-				})
+				});
 			})
-			
-			
-//			campaniasPersistenceService.getCollection(function(collection) {
-//					filter.campanias = collection.filter(function(campania) {
-//						return campania.selected
-//					}).map(function(campania) {
-//						return campania.uri
-//					})
-//			})
 			
 			var currentLocation = zonasPersistenceService.getById(-1)
 			
@@ -1429,6 +1493,15 @@
 				
 				$("#ul-beneficios").empty();
 				
+				if(collection.length == 0){
+					$("#sin-resultados-beneficios").show();
+				}else{
+					if(collection.lenght == filter.numberLastIndex){
+						$("#buscar-mas-beneficios").show();
+					}else{
+						$("#fin-beneficios").show();
+					}
+				}
 				collection.forEach(function(beneficio) {
 		
 					beneficiosPersistenceService.showBeneficio(beneficio);
@@ -2060,7 +2133,15 @@
 
 		})
 	})
-	$("#buscar-sucursales").live('pageinit',function() {
+	$("#buscar-sucursales").live('pageshow',function() {
+
+		console.log("pageSow sucursales");
+		
+		$("#fin-sucursales").hide();
+		
+		$("#sin-resultados-sucursales").hide();
+		
+		$("#buscar-sucursales-regionesOrdenables-filter").empty();
 		
 		var filter = sucursalesPersistenceService.getFilter();
 		
@@ -2068,32 +2149,21 @@
 			$("#buscar-sucursales-name").val(filter.searchText);
 		}
 		
-		zonasPersistenceService.getCollection(function(collection) {
+	zonasPersistenceService.getCollection(function(collection) {
 			
 			console.log("buscar-sucursales-regionesOrdenables-filter " , collection.length)
 			
 			collection.forEach(function(zona) {
 
-				$("#buscar-sucursales-regionesOrdenables-filter").append("<input id='" + zona.uri + "' type='checkbox' class='regionesOrdenables-update' /><label for='" + zona.uri + "'>" + zona.nombre +"</label>")
+				$("#buscar-sucursales-regionesOrdenables-filter").append("<input id='sucursal-zona-" + zona.uri + "' type='checkbox' class='regionesOrdenablesSucursal-update' /><label for='sucursal-zona-" + zona.uri + "'>" + zona.nombre +"</label>")
 					
-					$("#" + zona.uri).prop("zonaId", zona.id);
+					console.log(zona.uri);
+				
+					$("#sucursal-zona-" + zona.uri).prop("zonaId", zona.id);
 					
-					$("#" + zona.uri).prop("checked", zona.sucursalSelected);
+					$("#sucursal-zona-" + zona.uri).prop("checked", zona.sucursalSelected);
 					
-					if(zona.id == -1){
-						
-						var checkbox = $("#" + zona.uri);
-						
-						checkbox.attr("checked","checked");
-						
-						var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
-						
-						zona.sucursalSelected = checkbox.prop("checked")
-						
-						zonasPersistenceService.update(zona);
-					}
-	
-					$("#" + zona.uri).click(function(e) {
+					$("#sucursal-zona-" + zona.uri).click(function(e) {
 						
 						var checkbox = $("#" + e.target.id);
 						
@@ -2103,8 +2173,60 @@
 						
 						zonasPersistenceService.update(zona);
 						
+						if(zona.id == -1){
+							unCheckAll("Sucursal");
+						}
+						var checkBoxMiUbicacion = $("#sucursal-zona-undefined");
+						
+						if($(this).is(":checked")){
+							if(checkBoxMiUbicacion.is(':checked') && e.target.id != "sucursal-zona-undefined"){
+								
+								checkBoxMiUbicacion.prop("checked",false).checkboxradio("refresh");
+								
+								$("#sucursal-zona-undefined").removeAttr('checked')
+								
+								var zonaMiUbicacion = zonasPersistenceService.getById(checkBoxMiUbicacion.prop('zonaId'))
+								
+								zonaMiUbicacion.sucursalSelected = checkBoxMiUbicacion.prop("checked")
+								
+								zonasPersistenceService.update(zonaMiUbicacion)
+							}
+							
+						}
 					})
 				});
+			
+			var checkbox = $("#sucursal-zona-undefined");
+			
+			var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'));
+
+			if(zona.id == -1){
+				if(!checkearActivos("Sucursal")){
+					
+					checkbox.attr("checked","checked");
+					
+					zona.sucursalSelected = checkbox.prop("checked")
+					
+					zonasPersistenceService.update(zona);
+				}else{
+					if(checkbox.is(':checked')){
+						
+						checkbox.prop("checked",false)
+						
+						$("#sucursal-zona-undefined").removeAttr('checked')
+						
+						var zonaMiUbicacion = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+						
+						zonaMiUbicacion.sucursalSelected = checkbox.prop("checked")
+						
+						zonasPersistenceService.update(zonaMiUbicacion)
+					}	
+				}
+					
+				
+			}
+
+			
 				try{
 					$("#buscar-sucursales-regionesOrdenables-filter").trigger("create");
 				}
@@ -2112,7 +2234,7 @@
 				}
 		
 			})
-			$("#buscar-sucursales-tipoSucursal").append("<option value='P'> Personas </option>");
+			$("#buscar-sucursales-tipoSucursal").html("<option value='P'> Personas </option>");
 			$("#buscar-sucursales-tipoSucursal").append("<option value='E'> Empresas </option>");
 			
 	})
@@ -2126,10 +2248,10 @@
 		var filter = sucursalesPersistenceService.getFilter();
 		
 		if(filter){
-			filter.numberFirstIndex += 49;
+			filter.numberFirstIndex += 50;
 			filter.numberLastIndex += 50;
 		}else{
-			filter.numberFirstIndex = 49;
+			filter.numberFirstIndex = 1;
 			filter.numberLastIndex = 50;
 		} 
 		
@@ -2164,7 +2286,11 @@
 
 			console.log("start filter");
 
-			$("#buscar-mas-sucursales").show();
+			$("#fin-sucursales").hide();
+			
+			$("#buscar-mas-sucursales").hide();
+			
+			$("#sin-resultados-sucursales").hide();
 			
 			var filter = {}
 			
@@ -2196,6 +2322,7 @@
 				filter.longitud = Preferences.get().longitude;
 			}
 			
+			$("#buscar-mas-sucursales").hide();
 			
 			sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
 			
@@ -2203,9 +2330,15 @@
 				
 				$("#ul-sucursales").empty();
 				
-				if(collection.length < filter.numberLastIndex){
-					$("#buscar-mas-beneficios").hide();
-					$("#fin-beneficios").show();
+				if(collection.length == 0){
+					$("#sin-resultados-sucursales").show();
+				}else{
+					if(collection.length == filter.numberLastIndex){
+						$("#buscar-mas-sucursales").show();
+					}else{
+						$("#buscar-mas-sucursales").hide();
+						$("#fin-sucursales").show();
+					}
 				}
 				
 				collection.forEach(function(sucursal) {
@@ -2259,7 +2392,7 @@
 		var filter = cajerosPersistenceService.getFilter();
 		
 		if(filter){
-			filter.numberFirstIndex +=49;
+			filter.numberFirstIndex +=50;
 			filter.numberLastIndex += 50;
 		}else{
 			filter.numberFirstIndex =1;
@@ -2293,7 +2426,9 @@
 
 			console.log("start filter");
 			
-			$("#buscar-mas-cajeros").show();
+			$("#sin-resultados-cajeros").hide();
+			$("#fin-cajeros").hide();
+			$("#buscar-mas-cajeros").hide();
 			
 			var filter = {}
 			
@@ -2324,6 +2459,16 @@
 				$.mobile.changePage("#listar-cajeros")
 				
 				$("#ul-cajeros").empty();
+				
+				if(collection.length == 0){
+					$("#sin-resultados-cajeros").show();
+				}else{
+					if(collection.length == filter.numberLastIndex){
+						$("#buscar-mas-cajeros").show();
+					}else{
+						$("#fin-cajeros").show();
+					}
+				}
 				
 				collection.forEach(function(cajero) {
 		
@@ -2372,12 +2517,9 @@
 				
 					var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ cajero.nombre+'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 					
-// $('#objects-mapa-mapa').gmap(defaultMapConfig).bind('init', function(ev, map)
-// {
 						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud),bounds: false, icon:'assets/images/cajero.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 						});
-// });
 				
 			});
 			
@@ -2555,12 +2697,21 @@
 		})
 		
 	})
-	$("#buscar-cajeros").live('pageinit',function() {
+	$("#buscar-cajeros").live('pageshow',function() {
+		
+		console.log("buscar-cajeros show")
 
-		console.log("buscar-cajeros init")
-
+		$("#fin-cajeros").hide();
+		
+		$("#buscar-cajeros-tipoCajero-filter").empty();
+		
+		$("#buscar-cajeros-regionesOrdenables-filter").empty();
+		
+		
 		var filter = cajerosPersistenceService.getFilter();
-
+		
+		$("#buscar-cajeros-tipoCajero-filter").append("<option data-placeholder='true' value='-1' >Seleccionar...</option>");
+		
 		tipoCajerosPersistenceService.getCollection(function(tipoCajeros) {
 			tipoCajeros.forEach(function (tipoCajero) {
 				$("#buscar-cajeros-tipoCajero-filter").append("<option value='" + tipoCajero.id + "'>" + tipoCajero.descripcion +"</option>")
@@ -2570,7 +2721,6 @@
 			
 			$("#buscar-cajeros-tipoCajero-filter").trigger("create");
 		})
-		
 		zonasPersistenceService.getCollection(function(collection) {
 	
 			console.log("buscar-cajeros-regionesOrdenables-filter " , collection.length)
@@ -2578,27 +2728,16 @@
 			
 			collection.forEach(function(zona) {
 
-				$("#buscar-cajeros-regionesOrdenables-filter").append("<input id='" + zona.uri + "' type='checkbox' class='regionesOrdenables-update' /><label for='" + zona.uri + "'>" + zona.nombre +"</label>")
+				$("#buscar-cajeros-regionesOrdenables-filter").append("<input id='cajero-zona-" + zona.uri + "' type='checkbox' class='regionesOrdenablesCajero-update' /><label for='cajero-zona-" + zona.uri + "'>" + zona.nombre +"</label>")
 					
-					$("#" + zona.uri).prop("zonaId", zona.id);
-				
-					$("#" + zona.uri).prop("checked", zona.cajeroSelected);
+					console.log(zona.uri)
 					
-					if(zona.id == -1){
-						
-						var checkbox = $("#" + zona.uri);
-						
-						checkbox.attr("checked","checked");
-						
-						var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'))
-						
-						zona.cajeroSelected = checkbox.prop("checked")
-						
-						zonasPersistenceService.update(zona);
-						
-					}
+					$("#cajero-zona-" + zona.uri).prop("zonaId", zona.id);
 				
-					$("#" + zona.uri).click(function(e) {
+					$("#cajero-zona-" + zona.uri).prop("checked", zona.cajeroSelected);
+					
+					$("#cajero-zona-" + zona.uri).unbind()
+					$("#cajero-zona-" + zona.uri).click(function(e) {
 						
 						var checkbox = $("#" + e.target.id);
 						
@@ -2608,7 +2747,62 @@
 						
 						zonasPersistenceService.update(zona);
 						
+						if(zona.id == -1){
+							unCheckAll('Cajero');
+						}
+						
+						var checkBoxMiUbicacion = $("#cajero-zona-undefined");
+						
+						if($(this).is(":checked")){
+							if(checkBoxMiUbicacion.is(':checked') && e.target.id != "cajero-zona-undefined"){
+								
+								checkBoxMiUbicacion.prop("checked",false).checkboxradio("refresh");
+								
+								$("#cajero-zona-undefined").removeAttr('checked')
+								
+								var zonaMiUbicacion = zonasPersistenceService.getById(checkBoxMiUbicacion.prop('zonaId'))
+								
+								zonaMiUbicacion.cajeroSelected = checkBoxMiUbicacion.prop("checked")
+								
+								zonasPersistenceService.update(zonaMiUbicacion)
+							}
+							
+						}
+						
 					})
+					
+			});
+					
+			var checkbox = $("#cajero-zona-undefined");
+			
+			var zona = zonasPersistenceService.getById(checkbox.prop('zonaId'));
+
+			if(zona.id == -1){
+				if(!checkearActivos("Cajero")){
+					
+					checkbox.attr("checked","checked");
+					
+					zona.cajeroSelected  = checkbox.prop("checked")
+					
+					zonasPersistenceService.update(zona);
+				}else{
+					if(checkbox.is(':checked')){
+						
+						checkbox.prop("checked",false)
+						
+						$("#cajero-zona-undefined").removeAttr('checked')
+						
+						var zonaMiUbicacion = zonasPersistenceService.getById(checkbox.prop('zonaId'))
+						
+						zonaMiUbicacion.cajeroSelected = checkbox.prop("checked")
+						
+						zonasPersistenceService.update(zonaMiUbicacion)
+					}	
+				}
+					
+				
+			}
+			
 					try{
 						$("#buscar-cajeros-regionesOrdenables-filter").trigger("create");
 					}
@@ -2616,7 +2810,6 @@
 						
 					}
 				
-			});
 			
 		})
 
@@ -2643,6 +2836,9 @@
 	   	$("#buscar-mas-beneficios").hide();
 	   	$("#buscar-mas-sucursales").hide();
 	   	$("#buscar-mas-cajeros").hide();
+	   	$("#sin-resultados-beneficios").hide();
+	   	$("#sin-resultados-sucursales").hide();
+	   	$("#sin-resultados-cajeros").hide();
 	});
 	
 	window.callbackList = [];
@@ -2670,8 +2866,6 @@
 		callbackList = []
 	});
 	
-	generateBannerForBeneficios();
-	
 	$("#fin-beneficios").hide();
    	$("#fin-sucursales").hide();
    	$("#fin-cajeros").hide();
@@ -2695,13 +2889,19 @@
 	beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
 		
 		$("#ul-beneficios").empty();
+		
+		if(collection.length == filter.numberLastIndex){
+			$("#buscar-mas-cajeros").show();
+		}else{
+			$("#fin-cajeros").show();
+		}
 
 		collection.forEach(function(beneficio) {
 
 			beneficiosPersistenceService.showBeneficio(beneficio);
 				
 		})
-		
+		generateBannerForBeneficios();
 		$("#ul-beneficios").listview('refresh');
 	});
 }
