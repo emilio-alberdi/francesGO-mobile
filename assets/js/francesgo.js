@@ -986,15 +986,16 @@
 	function checkearActivos(idClass){
 		
 		var idCheckBox = idClass.toLowerCase();
+		
 		var statusTrue = false; 
 		var statusFalse = false
+		
 		$(".regionesOrdenables"+idClass+"-update").each(function(){ 
 			if(this.checked && this.id != idCheckBox+"-zona-undefined"){
 				statusTrue = true; 
 			}else
 				statusFalse = false;
 		});
-		
 		return (statusTrue == true) ? statusTrue : statusFalse
 	}
 	
