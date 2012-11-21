@@ -23,6 +23,8 @@
 		Preferences.get().longitude = position.coords.longitude;
 	  
 		Preferences.update();
+		
+//		callFirstInstanceBeneficio();
     });  
 		
 
@@ -570,6 +572,7 @@
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  console.log(textStatus, errorThrown);
 		}})
+		$.mobile.showPageLoadingMsg();
 		
 	}
 
@@ -1014,7 +1017,61 @@
 		});		
 		
 	}
+	
+	function callFirstInstanceBeneficio(){
+		var filter = beneficiosPersistenceService.getFilter();
+		if(filter){
+			if(filter.latitude != null && filter.latitude == 0){
+				filter.latitude = Preferences.get().latitude;
+			}
+			if(filter.longitude != null && filter.longitude == 0){
+				filter.longitude =  Preferences.get().longitude;
+			}
+		}else{
+			filter = {}
+			if(Preferences.get().latitude == 0){
+				setTimeout(function(){callFirstInstanceBeneficio()},2000);
+				return;
+			}else{
+				filter.latitude = Preferences.get().latitude;
+			}
+			if(Preferences.get().longitude == 0){
+				setTimeout(function(){callFirstInstanceBeneficio()},2000);
+				return ;
+			}else{
+				filter.longitude = Preferences.get().longitude;
+			}
+		}
+		
+		filter.numberFirstIndex = 1;
+		filter.numberLastIndex = 50;
+		
+		
+		beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
+			
+			$("#ul-beneficios").empty();
+			
+			$.mobile.hidePageLoadingMsg();
+			
+			if(collection.length == 0){
+				$("#sin-resultados-beneficios").show();
+			}else{
+				if(collection.lenght == filter.numberLastIndex){
+					$("#buscar-mas-beneficios").show();
+				}else{
+					$("#fin-beneficios").show();
+				}
+			} 
 
+			collection.forEach(function(beneficio) {
+
+				beneficiosPersistenceService.showBeneficio(beneficio);
+					
+			})
+			generateBannerForBeneficios();
+			$("#ul-beneficios").listview('refresh');
+		});
+	}
 
 	function changeTheme(select) {
 		
@@ -1247,7 +1304,7 @@
 	    }
 
 	})
-	
+	//TODO
 	$("#buscar-beneficios").live('pageshow',function() {
 		
 		console.log("pageShow Beneficios");
@@ -1448,6 +1505,8 @@
 			
 				
 		});	
+		
+		$.mobile.hidePageLoadingMsg();
 
 	});
 	
@@ -1493,7 +1552,7 @@
 				$.mobile.changePage("#listar-beneficios")
 				
 				$("#ul-beneficios").empty();
-				
+				//TODO 
 				if(collection.length == 0){
 					$("#sin-resultados-beneficios").show();
 				}else{
@@ -1869,13 +1928,25 @@
 		
 		
 	})
-
+//TODO
 	$("#listar-beneficios").live('pageshow',function() {
 		
 		$("#ul-beneficios").empty();
 		
+		var filter = beneficiosPersistenceService.getFilter();
+		
 		beneficiosPersistenceService.getCollection(function(collection) {
 
+			if(collection.length == 0){
+				$("#sin-resultados-beneficios").show();
+			}else{
+				if(collection.lenght == filter.numberLastIndex){
+					$("#buscar-mas-beneficios").show();
+				}else{
+					$("#fin-beneficios").show();
+				}
+			}
+			
 			collection.forEach(function(beneficio) {
 				
 				beneficiosPersistenceService.showBeneficio(beneficio);
@@ -1884,6 +1955,8 @@
 			$("#ul-beneficios").listview('refresh');
 
 		})
+		
+		$.mobile.hidePageLoadingMsg();
 	})
 
 	
@@ -2113,17 +2186,41 @@
 	})
 		
 
-		
+		//TODO
 	$("#listar-sucursales").live('pageshow',function() {
 
+		var filter = sucursalesPersistenceService.getFilter();
 		
-		sucursalesPersistenceService.getCollection(function(collection) {
+		if(filter){
+				if(!filter.latitud && (filter.latitude && !filter.latitude == 0)){
+					filter.latitud = Preferences.get().latitude;
+				}
+				if(!filter.longitud && (filter.longitude && !filter.longitude == 0)){
+					filter.longitud = Preferences.get().longitude;
+				}
+		}else{
+			$("#buscar-mas-sucursales").hide();
+			filter = {}
+			filter.numberFirstIndex = 1;
+			filter.numberLastIndex = 50;
+			filter.latitud = Preferences.get().latitude;
+			filter.longitud = Preferences.get().longitude;
+		}
+		sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
 
 			$("#ul-sucursales").empty();
 			
-			if(collection.length > 0){
-				$("#buscar-mas-sucursales").show();
+			if(collection.length == 0){
+				console.log("no hubo resultados de la busqueda")
+				$("#sin-resultados-sucursales").show();
+			}else{
+				if(collection.length == filter.numberLastIndex){
+					$("#buscar-mas-sucursales").show();
+				}else{
+					$("#fin-sucursales").show();
+				}
 			}
+			
 			collection.forEach(function(sucursal) {
 	
 				sucursalesPersistenceService.showSucursal(sucursal);
@@ -2133,12 +2230,16 @@
 			$("#ul-sucursales").listview('refresh');
 
 		})
+		
+		$.mobile.hidePageLoadingMsg();
 	})
+	
+	//TODO 
 	$("#buscar-sucursales").live('pageshow',function() {
 
 		console.log("pageSow sucursales");
 		
-		$("#fin-sucursales").hide();
+//		$("#fin-sucursales").hide();
 		
 		$("#sin-resultados-sucursales").hide();
 		
@@ -2278,18 +2379,19 @@
 
 		});	
 		
+		$.mobile.hidePageLoadingMsg();
+		
 		
 	})
-	
+	//TODO
 	$("#buscar-sucursales-link").click(function(e) {
-		
 		try {
 
 			console.log("start filter");
 
 			$("#fin-sucursales").hide();
 			
-			$("#buscar-mas-sucursales").hide();
+			$("#buscar-mas-sucursales").hide()
 			
 			$("#sin-resultados-sucursales").hide();
 			
@@ -2322,22 +2424,24 @@
 				filter.latitud = Preferences.get().latitude;
 				filter.longitud = Preferences.get().longitude;
 			}
-			
 			$("#buscar-mas-sucursales").hide();
+			$("#fin-sucursales").hide();
 			
 			sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
-			
+
 				$.mobile.changePage("#listar-sucursales")
-				
+
 				$("#ul-sucursales").empty();
 				
+				$("#buscar-mas-sucursales").hide()
+				
 				if(collection.length == 0){
+					console.log("no hubo resultados de la busqueda")
 					$("#sin-resultados-sucursales").show();
 				}else{
 					if(collection.length == filter.numberLastIndex){
 						$("#buscar-mas-sucursales").show();
 					}else{
-						$("#buscar-mas-sucursales").hide();
 						$("#fin-sucursales").show();
 					}
 				}
@@ -2363,14 +2467,37 @@
 	
 	$("#listar-cajeros").live('pageshow',function() {
 		
-		cajerosPersistenceService.getCollection(function(collection) {
+		var filter = cajerosPersistenceService.getFilter();
+		
+		if(filter){
+			if(!filter.latitud && (filter.latitude && !filter.latitude == 0)){
+				filter.latitud = Preferences.get().latitude;
+			}
+			if(!filter.longitud && (filter.longitude && !filter.longitude == 0)){
+				filter.longitud = Preferences.get().longitude;
+			}
+		}else{
+			$("#buscar-mas-cajeros").hide();
+			filter = {}
+			filter.numberFirstIndex = 1;
+			filter.numberLastIndex = 50;
+			filter.latitud = Preferences.get().latitude;
+			filter.longitud = Preferences.get().longitude;
+		}
+		
+		cajerosPersistenceService.getFilteredCollection(filter,function(collection) {
 
 			$("#ul-cajeros").empty();
-			if(collection.length < 50){
-				
-				$("#buscar-mas-sucursales").hide();
-				
-				$("#fin-sucursales").show();
+			
+			if(collection.length == 0){
+				console.log("no hubo resultados de la busqueda")
+				$("#sin-resultados-cajeros").show();
+			}else{
+				if(collection.length == filter.numberLastIndex){
+					$("#buscar-mas-cajeros").show();
+				}else{
+					$("#fin-cajeros").show();
+				}
 			}
 			collection.forEach(function(cajero) {
 	
@@ -2381,6 +2508,8 @@
 			$("#ul-cajeros").listview('refresh');
 
 		})
+		
+		$.mobile.hidePageLoadingMsg();
 	})
 
 	
@@ -2419,6 +2548,7 @@
 			$("#ul-cajeros").listview('refresh');
 
 		});	
+		$.mobile.hidePageLoadingMsg();
 	})
 	
 	$("#buscar-cajeros-link").click(function(e) {
@@ -2874,38 +3004,11 @@
    	$("#buscar-mas-beneficios").hide();
    	$("#buscar-mas-sucursales").hide();
    	$("#buscar-mas-cajeros").hide();
-	
-	var filter = beneficiosPersistenceService.getFilter();
-	
-	if(filter != null){
-		if(filter.numberLastIndex > 0){
-			$("#buscar-mas-beneficios").show();
-		}
-	}else{
-		$("#buscar-mas-beneficios").hide();
-		filter = {}
-		filter.numberLastIndex = 50;
-	}
-	
-	beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
-		
-		$("#ul-beneficios").empty();
-		
-		if(collection.length == filter.numberLastIndex){
-			$("#buscar-mas-cajeros").show();
-		}else{
-			$("#fin-cajeros").show();
-		}
-
-		collection.forEach(function(beneficio) {
-
-			beneficiosPersistenceService.showBeneficio(beneficio);
-				
-		})
-		generateBannerForBeneficios();
-		$("#ul-beneficios").listview('refresh');
-	});
+   	
+   	setTimeout(function(){callFirstInstanceBeneficio()},2000);
 	
 	zonasPersistenceService.forceReloadCollection();
+	
+	$.mobile.hidePageLoadingMsg();
 }
 	
