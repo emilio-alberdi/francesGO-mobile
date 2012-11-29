@@ -1056,7 +1056,7 @@
 			if(collection.length == 0){
 				$("#sin-resultados-beneficios").show();
 			}else{
-				if(collection.lenght == filter.numberLastIndex){
+				if(collection.length == filter.numberLastIndex){
 					$("#buscar-mas-beneficios").show();
 				}else{
 					$("#fin-beneficios").show();
@@ -2979,6 +2979,9 @@
 	   	$("#sin-resultados-beneficios").hide();
 	   	$("#sin-resultados-sucursales").hide();
 	   	$("#sin-resultados-cajeros").hide();
+	   	$("#fin-sucursales").hide();
+	   	$("#fin-cajeros").hide();
+	   	$("#fin-cajeros").hide();
 	});
 	
 	window.callbackList = [];
