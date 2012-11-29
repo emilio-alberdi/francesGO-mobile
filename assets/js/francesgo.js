@@ -1551,6 +1551,8 @@
 			
 				$.mobile.changePage("#listar-beneficios")
 				
+				$("#fin-beneficios").hide();
+				
 				$("#ul-beneficios").empty();
 				//TODO 
 				if(collection.length == 0){
@@ -2210,6 +2212,8 @@
 
 			$("#ul-sucursales").empty();
 			
+			$("#fin-sucursales").hide();
+			
 			if(collection.length == 0){
 				console.log("no hubo resultados de la busqueda")
 				$("#sin-resultados-sucursales").show();
@@ -2430,6 +2434,8 @@
 			sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
 
 				$.mobile.changePage("#listar-sucursales")
+				
+				$("#fin-sucursales").hide();
 
 				$("#ul-sucursales").empty();
 				
@@ -2488,6 +2494,7 @@
 		cajerosPersistenceService.getFilteredCollection(filter,function(collection) {
 
 			$("#ul-cajeros").empty();
+			$("#fin-cajeros").hide();
 			
 			if(collection.length == 0){
 				console.log("no hubo resultados de la busqueda")
@@ -2588,6 +2595,8 @@
 			cajerosPersistenceService.getFilteredCollection(filter, function(collection) {
 			
 				$.mobile.changePage("#listar-cajeros")
+				
+				$("#fin-cajeros").hide();
 				
 				$("#ul-cajeros").empty();
 				
