@@ -1556,7 +1556,7 @@
 				if(collection.length == 0){
 					$("#sin-resultados-beneficios").show();
 				}else{
-					if(collection.lenght == filter.numberLastIndex){
+					if(collection.length == filter.numberLastIndex){
 						$("#buscar-mas-beneficios").show();
 					}else{
 						$("#fin-beneficios").show();
