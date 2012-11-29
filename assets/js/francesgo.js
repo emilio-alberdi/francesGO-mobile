@@ -1503,9 +1503,9 @@
 			console.log('refresh');
 			
 				
+		$.mobile.hidePageLoadingMsg();
 		});	
 		
-//		$.mobile.hidePageLoadingMsg();
 
 	});
 	
@@ -2385,9 +2385,9 @@
 			
 			console.log('referesh');
 
+		$.mobile.hidePageLoadingMsg();
 		});	
 		
-//		$.mobile.hidePageLoadingMsg();
 		
 		
 	})
@@ -2558,8 +2558,8 @@
 
 			$("#ul-cajeros").listview('refresh');
 
+			$.mobile.hidePageLoadingMsg();
 		});	
-		$.mobile.hidePageLoadingMsg();
 	})
 	
 	$("#buscar-cajeros-link").click(function(e) {
