@@ -1494,10 +1494,9 @@
 			
 			$("#ul-beneficios").listview('refresh');
 			
-			if(collection.length < 50){
-				
-				$("#buscar-mas-beneficios").hide();
-				
+			if(collection.length == 50){
+				$("#buscar-mas-beneficios").show();
+			}else{
 				$("#fin-beneficios").show();
 			}
 			
@@ -1506,7 +1505,7 @@
 				
 		});	
 		
-		$.mobile.hidePageLoadingMsg();
+//		$.mobile.hidePageLoadingMsg();
 
 	});
 	
@@ -1942,7 +1941,7 @@
 		
 		var filter = beneficiosPersistenceService.getFilter();
 		
-		beneficiosPersistenceService.getCollection(function(collection) {
+		beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
 
 			if(collection.length == 0){
 				$("#sin-resultados-beneficios").show();
@@ -2388,7 +2387,7 @@
 
 		});	
 		
-		$.mobile.hidePageLoadingMsg();
+//		$.mobile.hidePageLoadingMsg();
 		
 		
 	})
