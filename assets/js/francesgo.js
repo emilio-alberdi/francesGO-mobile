@@ -1515,8 +1515,13 @@
 		try {
 			console.log("start filter");
 			
+
+			$("#buscar-mas-beneficios").hide()
+			
+			$("#sin-resultados-beneficios").hide();
 			
 			$("#fin-beneficios").hide();
+			
 			var filter = {}
 			filter.searchText = $("#buscar-beneficios-search").val();
 			
