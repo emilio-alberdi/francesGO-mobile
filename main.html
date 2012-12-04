@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Francés Go</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.css" />
+    <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
+    <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
+<!--     <link rel="stylesheet" href="assets/stylesheets/css/themes/jquery-mobile-theme-BENEFICIOS.min.css" /> -->
+	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+	<script type="text/javascript" src="assets/js/francesgo.js"></script>
+  </head>
+  <body>
+<!--   class="banner" data-theme='d' -->
+    <div  class="banner background" data-role='page'  id="listar-beneficios">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
+        <h1>Beneficios</h1>
+        <a  id='beneficios-mapa'>Mapa</a>
+      </div>
+  	  <div data-role="content">
+		
+		<img src='assets/images/francesGo-logo.png' />
+          <div class='submit hide'>
+            <a data-role='button'  href='#buscar-beneficios'>Buscar Beneficios</a>
+          </div>
+         
+        <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+          <ul id="ul-beneficios" data-inset='true' data-role='listview'>
+          
+          
+          
+          </ul>
+
+          <div class='ui-content ui-scrollview-clip hide' id='buscar-mas-beneficios' data-role='content' data-scroll='y' >
+          	<a data-role='button'>Ver mas</a>
+          </div>
+          <div data-role='fieldcontain' id='sin-resultados-beneficios'>
+            <h3>No se encontraron resultados para su busqueda.</h3>
+           </div>
+           <div data-role='fieldcontain' id='fin-beneficios'>
+            <h3>No hay mas beneficios para mostrar</h3>
+           </div>
+          
+        </div>
+        
+      </div>
+      </div>
+     
+     <!-- ********************* listar beneficios ************************** -->
+    <div class="banner background " data-role='page'  id="menu-principal">
+      <div data-position='fixed'  data-role='header' >
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Atrás</a>
+        <h1>Menu principal</h1>
+      </div>
+        <img src='assets/images/francesGo-logo.png' />
+        <div class="content" align="center">
+						<a href='#listar-beneficios'><img src='assets/images/Beneficios-01.png'/></a>
+						<a href='#listar-sucursales'><img src='assets/images/Sucursales-01.png'/></a><br/>
+						<a href='#listar-cajeros'><img src='assets/images/Cajeros-01.png'/></a>
+						<a href='#notificacionesSMS'><img src='assets/images/Avisodepromociones-01.png'/></a><br/>
+						<a href='#preferencias'><img src='assets/images/Preferencias-01.png'/></a>
+						<a href='#ayuda'><img src='assets/images/Ayuda-01.png'/></a>
+					
+		</div>
+<!-- 		<div  data-role="footer" ><img id="bannerImage"  /></div> -->
+     </div>
+     
+     <!-- ********************* menu principal ************************** -->
+    <div class="background banner" data-role='page' id="ayuda">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal'>Atrás</a>
+        <h1>Ayuda</h1>
+      </div>
+        <div class="content">
+        
+		</div>
+     </div>
+     
+     <!-- ********************* ayuda ************************** -->
+     
+         <div class="banner background" data-role='page' id="preferencias">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#menu-principal'>Atrás</a>
+        <h1>Preferencias</h1>
+      </div>
+        <div class="content">
+        	<h3>Tema:</h3>
+			<select id="preferencias-theme" data-mini='true'  onchange="changeTheme(this)" >
+              <option >FrancesGo</option>
+              <option >FrancesGoBeneficios</option>
+<!--               <option >River</option> -->
+            </select>
+            <h3>Eliminar cache</h3>
+			<a id="preferencias-eliminar-cache" data-role='button'>Eliminar cache</a>
+            					
+		</div>
+     </div>
+   
+     <!-- ********************* fin preferencias ************************** -->
+     
+    <div  class= 'banner background' data-role='page' id="ver-beneficio">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#listar-beneficios'>Atrás</a>
+        <h1>Beneficio</h1>
+      </div>
+      <div id="beneficio-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
+        <!-- /Contenido -->
+        
+		<div class='title-image'>
+          <div id='beneficio-title' class="title">
+<!--         <img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/> -->
+          </div>
+        <div class='padding'>
+          <p id='beneficio-descripcionPortal'> </p> 
+          <div id='beneficio-direccion' class='address'>
+          </div>
+          <p id='beneficio-infoContacto'>
+          </p>
+          
+       </div>
+        <div class='mapa'>
+<!--           <a class='see' id="ver-beneficio-mapa-link">Ver en el Mapa &rarr;</a> -->
+          <div class='map' id='ver-beneficio-mapa'></div>
+        </div>
+        
+        <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-beneficio-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
+        
+        <div class='legales'>
+          <div class='padding'>
+            <a id='ver-beneficio-legales-link'>Ver Legales</a>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--     <div  data-role="footer" ><img id="bannerImage"  /></div>  -->
+    </div>
+     
+     <!-- ********************* ver-beneficios ************************** -->
+     
+     
+    <div class="banner background" data-role='page' id="buscar-beneficios">
+      <div  data-role='header' data-position='fixed'  >
+        <a data-icon='arrow-l' href='#menu-principal'>Atrás</a>
+        <h1>Beneficios</h1>
+      </div>
+      <img src='assets/images/logo_francesGo.png' />
+      <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+        <div class='search'>
+          <div data-role='fieldcontain'>
+            <input id='buscar-beneficios-search' name='search' placeholder='Ingresar palabra clave' type='text' value='' />
+          </div>
+        </div>
+        <div class='options'>
+          <div data-content-theme='d' data-role='collapsible-set'>
+            <div data-role='collapsible'>
+              <h3>Rubros</h3>
+              <fieldset id="rubros-filter" data-role='controlgroup'>
+              </fieldset>
+            </div>
+            <div data-role='collapsible'>
+              <h3>Zonas</h3>
+              <fieldset id="regionesOrdenables-filter" data-role='controlgroup'>
+              </fieldset>
+            </div>
+<!--             <div data-role='collapsible'> -->
+<!--               <h3>Campañas</h3> -->
+<!--               <fieldset id="campanias-filter" data-role='controlgroup'> -->
+<!--               </fieldset> -->
+<!--             </div> -->
+          </div>
+        </div>
+        <div class='submit'>
+          <a id="buscar-beneficios-link" data-role='button' >Buscar</a>
+        </div>
+      </div>
+      </div>
+      <!-- ************************* buscar beneficios -->
+      
+      
+     <div class='banner background' data-role='page'  id="beneficio-legales">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' id = 'back-legales'>Atrás</a>
+        <h1>Legales</h1>
+      </div>
+      <div class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
+        <!-- /Contenido -->
+        <div class='padding'>
+          <h4 id="beneficio-legales-comercio"></h4>
+          <div id= "beneficio-legales-datos">
+          
+          </div>
+<!--           <p id="beneficio-legales-vigencia"> -->
+<!--           </p> -->
+<!--           <br /> -->
+<!--           <p id="beneficio-legales-legales"></p> -->
+<!--           <br /> -->
+<!--           <p id="beneficio-legales-cft"></p> -->
+        </div>
+      </div>
+  	 </div>	
+      
+      <!-- ************************* beneficio legales -->
+      
+      <div data-role='page' class='background' id="object-mapa">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Atrás</a>
+        <h1 id="object-mapa-title" >Beneficio</h1>
+      </div>
+      <div class='ui-content  show-map' data-role='content' data-scroll='y' role='main' style="height: 100%;width: 100%">
+        <!-- /Contenido -->
+       	<div class='map' id='object-mapa-mapa' style="height: 100%;width: 100%"></div>
+       	<div id="direcciones" style="width: 500px;"></div> 
+      </div>
+  	 </div>	
+      
+      <!-- ************************* beneficio mapa -->
+      <div data-role='page' class='background' id="objects-mapa">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#' id='back-listar'>Atrás</a>
+        <h1 id="objects-mapa-title" >Beneficios</h1>
+      </div>
+        <!-- /Contenido -->
+       <div class='ui-content  show-map'  data-fullscreen="true" data-role='content' data-scroll='y' role='main' style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; ">
+        <!-- /Contenido -->
+       	<div class='map' id='objects-mapa-mapa'  data-fullscreen="true" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; "></div>
+      </div>
+  	  </div>	
+      <!-- ************************* beneficios mapa -->
+      
+  	  <div data-role='page' class='banner background' id="notificacionesSMS">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal'>Back</a>
+        <h1>Alerta de promociones</h1>
+      </div>
+    		<ul data-role="listview">
+	   			<li><a href="#registracion">Registrate</a></li>
+				<li><a href="#registracion-baja">Darse de baja</a></li>
+			</ul>
+<!-- 			<div  data-role="footer" ><img id="bannerImage"  /></div> -->
+  	 </div>	
+      
+      
+      
+       <div data-role='page' class='background' id="registracion">
+      <div data-position='fixed' data-role='header' >
+        <a data-icon='arrow-l' href='#notificacionesSMS' >Atrás</a>
+        <h1>Registración SMS</h1>
+      </div>
+      <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+        <form id="registracion-form" name="registracion-form">
+          <p>SI quiero recibir información de las promociones via celular o e-mail</p>
+   
+          <div data-mini='true' data-role='fieldcontain'>
+          <h3>Datos personales</h3>
+          <table class="registracion">
+          <tbody>
+          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>DNI</label></td>
+          <td><select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  >
+              <option data-placeholder="true" value="-1">Seleccionar...</option>
+            </select></td><td><input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /></td> </tr>
+          </tbody>
+          </table>
+          </div>
+          <div data-mini='true' data-role='fieldcontain'>
+            <label data-mini='true' for='registracion-nombre'>Nombre</label>
+            <input data-mini='true' id='registracion-nombre' name='nombre' type='text' value='' class="required" />
+          </div>
+          <div data-role='fieldcontain'>
+            <label data-mini='true' for='registracion-apellido'>Apellido</label>
+            <input data-mini='true' id='registracion-apellido' name='apellido' type='text' value='' class="required" />
+          </div>
+          <div data-role='fieldcontain'>
+          	<h3>Número celular</h3>
+            <table class="registracion ui-hide-label" >
+	          <tbody>
+	          <tr><td> <label data-mini='true' for='registracion-codigoAreaCelular'>Código Area</label></td>
+	          <td><input data-mini='true' id='registracion-codigoAreaCelular' name='codigoAreaCelular' type='number' value='' max="4" maxlength="4" placeholder="Cod Area" class="required" /></td>
+	          <td> <label data-mini='true' for='registracion-numeroCelular'>Número:</label></td>
+	          <td><input data-mini='true' id='registracion-numeroCelular' name='numeroCelular' type='number' value='' max="8" maxlength="8" placeholder="Número" class="required" /></td> </tr>
+	          </tbody>
+	          </table>
+	       </div>
+          <div data-role='fieldcontain'>
+            <label class='select' for='registracion-operadorCelular'>Compañía Celular</label>
+            <select id='registracion-operadorCelular' name='operadorCelular' data-native-menu="false" class="required" >
+              <option data-placeholder="true">Seleccionar...</option>
+                 
+            </select>
+          </div>
+          <div data-role='fieldcontain'>
+            <h3>Preferencias</h3>
+            <label class='select' for='registracion-rubro'>Rubro</label>
+            <select id='registracion-rubro' name='rubroUris'   multiple="multiple" data-native-menu="false" >
+              <option data-placeholder="true">Seleccionar...</option>
+            </select>
+          </div>
+          <div data-role='fieldcontain'>
+            <label class='select' for='registracion-regionesOrdenables'>Zona</label>
+            <select id='registracion-regionesOrdenables' name='zonaUris' multiple="multiple" data-native-menu="false"  >
+            	<option data-placeholder="true">Seleccionar...</option>
+            </select>
+          </div>
+        </form>
+        <div class='submit'>
+          <a data-role='button' id="registracion-confirmation-link" href='#registracion-confirmation'>Registrarse</a>
+        </div>
+      </div>
+    </div>
+      <!-- ************************************ Registracion ************************************* -->
+      
+       <div data-role='page' class='background' id="registracion-confirmation">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#registracion'>Atrás</a>
+	        <h1>Confirmacion</h1>
+	      </div>
+
+      	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+	      
+	           <textarea rows="6" class="terminos ochentapor" readonly="true" >Manifiesto interés en recibir información de las propuestas comerciales que el Banco brinda a sus clientes y presto en este acto mi consentimiento, conforme lo establecido en la ley 25.326 de protección de datos personales, a tenor de lo cual declaro conocer y aceptar, para que mis datos personales integren la base de Banco Francés S.A., otorgando por el presente, autorización expresa para i) el tratamiento automatizado de dichos datos o información y ii) su utilización en relación con la actividad bancaria, financiera, o de servicios actuales o futuros, que desarrolle Banco Francés S.A. o cualquiera de sus subsidiarias o afiliadas.</textarea>
+			    
+				 <div>
+					<label for="aceptaTerminosLegales" class="checkbox">Acepto los Terminos Legales</label>
+					<input id="aceptaTerminosLegales" type="checkbox" name="aceptaTerminosLegales" />
+				</div>
+
+		        <div class='submit'>
+		          <a id="registracion-confirmation-send-link" data-role='button' >Confirmar</a>
+		        </div>
+
+		  </div>	      
+      </div>
+      
+      <div data-role='page' class='background' id="registracion-resultado">
+	      <div data-position='fixed' data-role='header' >
+	        <h1>Registracion SMS</h1>
+	      </div>
+
+      	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+	      
+	             <div id="registracion-resultado-message">
+	             
+	             </div>
+			    
+		        <div class='submit'>
+		          <a  data-role='button'  href="#menu-principal">Menu Principal</a>
+		        </div>
+
+		  </div>	      
+      </div>
+      
+      
+      <!-- ************************************ Confirmacion ************************************* -->
+
+       <div data-role='page' class='background' id="registracion-baja">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#notificacionesSMS' >Atrás</a>
+	        <h1>Baja envio SMS</h1>
+	      </div>
+
+
+      	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+
+				<p>Darse de baja, para no recibir información de las promociones via celular o e-mail</p>	    
+			    
+			    <form id="registracion-baja-form">
+		          <div data-role='fieldcontain'>
+		          
+		             <table class="registracion">
+			          <tbody>
+			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>DNI</label></td>
+			          <td><select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  >
+			              <option data-placeholder="true">Seleccionar...</option>
+			            </select></td><td><input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /></td> </tr>
+			          </tbody>
+			          </table>
+		          </div>
+		         </form>  
+	         
+		        <div class='submit'>
+		          <a data-role='button' data-rel="dialog" href="#registracion-baja-confirmacion" >Confirmar</a>
+		        </div>
+
+		  </div>	      
+		  
+		  
+      </div>
+      
+      <!-- ************************************ registracion baja ************************************* -->
+       <div data-role='page' class='background' id="registracion-baja-confirmacion">
+	      <div data-position='fixed' data-role='header'>
+	        <a data-icon='arrow-l' href='#registracion-baja'>Atrás</a>
+	        <h1>Confirmacion baja</h1>
+	      </div>
+
+      	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+
+				<p>Confirma darse de baja, para no recibir informacion de las promociones via celular o e-mail</p>	    
+			 
+		        <div class='submit'>
+		          <a id="registracion-baja-confirmacion-link" data-role='button' data-theme='f' >Darme de baja</a>
+		        </div>
+
+		  </div>	      
+      </div>
+      <!-- ************************************ registracion baja confirmacion ************************************* -->
+      
+     <div class="banner background" data-role='page' id="listar-sucursales">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
+        <h1>Sucursales</h1>
+        <a id='sucursales-mapa'>Mapa</a>
+      </div>
+		<img src='assets/images/francesGo-logo.png' />
+          <div class='submit'>
+            <a data-role='button'  href='#buscar-sucursales'>Buscar Sucursales</a>
+          </div>
+  	  <div data-role="content">
+        <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+          <ul id="ul-sucursales" data-inset='true' data-role='listview'>
+          
+          </ul>
+        </div>
+      </div>
+		<div class='ui-content ui-scrollview-clip hide' id='buscar-mas-sucursales' data-role='content' data-scroll='y' >
+        	<a data-role='button'>Ver mas</a>
+        </div>
+        <div data-role='fieldcontain' id='sin-resultados-sucursales'>
+            <h3>No se encontraron resultados para su busqueda.</h3>
+           </div>
+        <div data-role='fieldcontain' id='fin-sucursales'>
+          	<h3>No hay mas sucursales para mostrar</h3>
+        </div>
+
+
+      </div>
+      
+      <!-- ************************* listar sucursales HASTA ACA -->
+ 
+    <div class="banner background" data-role='page' id="buscar-sucursales">
+      <div  data-role='header' data-position='fixed'>
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)'>Atrás</a>
+        <h1>Sucursales</h1>
+      </div>
+      <img src='assets/images/logo_francesGo.png' />
+      <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+        <div class='search'>
+          <div data-role='fieldcontain'>
+            <input id='buscar-sucursal-nombre' name='nombre' placeholder='Ingresar palabra clave' type='text' value='' />
+          </div>
+        </div>
+        <div class='options'>
+          <div data-content-theme='d' data-role='collapsible-set'>
+            <div data-role='collapsible'>
+              <h3>Zonas</h3>
+              <fieldset id="buscar-sucursales-regionesOrdenables-filter" data-role='controlgroup'>
+              </fieldset>
+            </div>
+          </div>
+              <h3>Tipos de Sucursal</h3>
+              <select id="buscar-sucursales-tipoSucursal" name='tipoSucursal'>
+              	<option value='' >Seleccionar</option>
+              </select>
+          </div>
+          
+        </div>
+        <div class='submit'>
+          <a id="buscar-sucursales-link" data-role='button'>Buscar</a>
+        </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+      </div>
+      <!-- ************************* buscar sucursales -->
+   
+    <div data-role='page' class='banner background' id="ver-sucursal">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#listar-sucursales' >Atrás</a>
+        <h1>Sucursal</h1>
+<!--         <a id="ver-sucursal-mapa-link2">Mapa</a> -->
+      </div>
+      <div id="sucursal-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
+        <!-- /Contenido -->
+        <div class='title-image'>
+          <div id='ver-sucursal-title' class="title">
+          </div>
+        </div>
+        <div class='padding'>
+          <p id='ver-sucursal-domicilio'>
+          </p>
+          <p id='ver-sucursal-localidad'>
+          </p>
+          Tipo sucursal:
+          <p id='ver-sucursal-tipoSucursal'>
+          </p>
+          Atencion publico:
+          <p id='ver-sucursal-atencionPublico'>
+          </p>
+          
+        </div>
+        <div class='mapa'>
+          <div class='map' id='ver-sucursal-mapa'></div>
+        </div>
+        
+         <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-sucursal-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
+      </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+    </div> 
+     
+     <!-- ********************* ver-sucursales ************************** -->
+   
+         
+     <div class="banner background" data-role='page' id="listar-cajeros">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#menu-principal' >Menu</a>
+        <h1>Cajeros</h1>
+        <a id='cajeros-mapa'>Mapa</a>
+      </div>
+  	  <div data-role="content">
+		
+		<img src='assets/images/francesGo-logo.png' />
+		<div class='submit'>
+            <a data-role='button' href='#buscar-cajeros'>Buscar cajeros</a>
+          </div>
+        <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+          <ul id="ul-cajeros" data-inset='true' data-role='listview'>
+          
+          
+          
+          </ul>
+          
+        </div>
+        
+        <div class='ui-content ui-scrollview-clip hide' id='buscar-mas-cajeros' data-role='content' data-scroll='y' >
+          	<a data-role='button'>Ver mas</a>
+        </div>
+        <div data-role='fieldcontain' id='sin-resultados-cajeros'>
+            <h3>No se encontraron resultados para su busqueda.</h3>
+           </div>
+        <div data-role='fieldcontain' id='fin-cajeros'>
+            <h3>No hay mas cajeros para mostrar</h3>
+        </div>
+        
+        </div>
+<!--         <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+      </div>
+      
+      <!-- ************************* listar cajeros -->
+ 
+    <div data-role='page' class='banner background' id="buscar-cajeros">
+      <div  data-role='header' data-position='fixed'>
+        <a data-icon='arrow-l' href='#menu-principal'>Atrás</a>
+        <h1>Cajeros</h1>
+      </div>
+      <img src='assets/images/logo_francesGo.png' />
+      <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+        <div class='options'>
+          <div data-content-theme='d' data-role='collapsible-set'>
+            <div data-role='collapsible'>
+              <h3>Zonas</h3>
+              <fieldset id="buscar-cajeros-regionesOrdenables-filter" data-role='controlgroup'>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+        <div class='options'>
+              <h3>Tipo Cajero</h3>
+              <select id='buscar-cajeros-tipoCajero-filter' name='tipoCajero'    >
+            	<option data-placeholder="true" value="-1" >Seleccionar...</option>
+              </select>
+        </div>
+<!--        	<label for="buscar-cajeros-expendeDolares" class="checkbox">Cajeros que expendan dolares</label> -->
+<!-- 		<input id="buscar-cajeros-expendeDolares" type="checkbox" name="expendeDolares" /> -->
+				
+        <div class='submit'>
+          <a id="buscar-cajeros-link" data-role='button'>Buscar</a>
+        </div>
+      </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+      </div>
+      <!-- ************************* buscar cajeros -->
+   
+    <div data-role='page' class='banner background' id="ver-cajero">
+      <div data-position='fixed' data-role='header'>
+        <a data-icon='arrow-l' href='#listar-cajeros'>Atrás</a>
+        <h1>Cajero</h1>
+<!--         <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a> -->
+      </div>
+      <div id="cajero-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
+        <!-- /Contenido -->
+        <div class='title-image'>
+          <div id='ver-cajero-title' class="title">
+          </div>
+        </div>
+        <div class='padding'>
+          <p id='ver-cajero-domicilio'>
+          </p>
+          <p id='ver-cajero-localidad'>
+          </p>
+          Tipo cajero: <span id='ver-cajero-tipoCajero'>  </span>
+          
+        </div>
+        <div class='mapa'>
+          <div class='map' id='ver-cajero-mapa'></div>
+        </div>
+        
+         <div class='comoLlegar'>
+        	<div class='padding'>
+        		<a id='ver-cajero-como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
+      </div>
+<!--       <div  data-role="footer" ><img id="bannerImage"  /></div> -->
+    </div> 
+     
+     <!-- ********************* ver-cajeros ************************** -->
+   
+      
+      </body>
+	<script type="text/javascript">
+	<!--
+	$(document).ready(function () {
+			
+		try {
+			francesGORegisterEvents();	
+		}
+		catch (e) {
+			console.log('start francesGORegisterEvents error' ,e);	
+			
+		}
+		
+		
+	});
+	//-->
+	</script>
+</html>
