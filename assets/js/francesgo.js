@@ -7,8 +7,8 @@
 	
    	baseUrl = '';
 //   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
-//   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+//   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
@@ -1494,12 +1494,13 @@
 			
 			$("#ul-beneficios").listview('refresh');
 			
-			if(collection.length == 50){
-				$("#buscar-mas-beneficios").show();
-			}else{
+			if(collection.length < 50){
+				
+				$("#buscar-mas-beneficios").hide();
+				
 				$("#fin-beneficios").show();
 			}
-			
+
 			console.log('refresh');
 			
 				
@@ -1946,7 +1947,7 @@
 			if(collection.length == 0){
 				$("#sin-resultados-beneficios").show();
 			}else{
-				if(collection.lenght == filter.numberLastIndex){
+				if(collection.length == filter.numberLastIndex){
 					$("#buscar-mas-beneficios").show();
 				}else{
 					$("#fin-beneficios").show();
