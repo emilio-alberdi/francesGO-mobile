@@ -1307,7 +1307,7 @@
 	    }
 
 	})
-	//TODO
+
 	$("#buscar-beneficios").live('pageshow',function() {
 		
 		console.log("pageShow Beneficios");
@@ -1562,7 +1562,6 @@
 				$("#fin-beneficios").hide();
 				
 				$("#ul-beneficios").empty();
-				//TODO 
 				
 				collection.forEach(function(beneficio) {
 					
@@ -1948,7 +1947,7 @@
 		
 		
 	})
-//TODO
+
 	$("#listar-beneficios").live('pageshow',function() {
 		
 		$("#ul-beneficios").empty();
@@ -1956,8 +1955,6 @@
 		$("#sin-resultados-beneficios").hide();
 		$("#buscar-mas-beneficios").hide();
 		$("#fin-beneficios").hide();
-		
-//		var filter = beneficiosPersistenceService.getFilter();
 		
 		beneficiosPersistenceService.getCollection(function(collection) {
 
@@ -2211,7 +2208,6 @@
 	})
 		
 
-		//TODO
 	$("#listar-sucursales").live('pageshow',function() {
 
 		var filter = sucursalesPersistenceService.getFilter();
@@ -2259,6 +2255,12 @@
 				
 				$("#fin-sucursales").hide();
 				
+				collection.forEach(function(sucursal) {
+					
+					sucursalesPersistenceService.showSucursal(sucursal);
+					
+				})
+				
 				if(collection.length == 0){
 					console.log("no hubo resultados de la busqueda")
 					$("#sin-resultados-sucursales").show();
@@ -2270,12 +2272,6 @@
 					}
 				}
 				
-				collection.forEach(function(sucursal) {
-					
-					sucursalesPersistenceService.showSucursal(sucursal);
-					
-				})
-				
 				$("#ul-sucursales").listview('refresh');
 				
 				$.mobile.hidePageLoadingMsg();
@@ -2283,12 +2279,9 @@
 			
 		}	
 	});
-	//TODO 
 	$("#buscar-sucursales").live('pageshow',function() {
 
 		console.log("pageSow sucursales");
-		
-//		$("#fin-sucursales").hide();
 		
 		$("#sin-resultados-sucursales").hide();
 		
@@ -2432,7 +2425,7 @@
 		
 		
 	})
-	//TODO
+
 	$("#buscar-sucursales-link").click(function(e) {
 		try {
 
@@ -2543,11 +2536,8 @@
 						$("#fin-cajeros").show();
 					}
 				}
-				collection.forEach(function(cajero) {
-					
-					cajerosPersistenceService.showCajero(cajero);
-					
-				})
+				
+				$("#ul-cajeros").listview('refresh');
 				
 			})
 		}else{
