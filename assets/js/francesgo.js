@@ -1853,6 +1853,15 @@
 		        	scale = new google.maps.Size(iw,ih) ; 
 		        	var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
 		        	marker.icon = image;
+					}else{
+						
+						var img = new Image();
+						
+						img.src = baseUrl + 'assets/images/icons/pinFgo.png'
+						
+						var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+						
+						marker.icon = image
 					}
 					
 					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
