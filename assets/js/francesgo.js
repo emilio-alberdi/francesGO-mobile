@@ -642,7 +642,7 @@
 
 			$("#beneficio-" + beneficio.hash).click(function(e) {
 				
-				$.mobile.changePage("#ver-beneficio")
+				$.mobile.changePage("#ver-beneficio",  { transition: "slide"} );
 				
 				$("#ver-beneficio").trigger({type:"display-data", beneficio:$(this).data("beneficio")})
 			})
@@ -724,7 +724,7 @@
 				
 				$("#" + sucursal.uri).click(function(e) {
 					
-					$.mobile.changePage("#ver-sucursal")
+					$.mobile.changePage("#ver-sucursal", { transition: "slide"} )
 					
 					$("#ver-sucursal").trigger({type:"display-data", sucursal:$(this).data("sucursal")})
 					
@@ -780,7 +780,7 @@
 			
 			$("#" + cajero.uri).click(function(e) {
 				
-				$.mobile.changePage("#ver-cajero")
+				$.mobile.changePage("#ver-cajero",  { transition: "slide"} )
 				
 				$("#ver-cajero").trigger({type:"display-data", cajero:$(this).data("cajero")})
 				
@@ -1232,7 +1232,7 @@
 	$("#registracion-baja-confirmacion-link").click(function(e){
 		
 		 var callback = function(data) {
-			 $.mobile.changePage("#registracion-resultado")
+			 $.mobile.changePage("#registracion-resultado" ,  { transition: "slide"} )
 		
 			 $.mobile.hidePageLoadingMsg();
 			 
@@ -1263,7 +1263,7 @@
 		
 		 var callback = function(data) {
 			 
-			 $.mobile.changePage("#registracion-resultado")
+			 $.mobile.changePage("#registracion-resultado" , { transition: "slide"} )
 			 
 			 $.mobile.hidePageLoadingMsg();
 			 
@@ -1557,7 +1557,7 @@
 			
 			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
 			
-				$.mobile.changePage("#listar-beneficios")
+				$.mobile.changePage("#listar-beneficios" , { transition: "slide"} )
 				
 				$("#fin-beneficios").hide();
 				
@@ -1605,7 +1605,7 @@
 		
 		$("#back-legales").one("click" , function(event){
 			
-			$.mobile.changePage("#ver-beneficio");
+			$.mobile.changePage("#ver-beneficio", { transition: "slide" ,reverse: true} );
 			
 			$("#ver-beneficio").trigger({type:"display-data", beneficio: beneficio});
 			
@@ -1741,7 +1741,7 @@
 		$("#ver-beneficio-legales-link").one("click" , function(event) {
 	
 			
-			$.mobile.changePage("#beneficio-legales")
+			$.mobile.changePage("#beneficio-legales", { transition: "slide"} )
 			
 			$("#beneficio-legales").trigger({type:"display-data", beneficio:beneficio})
 			
@@ -1750,7 +1750,7 @@
 		
 		$("#ver-beneficio-mapa-link2,#ver-beneficio-mapa-link").click(function() {
 			
-			$.mobile.changePage("#object-mapa")
+			$.mobile.changePage("#object-mapa", { transition: "slide"} )
 			
 			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
@@ -1808,7 +1808,7 @@
 		
 		$("#objects-mapa").trigger({type:"display-data-beneficio",title:'Beneficios'})
 		
-		$.mobile.changePage("#objects-mapa")
+		$.mobile.changePage("#objects-mapa", { transition: "slide"} )
 				
 	})
 	$("#objects-mapa").bind('display-data-beneficio',function(e) {
@@ -1993,7 +1993,7 @@
 	
 	$("#sucursales-mapa").click(function() {
 
-		$.mobile.changePage("#objects-mapa")
+		$.mobile.changePage("#objects-mapa" , { transition: "slide"} )
 		
 		$("#objects-mapa").trigger({type:"display-data-sucursales",title:'Sucursales'})
 		
@@ -2010,7 +2010,7 @@
 			$("#objects-mapa-title").text(e.title)
 		}
 		$("#back-listar").click(function(){
-			$.mobile.changePage("#listar-sucursales");
+			$.mobile.changePage("#listar-sucursales" , { transition: "slide"} );
 		})	
 		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
@@ -2152,7 +2152,7 @@
 			
 			console.log("#object-mapa display sucursal")
 		
-			$.mobile.changePage("#object-mapa")
+			$.mobile.changePage("#object-mapa", { transition: "slide"} )
 		
 			$("#object-mapa").trigger({type:"display-data-sucursal", sucursal:sucursal, title:'Sucursal'})
 		
@@ -2480,7 +2480,7 @@
 			
 			sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
 
-				$.mobile.changePage("#listar-sucursales")
+				$.mobile.changePage("#listar-sucursales" , { transition: "slide"} )
 				
 				$("#fin-sucursales").hide();
 
@@ -2664,7 +2664,7 @@
 			
 			cajerosPersistenceService.getFilteredCollection(filter, function(collection) {
 			
-				$.mobile.changePage("#listar-cajeros")
+				$.mobile.changePage("#listar-cajeros" , { transition: "slide"} )
 				
 				$("#fin-cajeros").hide();
 				
@@ -2701,7 +2701,7 @@
 		
 		$("#objects-mapa").trigger({type:"display-data-cajeros",title:'Cajeros'})
 		
-		$.mobile.changePage("#objects-mapa")
+		$.mobile.changePage("#objects-mapa", { transition: "slide"} )
 					
 	})
 
@@ -2716,7 +2716,7 @@
 		}
 		
 		$("#back-listar").click(function(){
-			$.mobile.changePage("#listar-cajeros");
+			$.mobile.changePage("#listar-cajeros", { transition: "slide"} );
 		})	
 		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
@@ -2843,7 +2843,7 @@
 			
 			console.log("#object-mapa display cajero")
 		
-			$.mobile.changePage("#object-mapa")
+			$.mobile.changePage("#object-mapa", { transition: "slide"} )
 		
 			$("#object-mapa").trigger({type:"display-data-cajero", cajero:cajero, title:'Cajero'})
 		
