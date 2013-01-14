@@ -435,6 +435,15 @@
 			this.getCollection(function(collection) {})
 		}
 	}
+	
+	PersistService.prototype.reloadCollection = function(){
+		
+		if(this.getFilter()){
+			this.getFilteredCollection(this.getFilter(), function(collection){})
+		}else{
+			this.getCollection(function(collection){})
+		}
+	}
 
 	
 	PersistService.prototype.getCollection = function(processCollection) {
@@ -474,7 +483,6 @@
 				else if (this.options.updateFilter) {
 					this.options.updateFilter(filter);
 				}	
-				
 				console.log('collection: ' + this.options.name + " filter: ", filter );
 				
 				this.remoteService.callFilter(filter, callback);	
@@ -533,6 +541,7 @@
 		
 		$.mobile.showPageLoadingMsg();
 		
+		//alert("metodo call: " + this.options.service)
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
 			  console.log(textStatus, errorThrown);
@@ -569,6 +578,7 @@
 		if(data.rubros){
 			data.rubros = data.rubros.toString();
 		}
+		
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  console.log(textStatus, errorThrown);
 		}})
@@ -637,7 +647,7 @@
 		
 			var image = this.getLogo(beneficio);
 		
-			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img  height='30' width='30' id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> <span class=''><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> </span></a></li>")
+			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img  height='30' width='30' id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> <span class=''><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> </span></a></li>") 
 			$("#beneficio-" + beneficio.hash ).data("beneficio", beneficio)
 
 			$("#beneficio-" + beneficio.hash).click(function(e) {
@@ -1029,6 +1039,33 @@
 			if(filter.longitude != null && filter.longitude == 0){
 				filter.longitude =  Preferences.get().longitude;
 			}
+			
+			beneficiosPersistenceService.getCollection(function(collection){
+				
+				$("#ul-beneficios").empty();
+				
+				$.mobile.hidePageLoadingMsg();
+				
+				collection.forEach(function(beneficio) {
+					
+					beneficiosPersistenceService.showBeneficio(beneficio);
+					
+				})
+				
+				if(collection.length == 0){
+					$("#sin-resultados-beneficios").show();
+				}else{
+					if(collection.length == filter.numberLastIndex){
+						$("#buscar-mas-beneficios").show();
+					}else{
+						$("#fin-beneficios").show();
+					}
+				} 
+
+				generateBannerForBeneficios();
+				$("#ul-beneficios").listview('refresh');
+				
+			})
 		}else{
 			filter = {}
 			if(Preferences.get().latitude == 0){
@@ -1043,37 +1080,37 @@
 			}else{
 				filter.longitude = Preferences.get().longitude;
 			}
+			filter.numberFirstIndex = 1;
+			filter.numberLastIndex = 50;
+			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
+				
+				$("#ul-beneficios").empty();
+				
+				$.mobile.hidePageLoadingMsg();
+				
+				collection.forEach(function(beneficio) {
+					
+					beneficiosPersistenceService.showBeneficio(beneficio);
+					
+				})
+				
+				if(collection.length == 0){
+					$("#sin-resultados-beneficios").show();
+				}else{
+					if(collection.length == filter.numberLastIndex){
+						$("#buscar-mas-beneficios").show();
+					}else{
+						$("#fin-beneficios").show();
+					}
+				} 
+				
+				generateBannerForBeneficios();
+				$("#ul-beneficios").listview('refresh');
+			});
 		}
 		
-		filter.numberFirstIndex = 1;
-		filter.numberLastIndex = 50;
 		
 		
-		beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
-			
-			$("#ul-beneficios").empty();
-			
-			$.mobile.hidePageLoadingMsg();
-			
-			collection.forEach(function(beneficio) {
-				
-				beneficiosPersistenceService.showBeneficio(beneficio);
-				
-			})
-			
-			if(collection.length == 0){
-				$("#sin-resultados-beneficios").show();
-			}else{
-				if(collection.length == filter.numberLastIndex){
-					$("#buscar-mas-beneficios").show();
-				}else{
-					$("#fin-beneficios").show();
-				}
-			} 
-
-			generateBannerForBeneficios();
-			$("#ul-beneficios").listview('refresh');
-		});
 	}
 
 	function changeTheme(select) {
@@ -1874,7 +1911,7 @@
 		
 		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
 		
-		var currentMarker = {'position': currentLatLng,bounds: true}
+		var currentMarker = {'position': currentLatLng,bounds: false}
 		
 		var img = new Image();
 		
@@ -1892,7 +1929,7 @@
 				
 				});
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 10);
 	
 	})
 
@@ -1948,9 +1985,9 @@
 			'strokeWeight': 0, 
 			'fillColor': "#008595", 
 			'fillOpacity': 0.25, 
-			'bounds': true,
-			'center': new google.maps.LatLng(beneficio.latitud,beneficio.longitud), 
-			'radius': 15, 
+			'bounds': false,
+			'center': new google.maps.LatLng(Preferences.get().latitude,Preferences.get().longitude), 
+			'radius': 7, 
 			'clickable': false 
 		});
 		
@@ -3054,6 +3091,14 @@
 	   	$("#fin-cajeros").hide();
 	});
 	
+	$("#fin-beneficios").hide();
+   	$("#fin-sucursales").hide();
+   	$("#fin-cajeros").hide();
+   	
+   	$("#buscar-mas-beneficios").hide();
+   	$("#buscar-mas-sucursales").hide();
+   	$("#buscar-mas-cajeros").hide();
+   	
 	window.callbackList = [];
 	
 	window.ensureGMaps = function(callback) {
@@ -3079,18 +3124,15 @@
 		callbackList = []
 	});
 	
-	$("#fin-beneficios").hide();
-   	$("#fin-sucursales").hide();
-   	$("#fin-cajeros").hide();
+
    	
-   	$("#buscar-mas-beneficios").hide();
-   	$("#buscar-mas-sucursales").hide();
-   	$("#buscar-mas-cajeros").hide();
-   	
-   	setTimeout(function(){callFirstInstanceBeneficio()},2000);
+	zonasPersistenceService.reloadCollection();
 	
-	zonasPersistenceService.forceReloadCollection();
+	setTimeout(function(){callFirstInstanceBeneficio()},2000);
 	
-	$.mobile.hidePageLoadingMsg();
+   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},1500)
+	
+   	$.mobile.hidePageLoadingMsg();
+	
 }
 	
