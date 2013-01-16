@@ -11,11 +11,12 @@
 	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.mobile-1.1.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/francesgo.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   </head>
   <body>
 <!--   class="banner" data-theme='d' -->
     <div  class="banner background" data-role='page'  id="listar-beneficios">
-      <div data-position='fixed' data-role='header' >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false" >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Menu</a>
         <h1>Beneficios</h1>
         <a  id='beneficios-mapa'>Mapa</a>
@@ -24,7 +25,7 @@
 		
 		<img src='assets/images/francesGo-logo.png' />
           <div class='submit hide'>
-            <a data-role='button'  href='#buscar-beneficios' data-transition="slide">Buscar Beneficios</a>
+            <a data-role='button' id='boton-buscar-beneficios' class='ui-disabled' href='#buscar-beneficios' data-transition="slide">Buscar Beneficios</a>
           </div>
          
         <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
@@ -126,13 +127,13 @@
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
         
-        <div class='comoLlegar'>
+        <div  class='comoLlegar' id='como-llegar'>
         	<div class='padding'>
-        		<a id='ver-beneficio-como-llegar-link'>Como llegar?</a>
+        		<a id='como-llegar-link'>Como llegar?</a>
         	</div>
         </div>
         
-        <div class='legales'>
+       <div class='legales'>
           <div class='padding'>
             <a id='ver-beneficio-legales-link'>Ver Legales</a>
           </div>
@@ -628,7 +629,28 @@
 	<script type="text/javascript">
 	<!--
 	$(document).ready(function () {
-			
+			/*
+		 if (navigator.userAgent.match(/iPhone/i)) {
+				alert('the agent is iphone')
+		        //cache the viewport tag if the user is using an iPhone
+		        var $viewport = $('head').children('meta[name="viewport"]');
+
+		        //bind an event handler to the window object for the orientationchange event
+		        $(window).bind('orientationchange', function() {
+		            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
+
+		                //landscape
+		                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
+		            } else {
+
+		                //portrait
+		                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
+		            }
+
+		        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
+		        }).trigger('orientationchange');
+		    }
+		*/
 		try {
 			francesGORegisterEvents();	
 		}

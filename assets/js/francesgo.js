@@ -647,7 +647,17 @@
 		
 			var image = this.getLogo(beneficio);
 		
-			$("#ul-beneficios").append("<li><a id='beneficio-" + beneficio.hash + "' ><img  height='30' width='30' id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> <span class=''><h3>" + beneficio.nombreComercio + "</h3><p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p><p>" + beneficio.mensajeCorto  +"</p> </span></a></li>") 
+			$("#ul-beneficios").append("" +
+					"<li>" +
+						"<a id='beneficio-" + beneficio.hash + "' >" +
+								"<img  height='30' width='30' id='beneficio-" + beneficio.hash + "-logo' class='ui-li-icon' src='" + image + "' ></img> " +
+								"<span class=''>" +
+									"<h3 class='ui-li-heading'>" + beneficio.nombreComercio + "</h3>" +
+									"<p id='beneficio-" + beneficio.hash + "-distance' class='ui-li-aside ui-li-desc'></p>" +
+									"<p>" + beneficio.mensajeCorto  +"</p>" +
+								"</span>" +
+						"</a>" +
+					"</li>") 
 			$("#beneficio-" + beneficio.hash ).data("beneficio", beneficio)
 
 			$("#beneficio-" + beneficio.hash).click(function(e) {
@@ -661,16 +671,18 @@
 			try {
 				ensureGMaps(function () {
 					try {
-						var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
-						
-						var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
-						
-						var distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
-						
-						distance = Math.ceil(distance/1000 )
-						
-						$("#beneficio-" + beneficio.hash + "-distance").text(distance + "km.")
+						if(beneficio.latitud != 0 || beneficio.longitud != 0){
 							
+							var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+							
+							var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
+							
+							var distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
+							
+							distance = Math.ceil(distance/1000 )
+							
+							$("#beneficio-" + beneficio.hash + "-distance").text(distance + "km.")
+						}
 					}
 					catch(e) {
 						console.log("Comercio error " ,e)
@@ -1111,6 +1123,49 @@
 		
 		
 		
+	}
+	
+	function createMarker(beneficio){
+		
+		console.log('creating marker');
+		var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
+		
+		var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': false}
+			
+		if (imageIcon) {
+			
+			
+			var img = new Image();
+			img.src = imageIcon;
+			var ih=img.height; 
+			var iw=img.width; 
+			
+			
+			var maxWidth = 30, maxHeight = 30;
+			if (iw > maxWidth || ih > maxHeight) {
+				if (iw < ih) {
+					ih = (ih * maxWidth) / iw;
+					iw = maxWidth;
+				}
+				else {
+					iw = (iw * maxHeight) / ih;
+					ih = maxHeight;
+				}
+			}
+			scale = new google.maps.Size(iw,ih) ; 
+			var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
+			marker.icon = image;
+		}else{
+			var img = new Image();
+			
+			img.src = baseUrl + 'assets/images/icons/pinFgo.png'
+			
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+			
+			marker.icon = image
+		}
+		
+		return marker;
 	}
 
 	function changeTheme(select) {
@@ -1663,13 +1718,19 @@
 		}
 		
 		try {
-			var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+			if(beneficio.latitud != 0 ||  beneficio.longitud != 0){
 			
-			var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
+				var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 			
-			distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
+				var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
+				
+				distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
+				
+				distance = Math.ceil(distance/1000 )
+				
+				console.log('distance: ' + distance);
+			}
 			
-			distance = Math.ceil(distance/1000 )
 		}
 		catch(e) {
 			console.log("Error", e);
@@ -1698,7 +1759,9 @@
 		
 		$("#beneficio-title").append("<span class='float'>" + beneficio.nombreComercio + "</span>")
 		
-		$("#beneficio-title").append("<span class='float-rigth-beneficio'>" + distance +"km"+ "</span>")
+		if(distance){
+			$("#beneficio-title").append("<span class='float-rigth-beneficio'>" + distance +"km"+ "</span>")
+		}
 		
 		$("#beneficio-descripcionPortal").text(beneficio.descripcionPortal)
 		
@@ -1715,64 +1778,38 @@
 		}
 		
 		$("#beneficio-direccion").empty();
-			
-		if(beneficio.idShopping){
-			$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
-		}else
-			$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
 		
+		console.log('distance is: ' + distance)
+		
+		alert($("#como-llegar-link").show());
+		
+		if(distance){
+			$("#como-llegar-link").show();
+			$('#ver-beneficio-mapa').show();
+			if(beneficio.idShopping){
+				$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
+			}else
+				$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
+			
 			$('#ver-beneficio-mapa').gmap('clear' , 'markers');
+			
 			$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
 			
-			
-		
 			var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 		
-				var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
-				
-				var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
-				
-				if (imageIcon) {
-					
-					
-					var img = new Image();
-					img.src = imageIcon;
-					var ih=img.height; 
-					var iw=img.width; 
-					
-					
-					var maxWidth = 30, maxHeight = 30;
-					if (iw > maxWidth || ih > maxHeight) {
-						if (iw < ih) {
-							ih = (ih * maxWidth) / iw;
-							iw = maxWidth;
-						}
-						else {
-							iw = (iw * maxHeight) / ih;
-							ih = maxHeight;
-						}
-					}
-					scale = new google.maps.Size(iw,ih) ; 
-					var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
-					marker.icon = image;
-				}else{
-					var img = new Image();
-					
-					img.src = baseUrl + 'assets/images/icons/pinFgo.png'
-					
-					var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
-					
-					marker.icon = image
-				}
-				
-				
-				
-				$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
-					$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-				});
-				$('#ver-beneficio-mapa').gmap('option', 'zoom', 5);
-				$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
-		
+			marker = createMarker(beneficio);
+			
+			$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
+				$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
+			});
+			//$('#ver-beneficio-mapa').gmap('option', 'zoom', 5);
+			$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+		}else{
+			$("#como-llegar-link").hide();
+			$('#ver-beneficio-mapa').hide();
+			
+			//$("#ver-beneficio-legales-link").show();
+		}
 		$("#ver-beneficio-legales-link").unbind();
 				
 		$("#ver-beneficio-legales-link").one("click" , function(event) {
@@ -1792,11 +1829,11 @@
 			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
 		})
-		$("#ver-beneficio-como-llegar-link").unbind();
+		$("#como-llegar-link").unbind();
 		
-		$("#ver-beneficio-como-llegar-link").one("click", function(){
+		$("#como-llegar-link").one("click", function(){
 		
-			$("#ver-beneficio-como-llegar-link").unbind('click');
+			$("#como-llegar-link").unbind('click');
 			
 			var currentlatlng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 
@@ -1834,14 +1871,13 @@
 				'radius': 15, 
 				'clickable': false 
 			});
-			$("#ver-beneficio-como-llegar-link").unbind();
+			$("#como-llegar-link").unbind();
 			 
 		});
 		
 	})
-	$("#beneficios-mapa").unbind();
 
-	$("#beneficios-mapa").one("click" , function() {
+	$("#beneficios-mapa").click(function() {
 		
 		$("#objects-mapa").trigger({type:"display-data-beneficio",title:'Beneficios'})
 		
@@ -1849,61 +1885,28 @@
 				
 	})
 	$("#objects-mapa").bind('display-data-beneficio',function(e) {
+		$('#objects-mapa-mapa').gmap('option', 'zoom', 1);
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
 		$("#back-listar").unbind("click");
 		
 		$("#back-listar").click(function(){
-			$.mobile.changePage("#listar-beneficios");
+			$.mobile.changePage("#listar-beneficios" ,{ transition: "slide" ,reverse: true} );
 		})	
-		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
 		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
-		
+
 		beneficiosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(beneficio) {
 	
 				var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 				
-					var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
-					var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), bounds: false}
+				var marker = createMarker(beneficio);
 					
-					if (imageIcon) {
-						var img = new Image();
-						img.src = imageIcon;
-						var ih=img.height; 
-				        var iw=img.width; 
-				        
-				        
-				        var maxWidth = 30, maxHeight = 30;
-					        if (iw > maxWidth || ih > maxHeight) {
-					          if (iw < ih) {
-					            ih = (ih * maxWidth) / iw;
-					            iw = maxWidth;
-					          }
-					          else {
-					            iw = (iw * maxHeight) / ih;
-					            ih = maxHeight;
-					          }
-					        }
-		        	scale = new google.maps.Size(iw,ih) ; 
-		        	var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
-		        	marker.icon = image;
-					}else{
-						
-						var img = new Image();
-						
-						img.src = baseUrl + 'assets/images/icons/pinFgo.png'
-						
-						var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
-						
-						marker.icon = image
-					}
-					
-					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
-						$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-					});
+				$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
+					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
+				});
 					
 			});
 			
@@ -1928,9 +1931,11 @@
 					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
 				
 				});
-			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 10);
-	
+				var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+				alert("El zoom es:" + zoom);
+			//$('#objects-mapa-mapa').gmap('option', 'zoom', 16);
+			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+			alert("luego El zoom es:" + zoom);
 	})
 
 	$("#object-mapa").bind('display-data-beneficio',function(e) {
@@ -1945,33 +1950,10 @@
 		$('#object-mapa-mapa').gmap('clear', 'markers');
 		
 		$('#ver-beneficio-mapa').gmap({ 'center': beneficio.latitud + ','+ beneficio.longitud})
-				
-		var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
 		
-		var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': true}
 		
-		if (imageIcon) {
-			var img = new Image();
-			img.src = imageIcon;
-			var ih=img.height; 
-	        var iw=img.width; 
-	        
-	        
-	        var maxWidth = 30, maxHeight = 30;
-		        if (iw > maxWidth || ih > maxHeight) {
-		          if (iw < ih) {
-		            ih = (ih * maxWidth) / iw;
-		            iw = maxWidth;
-		          }
-		          else {
-		            iw = (iw * maxHeight) / ih;
-		            ih = maxHeight;
-		          }
-		        }
-    	scale = new google.maps.Size(iw,ih) ; 
-    	var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
-    	marker.icon = image;
-		}
+		marker = createMarker(beneficio);
+
 		var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
 		
 		$('#object-mapa-mapa').gmap('addMarker', currentMarker).click(function() {
