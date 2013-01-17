@@ -16,7 +16,7 @@
   <body>
 <!--   class="banner" data-theme='d' -->
     <div  class="banner background" data-role='page'  id="listar-beneficios">
-      <div data-position='fixed' data-role='header' data-tap-toggle="false" >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Menu</a>
         <h1>Beneficios</h1>
         <a  id='beneficios-mapa'>Mapa</a>
@@ -52,7 +52,7 @@
      
      <!-- ********************* listar beneficios ************************** -->
     <div class="banner background " data-role='page'  id="menu-principal">
-      <div data-position='fixed'  data-role='header' >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  screen="true" style='position:fixed' >
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=”reverse” >Atrás</a>
         <h1>Menu principal</h1>
       </div>
@@ -71,7 +71,7 @@
      
      <!-- ********************* menu principal ************************** -->
     <div class="background banner" data-role='page' id="ayuda">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Ayuda</h1>
       </div>
@@ -83,7 +83,7 @@
      <!-- ********************* ayuda ************************** -->
      
          <div class="banner background" data-role='page' id="preferencias">
-      <div data-position='fixed' data-role='header' >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Preferencias</h1>
       </div>
@@ -103,7 +103,7 @@
      <!-- ********************* fin preferencias ************************** -->
      
     <div  class= 'banner background' data-role='page' id="ver-beneficio">
-      <div data-position='fixed' data-role='header' >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#listar-beneficios' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Beneficio</h1>
       </div>
@@ -127,17 +127,18 @@
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
         
-        <div  class='comoLlegar' id='como-llegar'>
-        	<div class='padding'>
-        		<a id='como-llegar-link'>Como llegar?</a>
-        	</div>
-        </div>
-        
        <div class='legales'>
           <div class='padding'>
             <a id='ver-beneficio-legales-link'>Ver Legales</a>
           </div>
         </div>
+
+        <div  class='comoLlegar' id='como-llegar'>
+        	<div class='padding'>
+        		<a id='como-llegar-link'>Como llegar?</a>
+        	</div>
+        </div>
+      
       </div>
     </div>
 <!--     <div  data-role="footer" ><img id="bannerImage"  /></div>  -->
@@ -147,7 +148,7 @@
      
      
     <div class="banner background" data-role='page' id="buscar-beneficios">
-      <div  data-role='header' data-position='fixed'  >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Beneficios</h1>
       </div>
@@ -186,7 +187,7 @@
       
       
      <div class='banner background' data-role='page'  id="beneficio-legales">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' id = 'back-legales' data-direction=”reverse”>Atrás</a>
         <h1>Legales</h1>
       </div>
@@ -210,7 +211,7 @@
       <!-- ************************* beneficio legales -->
       
       <div data-role='page' class='background' id="object-mapa">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1 id="object-mapa-title" >Beneficio</h1>
       </div>
@@ -223,7 +224,7 @@
       
       <!-- ************************* beneficio mapa -->
       <div data-role='page' class='background' id="objects-mapa">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#' id='back-listar' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1 id="objects-mapa-title" >Beneficios</h1>
       </div>
@@ -236,7 +237,7 @@
       <!-- ************************* beneficios mapa -->
       
   	  <div data-role='page' class='banner background' id="notificacionesSMS">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Back</a>
         <h1>Alerta de promociones</h1>
       </div>
@@ -250,7 +251,7 @@
       
       
        <div data-role='page' class='background' id="registracion">
-      <div data-position='fixed' data-role='header' >
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#notificacionesSMS' data-transition="slide" data-direction=”reverse” >Atrás</a>
         <h1>Registración SMS</h1>
       </div>
@@ -317,7 +318,7 @@
       <!-- ************************************ Registracion ************************************* -->
       
        <div data-role='page' class='background' id="registracion-confirmation">
-	      <div data-position='fixed' data-role='header'>
+	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
 	        <a data-icon='arrow-l' href='#registracion' data-transition="slide" data-direction=”reverse”>Atrás</a>
 	        <h1>Confirmacion</h1>
 	      </div>
@@ -339,7 +340,7 @@
       </div>
       
       <div data-role='page' class='background' id="registracion-resultado">
-	      <div data-position='fixed' data-role='header' >
+	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
 	        <h1>Registracion SMS</h1>
 	      </div>
 
@@ -360,7 +361,7 @@
       <!-- ************************************ Confirmacion ************************************* -->
 
        <div data-role='page' class='background' id="registracion-baja">
-	      <div data-position='fixed' data-role='header'>
+	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
 	        <a data-icon='arrow-l' href='#notificacionesSMS' data-transition="slide" data-direction=”reverse”>Atrás</a>
 	        <h1>Baja envio SMS</h1>
 	      </div>
@@ -395,7 +396,7 @@
       
       <!-- ************************************ registracion baja ************************************* -->
        <div data-role='page' class='background' id="registracion-baja-confirmacion">
-	      <div data-position='fixed' data-role='header'>
+	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
 	        <a data-icon='arrow-l' href='#registracion-baja' data-transition="slide" data-direction=”reverse”>Atrás</a>
 	        <h1>Confirmacion baja</h1>
 	      </div>
@@ -413,7 +414,7 @@
       <!-- ************************************ registracion baja confirmacion ************************************* -->
       
      <div class="banner background" data-role='page' id="listar-sucursales">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Menu</a>
         <h1>Sucursales</h1>
         <a id='sucursales-mapa'>Mapa</a>
@@ -445,7 +446,7 @@
       <!-- ************************* listar sucursales HASTA ACA -->
  
     <div class="banner background" data-role='page' id="buscar-sucursales">
-      <div  data-role='header' data-position='fixed'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Sucursales</h1>
       </div>
@@ -479,7 +480,7 @@
       <!-- ************************* buscar sucursales -->
    
     <div data-role='page' class='banner background' id="ver-sucursal">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#listar-sucursales' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Sucursal</h1>
 <!--         <a id="ver-sucursal-mapa-link2">Mapa</a> -->
@@ -520,7 +521,7 @@
    
          
      <div class="banner background" data-role='page' id="listar-cajeros">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" >Menu</a>
         <h1>Cajeros</h1>
         <a id='cajeros-mapa'>Mapa</a>
@@ -557,7 +558,7 @@
       <!-- ************************* listar cajeros -->
  
     <div data-role='page' class='banner background' id="buscar-cajeros">
-      <div  data-role='header' data-position='fixed'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Cajeros</h1>
       </div>
@@ -590,7 +591,7 @@
       <!-- ************************* buscar cajeros -->
    
     <div data-role='page' class='banner background' id="ver-cajero">
-      <div data-position='fixed' data-role='header'>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
         <a data-icon='arrow-l' href='#listar-cajeros' data-transition="slide" data-direction=”reverse”>Atrás</a>
         <h1>Cajero</h1>
 <!--         <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a> -->
@@ -629,28 +630,7 @@
 	<script type="text/javascript">
 	<!--
 	$(document).ready(function () {
-			/*
-		 if (navigator.userAgent.match(/iPhone/i)) {
-				alert('the agent is iphone')
-		        //cache the viewport tag if the user is using an iPhone
-		        var $viewport = $('head').children('meta[name="viewport"]');
 
-		        //bind an event handler to the window object for the orientationchange event
-		        $(window).bind('orientationchange', function() {
-		            if (window.orientation == 90 || window.orientation == -90 || window.orientation == 270) {
-
-		                //landscape
-		                $viewport.attr('content', 'height=device-width,width=device-height,initial-scale=1.0,maximum-scale=1.0');
-		            } else {
-
-		                //portrait
-		                $viewport.attr('content', 'height=device-height,width=device-width,initial-scale=1.0,maximum-scale=1.0');
-		            }
-
-		        //trigger an orientationchange event on the window object to initialize this code (basically in-case the user opens the page in landscape mode)
-		        }).trigger('orientationchange');
-		    }
-		*/
 		try {
 			francesGORegisterEvents();	
 		}

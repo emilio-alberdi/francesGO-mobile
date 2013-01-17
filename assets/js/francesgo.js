@@ -6,27 +6,30 @@
 
 	
    	baseUrl = '';
-   	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
+ //  	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
  //  	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   //	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
 	    $.mobile.allowCrossDomainPages = true;
 	    $.mobile.page.prototype.options.addBackBtn = true;
 	});
-
-	navigator.geolocation.getCurrentPosition(function(position){
-		
-		Preferences.get().latitude = position.coords.latitude;
-		
-		Preferences.get().longitude = position.coords.longitude;
-	  
-		Preferences.update();
-		
-//		callFirstInstanceBeneficio();
-    });  
-		
+   	
+   	if(navigator.geolocation){
+   		
+   		navigator.geolocation.getCurrentPosition(savePosition, displayError,{ maximumAge: 600000, timeout: 10000} );
+   		
+   	}
+   	/*	navigator.geolocation.getCurrentPosition(function(position){
+   			
+   			Preferences.get().latitude = position.coords.latitude;
+   			
+   			Preferences.get().longitude = position.coords.longitude;
+   			
+   			Preferences.update();
+   			
+   		});*/  
 
 	Storage.prototype.setObject = function(key, value) {
 		if (value) {
@@ -50,6 +53,23 @@
 		this.longitude = 0;
 	}
 	
+	function displayError(error) {
+		var errors = {
+			 1:'Permission denied',
+			 2:'Position unavailable',
+			 3:'Request timeout'
+		};
+		alert("Error: " + errors[error.code]);
+	}
+	
+	function savePosition(position) {
+			
+		Preferences.get().latitude = position.coords.latitude;
+		
+		Preferences.get().longitude = position.coords.longitude;
+			
+		Preferences.update();
+	}
 	
 	function Preferences() {
 		
@@ -541,7 +561,6 @@
 		
 		$.mobile.showPageLoadingMsg();
 		
-		//alert("metodo call: " + this.options.service)
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
 			  console.log(textStatus, errorThrown);
@@ -1128,6 +1147,7 @@
 	function createMarker(beneficio){
 		
 		console.log('creating marker');
+		
 		var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
 		
 		var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': false}
@@ -1164,6 +1184,8 @@
 			
 			marker.icon = image
 		}
+		
+		console.log(marker);
 		
 		return marker;
 	}
@@ -1718,13 +1740,13 @@
 		}
 		
 		try {
-			if(beneficio.latitud != 0 ||  beneficio.longitud != 0){
+			if(beneficio.latitud != 0 &&  beneficio.longitud != 0){
 			
 				var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
 			
 				var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
 				
-				distance = google.maps.geometry.spherical.computeDistanceBetween (currentPosition, sucursalPostion);
+				distance = google.maps.geometry.spherical.computeDistanceBetween(currentPosition, sucursalPostion);
 				
 				distance = Math.ceil(distance/1000 )
 				
@@ -1780,8 +1802,6 @@
 		$("#beneficio-direccion").empty();
 		
 		console.log('distance is: ' + distance)
-		
-		alert($("#como-llegar-link").show());
 		
 		if(distance){
 			$("#como-llegar-link").show();
@@ -1932,10 +1952,10 @@
 				
 				});
 				var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
-				alert("El zoom es:" + zoom);
+//		alert("El zoom es:" + zoom);
 			//$('#objects-mapa-mapa').gmap('option', 'zoom', 16);
 			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
-			alert("luego El zoom es:" + zoom);
+		//	alert("luego El zoom es:" + zoom);
 	})
 
 	$("#object-mapa").bind('display-data-beneficio',function(e) {
@@ -3106,13 +3126,11 @@
 		callbackList = []
 	});
 	
-
-   	
 	zonasPersistenceService.reloadCollection();
 	
 	setTimeout(function(){callFirstInstanceBeneficio()},2000);
 	
-   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},1500)
+   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
 	
    	$.mobile.hidePageLoadingMsg();
 	
