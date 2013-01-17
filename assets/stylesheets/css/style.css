@@ -273,9 +273,17 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 	min-height: 133px
 }
 
+
+.imgLogoFrances{
+	 color: transparent;
+    font-size: 0;
+    margin-left: 0px;
+    vertical-align: middle;
+}
+
 .show-benefit .legales a {
 	margin-bottom: 15px;
-	margin-right: -240px;
+	margin-right: 0px;
 	float: right;
 	background: #888;
 	color: white;
@@ -295,17 +303,12 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 		), color-stop(0.68, #999) )
 }
 
-.imgLogoFrances{
-	 color: transparent;
-    font-size: 0;
-    margin-left: 0px;
-    vertical-align: middle;
-}
-
 .show-benefit .comoLlegar a {
-	margin-bottom: -4px;
-	margin-top: 29px;
-	margin-right: 116px;
+	
+
+	margin-bottom: 0;
+    margin-right: 19px;
+    margin-top: -29px;
 	float: right;
 	background: #888;
 	color: white;
@@ -327,6 +330,41 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 		
 		    background: -moz-linear-gradient(center bottom , #8C8C8C 35%, #999999 68%) repeat scroll 0 0 #888888;
 }
+
+
+
+
+/* .show-benefit .comoLlegar a { */
+/* 	margin-bottom: -4px; */
+/* 	margin-top: 29px; */
+/* 	margin-left: 1080px; */
+/* 	background: #888; */
+/*     color: white; */
+/*     border-radius: 6px; */
+/*    	-moz-border-radius: 6px; */
+/* 	-webkit-border-radius: 6px; */
+    
+/*     cursor: pointer; */
+/*     float: right; */
+/*     position: absolute; */
+/*     margin-bottom: 3px; */
+/*     margin-left: 400px; */
+/*     margin-top: 29px; */
+/*     padding: 7px 16px; */
+/*     text-decoration: none; */
+/*     text-shadow: 1px 1px #555; */
+/* 	background-image: linear-gradient(bottom, #8c8c8c 35%, #999 68%); */
+/* 	background-image: -o-linear-gradient(bottom, #8c8c8c 35%, #999 68%); */
+/* 	background-image: -moz-linear-gradient(bottom, #8c8c8c 35%, #999 68%); */
+/* 	background-image: -webkit-linear-gradient(bottom, #8c8c8c 35%, #999 68%); */
+/* 	background-image: -ms-linear-gradient(bottom, #8c8c8c 35%, #999 68%); */
+/* 	background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.35, #8c8c8c */
+/* 		), color-stop(0.68, #999) ) */
+		
+		
+/* 		    background: -moz-linear-gradient(center bottom , #8C8C8C 35%, #999999 68%) repeat scroll 0 0 #888888; */
+/* } */
+
 
 .show-benefit .legales a:hover {
 	background: #666;
