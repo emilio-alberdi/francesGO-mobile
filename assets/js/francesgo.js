@@ -7,8 +7,8 @@
 	
    	baseUrl = '';
  //  	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
-   	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-   //	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+   //	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
 
@@ -752,7 +752,7 @@
 						
 						distance = Math.ceil(distance/1000 )
 						
-						console.log("Sucursal " + sucursal.nombre, distance)
+					//	console.log("Sucursal " + sucursal.nombre, distance)
 						
 						$("#" + sucursal.uri + "-distance").text(distance + "km")
 					})
@@ -2212,7 +2212,7 @@
 			
 			console.log('zoom del mapa: ' + $('#ver-sucursal-mapa').gmap('option', 'zoom'));
 			
-			$('#ver-sucursal-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+			$('#ver-sucursal-mapa').gmap('option', 'center', new google.maps.LatLng(sucursal.latitud , sucursal.longitud));
 		})
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
@@ -2931,7 +2931,7 @@
 			
 			console.log('zoom del mapa: ' + $('#ver-cajero-mapa').gmap('option', 'zoom'));
 			
-			$('#ver-cajero-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+			$('#ver-cajero-mapa').gmap('option', 'center', new google.maps.LatLng(cajero.latitud , cajero.longitud));
 		})
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
