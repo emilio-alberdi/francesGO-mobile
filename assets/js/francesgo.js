@@ -1276,11 +1276,6 @@
 		});
 	})
 
-	$("#ver-beneficio").live('pagebeforehide',function() {
-		var pageName = 'ver-beneficio-mapa';
-		refreshMap(pageName);
-	})
-		
 	$("#registracion-baja").bind('display-data',function(e) {
 		
 		tiposDocumentoPersistenceService.getCollection(function(tiposDocumento) {
@@ -1724,11 +1719,11 @@
 	});
 	
 	$('#ver-beneficio').live('pagebeforehide',function() {
+		var pageName = 'ver-beneficio-mapa';
+		refreshMap(pageName);
 		console.log('destroy map')
 		$('#ver-beneficio-mapa').gmap('destroy');
 	})
-	
-	
 	
 	$("#ver-beneficio").bind('display-data',function(e) {
 		
@@ -1803,10 +1798,14 @@
 		}
 		
 		$("#beneficio-direccion").empty();
-		
+		$("#como-llegar-link").show();
+		$('#ver-beneficio-mapa').show();
 		console.log('distance is: ' + distance)
 		
-		if(distance){
+		if(!distance){
+			$("#como-llegar-link").hide();
+			$('#ver-beneficio-mapa').hide();
+		}
 			
 			$('#ver-beneficio-mapa').gmap().one('init',function(event){
 
@@ -1819,12 +1818,11 @@
 				$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
 			})
 			
-			$("#como-llegar-link").show();
-			$('#ver-beneficio-mapa').show();
+			
 			if(beneficio.idShopping){
-				$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
+				$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
 			}else
-				$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad +"<span>(" + distance +" km)</span></p>");
+				$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
 			
 			$('#ver-beneficio-mapa').gmap('clear' , 'markers');
 			
@@ -1839,12 +1837,7 @@
 			});
 			//$('#ver-beneficio-mapa').gmap('option', 'zoom', 5);
 			$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
-		}else{
-			$("#como-llegar-link").hide();
-			$('#ver-beneficio-mapa').hide();
-			
-			//$("#ver-beneficio-legales-link").show();
-		}
+	
 		$("#ver-beneficio-legales-link").unbind();
 				
 		$("#ver-beneficio-legales-link").one("click" , function(event) {
@@ -2173,6 +2166,8 @@
 	$("#ver-sucursal").live('pagebeforehide',function() {
 		var pageName = 'ver-sucursal-mapa';
 		refreshMap(pageName);
+		console.log('destroy map')
+		$('#ver-sucursal-mapa').gmap('destroy');
 	})	
 
 	$("#ver-sucursal").bind('display-data',function(e) {
@@ -2208,6 +2203,17 @@
 		$("#ver-sucursal-localidad").text(sucursal.localidad.nombre)
 		
 		$('#ver-sucursal-mapa').gmap('clear', 'markers');
+		
+		$('#ver-sucursal-mapa').gmap().one('init',function(event){
+
+			console.log('entro al bind')
+			
+			$('#ver-sucursal-mapa').gmap('option', 'zoom', 13);
+			
+			console.log('zoom del mapa: ' + $('#ver-sucursal-mapa').gmap('option', 'zoom'));
+			
+			$('#ver-sucursal-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+		})
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 
@@ -2876,8 +2882,14 @@
 	})
 	
 	$("#ver-cajero").live('pagebeforehide',function() {
+
 		var pageName = 'ver-cajero-mapa';
+		
 		refreshMap(pageName);
+		
+		console.log('destroy map')
+		
+		$('#ver-cajero-mapa').gmap('destroy');
 	})	
 	
 	
@@ -2910,6 +2922,17 @@
 		$("#ver-cajero-tipoCajero").text(cajero.tipoCajeroBanco.descripcion)
 
 		$('#ver-cajero-mapa').gmap('clear', 'markers');
+		
+		$('#ver-cajero-mapa').gmap().one('init',function(event){
+
+			console.log('entro al bind')
+			
+			$('#ver-cajero-mapa').gmap('option', 'zoom', 13);
+			
+			console.log('zoom del mapa: ' + $('#ver-cajero-mapa').gmap('option', 'zoom'));
+			
+			$('#ver-cajero-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+		})
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 	
