@@ -1146,8 +1146,6 @@
 	
 	function createMarker(beneficio){
 		
-		console.log('creating marker');
-		
 		var imageIcon = beneficiosPersistenceService.getLogo(beneficio);
 		
 		var marker = {'position': new google.maps.LatLng(beneficio.latitud , beneficio.longitud), 'bounds': false}
@@ -1184,8 +1182,6 @@
 			
 			marker.icon = image
 		}
-		
-		console.log(marker);
 		
 		return marker;
 	}
@@ -1727,6 +1723,13 @@
 		
 	});
 	
+	$('#ver-beneficio').live('pagebeforehide',function() {
+		console.log('destroy map')
+		$('#ver-beneficio-mapa').gmap('destroy');
+	})
+	
+	
+	
 	$("#ver-beneficio").bind('display-data',function(e) {
 		
 		var beneficio = e.beneficio;
@@ -1804,6 +1807,18 @@
 		console.log('distance is: ' + distance)
 		
 		if(distance){
+			
+			$('#ver-beneficio-mapa').gmap().one('init',function(event){
+
+				console.log('entro al bind')
+				
+				$('#ver-beneficio-mapa').gmap('option', 'zoom', 13);
+				
+				console.log('zoom del mapa: ' + $('#ver-beneficio-mapa').gmap('option', 'zoom'));
+				
+				$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+			})
+			
 			$("#como-llegar-link").show();
 			$('#ver-beneficio-mapa').show();
 			if(beneficio.idShopping){
@@ -1894,7 +1909,15 @@
 			$("#como-llegar-link").unbind();
 			 
 		});
-		
+		/*
+		$('#datos-de-coordenadas').html(
+		 '<p>'
+		+ 'Latitud del Beneficio: ' + beneficio.latitud+ '<br />'
+		+ 'Longitud del Beneficio: ' + beneficio.longitud + '<br />'
+		+ 'Latitud del usuario: ' + Preferences.get().latitude + '<br />'
+		+ 'Longitud del usuario: ' + Preferences.get().longitude  + '<br />'
+		+ '</p>' 
+		)*/
 	})
 
 	$("#beneficios-mapa").click(function() {
@@ -1904,8 +1927,15 @@
 		$.mobile.changePage("#objects-mapa", { transition: "slide"} )
 				
 	})
+	
+	$("#objects-mapa").live('pagebeforehide',function() {
+		console.log('destroy map')
+		$('#objects-mapa-mapa').gmap('destroy');
+	})
+	
 	$("#objects-mapa").bind('display-data-beneficio',function(e) {
-		$('#objects-mapa-mapa').gmap('option', 'zoom', 1);
+		
+		console.log('objects mapa beneficios')
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
@@ -1913,10 +1943,18 @@
 		
 		$("#back-listar").click(function(){
 			$.mobile.changePage("#listar-beneficios" ,{ transition: "slide" ,reverse: true} );
-		})	
-		$('#objects-mapa-mapa').gmap('clear', 'markers');
-		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
-
+		})
+		
+		var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom')
+		console.log('zoom antes de cambiarlo: ' + zoom)
+		$('#objects-mapa-mapa').gmap().one('init', function(event){
+			console.log('entro al bind')
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
+			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+			console.log('zoom despues de cambiarlo: '  + zoom)
+			
+		})			
+			
 		beneficiosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(beneficio) {
 	
@@ -1945,21 +1983,20 @@
 		currentMarker.icon = image;
 		console.log("Current Position " + currentLatLng + "URL image: " + image.url);
 			
-				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
-				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+			$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+			$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
 
-					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
-				
-				});
-				var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
-//		alert("El zoom es:" + zoom);
-			//$('#objects-mapa-mapa').gmap('option', 'zoom', 16);
-			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
-		//	alert("luego El zoom es:" + zoom);
+				$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+			
+			});
+			
 	})
 
 	$("#object-mapa").bind('display-data-beneficio',function(e) {
 	
+		e.preventDefault();
+		e.stopPropagation();
+		
 		if (e.title) {
 			$("#object-mapa-title").text(e.title)
 		}
@@ -2032,18 +2069,19 @@
 	
 	$("#sucursales-mapa").click(function() {
 
-		$.mobile.changePage("#objects-mapa" , { transition: "slide"} )
-		
 		$("#objects-mapa").trigger({type:"display-data-sucursales",title:'Sucursales'})
+		
+		$.mobile.changePage("#objects-mapa" , { transition: "slide"} )
 		
 					
 	})
 
 	
-	$("#objects-mapa").bind('display-data-sucursales',function(e) {
+	$("#objects-mapa").one('display-data-sucursales',function(e) {
+		
 		$("#back-listar").unbind("click");
 		
-		console.log("object-mapa init", e.title)
+		console.log("object-mapa init sucursales ", e.title)
 		
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
@@ -2051,13 +2089,16 @@
 		$("#back-listar").click(function(){
 			$.mobile.changePage("#listar-sucursales" , { transition: "slide"} );
 		})	
-		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
-		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
 		
-		sucursalesPersistenceService.getCollection(function(collection) {
-			collection.forEach(function(sucursal) {
-				
+		$('#objects-mapa-mapa').gmap().one('init', function(event){
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
+		});
+	
+			sucursalesPersistenceService.getCollection(function(collection) {
+				collection.forEach(function(sucursal) {
+					
 					var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 
 					if(sucursal.tipoSucursal == 'P'){
@@ -2068,32 +2109,29 @@
 						$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 						});
-				
-			});
-			
-		});	
-		
-		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
-		
-		var currentMarker = {'position': currentLatLng,bounds: true}
-		
-		var img = new Image();
-		
-		img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
-		
-		var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
-		
-		currentMarker.icon = image;
-			
-				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
-				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
-
-					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
-				
+					
 				});
+				
+			});	
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
-		
+			var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
+			
+			var currentMarker = {'position': currentLatLng,bounds: true}
+			
+			var img = new Image();
+			
+			img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+			
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+			
+			currentMarker.icon = image;
+				
+			$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+			$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+
+				$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+			
+			});
 	})
 	
 	
@@ -2745,9 +2783,10 @@
 	})
 
 	
-	$("#objects-mapa").bind('display-data-cajeros',function(e) {
+	$("#objects-mapa").one('display-data-cajeros',function(e) {
 		
-		console.log("object-mapa init", e.title)
+		console.log("object-mapa init cajeros", e.title)
+		
 		$("#back-listar").unbind("click");
 		
 		if (e.title) {
@@ -2759,40 +2798,45 @@
 		})	
 		
 		$('#objects-mapa-mapa').gmap('clear', 'markers');
-		$('#ver-cajero-mapa').gmap('clear' , 'overlays');
 		
-		cajerosPersistenceService.getCollection(function(collection) {
-			collection.forEach(function(cajero) {
-				
+		$('#objects-mapa-mapa').gmap().one('init', function(event){
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
+		})
+		
+			cajerosPersistenceService.getCollection(function(collection) {
+				collection.forEach(function(cajero) {
+					
 					var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ cajero.nombre+'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
 					
 						$('#objects-mapa-mapa').gmap('addMarker', {'position': new google.maps.LatLng(cajero.latitud , cajero.longitud),bounds: false, icon:'assets/images/cajero.gif'}).click(function() {
 							$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': cajeroInfo}, this);
 						});
-				
-			});
-			
-		});	
-		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
-		
-		var currentMarker = {'position': currentLatLng,bounds: false}
-		
-		var img = new Image();
-		
-		img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
-		
-		var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
-		
-		currentMarker.icon = image;
-		console.log("Current Position " + currentLatLng + "URL image: " + image.url);
-				$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
-				$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
-
-					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
-				
+					
 				});
+				
+			});	
+			var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 14);
+			var currentMarker = {'position': currentLatLng,bounds: false}
+			
+			var img = new Image();
+			
+			img.src = baseUrl + 'assets/images/icons/User_Icon_Map.png'
+			
+			var image = new google.maps.MarkerImage(img.src,null,null,null, null);		
+			
+			currentMarker.icon = image;
+			
+			console.log("Current Position " + currentLatLng + "URL image: " + image.url);
+					
+			$('#objects-mapa-mapa').gmap('option', 'center', currentLatLng );
+			
+			$('#objects-mapa-mapa').gmap('addMarker',currentMarker).click(function() {
+	
+				$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
+					
+			});
 	})
 	
 	
