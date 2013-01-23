@@ -14,6 +14,13 @@
 		email="gustavo.garcia@artdecode.com.ar">
 		Gustavo Felipe Garcia
 	</author>
+	
+  <access uri="http://chart.apis.google.com" subdomains="true" />
+  <feature id="blackberry.ui.Spinner" />
+  <feature id="blackberry.push" />
+  <feature id="blackberry.message.sms" />
+  <feature id="blackberry.ui.menu" />
+  <feature id="blackberry.identity" />
 
 	<icon src="icon.png" gap:role="default" />
 	<icon src="assets/images/icons/ios/icon_57x57.png" width="57" height="57" />
