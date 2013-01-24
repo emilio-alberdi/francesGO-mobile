@@ -45,11 +45,12 @@
   	<feature id="blackberry.app" required="true" version="1.0.0.0" />
   	<feature id="blackberry.app.event" required="true" version="1.0.0.0" />
 	
-  	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
+	<access uri="*" />
+  	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
   	<access subdomains="true" uri="http://192.168.1.105:8080"/>
+  	<access subdomains="true" uri="*" />
   	<access subdomains="true" uri="file:///store/home" />
   	<access subdomains="true" uri="file:///SDCard" />
-  	<access subdomains="true" uri="*" />
 	  
   	<rim:permissions>
     	<rim:permit>use_camera</rim:permit>
