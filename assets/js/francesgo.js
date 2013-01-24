@@ -643,6 +643,7 @@ RemoteService.prototype.callFilterBB = function(data, processCollection) {
 		
 		var url = this.options.service + "?latitude=-34.603723&longitude=-58.381593&numberFirstIndex=1&numberLastIndex=50"
 		
+		
 		xmlhttp=null;
 		if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
 		  xmlhttp=new XMLHttpRequest();
