@@ -28,6 +28,16 @@
 	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
 	<icon src="assets/images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
 	
+	
+	<rim:connection timeout="60000">
+	    <id>TCP_WIFI</id>
+	    <id>TCP_CELLULAR</id>
+	    <id>WAP2</id>
+	    <id>WAP</id>
+	    <id>BIS-B</id>
+	    <id>MDS</id>
+	</rim:connection>
+	
 	<feature id="blackberry.ui.Spinner" />
 	<feature id="blackberry.push" />
 	<feature id="blackberry.message.sms" />
@@ -46,6 +56,7 @@
   	<feature id="blackberry.app.event" required="true" version="1.0.0.0" />
 	
 	<access uri="*" />
+	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
   	<access subdomains="true" uri="http://192.168.1.105:8080"/>
   	<access subdomains="true" uri="*" />

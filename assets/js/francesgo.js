@@ -4,7 +4,6 @@
 
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-	
    	baseUrl = '';
   // 	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
    //	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
@@ -599,7 +598,9 @@
 		}
 		
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			  console.log(textStatus, errorThrown);
+			alert("error on: " + textStatus + ", "+ errorThrown);  
+			
+			console.log(textStatus, errorThrown);
 		}})
 		$.mobile.showPageLoadingMsg();
 		
