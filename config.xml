@@ -35,7 +35,7 @@
 	    <id>WAP2</id>
 	    <id>WAP</id>
 	    <id>BIS-B</id>
-	    <id>MDS</id>
+<!-- 	    <id>MDS</id> -->
 	</rim:connection>
 	
 	<feature id="blackberry.ui.Spinner" />

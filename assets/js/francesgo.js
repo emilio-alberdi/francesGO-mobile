@@ -8,12 +8,7 @@
   // 	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
    //	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
    		baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
-   	$( document ).bind( "mobileinit", function() {
-	    // Make your jQuery Mobile framework configuration changes here!
-   		$.support.cors = true;
-	    $.mobile.allowCrossDomainPages = true;
-	    $.mobile.page.prototype.options.addBackBtn = true;
-	});
+
    	
    	if(navigator.geolocation){
    		
@@ -1143,6 +1138,49 @@
 		
 		
 		
+	}
+	
+	function callXHRFromBB(){
+		var filter = {}
+		if(Preferences.get().latitude == 0){
+			setTimeout(function(){callFirstInstanceBeneficio()},2000);
+			return;
+		}else{
+			filter.latitude = Preferences.get().latitude;
+		}
+		if(Preferences.get().longitude == 0){
+			setTimeout(function(){callFirstInstanceBeneficio()},2000);
+			return ;
+		}else{
+			filter.longitude = Preferences.get().longitude;
+		}
+		filter.numberFirstIndex = 1;
+		filter.numberLastIndex = 50;
+		beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
+			
+			$("#ul-beneficios").empty();
+			
+			$.mobile.hidePageLoadingMsg();
+			
+			collection.forEach(function(beneficio) {
+				
+				beneficiosPersistenceService.showBeneficio(beneficio);
+				
+			})
+			
+			if(collection.length == 0){
+				$("#sin-resultados-beneficios").show();
+			}else{
+				if(collection.length == filter.numberLastIndex){
+					$("#buscar-mas-beneficios").show();
+				}else{
+					$("#fin-beneficios").show();
+				}
+			} 
+			
+			generateBannerForBeneficios();
+			$("#ul-beneficios").listview('refresh');
+		});
 	}
 	
 	function createMarker(beneficio){
@@ -3194,11 +3232,20 @@
 		callbackList = []
 	});
 	
-	zonasPersistenceService.reloadCollection();
+   	$( document ).bind( "mobileinit", function() {
+	    // Make your jQuery Mobile framework configuration changes here!
+   		$.support.cors = true;
+	    $.mobile.allowCrossDomainPages = true;
+	    $.mobile.page.prototype.options.addBackBtn = true;
+		
+	    zonasPersistenceService.reloadCollection();
+		
+		setTimeout(function(){callFirstInstanceBeneficio()},2000);
+		
+	   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
+	});
 	
-	setTimeout(function(){callFirstInstanceBeneficio()},2000);
-	
-   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
+
 	
    	$.mobile.hidePageLoadingMsg();
 	
