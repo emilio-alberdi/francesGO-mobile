@@ -13,6 +13,12 @@
    		$.support.cors = true;
 	    $.mobile.allowCrossDomainPages = true;
 	    $.mobile.page.prototype.options.addBackBtn = true;
+		
+	    zonasPersistenceService.reloadCollection();
+		
+		setTimeout(function(){callFirstInstanceBeneficio()},2000);
+		
+	   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
 	});
    	
    	if(navigator.geolocation){
@@ -571,6 +577,44 @@
 		
 	}
 	
+RemoteService.prototype.callFilterBB = function(data, processCollection) {
+		
+		var services = this.services;
+		
+		var callback = function (data) {
+			try {
+				
+				services.forEach(function(persistService) {
+					
+					persistService.loadCollection(data) 
+					
+				})
+			
+				processCollection();
+			}
+			catch(e) {
+				console.log('error', e);
+			}
+		}
+		if(data.zonas){
+			data.zonas = data.zonas.toString(); 
+		}
+		if(data.rubros){
+			data.rubros = data.rubros.toString();
+		}
+		
+		
+		
+		
+		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+			alert("error on: " + textStatus + ", "+ errorThrown);  
+			
+			console.log(textStatus, errorThrown);
+		}})
+		$.mobile.showPageLoadingMsg();
+		
+	}
+
 	RemoteService.prototype.callFilter = function(data, processCollection) {
 		
 		var services = this.services;
@@ -596,6 +640,27 @@
 		if(data.rubros){
 			data.rubros = data.rubros.toString();
 		}
+		
+		var url = this.options.service + "?latitude=-34.603723&longitude=-58.381593&numberFirstIndex=1&numberLastIndex=50"
+		
+		xmlhttp=null;
+		if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else if (window.ActiveXObject) {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }
+		if (xmlhttp!=null){
+			alert("xmlhttp no es nulo")
+		  //xmlhttp.onreadystatechange=state_Change;
+		  xmlhttp.open("GET",url,true);
+		  xmlhttp.send(null);
+		  }
+		else {
+		  alert("Your browser does not support XML HTTP.");
+		  }
+		}
+
 		
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			alert("error on: " + textStatus + ", "+ errorThrown);  
@@ -1143,6 +1208,49 @@
 		
 		
 		
+	}
+	
+	function callXHRFromBB(){
+		var filter = {}
+		if(Preferences.get().latitude == 0){
+			setTimeout(function(){callFirstInstanceBeneficio()},2000);
+			return;
+		}else{
+			filter.latitude = Preferences.get().latitude;
+		}
+		if(Preferences.get().longitude == 0){
+			setTimeout(function(){callFirstInstanceBeneficio()},2000);
+			return ;
+		}else{
+			filter.longitude = Preferences.get().longitude;
+		}
+		filter.numberFirstIndex = 1;
+		filter.numberLastIndex = 50;
+		beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
+			
+			$("#ul-beneficios").empty();
+			
+			$.mobile.hidePageLoadingMsg();
+			
+			collection.forEach(function(beneficio) {
+				
+				beneficiosPersistenceService.showBeneficio(beneficio);
+				
+			})
+			
+			if(collection.length == 0){
+				$("#sin-resultados-beneficios").show();
+			}else{
+				if(collection.length == filter.numberLastIndex){
+					$("#buscar-mas-beneficios").show();
+				}else{
+					$("#fin-beneficios").show();
+				}
+			} 
+			
+			generateBannerForBeneficios();
+			$("#ul-beneficios").listview('refresh');
+		});
 	}
 	
 	function createMarker(beneficio){
@@ -3194,11 +3302,7 @@
 		callbackList = []
 	});
 	
-	zonasPersistenceService.reloadCollection();
-	
-	setTimeout(function(){callFirstInstanceBeneficio()},2000);
-	
-   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
+
 	
    	$.mobile.hidePageLoadingMsg();
 	
