@@ -28,6 +28,16 @@
 	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
 	<icon src="assets/images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
 	
+	
+	<rim:connection timeout="60000">
+	    <id>BIS-B</id>
+	    <id>TCP_WIFI</id>
+	    <id>TCP_CELLULAR</id>
+	    <id>MDS</id>
+	    <id>WAP2</id>
+	    <id>WAP</id>
+	</rim:connection>
+
 	<feature id="blackberry.ui.Spinner" />
 	<feature id="blackberry.push" />
 	<feature id="blackberry.message.sms" />

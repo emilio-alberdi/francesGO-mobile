@@ -11,7 +11,7 @@
    		baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
-
+   		$.support.cors = true;
 	    $.mobile.allowCrossDomainPages = true;
 	    $.mobile.page.prototype.options.addBackBtn = true;
 	});
@@ -599,7 +599,9 @@
 		}
 		
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			  console.log(textStatus, errorThrown);
+			alert("error on: " + textStatus + ", "+ errorThrown);  
+			
+			console.log(textStatus, errorThrown);
 		}})
 		$.mobile.showPageLoadingMsg();
 		
