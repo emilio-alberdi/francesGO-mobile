@@ -14,11 +14,6 @@
 	    $.mobile.allowCrossDomainPages = true;
 	    $.mobile.page.prototype.options.addBackBtn = true;
 		
-	    zonasPersistenceService.reloadCollection();
-		
-		setTimeout(function(){callFirstInstanceBeneficio()},2000);
-		
-	   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
 	});
    	
    	if(navigator.geolocation){
@@ -3303,7 +3298,11 @@ RemoteService.prototype.callFilterBB = function(data, processCollection) {
 		callbackList = []
 	});
 	
-
+	zonasPersistenceService.reloadCollection();
+	
+	setTimeout(function(){callFirstInstanceBeneficio()},2000);
+	
+   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
 	
    	$.mobile.hidePageLoadingMsg();
 	
