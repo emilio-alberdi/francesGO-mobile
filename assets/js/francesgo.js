@@ -572,43 +572,6 @@
 		
 	}
 	
-RemoteService.prototype.callFilterBB = function(data, processCollection) {
-		
-		var services = this.services;
-		
-		var callback = function (data) {
-			try {
-				
-				services.forEach(function(persistService) {
-					
-					persistService.loadCollection(data) 
-					
-				})
-			
-				processCollection();
-			}
-			catch(e) {
-				console.log('error', e);
-			}
-		}
-		if(data.zonas){
-			data.zonas = data.zonas.toString(); 
-		}
-		if(data.rubros){
-			data.rubros = data.rubros.toString();
-		}
-		
-		
-		
-		
-		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			alert("error on: " + textStatus + ", "+ errorThrown);  
-			
-			console.log(textStatus, errorThrown);
-		}})
-		$.mobile.showPageLoadingMsg();
-		
-	}
 
 	RemoteService.prototype.callFilter = function(data, processCollection) {
 		
@@ -638,36 +601,67 @@ RemoteService.prototype.callFilterBB = function(data, processCollection) {
 		
 		var url = this.options.service + "?latitude=-34.603723&longitude=-58.381593&numberFirstIndex=1&numberLastIndex=50"
 		
+		var xmlhttp = createXMLHTTPRequest();
 		
-		xmlhttp=null;
-		if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
-		  xmlhttp=new XMLHttpRequest();
-		  }
-		else if (window.ActiveXObject) {// code for IE6, IE5
-		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		  }
 		if (xmlhttp!=null){
 			alert("xmlhttp no es nulo")
 		  //xmlhttp.onreadystatechange=state_Change;
-		  xmlhttp.open("GET",url,true);
+		  xmlhttp.open("POST",url,true);
 		  xmlhttp.send(null);
 		  }
 		else {
 		  alert("Your browser does not support XML HTTP.");
 		  }
+		   
+		xmlhttp.onreadystatechange = function (){
+			cargarPagina(xmlhttp);
 		}
-
-		
+	/*	
 		$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			alert("error on: " + textStatus + ", "+ errorThrown);  
 			
 			console.log(textStatus, errorThrown);
-		}})
+		}})*/
 		$.mobile.showPageLoadingMsg();
 		
 	}
 
 	
+	function createXMLHTTPRequest(){
+		var xmlhttp=null;
+		if (window.XMLHttpRequest) {// code for Firefox, Opera, IE7, etc.
+		  xmlhttp=new XMLHttpRequest();
+		  }
+		else if (window.ActiveXObject) {// code for IE6, IE5
+		  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  }else{
+			  alert('no soporta xmlhttprequest')
+		  }
+	}
+	
+	function cargarPagina(xml){
+		alert("cargando pagina")
+		alert('XML readystate: ' + xml.readyState)
+		alert('XML status: ' + xml.status);
+		alert('datos: ' + xml.responseText);
+		console.log('datos: ' + xml.responseText);
+		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
+			var data = xml.responseText;
+			try {
+				
+				services.forEach(function(persistService) {
+					
+					persistService.loadCollection(data) 
+					
+				})
+			
+				processCollection();
+			}
+			catch(e) {
+				console.log('error', e);
+			}
+		}
+	}
 	console.log('start ');
 	
 	
