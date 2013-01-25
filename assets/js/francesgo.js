@@ -637,6 +637,7 @@
 		  }else{
 			  alert('no soporta xmlhttprequest')
 		  }
+		return xmlhttp;
 	}
 	
 	function cargarPagina(xml){
