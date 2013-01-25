@@ -55,7 +55,11 @@
   	<feature id="blackberry.app" required="true" version="1.0.0.0" />
   	<feature id="blackberry.app.event" required="true" version="1.0.0.0" />
 	
-	
+	<feature id="blackberry.ui.dialog" required="true" version="1.0.0"/>
+	<access uri="http://m.francesgo.com.ar" subdomains="true">
+	   <feature id="blackberry.pim.memo" required="true" version="1.0.0"/>
+	   <feature id="blackberry.invoke.MemoArguments" required="true" version="1.0.0"/>
+	</access>
     <access subdomains="true" uri="http://francesgo.com.ar"/>
 	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
