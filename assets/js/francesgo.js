@@ -613,6 +613,8 @@
 					data.rubros = data.rubros.toString();
 				}
 	
+				alert('latitud: ' + data.latitude);
+				alert('longitud: ' + data.longitude);
 				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 					alert("error on: " + textStatus + ", "+ errorThrown);  
 					
