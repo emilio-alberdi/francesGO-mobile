@@ -596,6 +596,7 @@
 		try{
 			var browser = navigator.userAgent;
 			   
+			alert(browser)
 			if ((browser.indexOf("BlackBerry") >= 0 || browser.indexOf("PlayBook") )){
 				
 				alert('user agent BB?')
