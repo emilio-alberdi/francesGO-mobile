@@ -596,18 +596,13 @@
 		try{
 			var browser = navigator.userAgent;
 			   
-			alert(browser)
-			if ((browser.indexOf("BlackBerry") >= 0 || browser.indexOf("PlayBook") )){
-				
-				alert('user agent BB?')
-				console.log('user agent BB');
+			if (browser.indexOf("BlackBerry") >= 0  ){
 				
 				var path = this.options.service;
 					
 				callFilterForBlackBerry(path,data, processCollection,services);
 				
 			}else{
-				alert('user agent android ?')
 				if(data.zonas){
 					data.zonas = data.zonas.toString(); 
 				}
