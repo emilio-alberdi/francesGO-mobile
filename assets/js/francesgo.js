@@ -636,6 +636,7 @@
 		try{
 			url = path + createParameters(data);
 			
+			alert(url);
 			console.log("url "+ url);
 		}catch(e){
 			console.log("error on " + e);
@@ -668,10 +669,10 @@
 			url += "searchText=" + data.searchText+"&" ;
 		}
 		if(data.lalitude){
-			url += "latitude="+data.lalitude+"&" ;
+			url += "latitude="+Preferences.get().latitude+"&" ;
 		}
 		if(data.longitude){
-			url += "longitude="+data.longitude+"&";
+			url += "longitude="+Preferences.get().longitude+"&";
 		}
 		if(data.zonas){
 			url += "zonas="+data.zonas.toString()+"&" ;
@@ -686,7 +687,7 @@
 			url +="numberLastIndex="+data.numberLastIndex;
 		}
 		console.log(url);
-		
+
 		return url;
 	}
 	function createXMLHTTPRequest(){
