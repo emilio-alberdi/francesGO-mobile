@@ -602,6 +602,8 @@
 				console.log('user agent BB');
 				
 				var path = this.options.service;
+				alert(data.latitude);
+				alert(data.longitude);
 					
 				callFilterForBlackBerry(path,data, processCollection,services);
 				
@@ -668,9 +670,12 @@
 		if(data.searchText){
 			url += "searchText=" + data.searchText+"&" ;
 		}
-		if(data.lalitude){
+		if(data.latitude){
 			url += "latitude="+Preferences.get().latitude+"&" ;
 		}
+		/*if(data.latitud){
+			url += "latitud="+Preferences.get().latitude+"&";
+		}*/
 		if(data.longitude){
 			url += "longitude="+Preferences.get().longitude+"&";
 		}
@@ -1784,9 +1789,9 @@
 			
 			if (currentLocation.selected) {
 				filter.latitude = Preferences.get().latitude;
-				alert(Preferences.get().latitude)
-				alert(Preferences.get().longitude)
+				alert(filter.latitude)
 				filter.longitude = Preferences.get().longitude;
+				alert(filter.longitude )
 			}
 			
 			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
