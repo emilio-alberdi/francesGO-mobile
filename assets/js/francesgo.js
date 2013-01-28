@@ -596,14 +596,12 @@
 		try{
 			var browser = navigator.userAgent;
 			   
-			if ((browser.indexOf("BlackBerry") >= 0 || browser.indexOf("PlayBook") ) && browser.indexOf("WebKit") >= 0){
+			if ((browser.indexOf("BlackBerry") >= 0 || browser.indexOf("PlayBook") )){
 				
 				alert('user agent BB?')
 				console.log('user agent BB');
 				
 				var path = this.options.service;
-				alert(data.latitude);
-				alert(data.longitude);
 					
 				callFilterForBlackBerry(path,data, processCollection,services);
 				
@@ -616,8 +614,6 @@
 					data.rubros = data.rubros.toString();
 				}
 	
-				alert('latitud: ' + data.latitude);
-				alert('longitud: ' + data.longitude);
 				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 					alert("error on: " + textStatus + ", "+ errorThrown);  
 					
@@ -672,13 +668,15 @@
 		}
 		if(data.latitude){
 			url += "latitude="+Preferences.get().latitude+"&" ;
+		}else if(data.latitud){
+			url += "latitud="+data.latitud+"&";
 		}
-		/*if(data.latitud){
-			url += "latitud="+Preferences.get().latitude+"&";
-		}*/
 		if(data.longitude){
 			url += "longitude="+Preferences.get().longitude+"&";
+		}else if(data.longitud){
+			url += "longitud="+data.longitud+"&";
 		}
+		
 		if(data.zonas){
 			url += "zonas="+data.zonas.toString()+"&" ;
 		}
