@@ -598,6 +598,7 @@
 			   
 			if ((browser.indexOf("BlackBerry") >= 0 || browser.indexOf("PlayBook") ) && browser.indexOf("WebKit") >= 0){
 				
+				alert('user agent BB?')
 				console.log('user agent BB');
 				
 				var path = this.options.service;
@@ -605,7 +606,7 @@
 				callFilterForBlackBerry(path,data, processCollection,services);
 				
 			}else{
-				
+				alert('user agent android ?')
 				if(data.zonas){
 					data.zonas = data.zonas.toString(); 
 				}
@@ -1782,6 +1783,8 @@
 			
 			if (currentLocation.selected) {
 				filter.latitude = Preferences.get().latitude;
+				alert(Preferences.get().latitude)
+				alert(Preferences.get().longitude)
 				filter.longitude = Preferences.get().longitude;
 			}
 			
