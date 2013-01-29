@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.2.9">
+		version 	= "0.3.0">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -11,9 +11,9 @@
 		FrancesGO Mobile Client for BVBA Frances Argentina
 	</description>
 
-	<author href="http://www.artdecode.com.ar"
+	<author href="http://www.bancofrances.com.ar"
 		email="gustavo.garcia@artdecode.com.ar">
-		Gustavo Felipe Garcia
+		BBVA Banco Frances
 	</author>
 	
 	 <access uri="http://chart.apis.google.com" subdomains="true" />
@@ -28,63 +28,35 @@
 	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
 	<icon src="assets/images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
 	
-	
-	<rim:connection timeout="60000">
-	    <id>TCP_WIFI</id>
-	    <id>TCP_CELLULAR</id>
-	    <id>WAP2</id>
-	    <id>WAP</id>
-	    <id>BIS-B</id>
-<!-- 	    <id>MDS</id> -->
-	</rim:connection>
-	
 	<feature id="blackberry.ui.Spinner" />
 	<feature id="blackberry.push" />
-	<feature id="blackberry.message.sms" />
 	<feature id="blackberry.ui.menu" />
-	<feature id="blackberry.identity" />
  	<feature id="blackberry.system" required="true" version="1.0.0.0" />
  	<feature id="phonegap" required="true" version="1.0.0" />
   	<feature id="blackberry.find" required="true" version="1.0.0.0" />
-  	<feature id="blackberry.identity" required="true" version="1.0.0.0" />
-  	<feature id="blackberry.pim.Address" required="true" version="1.0.0.0" />
-  	<feature id="blackberry.pim.Contact" required="true" version="1.0.0.0" />
   	<feature id="blackberry.io.file" required="true" version="1.0.0.0" />
   	<feature id="blackberry.utils" required="true" version="1.0.0.0" />
   	<feature id="blackberry.io.dir" required="true" version="1.0.0.0" />
   	<feature id="blackberry.app" required="true" version="1.0.0.0" />
   	<feature id="blackberry.app.event" required="true" version="1.0.0.0" />
-	
 	<feature id="blackberry.ui.dialog" required="true" version="1.0.0"/>
-	<access uri="http://m.francesgo.com.ar" subdomains="true">
-	   <feature id="blackberry.pim.memo" required="true" version="1.0.0"/>
-	   <feature id="blackberry.invoke.MemoArguments" required="true" version="1.0.0"/>
-	</access>
-	
-	<access uri="http://m.francesgo.com.ar" subdomains="true">
- 	    <feature id="blackberry.app" version="1.0.0.0" required="true"/>
- 	    <feature id="blackberry.invoke" version="1.0.0.0" required="true"/>
-	</access>
 
+    <access subdomains="true" uri="*"/>
     <access subdomains="true" uri="http://francesgo.com.ar"/>
 	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/*"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json"/>
-  	<access subdomains="true" uri="http://192.168.1.105:8080"/>
 
   	<access subdomains="true" uri="file:///store/home" />
   	<access subdomains="true" uri="file:///SDCard" />
 	  
   	<rim:permissions>
-    	<rim:permit>use_camera</rim:permit>
-	    <rim:permit>read_device_identifying_information</rim:permit>
-	    <rim:permit>access_shared</rim:permit>
 	    <rim:permit>read_geolocation</rim:permit>
   	</rim:permissions>
 		
-		<gap:splash src="splash.png" />
+	<gap:splash src="splash.png" />
 
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
 	<feature name="http://api.phonegap.com/1.0/network"/>
