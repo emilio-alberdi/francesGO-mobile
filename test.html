@@ -31,8 +31,13 @@
         </div>
       <div id= 'progress'>
       
-      </div>
-        <div id='datos'>
+      <div id='datosPost'>
+        
+        </div>
+
+        <div id='datosGet'>
+        
+        </div>
         
         </div>
      </div>
@@ -43,7 +48,13 @@
 	$(document).ready(function() {
 		
 		$('#buscar').click(function(){
-			
+			try{
+				var callbackGet = function(data){
+					$('#datosGet').html('<p>'
+							+ 'Se realizo la llamada via ajax ("Get") y se cargan los siguientes datos ' + data.responseText + '<br />'
+							+ '</p>');
+				}
+				
 			var callbackPost = function(data){
 				$('#datosPost').html('<p>'
 						+ 'Se realizo la llamada via ajax ("Post") y se cargan los siguientes datos ' + data.responseText + '<br />'
@@ -62,7 +73,9 @@
 // 			filter.longitude = -58.381593;
 			var filter = '?latitude=-34.603723&longitude=-58.381593&numberFirstIndex=1&numberLastIndex=5';
 			sendRequest(urlPost,callbackPost,filter);
-			
+			}catch(e){
+				alert('error on : ' + e)
+			}
 		});//buscar
 		
 	});

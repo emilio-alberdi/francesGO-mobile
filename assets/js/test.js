@@ -52,6 +52,7 @@ function sendRequest(url,callback,postData) {
 	
 	req.send(postData);
 	}catch(e){
+		alert('error ' + e)
 		console.log('error ' + e);
 	}
 		
