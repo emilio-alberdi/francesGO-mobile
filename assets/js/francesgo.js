@@ -1783,9 +1783,9 @@
 			
 			if (currentLocation.selected) {
 				filter.latitude = Preferences.get().latitude;
-				alert(filter.latitude)
+			//	alert(filter.latitude)
 				filter.longitude = Preferences.get().longitude;
-				alert(filter.longitude )
+				//alert(filter.longitude )
 			}
 			
 			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {

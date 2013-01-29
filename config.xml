@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.2.2">
+		version 	= "0.2.3">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -11,9 +11,9 @@
 		FrancesGO Mobile Client for BVBA Frances Argentina
 	</description>
 
-	<author href="http://www.bancofrances.com.ar"
-		email="info@bbvafrances.com.ar">
-		BBVA Frances
+	<author href="http://www.artdecode.com.ar"
+		email="gustavo.garcia@artdecode.com.ar">
+		Gustavo Felipe Garcia
 	</author>
 	
 	 <access uri="http://chart.apis.google.com" subdomains="true" />
