@@ -710,7 +710,7 @@
 	
 	function proccessCall(xml,services,processCollection){
 		
-		console.log('datos: ' + JSON.parse(xml.responseText));
+		alert('datos: ' + JSON.parse(xml.responseText));
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
 		
