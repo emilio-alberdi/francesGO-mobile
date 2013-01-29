@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.2.6">
+		version 	= "0.2.7">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -69,6 +69,9 @@
     <access subdomains="true" uri="http://francesgo.com.ar"/>
 	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
+  	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/*"/>
+  	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/"/>
+  	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json"/>
   	<access subdomains="true" uri="http://192.168.1.105:8080"/>
 
   	<access subdomains="true" uri="file:///store/home" />
