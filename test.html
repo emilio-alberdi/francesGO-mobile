@@ -61,9 +61,9 @@
 						+ '</p>');
 			}
 			
-			var urlGet = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?action=getProvincias';
+			var urlGet = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?';
 			//var urlGet = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
-			sendRequest(urlGet, callbackGet, null)
+			sendRequest(urlGet, callbackGet, 'action=getProvincias');
 			//var urlPost = 'http://localhost:8080/francesGo2-portal/mobile/mobile-beneficios.json';
 			var urlPost = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/mobile-beneficios.json';
 // 			var filter = {}
