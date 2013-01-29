@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Francés Go</title>
+    <title>FrancÃ©s Go</title>
     <meta charset=utf-8 />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
@@ -21,13 +21,16 @@
    <!-- ********************* listar beneficios ************************** -->
     <div class="banner background " data-role='page'  id="menu-principal">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  screen="true" style='position:fixed' >
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=”reverse” >Atrás</a>
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=â€�reverseâ€� >AtrÃ¡s</a>
         <h1>Menu del test</h1>
       </div>
      <div>
         	<div class='submit'>
         		 <a data-role='button' id='buscar'>buscar</a>
         	</div>
+     
+        		 <a data-role='button' href="http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias" id='buscar'>buscar href</a>
+     
         </div>
       <div id= 'progress'>
       
@@ -61,8 +64,8 @@
 						+ '</p>');
 			}
 			
-			var urlGet = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?';
-			//var urlGet = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
+			//var urlGet = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?';
+			var urlGet = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
 			sendRequest(urlGet, callbackGet, 'action=getProvincias');
 			//var urlPost = 'http://localhost:8080/francesGo2-portal/mobile/mobile-beneficios.json';
 			var urlPost = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/mobile-beneficios.json';
