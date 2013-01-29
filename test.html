@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Francés Go</title>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta name="HandheldFriendly" content="True" />
+	<meta name="x-blackberry-defaultHoverEffect" content="true" /> 
+	<link rel="stylesheet"  href="assets/stylesheets/jquery.mobile-1.1.0.css" />
+    <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
+    <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
+    <link rel="stylesheet" href="assets/stylesheets/css/themes/jquery-mobile-theme-BENEFICIOS.min.css" />
+	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="assets/js/jquery.mobile-1.1.0.min.js"></script>
+		<script type="text/javascript" src="assets/js/test.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no" />
+  </head>
+  <body>
+  
+   <!-- ********************* listar beneficios ************************** -->
+    <div class="banner background " data-role='page'  id="menu-principal">
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  screen="true" style='position:fixed' >
+        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-transition="slide" data-direction=”reverse” >Atrás</a>
+        <h1>Menu del test</h1>
+      </div>
+     <div>
+        	<div class='submit'>
+        		 <a data-role='button' id='buscar'>buscar</a>
+        	</div>
+        </div>
+      <div id= 'progress'>
+      
+      </div>
+        <div id='datos'>
+        
+        </div>
+     </div>
+  
+      
+      </body>
+	<script type="text/javascript">
+	$(document).ready(function() {
+		
+		$('#buscar').click(function(){
+			
+			var callback = function(data){
+				$('#datos').html('<p>'
+						+ 'Se realizo la llamada via ajax y se cargan los siguientes datos ' + data.responseText + '<br />'
+						+ '</p>');
+			}
+			
+// 			var url = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?action=getProvincias';
+			var url = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
+			sendRequest(url, callback)
+			
+		});//buscar
+		
+	});
+	</script>
+</html>
