@@ -16,7 +16,6 @@
 		BBVA Banco Frances
 	</author>
 	
-	 <access uri="http://chart.apis.google.com" subdomains="true" />
 	
 	<icon src="icon.png" gap:role="default" />
 	<icon src="assets/images/icons/ios/icon_57x57.png" width="57" height="57" />
@@ -41,14 +40,15 @@
   	<feature id="blackberry.app.event" required="true" version="1.0.0.0" />
 	<feature id="blackberry.ui.dialog" required="true" version="1.0.0"/>
 
-    <access subdomains="true" uri="*"/>
+    <access subdomains="true" origin="*" uri="*"/>
     <access subdomains="true" uri="http://francesgo.com.ar"/>
 	<access subdomains="true" uri="http://m.francesgo.com.ar"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/mobile/"/>
-  	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/*"/>
+  	<access subdomains="false" uri="http://m.francesgo.com.ar/francesGo2-Portal/*"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/"/>
   	<access subdomains="true" uri="http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json"/>
-
+    <access origin="http://chart.apis.google.com" subdomains="true" />
+	
   	<access subdomains="true" uri="file:///store/home" />
   	<access subdomains="true" uri="file:///SDCard" />
 	  
