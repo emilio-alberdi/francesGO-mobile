@@ -579,7 +579,11 @@
 		
 		var callback = function (data) {
 			try {
-				
+				$('#datos').html(
+						 '<p>'
+						+ 'Se realizo la llamada via ajax y se cargan la siguiente cantidad de beneficios ' + data.beneficios[0].length + '<br />'
+						+ '</p>' 
+						);
 				services.forEach(function(persistService) {
 					
 					persistService.loadCollection(data) 
@@ -596,13 +600,13 @@
 		try{
 			var browser = navigator.userAgent;
 			   
-			if (browser.indexOf("BlackBerry") >= 0  ){
+			/*if (browser.indexOf("BlackBerry") >= 0  ){
 				
 				var path = this.options.service;
 					
 				callFilterForBlackBerry(path,data, processCollection,services);
 				
-			}else{
+			}else{*/
 				if(data.zonas){
 					data.zonas = data.zonas.toString(); 
 				}
@@ -615,7 +619,7 @@
 					
 					console.log(textStatus, errorThrown);
 				}});
-			}
+//			}
 			
 			$.mobile.showPageLoadingMsg();
 			
