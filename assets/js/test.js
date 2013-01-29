@@ -17,13 +17,20 @@
 //	if (req.readyState == 4) return;
 //	req.send(postData);
 //}
-function sendRequest(url,callback) {
+
+baseUrl = '';
+   //	baseUrl = 'http://192.168.1.105:8080/francesGo2-portal/mobile/';
+   //	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+  		baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+
+
+function sendRequest(url,callback,postData) {
 	try{
 	var req = createXMLHTTPObject();
 	
 	if (!req) return;
 	
-	var method = "GET";
+	var method = (postData) ? "POST" : "GET";
 	
 	req.overrideMimeType('application/json');
 
@@ -31,7 +38,9 @@ function sendRequest(url,callback) {
 	
 	//req.setRequestHeader('User-Agent','XMLHTTP/1.0');
 
-	
+	if (postData){
+		req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	}
 	req.onreadystatechange = function () {
 		if (req.readyState == 4 && (req.status == 200 || window.location.href.indexOf ("http") == - 1)){
 			
@@ -41,9 +50,9 @@ function sendRequest(url,callback) {
 		}
 	}
 	
-	req.send(null);
+	req.send(postData);
 	}catch(e){
-		console.log('error ' + e)
+		console.log('error ' + e);
 	}
 		
 }

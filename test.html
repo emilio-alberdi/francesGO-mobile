@@ -44,15 +44,24 @@
 		
 		$('#buscar').click(function(){
 			
-			var callback = function(data){
-				$('#datos').html('<p>'
-						+ 'Se realizo la llamada via ajax y se cargan los siguientes datos ' + data.responseText + '<br />'
+			var callbackPost = function(data){
+				$('#datosPost').html('<p>'
+						+ 'Se realizo la llamada via ajax ("Post") y se cargan los siguientes datos ' + data.responseText + '<br />'
 						+ '</p>');
 			}
 			
- 			var url = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?action=getProvincias';
-			//var url = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
-			sendRequest(url, callback)
+			var url = 'http://m.francesgo.com.ar/francesGo2-Portal/exportador-planilla.json?action=getProvincias';
+			//var urlGet = 'http://localhost:8080/francesGo2-portal/exportador-planilla.json?action=getProvincias'
+			sendRequest(urlGet, callbackGet, null)
+			//var urlPost = 'http://localhost:8080/francesGo2-portal/mobile/mobile-beneficios.json';
+			var urlPost = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/mobile-beneficios.json';
+// 			var filter = {}
+// 			filter.numberFirstIndex = 1;
+// 			filter.numberLastIndex = 50;
+// 			filter.latitude = -34.603723;
+// 			filter.longitude = -58.381593;
+			var filter = '?latitude=-34.603723&longitude=-58.381593&numberFirstIndex=1&numberLastIndex=5';
+			sendRequest(urlPost,callbackPost,filter);
 			
 		});//buscar
 		
