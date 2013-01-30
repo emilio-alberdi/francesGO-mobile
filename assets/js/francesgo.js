@@ -579,11 +579,6 @@
 		
 		var callback = function (data) {
 			try {
-				$('#datos').html(
-						 '<p>'
-						+ 'Se realizo la llamada via ajax y se cargan la siguiente cantidad de beneficios ' + data.beneficios[0].length + '<br />'
-						+ '</p>' 
-						);
 				services.forEach(function(persistService) {
 					
 					persistService.loadCollection(data) 
@@ -632,9 +627,10 @@
 		var url;
 		
 		try{
-			url = path + createParameters(data);
+			url = path
 			
-			alert(url);
+			var parameters = createParameters(data);
+			
 			console.log("url "+ url);
 		}catch(e){
 			console.log("error on " + e);
@@ -648,7 +644,7 @@
 			
 			xmlhttp.open("POST",url,true);
 			
-			xmlhttp.send(null);
+			xmlhttp.send(parameters);
 		
 		}else {
 		  return;
@@ -713,8 +709,6 @@
 	}
 	
 	function proccessCall(xml,services,processCollection){
-		
-		alert('datos: ' + JSON.parse(xml.responseText));
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
 		
