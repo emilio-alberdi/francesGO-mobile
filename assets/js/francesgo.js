@@ -593,28 +593,19 @@
 		}
 		
 		try{
-			var browser = navigator.userAgent;
 			   
-			/*if (browser.indexOf("BlackBerry") >= 0  ){
+			if(data.zonas){
+				data.zonas = data.zonas.toString(); 
+			}
+			if(data.rubros){
+				data.rubros = data.rubros.toString();
+			}
+
+			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+				alert("error on: " + textStatus + ", "+ errorThrown);  
 				
-				var path = this.options.service;
-					
-				callFilterForBlackBerry(path,data, processCollection,services);
-				
-			}else{*/
-				if(data.zonas){
-					data.zonas = data.zonas.toString(); 
-				}
-				if(data.rubros){
-					data.rubros = data.rubros.toString();
-				}
-	
-				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-					alert("error on: " + textStatus + ", "+ errorThrown);  
-					
-					console.log(textStatus, errorThrown);
-				}});
-//			}
+				console.log(textStatus, errorThrown);
+			}});
 			
 			$.mobile.showPageLoadingMsg();
 			
@@ -623,113 +614,6 @@
 		}
 	}
 
-	function callFilterForBlackBerry(path, data, processCollection,services){
-		var url;
-		
-		try{
-			url = path
-			
-			var parameters = createParameters(data);
-			
-			console.log("url "+ url);
-		}catch(e){
-			console.log("error on " + e);
-		}
-		
-		var xmlhttp = createXMLHTTPRequest();
-		
-		if (xmlhttp!=null){
-			
-			xmlhttp.overrideMimeType('application/json');
-			
-			xmlhttp.open("POST",url,true);
-			
-			xmlhttp.send(parameters);
-		
-		}else {
-		  return;
-		}
-		   
-		xmlhttp.onreadystatechange = function (){
-			proccessCall(xmlhttp,services,processCollection);
-		}
-	}
-	
-	function createParameters(data){
-		
-		var url = "?";
-		
-		if(data.searchText){
-			url += "searchText=" + data.searchText+"&" ;
-		}
-		if(data.latitude){
-			url += "latitude="+Preferences.get().latitude+"&" ;
-		}else if(data.latitud){
-			url += "latitud="+data.latitud+"&";
-		}
-		if(data.longitude){
-			url += "longitude="+Preferences.get().longitude+"&";
-		}else if(data.longitud){
-			url += "longitud="+data.longitud+"&";
-		}
-		
-		if(data.zonas){
-			url += "zonas="+data.zonas.toString()+"&" ;
-		}
-		if(data.rubros){
-			url +="rubros="+data.rubros.toString()+"&" ;
-		}
-		if(data.numberFirstIndex) {
-			url +="numberFirstIndex="+ data.numberFirstIndex+"&";
-		}
-		if(data.numberLastIndex) {
-			url +="numberLastIndex="+data.numberLastIndex;
-		}
-		console.log(url);
-
-		return url;
-	}
-	function createXMLHTTPRequest(){
-		
-		var xmlhttp=null;
-		
-		if (window.XMLHttpRequest) {
-		
-			xmlhttp=new XMLHttpRequest();
-		  
-		}else if (window.ActiveXObject) {
-		  
-			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-		  
-		}else{
-			  alert('Por favor verifique el navegador que esta usando. En caso de ser necesario actualicelo a la ultima version')
-		}
-		
-		return xmlhttp;
-	}
-	
-	function proccessCall(xml,services,processCollection){
-		
-		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
-		
-			var data = JSON.parse(xml.responseText);
-			
-			try {
-				
-				services.forEach(function(persistService) {
-					
-					persistService.loadCollection(data) 
-					
-				})
-			
-				processCollection();
-			}
-			catch(e) {
-				console.log('error', e);
-			}
-		}
-	}
-	
 	console.log('start ');
 	
 	
