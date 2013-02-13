@@ -59,11 +59,12 @@
 			 2:'Position unavailable',
 			 3:'Request timeout'
 		};
-		alert("Error: " + errors[error.code]);
+		console.log("Error: " + errors[error.code]);
 	}
 	
 	function savePosition(position) {
 			
+		console.log('save user position')
 		Preferences.get().latitude = position.coords.latitude;
 		
 		Preferences.get().longitude = position.coords.longitude;
@@ -551,21 +552,18 @@
 			
 				processCollection();
 				
-				$.mobile.hidePageLoadingMsg();
-				
+				$.mobile.loading('hide');				
 			}
 			catch(e) {
 				console.log('error', e);
 			}
 		}
 		
-		$.mobile.showPageLoadingMsg();
+		$.mobile.loading('show');
 		
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
 			  console.log(textStatus, errorThrown);
-			  
-			  $.mobile.hidePageLoadingMsg();
 			  
 			  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 		}})
@@ -593,27 +591,143 @@
 		}
 		
 		try{
+			var browser = navigator.userAgent;
 			   
-			if(data.zonas){
-				data.zonas = data.zonas.toString(); 
-			}
-			if(data.rubros){
-				data.rubros = data.rubros.toString();
-			}
-
-			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-				alert("error on: " + textStatus + ", "+ errorThrown);  
+			if (browser.indexOf("BlackBerry") >= 0  ){
 				
-				console.log(textStatus, errorThrown);
-			}});
+				var path = this.options.service;
+					
+				callFilterForBlackBerry(path,data, processCollection,services);
+				
+			}else{
+				if(data.zonas){
+					data.zonas = data.zonas.toString(); 
+				}
+				if(data.rubros){
+					data.rubros = data.rubros.toString();
+				}
+	
+				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+					alert("error on: " + textStatus + ", "+ errorThrown);  
+					
+					console.log(textStatus, errorThrown);
+				}});
+			}
 			
-			$.mobile.showPageLoadingMsg();
+			$.mobile.loading('show');
 			
 		}catch(e){
 			console.log('error' + e)
 		}
 	}
 
+	function callFilterForBlackBerry(path, data, processCollection,services){
+		var url;
+		
+		try{
+			url = path
+			
+			var parameters = createParameters(data);
+			
+			console.log("url "+ url);
+		}catch(e){
+			console.log("error on " + e);
+		}
+		
+		var xmlhttp = createXMLHTTPRequest();
+		
+		if (xmlhttp!=null){
+			
+			xmlhttp.overrideMimeType('application/json');
+			
+			xmlhttp.open("POST",url,true);
+			
+			xmlhttp.send(parameters);
+		
+		}else {
+		  return;
+		}
+		   
+		xmlhttp.onreadystatechange = function (){
+			proccessCall(xmlhttp,services,processCollection);
+		}
+	}
+	
+	function createParameters(data){
+		
+		var url = "?";
+		
+		if(data.searchText){
+			url += "searchText=" + data.searchText+"&" ;
+		}
+		if(data.latitude){
+			url += "latitude="+Preferences.get().latitude+"&" ;
+		}else if(data.latitud){
+			url += "latitud="+data.latitud+"&";
+		}
+		if(data.longitude){
+			url += "longitude="+Preferences.get().longitude+"&";
+		}else if(data.longitud){
+			url += "longitud="+data.longitud+"&";
+		}
+		
+		if(data.zonas){
+			url += "zonas="+data.zonas.toString()+"&" ;
+		}
+		if(data.rubros){
+			url +="rubros="+data.rubros.toString()+"&" ;
+		}
+		if(data.numberFirstIndex) {
+			url +="numberFirstIndex="+ data.numberFirstIndex+"&";
+		}
+		if(data.numberLastIndex) {
+			url +="numberLastIndex="+data.numberLastIndex;
+		}
+		console.log(url);
+
+		return url;
+	}
+	function createXMLHTTPRequest(){
+		
+		var xmlhttp=null;
+		
+		if (window.XMLHttpRequest) {
+		
+			xmlhttp=new XMLHttpRequest();
+		  
+		}else if (window.ActiveXObject) {
+		  
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		  
+		}else{
+			  alert('Por favor verifique el navegador que esta usando. En caso de ser necesario actualicelo a la ultima version')
+		}
+		
+		return xmlhttp;
+	}
+	
+	function proccessCall(xml,services,processCollection){
+		
+		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
+		
+			var data = JSON.parse(xml.responseText);
+			
+			try {
+				
+				services.forEach(function(persistService) {
+					
+					persistService.loadCollection(data) 
+					
+				})
+			
+				processCollection();
+			}
+			catch(e) {
+				console.log('error', e);
+			}
+		}
+	}
+	
 	console.log('start ');
 	
 	
@@ -1083,7 +1197,7 @@
 				
 				$("#ul-beneficios").empty();
 				
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 				
 				collection.forEach(function(beneficio) {
 					
@@ -1125,7 +1239,7 @@
 				
 				$("#ul-beneficios").empty();
 				
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 				
 				collection.forEach(function(beneficio) {
 					
@@ -1317,7 +1431,9 @@
 		
 		tiposDocumentoPersistenceService.getCollection(function(tiposDocumento) {
 			tiposDocumento.forEach(function (tipoDocumento) {
-				$("#registracion-tiposDocumento").append("<option value='" + tipoDocumento.codigoAltamira + "'>" + tipoDocumento.descripcionLarga +"</option>")
+				if(tipoDocumento.id != 6 && tipoDocumento.id != 7){
+					$("#registracion-tiposDocumento").append("<option value='" + tipoDocumento.codigoAltamira + "'>" + tipoDocumento.descripcionLarga +"</option>")
+				}
 			})
 	
 			$("#registracion-tiposDocumento").selectmenu('refresh', true);
@@ -1332,7 +1448,9 @@
 		
 		zonasPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(zona) {
-				$("#registracion-regionesOrdenables").append("<option value='" + zona.uri + "'>" + zona.nombre +"</option>")
+				if(zona.id != -1){
+					$("#registracion-regionesOrdenables").append("<option value='" + zona.uri + "'>" + zona.nombre +"</option>")
+				}
 			});
 			$("#registracion-regionesOrdenables").selectmenu('refresh', true);
 		})
@@ -1341,24 +1459,55 @@
 		
 	})
 
+	$("#registracion-baja-confirmation-link").click(function(e){
+		
+		console.log("validate")
+			
+		 var emptyFields = $("#registracion-baja-form").find(":input.required,select.required").filter(function() {
+		        return !$.trim($(this).val()).length;
+		 });
+		 
+		 
+	    if(emptyFields.length) {
+	        emptyFields.css("border", "1px solid red");   
+	        alert("Debe seleccionar los campos indicados");
+	        return false;
+	    }
+	    
+	    var tipoDni = parseInt($('#registracion-baja-tiposDocumento').val())
+	    
+	    if(isNaN(tipoDni)){
+	    	alert("Debe seleccionar un tipo de documento")
+	    	$('#registracion-baja-tiposDocumento').css("border", "1px solid red");
+			return false;
+	    }
+	    
+	    var dni = parseInt($('#registracion-baja-dni').val());
+		 
+		 if(isNaN(dni)){
+			 alert("El número de documento debe ser númerico");		
+			 $('#registracion-dni').css("border", "1px solid red");
+			 return false;
+		 }
+		 
+	});
 	
-	$("#registracion-baja-confirmacion-link").click(function(e){
+	$("#registracion-baja-confirmacion-send-link").click(function(e){
 		
 		 var callback = function(data) {
 			 $.mobile.changePage("#registracion-resultado" ,  { transition: "slide"} )
 		
-			 $.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
 			 
 			 $("#registracion-resultado-message").text("Para confirmar la baja le enviaremos un SMS al n�mero de celular registrado.")
 		 }
 		 
-		 $.mobile.showPageLoadingMsg();
+		 $.mobile.loading('show');
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion-baja.json", type:'POST', data:$('#registracion-baja-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  console.log(textStatus, errorThrown);
 		
-			  $.mobile.hidePageLoadingMsg();
-				 
+			  $.mobile.loading('hide'); 
 		 }})
 		
 		
@@ -1378,15 +1527,16 @@
 			 
 			 $.mobile.changePage("#registracion-resultado" , { transition: "slide"} )
 			 
-			 $.mobile.hidePageLoadingMsg();
-			 
+			 $.mobile.loading('hide');
+
 			 $("#registracion-resultado-message").text(" Ha sido registrado satisfactoriamente. Le enviaremos un mensaje de bienvenida")
 		 }
 		 
-		 $.mobile.showPageLoadingMsg();
+		 $.mobile.loading('show');
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			 $.mobile.hidePageLoadingMsg();
+
+			 $.mobile.loading('hide');
 			 console.log(textStatus, errorThrown);
 		 }})
 		 
@@ -1418,6 +1568,39 @@
 	        alert("Debe seleccionar los campos indicados");
 	        return false;
 	    }
+	    
+	    var dni = parseInt($('#registracion-dni').val());
+		 
+		 if(isNaN(dni)){
+			 alert("El número de documento debe ser númerico");		
+			 $('#registracion-dni').css("border", "1px solid red");
+			 return false;
+		 }
+		 
+		 var tipoDni = parseInt($('#registracion-tiposDocumento').val())
+
+		 if(tipoDni == -1){
+	    	alert("Debe seleccionar un tipo de documento")
+	    	$('#registracion-baja-tiposDocumento').css("border", "1px solid red");
+			return false;
+	    }
+		 
+		 var codArea = parseInt($('#registracion-codigoAreaCelular').val());
+		 
+		 if(isNaN(codArea)){
+			 alert("El codigo de área debe ser númerico");		
+			 $('#registracion-codigoAreaCelular').css("border", "1px solid red");
+			 return false;
+		 }
+
+		 var numeroCelular = parseInt($('#registracion-numeroCelular').val());
+		 
+		 if(isNaN(numeroCelular)){
+			 alert("El número de celular debe ser númerico");		
+			 $('#registracion-codigoAreaCelular').css("border", "1px solid red");
+			 return false;
+		 }
+	    
 
 	})
 
@@ -1620,7 +1803,7 @@
 			console.log('refresh');
 			
 				
-		$.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
 		});	
 		
 
@@ -1664,11 +1847,13 @@
 			var currentLocation = zonasPersistenceService.getById(-1)
 			
 			if (currentLocation.selected) {
-				filter.latitude = Preferences.get().latitude;
-			//	alert(filter.latitude)
-				filter.longitude = Preferences.get().longitude;
-				//alert(filter.longitude )
+				filter.checkMiUbicacion = true;
+			}else{
+				filter.checkMiUbicacion = false;
 			}
+			
+			filter.latitude = Preferences.get().latitude;
+			filter.longitude = Preferences.get().longitude;
 			
 			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
 			
@@ -1949,25 +2134,56 @@
 		})
 		
 		var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom')
+		
 		console.log('zoom antes de cambiarlo: ' + zoom)
+		
 		$('#objects-mapa-mapa').gmap().one('init', function(event){
+		
 			console.log('entro al bind')
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
-			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
-			console.log('zoom despues de cambiarlo: '  + zoom)
 			
-		})			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 16);
+			
+			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+			
+			console.log('zoom despues de cambiarlo: '  + zoom);
+			
+			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
+			
+		})		
 			
 		beneficiosPersistenceService.getCollection(function(collection) {
 			collection.forEach(function(beneficio) {
-	
-				var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+
+				var distance;
 				
-				var marker = createMarker(beneficio);
+				try{
 					
-				$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
-					$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-				});
+					var currentPosition = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude);
+					
+					var sucursalPostion = new google.maps.LatLng(beneficio.latitud, beneficio.longitud);
+					
+					distance = google.maps.geometry.spherical.computeDistanceBetween(currentPosition, sucursalPostion);
+					
+					distance = Math.ceil(distance/1000 )
+					
+				}catch(e){
+					console.log('error ' + e)
+				}
+				
+				if(distance < 2){
+					
+					console.log('cargando el beneficio: ' + beneficio.nombreComercio)
+					
+					var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
+					
+					var marker = createMarker(beneficio);
+					
+//					marker.bounds = true;
+					
+					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
+						$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
+					});
+				}
 					
 			});
 			
@@ -1975,7 +2191,7 @@
 		
 		var currentLatLng = new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude)
 		
-		var currentMarker = {'position': currentLatLng,bounds: false}
+		var currentMarker = {'position': currentLatLng,bounds: true}
 		
 		var img = new Image();
 		
@@ -2044,29 +2260,74 @@
 		$("#buscar-mas-beneficios").hide();
 		$("#fin-beneficios").hide();
 		
-		beneficiosPersistenceService.getCollection(function(collection) {
-
-			collection.forEach(function(beneficio) {
-				
-				beneficiosPersistenceService.showBeneficio(beneficio);
-			})
-
-			if(collection.length == 0){
-				$("#sin-resultados-beneficios").show();
-			}else{
-				if(collection.length == 50){
-					$("#buscar-mas-beneficios").show();
-				}else{
-					$("#fin-beneficios").show();
-				}
-			}
-			
-			
-			$("#ul-beneficios").listview('refresh');
-
-		})
+		var filter = beneficiosPersistenceService.getFilter();
 		
-		$.mobile.hidePageLoadingMsg();
+		if(filter){
+
+			beneficiosPersistenceService.getCollection(function(collection) {
+	
+				collection.forEach(function(beneficio) {
+					
+					beneficiosPersistenceService.showBeneficio(beneficio);
+				})
+	
+				if(collection.length == 0){
+					$("#sin-resultados-beneficios").show();
+				}else{
+					if(collection.length == 50){
+						$("#buscar-mas-beneficios").show();
+					}else{
+						$("#fin-beneficios").show();
+					}
+				}
+				
+				
+				$("#ul-beneficios").listview('refresh');
+	
+			})
+		}else{
+			//TODO 
+			$("#buscar-mas-beneficios").hide();
+			
+			filter = {}
+			
+			filter.numberFirstIndex = 1;
+			
+			filter.numberLastIndex = 50;
+
+			filter.latitude = Preferences.get().latitude;
+			
+			filter.longitude = Preferences.get().longitude;
+			
+			filter.checkMiUbicacion = true;
+		
+			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
+				
+				$("#ul-beneficios").empty();
+				
+				$.mobile.loading('hide');
+				
+				collection.forEach(function(beneficio) {
+					
+					beneficiosPersistenceService.showBeneficio(beneficio);
+					
+				})
+				
+				if(collection.length == 0){
+					$("#sin-resultados-beneficios").show();
+				}else{
+					if(collection.length == filter.numberLastIndex){
+						$("#buscar-mas-beneficios").show();
+					}else{
+						$("#fin-beneficios").show();
+					}
+				} 
+				
+				//generateBannerForBeneficios();
+				$("#ul-beneficios").listview('refresh');
+			});
+		}
+		
 	})
 
 	
@@ -2080,11 +2341,9 @@
 	})
 
 	
-	$("#objects-mapa").one('display-data-sucursales',function(e) {
+	$("#objects-mapa").bind('display-data-sucursales',function(e) {
 		
 		$("#back-listar").unbind("click");
-		
-		console.log("object-mapa init sucursales ", e.title)
 		
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
@@ -2092,12 +2351,24 @@
 		$("#back-listar").click(function(){
 			$.mobile.changePage("#listar-sucursales" , { transition: "slide"} );
 		})	
-		$('#objects-mapa-mapa').gmap('clear', 'markers');
+		
+		var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+		
+		console.log('zoom antes de cambiarlo: ' + zoom);
 		
 		$('#objects-mapa-mapa').gmap().one('init', function(event){
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
-		});
+			console.log('entro al bind')
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 15);
+			
+			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+			
+			console.log('zoom despues de cambiarlo: '  + zoom);
+			
+			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
+			
+		})			
 	
 			sucursalesPersistenceService.getCollection(function(collection) {
 				collection.forEach(function(sucursal) {
@@ -2291,7 +2562,7 @@
 									});
 							}
 							else {
-								 alert("no se pudo localizar su ubicacion actual ");
+								 alert("No se pudo localizar su ubicación actual ");
 							 }
 						}
 					);
@@ -2340,7 +2611,7 @@
 				
 				$("#ul-sucursales").listview('refresh');
 
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			})
 
 		}else{
@@ -2350,6 +2621,7 @@
 			filter.numberLastIndex = 50;
 			filter.latitud = Preferences.get().latitude;
 			filter.longitud = Preferences.get().longitude;
+			filter.checkMiUbicacion = true;
 
 			sucursalesPersistenceService.getFilteredCollection(filter, function(collection) {
 				
@@ -2376,7 +2648,7 @@
 				
 				$("#ul-sucursales").listview('refresh');
 				
-				$.mobile.hidePageLoadingMsg();
+				$.mobile.loading('hide');
 			});
 			
 		}	
@@ -2521,7 +2793,7 @@
 			
 			console.log('referesh');
 
-		$.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
 		});	
 		
 		
@@ -2564,10 +2836,16 @@
 			
 			var currentLocation = zonasPersistenceService.getById(-1)
 			
+			filter.checkMiUbicacion = false; 
+			
 			if (currentLocation.sucursalSelected) {
-				filter.latitud = Preferences.get().latitude;
-				filter.longitud = Preferences.get().longitude;
+				filter.checkMiUbicacion = true;
 			}
+			
+			filter.latitud = Preferences.get().latitude;
+			
+			filter.longitud = Preferences.get().longitude;
+
 			$("#buscar-mas-sucursales").hide();
 			$("#fin-sucursales").hide();
 			
@@ -2649,7 +2927,8 @@
 			filter.numberLastIndex = 50;
 			filter.latitud = Preferences.get().latitude;
 			filter.longitud = Preferences.get().longitude;
-
+			filter.checkMiUbicacion = true;
+			
 			cajerosPersistenceService.getFilteredCollection(filter,function(collection) {
 				
 				$("#ul-cajeros").empty();
@@ -2679,7 +2958,7 @@
 		}
 		
 		
-		$.mobile.hidePageLoadingMsg();
+		$.mobile.loading('hide');
 	})
 
 	
@@ -2717,7 +2996,7 @@
 
 			$("#ul-cajeros").listview('refresh');
 
-			$.mobile.hidePageLoadingMsg();
+			$.mobile.loading('hide');
 		});	
 	})
 	
@@ -2746,13 +3025,19 @@
 			
 			var currentLocation = zonasPersistenceService.getById(-1)
 			
+			filter.checkMiUbicacion = false;
+		
 			if (currentLocation.cajeroSelected) {
-				filter.latitud = Preferences.get().latitude;
-				filter.longitud = Preferences.get().longitude;
-			
+						
+				filter.checkMiUbicacion = true;
 			}
 			
+			filter.latitud = Preferences.get().latitude;
+
+			filter.longitud = Preferences.get().longitude;
+			
 			filter.tipoCajeros = $("#buscar-cajeros-tipoCajero-filter").val();
+			
 			filter.expendeDolares = $("#buscar-cajeros-expendeDolares").val();
 			
 			cajerosPersistenceService.getFilteredCollection(filter, function(collection) {
@@ -2799,7 +3084,7 @@
 	})
 
 	
-	$("#objects-mapa").one('display-data-cajeros',function(e) {
+	$("#objects-mapa").bind('display-data-cajeros',function(e) {
 		
 		console.log("object-mapa init cajeros", e.title)
 		
@@ -2813,12 +3098,22 @@
 			$.mobile.changePage("#listar-cajeros", { transition: "slide"} );
 		})	
 		
-		$('#objects-mapa-mapa').gmap('clear', 'markers');
+		var zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+		
+		console.log('zoom antes de cambiarlo: ' + zoom);
 		
 		$('#objects-mapa-mapa').gmap().one('init', function(event){
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 13);
-		})
+			console.log('entro al bind')
+			
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 15);
+			
+			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
+			
+			console.log('zoom despues de cambiarlo: '  + zoom)
+			
+			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
+		})			
 		
 			cajerosPersistenceService.getCollection(function(collection) {
 				collection.forEach(function(cajero) {
@@ -3005,7 +3300,7 @@
 									});
 							}
 							else {
-								 alert("no se pudo localizar su ubicacion actual ");
+								 alert("No se pudo localizar su ubicación actual ");
 							 }
 						}
 					);
@@ -3203,13 +3498,26 @@
 		callbackList = []
 	});
 	
+	$.mobile.loading('show');
+	
 	zonasPersistenceService.reloadCollection();
 	
-	setTimeout(function(){callFirstInstanceBeneficio()},2000);
+	setTimeout(function(){
+		
+		var zonasGeograficas = localStorage.getObject('regionesOrdenables');
+		while(!zonasGeograficas){
+			var zonasGeograficas = localStorage.getObject('regionesOrdenables');
+		}
+		
+		if(zonasGeograficas){
+			$('#boton-listar-beneficios').removeClass('ui-disabled')
+			$('#boton-listar-sucursales').removeClass('ui-disabled')
+			$('#boton-listar-cajeros').removeClass('ui-disabled')
+
+			$.mobile.loading('hide');
+		}
+	},2000);
 	
-   	setTimeout(function(){$("#boton-buscar-beneficios").removeClass('ui-disabled')},2000)
-	
-   	$.mobile.hidePageLoadingMsg();
 	
 }
 	
