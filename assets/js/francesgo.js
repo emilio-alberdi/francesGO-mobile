@@ -3498,21 +3498,21 @@
 	
 	zonasPersistenceService.reloadCollection();
 	
-	setTimeout(function(){
-		
-		var zonasGeograficas = localStorage.getObject('regionesOrdenables');
-		while(!zonasGeograficas){
-			var zonasGeograficas = localStorage.getObject('regionesOrdenables');
-		}
-		
-		if(zonasGeograficas){
+//	setTimeout(function(){
+//		
+//		var zonasGeograficas = localStorage.getObject('regionesOrdenables');
+//		while(!zonasGeograficas){
+//			var zonasGeograficas = localStorage.getObject('regionesOrdenables');
+//		}
+//		
+//		if(zonasGeograficas){
 			$('#boton-listar-beneficios').removeClass('ui-disabled')
 			$('#boton-listar-sucursales').removeClass('ui-disabled')
 			$('#boton-listar-cajeros').removeClass('ui-disabled')
 
 			$.mobile.loading('hide');
-		}
-	},2000);
+//		}
+//	},2000);
 	
 	
 }
