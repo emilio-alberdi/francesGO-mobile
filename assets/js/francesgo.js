@@ -1901,23 +1901,28 @@
 	
 		$("#beneficio-legales-datos").text(beneficio.textoVigencia + beneficio.legales + beneficio.cft)
 		
-		$("#back-legales").unbind();
+//		$("#back-legales").unbind();
 		
 		$("#back-legales").one("click" , function(event){
+			
+//			$("#beneficio-legales").unbind();
 			
 			$.mobile.changePage("#ver-beneficio", { transition: "slide" ,reverse: true} );
 			
 			$("#ver-beneficio").trigger({type:"display-data", beneficio: beneficio});
 			
-		})	
+		})
+//		$("#ver-beneficio-legales-link").unbind();
 		
 	});
+	
 	
 	$('#ver-beneficio').live('pagebeforehide',function() {
 		var pageName = 'ver-beneficio-mapa';
 		refreshMap(pageName);
 		console.log('destroy map')
 		$('#ver-beneficio-mapa').gmap('destroy');
+		$("#ver-beneficio-legales-link").unbind();
 	})
 	
 	$("#ver-beneficio").bind('display-data',function(e) {
@@ -1993,50 +1998,48 @@
 		}
 		
 		$("#beneficio-direccion").empty();
+		
 		$("#como-llegar-link").show();
+		
 		$('#ver-beneficio-mapa').show();
-		console.log('distance is: ' + distance)
 		
 		if(!distance){
 			$("#como-llegar-link").hide();
 			$('#ver-beneficio-mapa').hide();
 		}
 			
-			$('#ver-beneficio-mapa').gmap().one('init',function(event){
+		$('#ver-beneficio-mapa').gmap().one('init',function(event){
 
-				console.log('entro al bind')
-				
-				$('#ver-beneficio-mapa').gmap('option', 'zoom', 13);
-				
-				console.log('zoom del mapa: ' + $('#ver-beneficio-mapa').gmap('option', 'zoom'));
-				
-				$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
-			})
+			$('#ver-beneficio-mapa').gmap('option', 'zoom', 13);
 			
-			
-			if(beneficio.idShopping){
-				$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
-			}else
-				$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
-			
-			$('#ver-beneficio-mapa').gmap('clear' , 'markers');
-			
-			$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
-			
-			var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
-		
-			marker = createMarker(beneficio);
-			
-			$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
-				$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-			});
-			//$('#ver-beneficio-mapa').gmap('option', 'zoom', 5);
 			$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+		})
+		
+		
+		if(beneficio.idShopping){
+			$("#beneficio-direccion").append("Sucursal: " + beneficio.nombreSucursal +"  <p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
+		}else
+			$("#beneficio-direccion").append("<p class='direccion'><strong>Dirección:</strong> " + beneficio.calle + " " + beneficio.numero +  ", " + beneficio.nombreLocalidad + ( (distance != undefined) ? "<span>(" + distance +" km)</span></p>" : "</p>") );
+		
+		$('#ver-beneficio-mapa').gmap('clear' , 'markers');
+		
+		$('#ver-beneficio-mapa').gmap('clear' , 'overlays');
+		
+		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 	
-		$("#ver-beneficio-legales-link").unbind();
+		marker = createMarker(beneficio);
+		
+		$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
+			$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
+		});
+		
+		$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+	
+//		$("#ver-beneficio-legales-link").unbind();
 				
 		$("#ver-beneficio-legales-link").one("click" , function(event) {
-	
+			
+			$("#ver-beneficio-legales-link").unbind('click');
 			
 			$.mobile.changePage("#beneficio-legales", { transition: "slide"} )
 			
@@ -2052,6 +2055,7 @@
 			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
 				
 		})
+		
 		$("#como-llegar-link").unbind();
 		
 		$("#como-llegar-link").one("click", function(){
@@ -2095,17 +2099,8 @@
 				'clickable': false 
 			});
 			$("#como-llegar-link").unbind();
-			 
+			
 		});
-		/*
-		$('#datos-de-coordenadas').html(
-		 '<p>'
-		+ 'Latitud del Beneficio: ' + beneficio.latitud+ '<br />'
-		+ 'Longitud del Beneficio: ' + beneficio.longitud + '<br />'
-		+ 'Latitud del usuario: ' + Preferences.get().latitude + '<br />'
-		+ 'Longitud del usuario: ' + Preferences.get().longitude  + '<br />'
-		+ '</p>' 
-		)*/
 	})
 
 	$("#beneficios-mapa").click(function() {
@@ -2113,7 +2108,7 @@
 		$("#objects-mapa").trigger({type:"display-data-beneficio",title:'Beneficios'})
 		
 		$.mobile.changePage("#objects-mapa", { transition: "slide"} )
-				
+		
 	})
 	
 	$("#objects-mapa").live('pagebeforehide',function() {
@@ -2127,6 +2122,7 @@
 		if (e.title) {
 			$("#objects-mapa-title").text(e.title)
 		}
+		
 		$("#back-listar").unbind("click");
 		
 		$("#back-listar").click(function(){
