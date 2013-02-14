@@ -1105,6 +1105,7 @@
 		beneficiosPersistenceService.forceReloadCollection()
 		sucursalesPersistenceService.forceReloadCollection()
 		cajerosPersistenceService.forceReloadCollection()
+		rubrosPersistenceService.remove();
 		zonasPersistenceService.forceReloadCollection()
 		bannersPersistenceService.forceReloadCollection()
 		
