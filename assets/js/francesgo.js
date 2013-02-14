@@ -3500,11 +3500,6 @@
 	
 	setTimeout(function(){
 		
-		var zonasGeograficas = localStorage.getObject('regionesOrdenables');
-		while(!zonasGeograficas){
-			zonasGeograficas = localStorage.getObject('regionesOrdenables');
-		}
-		
 		$('#boton-listar-beneficios').removeClass('ui-disabled')
 		$('#boton-listar-sucursales').removeClass('ui-disabled')
 		$('#boton-listar-cajeros').removeClass('ui-disabled')
