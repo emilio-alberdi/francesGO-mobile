@@ -2467,7 +2467,7 @@
 		
 		$("#ver-sucursal-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
 		
-		$("#ver-sucursal-title").append("<span><h1>" + sucursal.nombre + "</h1></span>")
+		$("#ver-sucursal-title").append("<span class='float' ><h1>" + sucursal.nombre + "</h1></span>")
 		
 		$("#ver-sucursal-title").append("<span class='rigth-sucursal'>" +distance+"KM"+"</span>")
 	
@@ -3214,7 +3214,7 @@
 		
 		$("#ver-cajero-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
 		
-		$("#ver-cajero-title").append("<span><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : 'BBVA Frances') + "</h1></span>")
+		$("#ver-cajero-title").append("<span class='float'><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : 'BBVA Frances') + "</h1></span>")
 	
 		$("#ver-cajero-title").append("<span class='rigth-sucursal'>" + distance +"km"+"</span>")
 		
