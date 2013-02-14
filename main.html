@@ -7,6 +7,7 @@
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
     <meta name="HandheldFriendly" content="True" />
 	<meta name="x-blackberry-defaultHoverEffect" content="true" /> 
+	<link rel="stylesheet" href="assets/stylesheets/theme.css" />
 	<link rel="stylesheet" href="assets/stylesheets/jquery.mobile-1.2.0.css" />
     <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
     <link rel="stylesheet" href="assets/stylesheets/css/themes/francesgobeneficios.min.css" />
@@ -254,26 +255,26 @@
           <tbody>
           	<tr>
           		<td>
-          			<label data-mini='true' for='registracion-tiposDocumento'>DNI</label></td>
+          			<label data-mini='true' for='registracion-tiposDocumento'>DNI</label> <span> *</span> </td>
           			<td>
           				<select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
               				<option data-placeholder="true" value="-1">Seleccionar...</option>
             				</select>
             		</td>
             	<td>
-            		<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /><span>*</span>
+            		<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" />
             	</td> 
             </tr>
           </tbody>
           </table>
           </div>
           <div data-mini='true' data-role='fieldcontain'>
-            <label data-mini='true' for='registracion-nombre'>Nombre</label>
-            <input data-mini='true' id='registracion-nombre' name='nombre' type='text' value='' class="required" /><span>*</span>
+            <label data-mini='true' for='registracion-nombre'>Nombre *</label>
+            <input data-mini='true' id='registracion-nombre' name='nombre' type='text' value='' class="required" />
           </div>
           <div data-role='fieldcontain'>
-            <label data-mini='true' for='registracion-apellido'>Apellido</label>
-            <input data-mini='true' id='registracion-apellido' name='apellido' type='text' value='' class="required" /><span>*</span>
+            <label data-mini='true' for='registracion-apellido'>Apellido *</label> 
+            <input data-mini='true' id='registracion-apellido' name='apellido' type='text' value='' class="required" />
           </div>
           <div data-role='fieldcontain'>
           	<h3>Número celular</h3>
@@ -281,30 +282,31 @@
 	          <tbody>
 	          <tr><td> <label data-mini='true' for='registracion-codigoAreaCelular'>Código Area</label></td>
 	          <td><input data-mini='true' id='registracion-codigoAreaCelular' name='codigoAreaCelular' type='number' value='' max="4" maxlength="4" placeholder="Cod Area" class="required" /></td>
-	          <td> <label data-mini='true' for='registracion-numeroCelular'>Número:</label></td>
-	          <td><input data-mini='true' id='registracion-numeroCelular' name='numeroCelular' type='number' value='' max="8" maxlength="8" placeholder="Número" class="required" /></td><span>*</span> </tr>
+	          <td> <label data-mini='true' for='registracion-numeroCelular'>Número: *</label> </td>
+	          <td><input data-mini='true' id='registracion-numeroCelular' name='numeroCelular' type='number' value='' max="8" maxlength="8" placeholder="Número" class="required" /></td> </tr>
 	          </tbody>
 	          </table>
 	       </div>
           <div data-role='fieldcontain'>
-            <label class='select' for='registracion-operadorCelular'>Compañía Celular</label>
+            <label class='select' for='registracion-operadorCelular'>Compañía Celular *</label>
             <select id='registracion-operadorCelular' name='operadorCelular' data-native-menu="false" class="required" >
               <option data-placeholder="true">Seleccionar...</option>
                  
-            </select><span>*</span>
+            </select>
           </div>
           <div data-role='fieldcontain'>
             <h3>Preferencias</h3>
-            <label class='select' for='registracion-rubro'>Rubro</label>
+            <label class='select' for='registracion-rubro'>Rubro *</label>
             <select id='registracion-rubro' name='rubroUris'   multiple="multiple" data-native-menu="false" >
               <option data-placeholder="true">Seleccionar...</option>
-            </select><span>*</span>
+            </select>
           </div>
+          
           <div data-role='fieldcontain'>
-            <label class='select' for='registracion-regionesOrdenables'>Zona</label>
+            <label class='select' for='registracion-regionesOrdenables'>Zona *</label> 
             <select id='registracion-regionesOrdenables' name='zonaUris' multiple="multiple" data-native-menu="false"  >
             	<option data-placeholder="true">Seleccionar...</option>
-            </select><span>*</span>
+            </select>
           </div>
         </form>
         <div class='submit'>
