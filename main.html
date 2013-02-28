@@ -273,8 +273,8 @@
 <!--           </div> -->
           
           		<div data-mini='true' data-role='fieldcontain'>
-            <label data-mini='true' for='registracion-tiposDocumento'>Documento</label>
-            <select id='registracion-tiposDocumento' data-mini='true' name='tipodoc' data-native-menu="false" class="required" >
+            <label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
+            <select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
           			<option data-placeholder="true" value="-1">Seleccionar..</option>
            	</select>
            	<br/>
@@ -402,17 +402,26 @@
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 
 			    <form id="registracion-baja-form">
-		          <div data-role='fieldcontain'>
+<!-- 		          <div data-role='fieldcontain'> -->
 		          
-		             <table class="registracion">
-			          <tbody>
-			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label></td>
-			          <td><select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  class="required">
-			              <option data-placeholder="true">Seleccionar...</option>
-			            </select></td><td><input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /><span>*</span></td> </tr>
-			          </tbody>
-			          </table>
-		          </div>
+<!-- 		             <table class="registracion"> -->
+<!-- 			          <tbody> -->
+<!-- 			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label></td> -->
+<!-- 			          <td><select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  class="required"> -->
+<!-- 			              <option data-placeholder="true">Seleccionar...</option> -->
+<!-- 			            </select></td><td><input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /><span>*</span></td> </tr> -->
+<!-- 			          </tbody> -->
+<!-- 			          </table> -->
+<!-- 		          </div> -->
+		          
+		          <div data-mini='true' data-role='fieldcontain'>
+            			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
+            			<select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
+          					<option data-placeholder="true" value="-1">Seleccionar..</option>
+           				</select>
+           			<br/>
+           				<input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" />
+          			</div>
 		         </form>  
 	         
 		        <div class='submit'>
@@ -605,8 +614,8 @@
         </div>
         <div class='options'>
 			<br/>
-              <select id='buscar-cajeros-tipoCajero-filter' name='tipoCajero'    >
-            	<option data-placeholder="true" value="-1" >Tipo Cajero</option>
+              <select id='buscar-cajeros-tipoCajero-filter' name='tipoCajero' >
+            	<option data-placeholder="true" value="-1" >Tipo de cajero</option>
               </select>
         </div>
 				

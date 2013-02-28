@@ -3374,7 +3374,7 @@ function processCall(xml,services,processCollection){
 		
 		var filter = cajerosPersistenceService.getFilter();
 		
-		$("#buscar-cajeros-tipoCajero-filter").append("<option data-placeholder='true' value='-1' >Tipo Cajero</option>");
+		$("#buscar-cajeros-tipoCajero-filter").append("<option data-placeholder='true' value='-1' >Tipo de Cajero</option>");
 		
 		tipoCajerosPersistenceService.getCollection(function(tipoCajeros) {
 			tipoCajeros.forEach(function (tipoCajero) {
