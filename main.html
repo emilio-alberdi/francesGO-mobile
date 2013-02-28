@@ -21,7 +21,7 @@
 
     <div class="banner background " data-role='page'  id="menu-principal">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  screen="true" style='position:fixed' >
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-rel="back" data-transition="slide" data-direction="reverse" >Atrás</a>
+<!--         <a data-icon='arrow-l' href='#' onclick='history.back(-1)' class='boton' data-rel="back" data-transition="slide" data-direction="reverse" >Atrás</a> -->
         <h1>Menú principal</h1>
       </div>
         <img src='assets/images/francesGo-logo.png' />
@@ -38,7 +38,7 @@
      
     <div  class="banner background" data-role='page'  id="listar-beneficios">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Menú</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-transition="slide">Menú</a>
         <h1>Beneficios</h1>
         <a  id='beneficios-mapa'>Mapa</a>
       </div>
@@ -76,7 +76,7 @@
      <!-- ********************* menu principal ************************** -->
     <div class="background banner" data-role='page' id="ayuda">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Ayuda</h1>
       </div>
         <div class="content">
@@ -88,7 +88,7 @@
      
          <div class="banner background" data-role='page' id="preferencias">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Preferencias</h1>
       </div>
         <div class="content">
@@ -107,7 +107,7 @@
      
     <div  class= 'banner background' data-role='page' id="ver-beneficio">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#listar-beneficios' data-transition='slide' data-direction='reverse' >Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#listar-beneficios' data-transition='slide' data-direction='reverse' >Atrás</a>
         <h1>Beneficio</h1>
       </div>
       <div id="beneficio-view" class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
@@ -124,7 +124,7 @@
           </p>
           
        </div>
-        <div class='mapa'>
+        <div class='ui-content  show-map' style="height: 50%;width: 100%">
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
         
@@ -149,7 +149,7 @@
      
     <div class="banner background" data-role='page' id="buscar-beneficios">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Beneficios</h1>
       </div>
       <img src='assets/images/logo_francesGo.png' />
@@ -183,7 +183,7 @@
       
      <div class='banner background' data-role='page'  id="beneficio-legales">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' id='back-legales' >Atrás</a>
+        <a data-icon='arrow-l' class='boton' id='back-legales' >Atrás</a>
         <h1>Legales</h1>
       </div>
       <div class='ui-content ui-scrollview-clip show show-benefit' data-role='content' data-scroll='y' role='main'>
@@ -201,7 +201,7 @@
       
       <div data-role='page' class='background' id="object-mapa">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#' onclick='history.back(-1)' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1 id="object-mapa-title" >Beneficio</h1>
       </div>
       <div class='ui-content  show-map' data-role='content' data-scroll='y' role='main' style="height: 100%;width: 100%">
@@ -214,7 +214,7 @@
       <!-- ************************* beneficio mapa -->
       <div data-role='page' class='background' id="objects-mapa">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#' id='back-listar'>Atrás</a>
+        <a data-icon='arrow-l' href='#' class='boton' id='back-listar'>Atrás</a>
         <h1 id="objects-mapa-title" >Beneficios</h1>
       </div>
         <!-- /Contenido -->
@@ -227,7 +227,7 @@
       
   	  <div data-role='page' class='banner background' id="notificacionesSMS">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' href='#menu-principal' class='boton'  data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Avisos de promociones</h1>
       </div>
       
@@ -242,10 +242,11 @@
       
       
        <div data-role='page' class='background' id="registracion">
-      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#notificacionesSMS' data-rel="back" data-transition="slide" data-direction="reverse" >Atrás</a>
-        <h1>Registración SMS</h1>
+      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed'>
+        <a data-icon='arrow-l' href='#notificacionesSMS' data-rel="back" data-transition="slide" data-direction="reverse" class='boton'>Atrás</a>
+        <h1>Registración</h1>
       </div>
+      	<img src='assets/images/logo_francesGo.png'/>
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
         <form id="registracion-form" name="registracion-form">
    
@@ -255,7 +256,7 @@
           <tbody>
           	<tr>
           		<td>
-          			<label data-mini='true' for='registracion-tiposDocumento'>DNI</label> <span> *</span> </td>
+          			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label> <span> *</span> </td>
           			<td>
           				<select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
               				<option data-placeholder="true" value="-1">Seleccionar...</option>
@@ -290,7 +291,7 @@
           <div data-role='fieldcontain'>
             <label class='select' for='registracion-operadorCelular'>Compañía Celular *</label>
             <select id='registracion-operadorCelular' name='operadorCelular' data-native-menu="false" class="required" >
-              <option data-placeholder="true">Seleccionar...</option>
+              <option data-placeholder="true" value='-1'>Seleccionar...</option>
                  
             </select>
           </div>
@@ -298,14 +299,14 @@
             <h3>Preferencias</h3>
             <label class='select' for='registracion-rubro'>Rubro *</label>
             <select id='registracion-rubro' name='rubroUris'   multiple="multiple" data-native-menu="false" >
-              <option data-placeholder="true">Seleccionar...</option>
+              <option data-placeholder="true" value='-1'>Seleccionar...</option>
             </select>
           </div>
           
           <div data-role='fieldcontain'>
             <label class='select' for='registracion-regionesOrdenables'>Zona *</label> 
             <select id='registracion-regionesOrdenables' name='zonaUris' multiple="multiple" data-native-menu="false"  >
-            	<option data-placeholder="true">Seleccionar...</option>
+            	<option data-placeholder="true" value='-1'>Seleccionar...</option>
             </select>
           </div>
         </form>
@@ -318,10 +319,11 @@
       
        <div data-role='page' class='background' id="registracion-confirmation">
 	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-	        <a data-icon='arrow-l' href='#registracion' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
-	        <h1>Confirmación</h1>
+	        <a data-icon='arrow-l' class='boton' href='#registracion' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+	        <h1>Registración</h1>
 	      </div>
 
+			<img src='assets/images/logo_francesGo.png'/>
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 	      
 	           <textarea rows="6" class="terminos ochentapor" readonly="true" >Manifiesto interés en recibir información de las propuestas comerciales que el Banco brinda a sus clientes y presto en este acto mi consentimiento, conforme lo establecido en la ley 25.326 de protección de datos personales, a tenor de lo cual declaro conocer y aceptar, para que mis datos personales integren la base de Banco Francés S.A., otorgando por el presente, autorización expresa para i) el tratamiento automatizado de dichos datos o información y ii) su utilización en relación con la actividad bancaria, financiera, o de servicios actuales o futuros, que desarrolle Banco Francés S.A. o cualquiera de sus subsidiarias o afiliadas.</textarea>
@@ -340,9 +342,27 @@
       
       <div data-role='page' class='background' id="registracion-resultado">
 	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-	        <h1>Registracion SMS</h1>
+	        <h1>Registración</h1>
 	      </div>
+			<img src='assets/images/logo_francesGo.png'/>
+      	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
+	      
+	             <div id="registracion-resultado-message">
+	             
+	             </div>
+			    
+		        <div class='submit'>
+		          <a  data-role='button'  href="#menu-principal" data-transition="slide">Menú Principal</a>
+		        </div>
 
+		  </div>	      
+      </div>
+      
+      <div data-role='page' class='background' id="baja-resultado">
+	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
+	        <h1>Baja</h1>
+	      </div>
+			<img src='assets/images/logo_francesGo.png'/>
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 	      
 	             <div id="registracion-resultado-message">
@@ -361,11 +381,11 @@
 
        <div data-role='page' class='background' id="registracion-baja">
 	      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-	        <a data-icon='arrow-l' href='#notificacionesSMS' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
-	        <h1>Baja envio SMS</h1>
+	        <a data-icon='arrow-l' class='boton' href='#notificacionesSMS' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+	        <h1>Baja</h1>
 	      </div>
 
-
+			<img src='assets/images/logo_francesGo.png'/>
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 
 			    <form id="registracion-baja-form">
@@ -373,7 +393,7 @@
 		          
 		             <table class="registracion">
 			          <tbody>
-			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>DNI</label></td>
+			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label></td>
 			          <td><select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  class="required">
 			              <option data-placeholder="true">Seleccionar...</option>
 			            </select></td><td><input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /><span>*</span></td> </tr>
@@ -384,7 +404,7 @@
 	         
 		        <div class='submit'>
 		        
-		          <a data-role='button'  id='registracion-baja-confirmation-link' href="#registracion-baja-confirmacion" data-rel="dialog" data-transition="slide">Confirmar</a>
+		          <a data-role='button'  id='registracion-baja-confirmation-link' href="#registracion-baja-confirmacion" data-rel="dialog" data-transition="slide">Continuar</a>
 		        </div>
 
 		  </div>	      
@@ -396,12 +416,12 @@
        <div data-role='page' class='background' id="registracion-baja-confirmacion">
 	      <div  data-role='header' data-tap-toggle="false"   >
 <!-- 	        <a data-icon='arrow-l' href='#registracion-baja' data-transition="slide" data-direction=”reverse”>Atrás</a> -->
-	        <h1>Confirmacion baja</h1>
+	        <h1>Baja</h1>
 	      </div>
-
+			<img src='assets/images/logo_francesGo.png'/>
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main' >
 
-				<p>Confirma darse de baja, para no recibir informacion de las promociones via celular</p>	    
+				<p>Confirma darse de baja, para no recibir información de las promociones vía celular</p>	    
 			 
 		        <div class='submit'>
 		          <a id="registracion-baja-confirmacion-send-link" data-role='button' >Darme de baja</a>
@@ -413,7 +433,7 @@
       
      <div class="banner background" data-role='page' id="listar-sucursales">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-transition="slide">Menú</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-transition="slide">Menú</a>
         <h1>Sucursales</h1>
         <a id='sucursales-mapa'>Mapa</a>
       </div>
@@ -445,7 +465,7 @@
  
     <div class="banner background" data-role='page' id="buscar-sucursales">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#' onclick='history.back(-1)' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#' onclick='history.back(-1)' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Sucursales</h1>
       </div>
       <img src='assets/images/logo_francesGo.png' />
@@ -463,9 +483,9 @@
               </fieldset>
             </div>
           </div>
-              <h3>Tipos de Sucursal</h3>
+			<br/>
               <select id="buscar-sucursales-tipoSucursal" name='tipoSucursal'>
-              	<option value='' >Seleccionar</option>
+              	<option value='' >Tipos de Sucursal</option>
               </select>
           </div>
           
@@ -479,7 +499,7 @@
    
     <div data-role='page' class='banner background' id="ver-sucursal">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#listar-sucursales' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#listar-sucursales' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Sucursal</h1>
 <!--         <a id="ver-sucursal-mapa-link2">Mapa</a> -->
       </div>
@@ -502,7 +522,7 @@
           </p>
           
         </div>
-        <div class='mapa'>
+        <div class='ui-content  show-map' style="height: 50%;width: 100%">
           <div class='map' id='ver-sucursal-mapa'></div>
         </div>
         
@@ -519,7 +539,7 @@
          
      <div class="banner background" data-role='page' id="listar-cajeros">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-transition="slide" >Menú</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-transition="slide" >Menú</a>
         <h1>Cajeros</h1>
         <a id='cajeros-mapa'>Mapa</a>
       </div>
@@ -556,7 +576,7 @@
  
     <div data-role='page' class='banner background' id="buscar-cajeros">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#menu-principal' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Cajeros</h1>
       </div>
       <img src='assets/images/logo_francesGo.png' />
@@ -571,9 +591,9 @@
           </div>
         </div>
         <div class='options'>
-              <h3>Tipo Cajero</h3>
+			<br/>
               <select id='buscar-cajeros-tipoCajero-filter' name='tipoCajero'    >
-            	<option data-placeholder="true" value="-1" >Seleccionar...</option>
+            	<option data-placeholder="true" value="-1" >Tipo Cajero</option>
               </select>
         </div>
 				
@@ -586,7 +606,7 @@
    
     <div data-role='page' class='banner background' id="ver-cajero">
       <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#listar-cajeros' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+        <a data-icon='arrow-l' class='boton' href='#listar-cajeros' data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
         <h1>Cajero</h1>
 <!--         <a data-theme='f' id="ver-cajero-mapa-link2">Mapa</a> -->
       </div>
@@ -604,7 +624,7 @@
           Tipo cajero: <span id='ver-cajero-tipoCajero'>  </span>
           
         </div>
-        <div class='mapa'>
+        <div class='ui-content  show-map' style="height: 50%;width: 100%">
           <div class='map' id='ver-cajero-mapa'></div>
         </div>
         

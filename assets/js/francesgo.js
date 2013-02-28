@@ -21,15 +21,6 @@
    		navigator.geolocation.getCurrentPosition(savePosition, displayError,{ maximumAge: 600000, timeout: 10000} );
    		
    	}
-   	/*	navigator.geolocation.getCurrentPosition(function(position){
-   			
-   			Preferences.get().latitude = position.coords.latitude;
-   			
-   			Preferences.get().longitude = position.coords.longitude;
-   			
-   			Preferences.update();
-   			
-   		});*/  
 
 	Storage.prototype.setObject = function(key, value) {
 		if (value) {
@@ -64,7 +55,8 @@
 	
 	function savePosition(position) {
 			
-		console.log('save user position')
+		console.log('save user position');
+		
 		Preferences.get().latitude = position.coords.latitude;
 		
 		Preferences.get().longitude = position.coords.longitude;
@@ -80,12 +72,15 @@
 	Preferences.userPreferences;
 
 	Preferences.update = function() {
-		localStorage.setObject('preferences', Preferences.userPreferences)
+		if(supportLocalStorage()){
+			localStorage.setObject('preferences', Preferences.userPreferences)
+		}
 	}
 
 	Preferences.load = function() {
-		
-		Preferences.userPreferences = localStorage.getObject('preferences')
+		if(supportLocalStorage()){
+			Preferences.userPreferences = localStorage.getObject('preferences')
+		}
 	
 		if (!Preferences.userPreferences) {
 			Preferences.userPreferences = new UserPreferences();	
@@ -166,48 +161,75 @@
 		}
 		
 		if (this.options.appendFirst) {
-
-			var persitedCollection = localStorage.getObject(this.options.name);
+			
+			var persitedCollection;
+			
+			if(supportLocalStorage()){
+				persitedCollection = localStorage.getObject(this.options.name);
+			}
 		
 			if (!persitedCollection) {
-				localStorage.setObject(this.options.name, collection);	
+				
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);	
+				}
 			}
 			else {
 				
 				collection =  collection.concat(persitedCollection)
 		
-				localStorage.setObject(this.options.name, collection);	
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);	
+				}
 				
 			}
 			
 		}
 		else if (this.options.appendLast) {
-
-			var persitedCollection = localStorage.getObject(this.options.name);
+			
+			var persitedCollection ;
+			
+			if(supportLocalStorage()){
+				persitedCollection = localStorage.getObject(this.options.name);
+			}
 		
 			if (!persitedCollection) {
-				localStorage.setObject(this.options.name, collection);	
+				
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);	
+				}
 			}
 			else {
 		
 				collection =  persitedCollection.concat(collection)
 		
-				localStorage.setObject(this.options.name, collection);	
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);	
+					
+				}
 				
 			}
 			
 		}
 		else if (this.options.merge) {
-			var persistedCollection = localStorage.getObject(this.options.name);
+			
+			var persistedCollection;
+			
+			if(supportLocalStorage()){
+				persistedCollection = localStorage.getObject(this.options.name);
+				
+			}
 			
 			if (!persistedCollection) {
-				localStorage.setObject(this.options.name, collection);	
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);	
+				}
 			}
 			else {
 				
-				this.sortCollection(persistedCollection)
+				//this.sortCollection(persistedCollection)
 				
-				this.sortCollection(collection)
+				//this.sortCollection(collection)
 				
 				var list = []
 				
@@ -254,19 +276,27 @@
 					}
 					
 				}
-			
-				localStorage.setObject(this.options.name, collection);	
+				
+				if(supportLocalStorage()){
+					
+					localStorage.setObject(this.options.name, collection);	
+				}
 				
 			}
 		
 		}	
 		else {
-			localStorage.setObject(this.options.name, collection);
+			if(supportLocalStorage()){
+				localStorage.setObject(this.options.name, collection);
+				
+			}
 		}
 		
 		if (this.options.maxItems && this.options.maxItems < collection.length) {
 			
-			localStorage.setObject(this.options.name, collection.slice(0, this.options.maxItems));
+			if(supportLocalStorage()){
+				localStorage.setObject(this.options.name, collection.slice(0, this.options.maxItems));
+			}
 			
 		}
 		
@@ -283,7 +313,10 @@
 		
 		}
 		
-		localStorage.setObject(this.options.name + '-metadata', {lastUpdate:new Date(), expirationDate:expirationDays});
+		if(supportLocalStorage()){
+			localStorage.setObject(this.options.name + '-metadata', {lastUpdate:new Date(), expirationDate:expirationDays});
+			
+		}
 		
 		console.log('store data: ', collection);
 		
@@ -365,8 +398,12 @@
 			return value;
 		}
 		else {
-		
-			var collection = localStorage.getObject(this.options.name);
+
+			var collection;
+			if(supportLocalStorage()){
+				collection = localStorage.getObject(this.options.name);
+				
+			}
 			
 			if (!collection) {
 				
@@ -397,8 +434,11 @@
 			this.collectionCache[getById(item)] = item
 		}
 		else {
-		
-			var collection = localStorage.getObject(this.options.name);
+
+			var collection;
+			if(supportLocalStorage()){
+				collection = localStorage.getObject(this.options.name);
+			}
 			
 			this.createCache(collection)
 			
@@ -416,29 +456,39 @@
 			
 		}
 		
-		this.sortCollection(list)
-		
-		localStorage.setObject(this.options.name, list);
+		//this.sortCollection(list)
+		if(supportLocalStorage()){
+			localStorage.setObject(this.options.name, list);
+		}
 	}
 	
 	PersistService.prototype.getFilter = function() {
 
-		return localStorage.getObject(this.options.name + "-filter");
+		if(supportLocalStorage()){
+			return localStorage.getObject(this.options.name + "-filter");
+		}else return null;
 		
 	}	
 
 
 	PersistService.prototype.getFilteredCollection = function(filter, processCollection) {
 
-		localStorage.setObject(this.options.name + "-filter", filter);
+		if(supportLocalStorage()){
+			localStorage.setObject(this.options.name + "-filter", filter);
+			
+		}
 		
 		var persistService = this;
 		
 		console.log('collection: ' + this.options.name + " filter: ", filter );
 		
 		var callback = function (data) {
-	
-			var collection = localStorage.getObject(persistService.options.name);
+			//TODO 
+			var collection;
+			if(supportLocalStorage()){
+				collection = localStorage.getObject(persistService.options.name);
+				
+			}
 			
 			processCollection(collection)
 		}
@@ -469,9 +519,17 @@
 	
 	PersistService.prototype.getCollection = function(processCollection) {
 		
-		var collection = localStorage.getObject(this.options.name);
-
-		var metadataCollection = localStorage.getObject(this.options.name + "-metadata");
+		var collection ;
+		if(supportLocalStorage()){
+			collection = localStorage.getObject(this.options.name);
+			
+		}
+		
+		var metadataCollection;
+		if(supportLocalStorage()){
+			metadataCollection = localStorage.getObject(this.options.name + "-metadata");
+			
+		}
 		
 		var expired = false;
 		
@@ -488,7 +546,10 @@
 			
 			var callback = function (data) {
 		
-				var collection = localStorage.getObject(persistService.options.name);
+				if(supportLocalStorage()){
+					var collection = localStorage.getObject(persistService.options.name);
+					
+				}
 				
 				processCollection(collection)
 			}
@@ -496,7 +557,10 @@
 			
 			if (this.options.filter ) {
 			
-				var filter = localStorage.getObject(this.options.name + "-filter");
+				if(supportLocalStorage()){
+					var filter = localStorage.getObject(this.options.name + "-filter");
+					
+				}
 				
 				if (!filter) {
 					filter = this.options.emptyFilter();
@@ -579,27 +643,32 @@
 			try {
 				services.forEach(function(persistService) {
 					
-					persistService.loadCollection(data) 
+					persistService.loadCollection(data) ;
 					
 				})
 			
 				processCollection();
+				
+				$.mobile.loading('hide');
 			}
 			catch(e) {
-				console.log('error', e);
+				console.log('error ', e);
 			}
 		}
 		
 		try{
-			var browser = navigator.userAgent;
-			   
-			if (browser.indexOf("BlackBerry") >= 0  ){
-				
+//			var browser = navigator.userAgent;
+//			   
+//			if (browser.indexOf("BlackBerry") >= 0  ){
+//				
 				var path = this.options.service;
-					
-				callFilterForBlackBerry(path,data, processCollection,services);
+//					
+//				alert(path);
+//				 console.log(data);
+//				callFilterForBlackBerry(path,data, processCollection,services);
+//				
+//			}else{
 				
-			}else{
 				if(data.zonas){
 					data.zonas = data.zonas.toString(); 
 				}
@@ -607,12 +676,13 @@
 					data.rubros = data.rubros.toString();
 				}
 	
+				checkNavigator(path, data, processCollection, services);
+
 				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 					alert("error on: " + textStatus + ", "+ errorThrown);  
 					
 					console.log(textStatus, errorThrown);
 				}});
-			}
 			
 			$.mobile.loading('show');
 			
@@ -621,73 +691,63 @@
 		}
 	}
 
-	function callFilterForBlackBerry(path, data, processCollection,services){
-		var url;
-		
-		try{
-			url = path
-			
-			var parameters = createParameters(data);
-			
-			console.log("url "+ url);
-		}catch(e){
-			console.log("error on " + e);
-		}
-		
-		var xmlhttp = createXMLHTTPRequest();
-		
-		if (xmlhttp!=null){
-			
-			xmlhttp.overrideMimeType('application/json');
-			
-			xmlhttp.open("POST",url,true);
-			
-			xmlhttp.send(parameters);
-		
-		}else {
-		  return;
-		}
-		   
-		xmlhttp.onreadystatechange = function (){
-			proccessCall(xmlhttp,services,processCollection);
+	function supportLocalStorage(){
+		if(localStorage){
+			return true;
+		}else{
+			return false;
 		}
 	}
 	
-	function createParameters(data){
+function checkNavigator(path, postData, processCollection, services){
 		
-		var url = "?";
-		
-		if(data.searchText){
-			url += "searchText=" + data.searchText+"&" ;
-		}
-		if(data.latitude){
-			url += "latitude="+Preferences.get().latitude+"&" ;
-		}else if(data.latitud){
-			url += "latitud="+data.latitud+"&";
-		}
-		if(data.longitude){
-			url += "longitude="+Preferences.get().longitude+"&";
-		}else if(data.longitud){
-			url += "longitud="+data.longitud+"&";
-		}
-		
-		if(data.zonas){
-			url += "zonas="+data.zonas.toString()+"&" ;
-		}
-		if(data.rubros){
-			url +="rubros="+data.rubros.toString()+"&" ;
-		}
-		if(data.numberFirstIndex) {
-			url +="numberFirstIndex="+ data.numberFirstIndex+"&";
-		}
-		if(data.numberLastIndex) {
-			url +="numberLastIndex="+data.numberLastIndex;
-		}
-		console.log(url);
+		var ua = navigator.userAgent;
 
-		return url;
+		if (ua.indexOf("BlackBerry") >= 0) {
+	        if (ua.indexOf("Version/") >= 0) { // ***User Agent in BlackBerry 6 and BlackBerry 7
+	            Verposition = ua.indexOf("Version/") + 8;
+	            TotLenght = ua.length;
+	            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
+	            callFilterForBlackBerry(path,postData,processCollection, services);
+//	            alert("call $.ajax")
+	        }
+	        else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
+	            var SplitUA = ua.split("/");
+	            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
+	            callFilterForBlackBerry(path,postData,processCollection, services);
+	            return ;
+	        }
+	    }
+
 	}
-	function createXMLHTTPRequest(){
+	
+function callFilterForBlackBerry(path, postData, processCollection,services){
+		try{
+			var req = createXMLHTTPObject();
+			
+			if (!req) return;
+			
+			var method = (postData) ? "POST" : "GET";
+			
+			req.overrideMimeType('application/json');
+
+			console.log(path+"," + method)
+			req.open(method,path,true);
+			
+			if (postData){
+				req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+			}
+			req.onreadystatechange = function () {
+					processCall(req,services,processCollection);
+			};
+			
+			req.send(postData);
+			}catch(e){
+				console.log('error ' + e);
+			}
+	}
+	
+	function createXMLHTTPObject(){
 		
 		var xmlhttp=null;
 		
@@ -706,20 +766,20 @@
 		return xmlhttp;
 	}
 	
-	function proccessCall(xml,services,processCollection){
+function processCall(xml,services,processCollection){
+		console.log('processing call')
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
 		
 			var data = JSON.parse(xml.responseText);
-			
+			console.log(data)
 			try {
 				
 				services.forEach(function(persistService) {
 					
-					persistService.loadCollection(data) 
+					persistService.loadCollection(data) ;
 					
-				})
-			
+				});
 				processCollection();
 			}
 			catch(e) {
@@ -770,7 +830,6 @@
 				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]))
 				
 				if (rubro) {
-					//TODO 
 					if(rubro.logoSmall){
 						image = baseUrl + 'image-resources/'  + rubro.logoSmall;
 					}
@@ -1404,7 +1463,9 @@
 		tiposDocumentoPersistenceService.getCollection(function(tiposDocumento) {
 			try {
 				tiposDocumento.forEach(function (tipoDocumento) {
-					$("#registracion-baja-tiposDocumento").append("<option value='" + tipoDocumento.id + "'>" + tipoDocumento.descripcionLarga +"</option>")
+					if(tipoDocumento.id != 6 && tipoDocumento.id != 7){
+						$("#registracion-baja-tiposDocumento").append("<option value='" + tipoDocumento.id + "'>" + tipoDocumento.descripcionLarga +"</option>")
+					}
 				})
 				
 				$("#registracion-baja-tiposDocumento").selectmenu('refresh', true);
@@ -1496,7 +1557,7 @@
 	$("#registracion-baja-confirmacion-send-link").click(function(e){
 		
 		 var callback = function(data) {
-			 $.mobile.changePage("#registracion-resultado" ,  { transition: "slide"} )
+			 $.mobile.changePage("#baja-resultado" ,  { transition: "slide"} )
 		
 			$.mobile.loading('hide');
 			 
@@ -1530,7 +1591,12 @@
 			 
 			 $.mobile.loading('hide');
 
-			 $("#registracion-resultado-message").text(" Ha sido registrado satisfactoriamente. Le enviaremos un mensaje de bienvenida")
+			 if(data.codigoError){
+				 $("#registracion-resultado-message").text(" Ocurrio un error al momento de la registración: " + data.mensajes[0]);
+			 }else{
+				 $("#registracion-resultado-message").text(" Ha sido registrado satisfactoriamente. Le enviaremos un mensaje de bienvenida");
+				 
+			 }
 		 }
 		 
 		 $.mobile.loading('show');
@@ -1602,7 +1668,29 @@
 			 return false;
 		 }
 	    
-
+		 var operadorCelular = parseInt($('#registracion-operadorCelular').val());
+	
+		if(operadorCelular == -1){
+			alert("Debe seleccionar un operador celular")
+	    	$('#registracion-operadorCelular').css("border", "1px solid red");
+			return false;
+		}
+		
+		var rubros = $('#registracion-rubro').val();
+		
+		if(!rubros || rubros == null){
+			alert("Debe seleccionar por lo menos un rubro")
+	    	$('#registracion-rubro').css("border", "1px solid red");
+			return false;
+		}
+		
+		var zonas = $('#registracion-regionesOrdenables').val();
+		
+		if(!zonas || zonas == null){
+			alert("Debe seleccionar por lo menos una zona")
+	    	$('#registracion-regionesOrdenables').css("border", "1px solid red");
+			return false;
+		}
 	})
 
 	$("#buscar-beneficios").live('pageshow',function() {
@@ -2011,9 +2099,11 @@
 			
 		$('#ver-beneficio-mapa').gmap().one('init',function(event){
 
-			$('#ver-beneficio-mapa').gmap('option', 'zoom', 13);
+			$('#ver-beneficio-mapa').gmap('option', 'zoom', 15);
 			
 			$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
+			
+			$('#ver-beneficio-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
 		})
 		
 		
@@ -2047,14 +2137,6 @@
 			$("#beneficio-legales").trigger({type:"display-data", beneficio:beneficio})
 			
 			
-		})
-		
-		$("#ver-beneficio-mapa-link2,#ver-beneficio-mapa-link").click(function() {
-			
-			$.mobile.changePage("#object-mapa", { transition: "slide"} )
-			
-			$("#object-mapa").trigger({type:"display-data-beneficio", beneficio:beneficio, title:'Beneficio'})
-				
 		})
 		
 		$("#como-llegar-link").unbind();
@@ -2138,7 +2220,7 @@
 		
 			console.log('entro al bind')
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoom', 16);
+			$('#objects-mapa-mapa').gmap('option', 'zoom', 15);
 			
 			zoom = $('#objects-mapa-mapa').gmap('option', 'zoom');
 			
@@ -2146,6 +2228,7 @@
 			
 			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
 			
+			$('#objects-mapa-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
 		})		
 			
 		beneficiosPersistenceService.getCollection(function(collection) {
@@ -2175,7 +2258,7 @@
 					
 					var marker = createMarker(beneficio);
 					
-//					marker.bounds = true;
+					marker.bounds = true;
 					
 					$('#objects-mapa-mapa').gmap('addMarker', marker).click(function() {
 						$('#objects-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
@@ -2208,47 +2291,6 @@
 			
 	})
 
-	$("#object-mapa").bind('display-data-beneficio',function(e) {
-	
-		e.preventDefault();
-		e.stopPropagation();
-		
-		if (e.title) {
-			$("#object-mapa-title").text(e.title)
-		}
-		var beneficio = e.beneficio;
-		
-		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
-
-		$('#object-mapa-mapa').gmap('clear', 'markers');
-		
-		$('#ver-beneficio-mapa').gmap({ 'center': beneficio.latitud + ','+ beneficio.longitud})
-		
-		
-		marker = createMarker(beneficio);
-
-		var currentMarker = {'position':new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude), 'bounds' : true}
-		
-		$('#object-mapa-mapa').gmap('addMarker', currentMarker).click(function() {
-			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': 'posicion actual'}, this);
-		});
-		$('#object-mapa-mapa').gmap('addMarker', marker).click(function() {
-			$('#object-mapa-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
-		});
-		
-		$('#object-mapa-mapa').gmap('addShape', 'Circle', { 
-			'strokeWeight': 0, 
-			'fillColor': "#008595", 
-			'fillOpacity': 0.25, 
-			'bounds': false,
-			'center': new google.maps.LatLng(Preferences.get().latitude,Preferences.get().longitude), 
-			'radius': 7, 
-			'clickable': false 
-		});
-		
-		
-	})
-
 	$("#listar-beneficios").live('pageshow',function() {
 		
 		$("#ul-beneficios").empty();
@@ -2256,6 +2298,7 @@
 		$("#sin-resultados-beneficios").hide();
 		$("#buscar-mas-beneficios").hide();
 		$("#fin-beneficios").hide();
+		
 		
 		var filter = beneficiosPersistenceService.getFilter();
 		
@@ -2283,7 +2326,6 @@
 	
 			})
 		}else{
-			//TODO 
 			$("#buscar-mas-beneficios").hide();
 			
 			filter = {}
@@ -2292,11 +2334,17 @@
 			
 			filter.numberLastIndex = 50;
 
-			filter.latitude = Preferences.get().latitude;
+			if(Preferences.get().latitude != 0 && Preferences.get().longitude != 0){
+				
+				filter.latitude = Preferences.get().latitude;
+				
+				filter.longitude = Preferences.get().longitude;
+
+				filter.checkMiUbicacion = true;
+			}else{
+				filter.checkMiUbicacion = false;
+			}
 			
-			filter.longitude = Preferences.get().longitude;
-			
-			filter.checkMiUbicacion = true;
 		
 			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
 				
@@ -2468,7 +2516,7 @@
 		
 		$("#ver-sucursal-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
 		
-		$("#ver-sucursal-title").append("<span class='float' ><h1>" + sucursal.nombre + "</h1></span>")
+		$("#ver-sucursal-title").append("<span class='float-sucursal-cajero' ><h1>" + sucursal.nombre + "</h1></span>")
 		
 		$("#ver-sucursal-title").append("<span class='rigth-sucursal'>" +distance+"KM"+"</span>")
 	
@@ -2484,13 +2532,11 @@
 		
 		$('#ver-sucursal-mapa').gmap().one('init',function(event){
 
-			console.log('entro al bind')
-			
-			$('#ver-sucursal-mapa').gmap('option', 'zoom', 13);
-			
-			console.log('zoom del mapa: ' + $('#ver-sucursal-mapa').gmap('option', 'zoom'));
+			$('#ver-sucursal-mapa').gmap('option', 'zoom', 15);
 			
 			$('#ver-sucursal-mapa').gmap('option', 'center', new google.maps.LatLng(sucursal.latitud , sucursal.longitud));
+			
+			$('#ver-sucursal-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
 		})
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
@@ -3215,7 +3261,7 @@
 		
 		$("#ver-cajero-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
 		
-		$("#ver-cajero-title").append("<span class='float'><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : 'BBVA Frances') + "</h1></span>")
+		$("#ver-cajero-title").append("<span class='float-sucursal-cajero'><h1>" + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : 'BBVA Frances') + "</h1></span>")
 	
 		$("#ver-cajero-title").append("<span class='rigth-sucursal'>" + distance +"km"+"</span>")
 		
@@ -3229,11 +3275,11 @@
 
 			console.log('entro al bind')
 			
-			$('#ver-cajero-mapa').gmap('option', 'zoom', 13);
-			
-			console.log('zoom del mapa: ' + $('#ver-cajero-mapa').gmap('option', 'zoom'));
+			$('#ver-cajero-mapa').gmap('option', 'zoom', 15);
 			
 			$('#ver-cajero-mapa').gmap('option', 'center', new google.maps.LatLng(cajero.latitud , cajero.longitud));
+			
+			$('#ver-cajero-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
 		})
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
@@ -3328,7 +3374,7 @@
 		
 		var filter = cajerosPersistenceService.getFilter();
 		
-		$("#buscar-cajeros-tipoCajero-filter").append("<option data-placeholder='true' value='-1' >Seleccionar...</option>");
+		$("#buscar-cajeros-tipoCajero-filter").append("<option data-placeholder='true' value='-1' >Tipo Cajero</option>");
 		
 		tipoCajerosPersistenceService.getCollection(function(tipoCajeros) {
 			tipoCajeros.forEach(function (tipoCajero) {
@@ -3497,6 +3543,10 @@
 	
 	$.mobile.loading('show');
 	
+//	beneficiosPersistenceService.remove();
+	
+//	rubrosPersistenceService.remove();
+	
 	zonasPersistenceService.reloadCollection();
 	
 	setTimeout(function(){
@@ -3507,7 +3557,6 @@
 
 		$.mobile.loading('hide');
 	},2500);
-	
 	
 }
 	

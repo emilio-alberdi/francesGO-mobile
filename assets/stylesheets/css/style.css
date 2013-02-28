@@ -25,6 +25,9 @@ img {
 	vertical-align: middle;
 	-ms-interpolation-mode: bicubic
 }
+.map img{
+	max-width:100%
+}
 
 li {
 	display: list-item
@@ -172,8 +175,18 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 	white-space: normal
 }
 
+
+.comercioLogo {
+    float: left;
+    margin-left: 2%;
+}
+
 .background{
 	background: url("../../images/Background_hd.jpg")
+}
+
+.boton{
+	color: #848484;
 }
 .float-rigth-beneficio{
     color: #0088DA;
@@ -181,8 +194,8 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
     font-size: 20px;
     font-weight: normal;
     margin-bottom: 93px;
-    margin-right: 2%;
-    margin-top: 0.5%;
+    margin-right: 11px;
+    margin-top: 1px;
     text-shadow: 1px 1px black;
 }
 .rigth-sucursal{
@@ -190,8 +203,8 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
     float: right;
     font-size: 16px;
     font-weight: normal;
-    margin-right: 2%;
-    margin-top: -2%;
+    margin-right: 15px;
+    margin-top: -31px;
     text-shadow: 1px 1px black;
 }
 .float-left{
@@ -206,9 +219,23 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
     color: #0088DA;
     font-size: 20px;
     font-weight: normal;
-    margin-left: 32%;
-    margin-top: 1px;
+    margin-left: 20%;
+    margin-top: 29px;
+    text-align: center;
+    text-shadow: 1px 1px black
+}
+
+.float-sucursal-cajero{
+    color: #0088DA;
+    float: right;
+    font-size: 20px;
+    font-weight: normal;
+    margin-right: 40%;
+    margin-top: 8px;
+    max-height: 0;
+    text-overflow: inherit;
     text-shadow: 1px 1px black;
+    white-space: pre;
 }
 
  #objects-mapa-mapa { height: 100% }
@@ -251,7 +278,7 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 }
 
 .show-benefit .title-image .title {
-	padding: 10px;
+	padding: 0px;
 /* 	background: rgba(0, 0, 0, 0.8); */
 	width: 100%;
 	background: #E7E6E4;
@@ -275,10 +302,11 @@ p,dl,hr,h1,h2,h3,h4,h5,h6,ol,ul,pre,table,address,fieldset,figure {
 
 
 .imgLogoFrances{
-	 color: transparent;
+	color: transparent;
     font-size: 0;
     margin-left: 0px;
-    vertical-align: middle;
+	display: block;
+    vertical-align: bottom;
 }
 
 .show-benefit .legales a {
