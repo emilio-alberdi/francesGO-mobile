@@ -250,25 +250,38 @@
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
         <form id="registracion-form" name="registracion-form">
    
-          <div data-mini='true' data-role='fieldcontain'>
-          <h3>Datos personales</h3>
-          <table class="registracion">
-          <tbody>
-          	<tr>
-          		<td>
-          			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label> <span> *</span> </td>
-          			<td>
-          				<select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
-              				<option data-placeholder="true" value="-1">Seleccionar...</option>
-            				</select>
-            		</td>
-            	<td>
-            		<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" />
-            	</td> 
-            </tr>
-          </tbody>
-          </table>
+<!--           <div data-mini='true' data-role='fieldcontain'> -->
+<!--           <h3>Datos personales</h3> -->
+<!--           <table class="registracion"> -->
+<!--           <tbody> -->
+<!--           	<tr> -->
+<!--           		<td> -->
+<!--           			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label> <span> *</span> </td> -->
+<!--           			<td> -->
+<!--           				<select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" > -->
+<!--               				<option data-placeholder="true" value="-1">Seleccionar...</option> -->
+<!--             				</select> -->
+<!--             		</td> -->
+<!--             </tr> -->
+<!--             <tr> -->
+<!--             	<td> -->
+<!--             		<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /> -->
+<!--             	</td>  -->
+<!--             </tr> -->
+<!--           </tbody> -->
+<!--           </table> -->
+<!--           </div> -->
+          
+          		<div data-mini='true' data-role='fieldcontain'>
+            <label data-mini='true' for='registracion-tiposDocumento'>Documento</label>
+            <select id='registracion-tiposDocumento' data-mini='true' name='tipodoc' data-native-menu="false" class="required" >
+          			<option data-placeholder="true" value="-1">Seleccionar..</option>
+           	</select>
+           	<br/>
+           	<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" />
           </div>
+          
+          
           <div data-mini='true' data-role='fieldcontain'>
             <label data-mini='true' for='registracion-nombre'>Nombre *</label>
             <input data-mini='true' id='registracion-nombre' name='nombre' type='text' value='' class="required" />
