@@ -1581,7 +1581,7 @@ function processCall(xml,services,processCollection){
 		var aceptaTerminosLegales = $("#aceptaTerminosLegales").is(':checked') ;
 		
 		if (!aceptaTerminosLegales) {
-			alert("Debe aceptar los terminos y condiciones")
+			alert("Debe aceptar los términos y condiciones")
 			return;
 		}
 		
