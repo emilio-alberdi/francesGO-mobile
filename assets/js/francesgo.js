@@ -51,6 +51,7 @@
 			 3:'Request timeout'
 		};
 		console.log("Error: " + errors[error.code]);
+		alert("Error: " + errors[error.code]);
 	}
 	
 	function savePosition(position) {
@@ -227,9 +228,10 @@
 			}
 			else {
 				
-				//this.sortCollection(persistedCollection)
+				//TODO SEE THIS
+				this.sortCollection(persistedCollection)
 				
-				//this.sortCollection(collection)
+				this.sortCollection(collection)
 				
 				var list = []
 				
@@ -455,8 +457,10 @@
 			}
 			
 		}
-		
-		//this.sortCollection(list)
+		//TODO SEE THIS
+		if(!item.subRubros){
+			this.sortCollection(list);
+		}
 		if(supportLocalStorage()){
 			localStorage.setObject(this.options.name, list);
 		}
@@ -483,7 +487,6 @@
 		console.log('collection: ' + this.options.name + " filter: ", filter );
 		
 		var callback = function (data) {
-			//TODO 
 			var collection;
 			if(supportLocalStorage()){
 				collection = localStorage.getObject(persistService.options.name);
@@ -637,6 +640,8 @@
 
 	RemoteService.prototype.callFilter = function(data, processCollection) {
 		
+		alert('comienza el metodo callfilter');
+		
 		var services = this.services;
 		
 		var callback = function (data) {
@@ -691,54 +696,62 @@
 		}
 	}
 
-	function supportLocalStorage(){
-		if(localStorage){
-			return true;
-		}else{
-			return false;
-		}
+function supportLocalStorage(){
+	if(localStorage){
+		return true;
+	}else{
+		alert('no soporta localStorage');
+		return false;
 	}
+}
 	
 function checkNavigator(path, postData, processCollection, services){
 		
-		var ua = navigator.userAgent;
+	alert('checkeando navegador');
+	
+	var ua = navigator.userAgent;
 
-		if (ua.indexOf("BlackBerry") >= 0) {
-	        if (ua.indexOf("Version/") >= 0) { // ***User Agent in BlackBerry 6 and BlackBerry 7
-	            Verposition = ua.indexOf("Version/") + 8;
-	            TotLenght = ua.length;
-	            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
-	            callFilterForBlackBerry(path,postData,processCollection, services);
-//	            alert("call $.ajax")
-	        }
-	        else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
-	            var SplitUA = ua.split("/");
-	            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
-	            callFilterForBlackBerry(path,postData,processCollection, services);
-	            return ;
-	        }
-	    }
+	if (ua.indexOf("BlackBerry") >= 0) {
+        if (ua.indexOf("Version/") >= 0) { // ***User Agent in BlackBerry 6 and BlackBerry 7
+            Verposition = ua.indexOf("Version/") + 8;
+            TotLenght = ua.length;
+            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
+	        callFilterForBlackBerry(path,postData,processCollection, services);
+            alert("realizando la llamada via $.ajax")
+        }
+        else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
+            var SplitUA = ua.split("/");
+            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
+            alert("Realizando la llamada via XMLHTTP REQUEST")
+            callFilterForBlackBerry(path,postData,processCollection, services);
+            return ;
+        }
+    }
 
-	}
+}
 	
 function callFilterForBlackBerry(path, postData, processCollection,services){
 		try{
 			var req = createXMLHTTPObject();
 			
-			if (!req) return;
+			if (!req){
+				alert('Objeto xml no soportado por el browser')
+				return;
+			}
 			
 			var method = (postData) ? "POST" : "GET";
 			
 			req.overrideMimeType('application/json');
 
-			console.log(path+"," + method)
+			alert("path: + "path+", " + method)
+			
 			req.open(method,path,true);
 			
 			if (postData){
 				req.setRequestHeader('Content-type','application/x-www-form-urlencoded');
 			}
 			req.onreadystatechange = function () {
-					processCall(req,services,processCollection);
+				processCall(req,services,processCollection);
 			};
 			
 			req.send(postData);
@@ -767,12 +780,16 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 	}
 	
 function processCall(xml,services,processCollection){
-		console.log('processing call')
+		alert('processing call')
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
-		
+			
+			alert('parseando el objeto xml a json');
+			
 			var data = JSON.parse(xml.responseText);
-			console.log(data)
+			
+			alert(data)
+			
 			try {
 				
 				services.forEach(function(persistService) {
@@ -784,6 +801,7 @@ function processCall(xml,services,processCollection){
 			}
 			catch(e) {
 				console.log('error', e);
+				alert('error', e);
 			}
 		}
 	}
@@ -1078,7 +1096,7 @@ function processCall(xml,services,processCollection){
 													  merge:true,
 													  filterCollection:function(data) { return data.regionesOrdenables[0]},
 													  processData:function(collection) {
-														   collection.splice(0,1, {id:-1, nombre:'Mi ubicacion'})
+														   collection.splice(0,0, {id:-1, nombre:'Mi ubicacion'})
 														   collection.forEach(function(zona) {
 															   zona.selected = false;
 															   zona.sucursalSelected = false; 
@@ -1240,89 +1258,6 @@ function processCall(xml,services,processCollection){
 			$('#'+ pageName + '-mapa').gmap('option', 'zoom', 16)
 		    $('#'+ pageName + '-mapa').gmap('refresh');
 		});		
-		
-	}
-	
-	function callFirstInstanceBeneficio(){
-		var filter = beneficiosPersistenceService.getFilter();
-		if(filter){
-			if(filter.latitude != null && filter.latitude == 0){
-				filter.latitude = Preferences.get().latitude;
-			}
-			if(filter.longitude != null && filter.longitude == 0){
-				filter.longitude =  Preferences.get().longitude;
-			}
-			
-			beneficiosPersistenceService.getCollection(function(collection){
-				
-				$("#ul-beneficios").empty();
-				
-				$.mobile.loading('hide');
-				
-				collection.forEach(function(beneficio) {
-					
-					beneficiosPersistenceService.showBeneficio(beneficio);
-					
-				})
-				
-				if(collection.length == 0){
-					$("#sin-resultados-beneficios").show();
-				}else{
-					if(collection.length == filter.numberLastIndex){
-						$("#buscar-mas-beneficios").show();
-					}else{
-						$("#fin-beneficios").show();
-					}
-				} 
-
-				generateBannerForBeneficios();
-				$("#ul-beneficios").listview('refresh');
-				
-			})
-		}else{
-			filter = {}
-			if(Preferences.get().latitude == 0){
-				setTimeout(function(){callFirstInstanceBeneficio()},2000);
-				return;
-			}else{
-				filter.latitude = Preferences.get().latitude;
-			}
-			if(Preferences.get().longitude == 0){
-				setTimeout(function(){callFirstInstanceBeneficio()},2000);
-				return ;
-			}else{
-				filter.longitude = Preferences.get().longitude;
-			}
-			filter.numberFirstIndex = 1;
-			filter.numberLastIndex = 50;
-			beneficiosPersistenceService.getFilteredCollection(filter, function(collection) {
-				
-				$("#ul-beneficios").empty();
-				
-				$.mobile.loading('hide');
-				
-				collection.forEach(function(beneficio) {
-					
-					beneficiosPersistenceService.showBeneficio(beneficio);
-					
-				})
-				
-				if(collection.length == 0){
-					$("#sin-resultados-beneficios").show();
-				}else{
-					if(collection.length == filter.numberLastIndex){
-						$("#buscar-mas-beneficios").show();
-					}else{
-						$("#fin-beneficios").show();
-					}
-				} 
-				
-				generateBannerForBeneficios();
-				$("#ul-beneficios").listview('refresh');
-			});
-		}
-		
-		
 		
 	}
 	
@@ -1557,11 +1492,17 @@ function processCall(xml,services,processCollection){
 	$("#registracion-baja-confirmacion-send-link").click(function(e){
 		
 		 var callback = function(data) {
+
 			 $.mobile.changePage("#baja-resultado" ,  { transition: "slide"} )
 		
 			$.mobile.loading('hide');
 			 
-			 $("#registracion-resultado-message").text("Para confirmar la baja le enviaremos un SMS al n�mero de celular registrado.")
+			 if(data.message){
+				 $("#baja-registracion-resultado-message").html("<h6>"+data.message+"</h6>");
+			 }else{
+				 $("#baja-registracion-resultado-message").html("<h6> Para confirmar la baja le enviaremos un SMS al número de celular registrado.</h6>");
+				 
+			 }
 		 }
 		 
 		 $.mobile.loading('show');
@@ -1591,10 +1532,10 @@ function processCall(xml,services,processCollection){
 			 
 			 $.mobile.loading('hide');
 
-			 if(data.codigoError){
-				 $("#registracion-resultado-message").text(" Ocurrio un error al momento de la registración: " + data.mensajes[0]);
+			 if(data.message){
+				 $("#registracion-resultado-message").html("<h6>"+data.message+"</h6>");
 			 }else{
-				 $("#registracion-resultado-message").text(" Ha sido registrado satisfactoriamente. Le enviaremos un mensaje de bienvenida");
+				 $("#registracion-resultado-message").html("<h6> Para confirmar esta registración le enviaremos un SMS al número de celular registrado.</h6>");
 				 
 			 }
 		 }
@@ -2102,8 +2043,8 @@ function processCall(xml,services,processCollection){
 			$('#ver-beneficio-mapa').gmap('option', 'zoom', 15);
 			
 			$('#ver-beneficio-mapa').gmap('option', 'center', new google.maps.LatLng(beneficio.latitud , beneficio.longitud));
-			
-			$('#ver-beneficio-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
+
+			$('#ver-beneficio-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.RIGHT_BOTTOM});
 		})
 		
 		
@@ -2228,7 +2169,7 @@ function processCall(xml,services,processCollection){
 			
 			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
 			
-			$('#objects-mapa-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
+			$('#objects-mapa-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.RIGHT_BOTTOM });
 		})		
 			
 		beneficiosPersistenceService.getCollection(function(collection) {
@@ -2536,7 +2477,7 @@ function processCall(xml,services,processCollection){
 			
 			$('#ver-sucursal-mapa').gmap('option', 'center', new google.maps.LatLng(sucursal.latitud , sucursal.longitud));
 			
-			$('#ver-sucursal-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
+			$('#ver-sucursal-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.RIGHT_BOTTOM});
 		})
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
@@ -3279,7 +3220,7 @@ function processCall(xml,services,processCollection){
 			
 			$('#ver-cajero-mapa').gmap('option', 'center', new google.maps.LatLng(cajero.latitud , cajero.longitud));
 			
-			$('#ver-cajero-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.BOTTOM_RIGHT });
+			$('#ver-cajero-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.RIGHT_BOTTOM});
 		})
 		
 		var cajeroInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+  cajero.codigoCajero + " " + ((cajero.sucursalBanco && cajero.sucursalBanco.nombre ) ? cajero.sucursalBanco.nombre : '') +'</h4><div id="bodyContent"><p>' + cajero.domicilio + '</p></div></div>'
@@ -3548,6 +3489,20 @@ function processCall(xml,services,processCollection){
 //	rubrosPersistenceService.remove();
 	
 	zonasPersistenceService.reloadCollection();
+	
+	bannerCollection = localStorage.getObject('banners');
+	
+	if(bannerCollection){
+		console.log('Banners al abrir la aplicacion: ' + bannerCollection.length );
+		if(bannerCollection.length == 0){
+			console.log('No habia banner cargados')
+			bannersPersistenceService.forceReloadCollection();
+			console.log('Banners luego de cargarlos: ' + bannerCollection.length );
+		}
+	}else{
+		console.log('Nunca se cargo la colleccion de banners')
+		bannersPersistenceService.forceReloadCollection();
+	}
 	
 	setTimeout(function(){
 		
