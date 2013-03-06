@@ -26,7 +26,7 @@
 		if (value) {
 			this.setItem(key, JSON.stringify(value));	
 		}	
-	}
+	};
 
 	Storage.prototype.getObject = function(key) {
 	    var value = this.getItem(key);
@@ -34,9 +34,9 @@
 		    return value && JSON.parse(value);
 	    }
 	    catch (e) {
-	    	console.log('parse error', e)
+	    	console.log('parse error', e);
 	    }
-	}
+	};
 	
 	function UserPreferences() {
 		this.theme = '';	
@@ -74,13 +74,13 @@
 
 	Preferences.update = function() {
 		if(supportLocalStorage()){
-			localStorage.setObject('preferences', Preferences.userPreferences)
+			localStorage.setObject('preferences', Preferences.userPreferences);
 		}
-	}
+	};
 
 	Preferences.load = function() {
 		if(supportLocalStorage()){
-			Preferences.userPreferences = localStorage.getObject('preferences')
+			Preferences.userPreferences = localStorage.getObject('preferences');
 		}
 	
 		if (!Preferences.userPreferences) {
@@ -88,7 +88,7 @@
 		}
 		
 		return Preferences.userPreferences;
-	}
+	};
 
 	Preferences.get = function() {
 		
@@ -97,20 +97,20 @@
 		}
 		
 		return Preferences.userPreferences;
-	}
+	};
 	
 	
 	function PersistService(options) {
 		this.options = options;
 		
 		if (!options.remoteService) {
-			this.remoteService = new RemoteService(options)
+			this.remoteService = new RemoteService(options);
 		}
 		else {
-			this.remoteService = options.remoteService 
+			this.remoteService = options.remoteService ;
 		}
 		
-		this.remoteService.add(this)
+		this.remoteService.add(this);
 		
 		this.collectionCache = {};
 		
@@ -123,22 +123,22 @@
 		else {
 			collection.sort(function (item1, item2) {
 				return item1.id - item2.id;
-			})
+			});
 		}
-	}
+	};
 
 	PersistService.prototype.getSort = function() {
 		if (this.options.sortFunction) {
-			return this.options.sortFunction
+			return this.options.sortFunction;
 		}
 		else {
 			var sort = function (item1, item2) {
 				return item1.id - item2.id;
-			}
+			};
 			
 			return sort;
 		}
-	}
+	};
 	
 	PersistService.prototype.loadCollection = function(data) {
 		
@@ -151,14 +151,14 @@
 	
 		console.log('load data: ', data);
 		
-		var collection = data
+		var collection = data;
 		
 		if (this.options.filterCollection) {
-			collection =  this.options.filterCollection(data)
+			collection =  this.options.filterCollection(data);
 		}
 		
 		if (this.options.processData) {
-			this.options.processData(collection)
+			this.options.processData(collection);
 		}
 		
 		if (this.options.appendFirst) {
@@ -177,7 +177,7 @@
 			}
 			else {
 				
-				collection =  collection.concat(persitedCollection)
+				collection =  collection.concat(persitedCollection);
 		
 				if(supportLocalStorage()){
 					localStorage.setObject(this.options.name, collection);	
@@ -188,7 +188,7 @@
 		}
 		else if (this.options.appendLast) {
 			
-			var persitedCollection ;
+			var persitedCollection;
 			
 			if(supportLocalStorage()){
 				persitedCollection = localStorage.getObject(this.options.name);
@@ -202,7 +202,7 @@
 			}
 			else {
 		
-				collection =  persitedCollection.concat(collection)
+				collection =  persitedCollection.concat(collection);
 		
 				if(supportLocalStorage()){
 					localStorage.setObject(this.options.name, collection);	
@@ -228,10 +228,9 @@
 			}
 			else {
 				
-				//TODO SEE THIS
-				this.sortCollection(persistedCollection)
+				this.sortCollection(persistedCollection);
 				
-				this.sortCollection(collection)
+				this.sortCollection(collection);
 				
 				var list = []
 				
@@ -242,16 +241,16 @@
 					var persistedItem = persistedCollection[i]
 					
 					if (counter >= collection.lehgth) {
-						list.push(persistedItem)
+						list.push(persistedItem);
 						continue;
 					}
 					
-					var item = collection[counter]
+					var item = collection[counter];
 					
-					var order = this.getSort(persistedItem, item)
+					var order = this.getSort(persistedItem, item);
 					
 					if (order < 0) {
-						list.push(persistedItem)
+						list.push(persistedItem);
 					   
 						continue;
 						
@@ -259,22 +258,22 @@
 					
 					if (order == 0) {
 						if (this.option.mergeFunction) {
-							list.push(this.option.mergeFunction(persistedItem, item))
+							list.push(this.option.mergeFunction(persistedItem, item));
 						}
 						else {
-							list.push(item)
+							list.push(item);
 						}
 					}
 					
 					while (order > 0 && counter < collection.length) {
 						
-						list.push(item)
+						list.push(item);
 						   
 						counter++;
 						
-						item = collection[counter]
+						item = collection[counter];
 						
-						order = this.getSort(persistedItem, item)
+						order = this.getSort(persistedItem, item);
 					}
 					
 				}
@@ -302,16 +301,16 @@
 			
 		}
 		
-		var expirationDays = null
+		var expirationDays = null;
 		
 		if (this.options.expirationDays) {
 			
-			expirationDays =  new Date()
-			expirationDays.setHours(0)
-			expirationDays.setMinutes(0)
-			expirationDays.setSeconds(0)
+			expirationDays =  new Date();
+			expirationDays.setHours(0);
+			expirationDays.setMinutes(0);
+			expirationDays.setSeconds(0);
 			
-			expirationDays.setTime(expirationDays.getTime() + this.options.expirationDays * 86400000 )
+			expirationDays.setTime(expirationDays.getTime() + this.options.expirationDays * 86400000 );
 		
 		}
 		
@@ -324,35 +323,35 @@
 		
 		return collection;
 
-	}
+	};
 	
 	PersistService.prototype.loadData = function(processCollection, persistService,data) {
 		
 		try {
-			var result =  persistService.loadCollection(data)
+			var result =  persistService.loadCollection(data);
 			
 			if (!result) {
-				console.log('Collection is empty ', this.options.name)
+				console.log('Collection is empty ', this.options.name);
 				return;
 			}
 			
-			this.createCache(result)
+			this.createCache(result);
 			
 			if (processCollection){
 			
-				processCollection(result)
+				processCollection(result);
 			}
 			
 		}
 		catch (e) {
 			console.log('error', e);
 		}
-	}
+	};
 	
     PersistService.prototype.remove = function() {
 		
 		try {
-			localStorage.removeItem(this.options.name)
+			localStorage.removeItem(this.options.name);
 			
 		}
 		catch (e) {
@@ -364,18 +363,18 @@
 		
 		var getById = function(item) {
 			try {
-				return parseInt(item.id)
+				return parseInt(item.id);
 			}
 			catch (e) {
 			} 
-			return item.id
-		}
+			return item.id;
+		};
 		
 		if (this.options.getByIdFunction) {
 			getById = this.options.getByIdFunction
 		}
 		
-		this.collectionCache = {}
+		this.collectionCache = {};
 		
 		var persistService = this;
 		
@@ -385,7 +384,7 @@
 			
 		});
 //		persistService.collectionCache.init = true;
-	}
+	};
 	
 	PersistService.prototype.getById = function(id) {
 		
@@ -413,22 +412,22 @@
 				return;
 			}
 			
-			this.createCache(collection)
+			this.createCache(collection);
 			
 			return this.collectionCache[id];
 			
 		}
 		
-	}
+	};
 	
 	PersistService.prototype.update = function(item) {
 		
 		var getById = function(item) {
-			return item.id
-		}
+			return item.id;
+		};
 		
 		if (this.options.getByIdFunction) {
-			getById = this.options.getByIdFunction
+			getById = this.options.getByIdFunction;
 		}
 		
 		if (this.collectionCache) {
@@ -453,11 +452,10 @@
 		for (property in this.collectionCache) {
 		
 			if(this.collectionCache.hasOwnProperty(property)) {
-				list.push(this.collectionCache[property])	
+				list.push(this.collectionCache[property]);	
 			}
 			
 		}
-		//TODO SEE THIS
 		if(!item.subRubros){
 			this.sortCollection(list);
 		}
@@ -716,13 +714,12 @@ function checkNavigator(path, postData, processCollection, services){
             Verposition = ua.indexOf("Version/") + 8;
             TotLenght = ua.length;
             alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
-	        callFilterForBlackBerry(path,postData,processCollection, services);
-            alert("realizando la llamada via $.ajax")
+            alert("realizando la llamada via $.ajax");
         }
         else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
             var SplitUA = ua.split("/");
             alert("BB OS Version: " + SplitUA[1].substring(0, 3));
-            alert("Realizando la llamada via XMLHTTP REQUEST")
+            alert("Realizando la llamada via XMLHTTP REQUEST");
             callFilterForBlackBerry(path,postData,processCollection, services);
             return ;
         }
@@ -735,7 +732,7 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 			var req = createXMLHTTPObject();
 			
 			if (!req){
-				alert('Objeto xml no soportado por el browser')
+				alert('Objeto xml no soportado por el browser');
 				return;
 			}
 			
@@ -743,7 +740,9 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 			
 			req.overrideMimeType('application/json');
 
-			alert("path: "+ path+", " + method)
+			alert("path: "+ path+", " + method);
+			
+			$.mobile.loading('show');
 			
 			req.open(method,path,true);
 			
@@ -780,9 +779,11 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 	}
 	
 function processCall(xml,services,processCollection){
-		alert('processing call')
+		alert('processing call');
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
+			
+			$.mobile.loading('hide');
 			
 			alert('parseando el objeto xml a json');
 			

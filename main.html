@@ -217,17 +217,17 @@
         <a data-icon='arrow-l' href='#' class='boton' id='back-listar'>Atrás</a>
         <h1 id="objects-mapa-title" >Beneficios</h1>
       </div>
+        <!-- /Contenido data-fullscreen="true"-->
+       <div class='ui-content  show-map'   data-role='content' data-scroll='y' role='main' style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; ">
         <!-- /Contenido -->
-       <div class='ui-content  show-map'  data-fullscreen="true" data-role='content' data-scroll='y' role='main' style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; ">
-        <!-- /Contenido -->
-       	<div class='map' id='objects-mapa-mapa'  data-fullscreen="true" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; "></div>
+       	<div class='map' id='objects-mapa-mapa' style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; "></div>
       </div>
   	  </div>	
       <!-- ************************* beneficios mapa -->
       
   	  <div data-role='page' class='banner background' id="notificacionesSMS">
-      <div data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
-        <a data-icon='arrow-l' href='#menu-principal' class='boton'  data-rel="back" data-transition="slide" data-direction="reverse">Atrás</a>
+      <div  align="center" data-position='fixed' data-role='header' data-tap-toggle="false"  style='position:fixed' >
+        <a data-icon='arrow-l' href='#menu-principal' class='boton'  data-rel="back" data-transition="slide" data-direction="reverse" style='valing:center'>Atrás</a>
         <h1>Avisos de promociones</h1>
       </div>
       
@@ -250,29 +250,7 @@
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
         <form id="registracion-form" name="registracion-form">
    
-<!--           <div data-mini='true' data-role='fieldcontain'> -->
-<!--           <h3>Datos personales</h3> -->
-<!--           <table class="registracion"> -->
-<!--           <tbody> -->
-<!--           	<tr> -->
-<!--           		<td> -->
-<!--           			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label> <span> *</span> </td> -->
-<!--           			<td> -->
-<!--           				<select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" > -->
-<!--               				<option data-placeholder="true" value="-1">Seleccionar...</option> -->
-<!--             				</select> -->
-<!--             		</td> -->
-<!--             </tr> -->
-<!--             <tr> -->
-<!--             	<td> -->
-<!--             		<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /> -->
-<!--             	</td>  -->
-<!--             </tr> -->
-<!--           </tbody> -->
-<!--           </table> -->
-<!--           </div> -->
-          
-          		<div data-mini='true' data-role='fieldcontain'>
+          <div data-mini='true' data-role='fieldcontain'>
             <label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
             <select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
           			<option data-placeholder="true" value="-1">Seleccionar..</option>
@@ -378,7 +356,7 @@
 			<img src='assets/images/logo_francesGo.png'/>
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 	      
-	             <div id="registracion-resultado-message">
+	             <div id="baja-registracion-resultado-message">
 	             
 	             </div>
 			    
@@ -402,17 +380,6 @@
       	  <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
 
 			    <form id="registracion-baja-form">
-<!-- 		          <div data-role='fieldcontain'> -->
-		          
-<!-- 		             <table class="registracion"> -->
-<!-- 			          <tbody> -->
-<!-- 			          <tr><td><label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label></td> -->
-<!-- 			          <td><select id='registracion-baja-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false"  class="required"> -->
-<!-- 			              <option data-placeholder="true">Seleccionar...</option> -->
-<!-- 			            </select></td><td><input data-mini='true' id='registracion-baja-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /><span>*</span></td> </tr> -->
-<!-- 			          </tbody> -->
-<!-- 			          </table> -->
-<!-- 		          </div> -->
 		          
 		          <div data-mini='true' data-role='fieldcontain'>
             			<label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
