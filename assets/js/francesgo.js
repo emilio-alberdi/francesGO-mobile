@@ -743,7 +743,7 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 			
 			req.overrideMimeType('application/json');
 
-			alert("path: + "path+", " + method)
+			alert("path: "+ path+", " + method)
 			
 			req.open(method,path,true);
 			
