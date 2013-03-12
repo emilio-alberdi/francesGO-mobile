@@ -2737,7 +2737,7 @@ function processCall(xml,services,processCollection){
 				}
 		
 			})
-			$("#buscar-sucursales-tipoSucursal").html("<option value='P'> Personas </option>");
+			$("#buscar-sucursales-tipoSucursal").append("<option value='P'> Personas </option>");
 			$("#buscar-sucursales-tipoSucursal").append("<option value='E'> Empresas </option>");
 			
 	})
