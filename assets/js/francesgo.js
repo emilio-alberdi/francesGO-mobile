@@ -638,8 +638,6 @@
 
 	RemoteService.prototype.callFilter = function(data, processCollection) {
 		
-		alert('comienza el metodo callfilter');
-		
 		var services = this.services;
 		
 		var callback = function (data) {
@@ -705,7 +703,7 @@ function supportLocalStorage(){
 	
 function checkNavigator(path, postData, processCollection, services){
 		
-	alert('checkeando navegador');
+//	alert('checkeando navegador');
 	
 	var ua = navigator.userAgent;
 
@@ -713,13 +711,13 @@ function checkNavigator(path, postData, processCollection, services){
         if (ua.indexOf("Version/") >= 0) { // ***User Agent in BlackBerry 6 and BlackBerry 7
             Verposition = ua.indexOf("Version/") + 8;
             TotLenght = ua.length;
-            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
-            alert("realizando la llamada via $.ajax");
+//            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
+//            alert("realizando la llamada via $.ajax");
         }
         else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
             var SplitUA = ua.split("/");
-            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
-            alert("Realizando la llamada via XMLHTTP REQUEST");
+//            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
+//            alert("Realizando la llamada via XMLHTTP REQUEST");
             callFilterForBlackBerry(path,postData,processCollection, services);
             return ;
         }
@@ -740,7 +738,7 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 			
 			req.overrideMimeType('application/json');
 
-			alert("path: "+ path+", " + method);
+//			alert("path: "+ path+", " + method);
 			
 			$.mobile.loading('show');
 			
@@ -779,13 +777,13 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 	}
 	
 function processCall(xml,services,processCollection){
-		alert('processing call');
+//		alert('processing call');
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
 			
 			$.mobile.loading('hide');
 			
-			alert('parseando el objeto xml a json');
+//			alert('parseando el objeto xml a json');
 			
 			var data = JSON.parse(xml.responseText);
 			
