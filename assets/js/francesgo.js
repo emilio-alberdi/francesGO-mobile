@@ -457,6 +457,7 @@
 			
 		}
 		if(!item.subRubros){
+			alert('ordenando lista de ' + item.nombre );
 			this.sortCollection(list);
 		}
 		if(supportLocalStorage()){
