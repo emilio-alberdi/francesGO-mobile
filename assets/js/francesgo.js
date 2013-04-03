@@ -703,8 +703,6 @@ function supportLocalStorage(){
 	
 function checkNavigator(path, postData, processCollection, services){
 		
-//	alert('checkeando navegador');
-	
 	var ua = navigator.userAgent;
 
 	if (ua.indexOf("BlackBerry") >= 0) {
@@ -2481,11 +2479,16 @@ function processCall(xml,services,processCollection){
 		
 		var sucursalInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ sucursal.nombre+'</h4><div id="bodyContent"><p>' + sucursal.domicilio + '</p></div></div>'
 
-		if(sucursal.tipoSucursal == 'P'){
-			var marker = {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true, icon:'assets/images/sucursal.gif'}
-		}else
-			var marker = {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true, icon:'assets/images/sucursal-empresa.gif'}
-		
+		try{
+			
+			if(sucursal.tipoSucursal == 'P'){
+				var marker = {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true, icon:'assets/images/sucursal.gif'}
+			}else
+				var marker = {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true, icon:'assets/images/sucursal-empresa.gif'}
+			
+		}catch(e){
+			alert(e);
+		}
 		$('#ver-sucursal-mapa').gmap('addMarker', marker).click(function() {
 			$('#ver-sucursal-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
 		});
@@ -2735,7 +2738,7 @@ function processCall(xml,services,processCollection){
 				}
 		
 			})
-			$("#buscar-sucursales-tipoSucursal").append("<option value='P'> Personas </option>");
+			$("#buscar-sucursales-tipoSucursal").html("<option value='P'> Personas </option>");
 			$("#buscar-sucursales-tipoSucursal").append("<option value='E'> Empresas </option>");
 			
 	})
