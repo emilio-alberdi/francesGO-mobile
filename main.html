@@ -12,10 +12,12 @@
     <link href='assets/stylesheets/css/themes/francesgo.css' rel='stylesheet' id="theme-css"/>
     <link rel="stylesheet" href="assets/stylesheets/css/themes/francesgobeneficios.min.css" />
     <link href='assets/stylesheets/css/style.css' rel='stylesheet' />
-	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script>
+<!-- 	<script type="text/javascript" src="assets/js/jquery-1.7.1.min.js"></script> -->
+	<script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/francesgo.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
   </head>
   <body>
 
@@ -250,6 +252,19 @@
       <div class='ui-content ui-scrollview-clip' data-role='content' data-scroll='y' role='main'>
         <form id="registracion-form" name="registracion-form">
    			<h3>Datos Personales</h3>
+   			
+   			<div data-mini='true' data-role='fieldcontain'>
+            <label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
+            <select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
+          			<option data-placeholder="true" value="-1">Seleccionar...</option>
+           	</select>
+           	<br/>
+           	<input data-mini='true' id='registracion-dni' type='number' value='' name='numeroDocumento' class="required" maxlength="8" max="8" />
+          </div>
+   			
+   			
+   			
+   			
           <div data-mini='true' data-role='fieldcontain'>
             <label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label>
             <select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" >
@@ -511,9 +526,10 @@
           </p>
           
         </div>
-        <div class='ui-content  show-map' style="height: 50%;width: 100%">
-          <div class='map' id='ver-sucursal-mapa'></div>
+        <div class='ui-content  show-map' style="height: 70%;width: 100%">
+          <div class='map' id='ver-sucursal-mapa' style="width: 100%; height: 100%; "></div>
         </div>
+        
         
          <div class='comoLlegarSucursalesCajeros'>
         	<div class='padding'>
