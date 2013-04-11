@@ -25,7 +25,7 @@
 	<icon src="assets/images/icons/android/icon_72x72.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="assets/images/icons/android/icon_96x96.png" gap:platform="android" gap:density="xhdpi" />
 	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
-	<icon src="assets/images/icons/blackberry/icon_hover.png" gap:platform="blackberry" gap:state="hover"/>
+	<icon src="assets/images/icons/blackberry/icon_48X48.png" gap:platform="blackberry" gap:state="hover"/>
 	
 	<feature id="blackberry.ui.Spinner" />
 	<feature id="blackberry.push" />
@@ -74,7 +74,9 @@
 	
 <!-- 	splash para BB -->
 
-	<gap:splash src="assets/images/splash-blackberry.png" gap:platform="blackberry" />
+	<gap:splash src="assets/images/splash-blackberry-480X360.png" gap:platform="blackberry" width="480" height="360"/>
+	<gap:splash src="assets/images/splash-blackberry-360X480.png" gap:platform="blackberry" width="360" height="480"/>
+	<gap:splash src="assets/images/splash-blackberry-320X240.png" gap:platform="blackberry" width="320" height="240"/>
 
 
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
