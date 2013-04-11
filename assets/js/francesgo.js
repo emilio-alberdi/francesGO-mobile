@@ -118,7 +118,14 @@
 	}
 	PersistService.prototype.sortCollection = function(collection) {
 		if (this.options.sortFunction) {
-			collection.sort(this.options.sortFunction);
+			collection.sort(function (item1,item2){
+				
+				var nameA = item1.nombre.toUpperCase();
+     		   
+     		   	var nameB = item2.nombre.toUpperCase();
+     		   
+     		   return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+			});
 		}
 		else {
 			collection.sort(function (item1, item2) {
@@ -231,7 +238,7 @@
 				this.sortCollection(persistedCollection);
 				
 				this.sortCollection(collection);
-				
+
 				var list = []
 				
 				var counter = 0;
@@ -456,10 +463,10 @@
 			}
 			
 		}
-		if(!item.subRubros){
-			alert('ordenando lista de ' + item.nombre );
-			this.sortCollection(list);
-		}
+		
+			
+		this.sortCollection(list);
+		
 		if(supportLocalStorage()){
 			localStorage.setObject(this.options.name, list);
 		}
@@ -523,6 +530,7 @@
 		
 		var collection ;
 		if(supportLocalStorage()){
+
 			collection = localStorage.getObject(this.options.name);
 			
 		}
@@ -659,32 +667,23 @@
 		}
 		
 		try{
-//			var browser = navigator.userAgent;
-//			   
-//			if (browser.indexOf("BlackBerry") >= 0  ){
-//				
-				var path = this.options.service;
-//					
-//				alert(path);
-//				 console.log(data);
-//				callFilterForBlackBerry(path,data, processCollection,services);
-//				
-//			}else{
-				
-				if(data.zonas){
-					data.zonas = data.zonas.toString(); 
-				}
-				if(data.rubros){
-					data.rubros = data.rubros.toString();
-				}
-	
-				checkNavigator(path, data, processCollection, services);
 
-				$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-					alert("error on: " + textStatus + ", "+ errorThrown);  
-					
-					console.log(textStatus, errorThrown);
-				}});
+			var path = this.options.service;
+
+			if(data.zonas){
+				data.zonas = data.zonas.toString(); 
+			}
+			if(data.rubros){
+				data.rubros = data.rubros.toString();
+			}
+
+			checkNavigator(path, data, processCollection, services);
+
+			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+				alert("error on: " + textStatus + ", "+ errorThrown);  
+				
+				console.log(textStatus, errorThrown);
+			}});
 			
 			$.mobile.loading('show');
 			
@@ -710,13 +709,9 @@ function checkNavigator(path, postData, processCollection, services){
         if (ua.indexOf("Version/") >= 0) { // ***User Agent in BlackBerry 6 and BlackBerry 7
             Verposition = ua.indexOf("Version/") + 8;
             TotLenght = ua.length;
-//            alert("BB OS Version: " + ua.substring(Verposition, Verposition + 3));
-//            alert("realizando la llamada via $.ajax");
         }
         else {// ***User Agent in BlackBerry Device Software 4.2 to 5.0
             var SplitUA = ua.split("/");
-//            alert("BB OS Version: " + SplitUA[1].substring(0, 3));
-//            alert("Realizando la llamada via XMLHTTP REQUEST");
             callFilterForBlackBerry(path,postData,processCollection, services);
             return ;
         }
@@ -737,8 +732,6 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 			
 			req.overrideMimeType('application/json');
 
-//			alert("path: "+ path+", " + method);
-			
 			$.mobile.loading('show');
 			
 			req.open(method,path,true);
@@ -776,17 +769,14 @@ function callFilterForBlackBerry(path, postData, processCollection,services){
 	}
 	
 function processCall(xml,services,processCollection){
-//		alert('processing call');
 		
 		if (xml.readyState == 4 && (xml.status == 200 || window.location.href.indexOf ("http") == - 1)){
 			
 			$.mobile.loading('hide');
 			
-//			alert('parseando el objeto xml a json');
-			
 			var data = JSON.parse(xml.responseText);
 			
-			alert(data)
+			alert(data);
 			
 			try {
 				
@@ -873,7 +863,8 @@ function processCall(xml,services,processCollection){
 									"<p>" + beneficio.mensajeCorto  +"</p>" +
 								"</span>" +
 						"</a>" +
-					"</li>") 
+					"</li>")
+			
 			$("#beneficio-" + beneficio.hash ).data("beneficio", beneficio)
 
 			$("#beneficio-" + beneficio.hash).click(function(e) {
@@ -951,7 +942,7 @@ function processCall(xml,services,processCollection){
 						
 					//	console.log("Sucursal " + sucursal.nombre, distance)
 						
-						$("#" + sucursal.uri + "-distance").text(distance + "km")
+						$("#" + sucursal.uri + "-distance").text(distance + "km");
 					})
 					
 				}
@@ -1041,6 +1032,8 @@ function processCall(xml,services,processCollection){
 	                                                   mergeFunction:function(rubroPersistedItem,rubroItem) {
 	                                                	   rubro.selected = rubroPersistedItem.selected;
 	   													   return rubro;	
+	                                                   },
+	                                                   sortFunction:function(collection){
 	                                                   }
 													   
 	});
@@ -1153,20 +1146,6 @@ function processCall(xml,services,processCollection){
 		  }
     });
 	
-	/*
-	 * var rubro = rubrosPersistenceService.getById(1)
-	 * 
-	 * console.log('start 2', rubrosPersistenceService.getById(1));
-	 * 
-	 * rubro.selected = true;
-	 * 
-	 * rubrosPersistenceService.update(rubro) Preferences.get().theme = 'test'
-	 * 
-	 * Preferences.update();
-	 * 
-	 * console.log(Preferences.get().theme)
-	 */
-
 
 	var defaultMapConfig =  {
         'zoom' : 16,
@@ -1435,7 +1414,9 @@ function processCall(xml,services,processCollection){
 		})
 		
 		rubrosPersistenceService.getCollection(function(collection) {
+			
 			collection.forEach(function(rubro) {
+				
 				$("#registracion-rubro").append("<option value='" + rubro.uri + "'>" + rubro.nombre +"</option>")
 			});
 			$("#registracion-rubro").selectmenu('refresh', true);
@@ -1583,6 +1564,12 @@ function processCall(xml,services,processCollection){
 			 return false;
 		 }
 		 
+		 if(!/^([0-9]{8})+$/.test(dni)){
+			 alert('El número de documento ingresado no es un número válido.');
+			 $('#registracion-dni').css("border", "1px solid red");
+			 return false;
+		 }
+		 
 		 var tipoDni = parseInt($('#registracion-tiposDocumento').val())
 
 		 if(tipoDni == -1){
@@ -1615,6 +1602,13 @@ function processCall(xml,services,processCollection){
 			return false;
 		}
 		
+		var numeroCompleto = operadorCelular + numeroCelular ;
+		if(numeroCompleto.length != 10){
+			alert("Ingrese un número de celular válido");
+			$('#registracion-numeroCelular').css("border", "1px solid red");
+			return false;
+		}
+		
 		var rubros = $('#registracion-rubro').val();
 		
 		if(!rubros || rubros == null){
@@ -1630,6 +1624,8 @@ function processCall(xml,services,processCollection){
 	    	$('#registracion-regionesOrdenables').css("border", "1px solid red");
 			return false;
 		}
+		
+		
 	})
 
 	$("#buscar-beneficios").live('pageshow',function() {
@@ -1652,6 +1648,7 @@ function processCall(xml,services,processCollection){
 		rubrosPersistenceService.getCollection(function(collection) {
 		
 		collection.forEach(function(rubro) {
+			
 			$("#rubros-filter").append("<input id='" + rubro.uri + "' type='checkbox' class='rubro-update' /><label for='" + rubro.uri + "'>" + rubro.nombre +"</label>")
 		
 			$("#" + rubro.uri).prop("rubroId", rubro.id);
@@ -1856,6 +1853,7 @@ function processCall(xml,services,processCollection){
 			filter.numberLastIndex = 50;
 			
 			rubrosPersistenceService.getCollection(function(collection) {
+				
 				filter.rubros = collection.filter(function(rubro) {
 					return rubro.selected
 				}).map(function(rubro) {
@@ -3489,7 +3487,7 @@ function processCall(xml,services,processCollection){
 	
 //	beneficiosPersistenceService.remove();
 	
-//	rubrosPersistenceService.remove();
+	rubrosPersistenceService.reloadCollection();
 	
 	zonasPersistenceService.reloadCollection();
 	
