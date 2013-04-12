@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.5.0">
+		version 	= "0.5.1">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -73,10 +73,10 @@
 	<gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" />
 	
 <!-- 	splash para BB -->
-	<gap:splash src="assets/images/splash-blackberry-480X320.png" gap:platform="blackberry"/>
-	<gap:splash src="assets/images/splash-blackberry-480X360.png" gap:platform="blackberry" width="480" height="360"/>
-	<gap:splash src="assets/images/splash-blackberry-360X480.png" gap:platform="blackberry" width="360" height="480"/>
-	<gap:splash src="assets/images/splash-blackberry-320X240.png" gap:platform="blackberry" width="320" height="240"/>
+
+	<gap:splash src="assets/images/splash-blackberry/splash-blackberry-480X360.png" gap:platform="blackberry" width="480" height="360"/>
+	<gap:splash src="assets/images/splash-blackberry/splash-blackberry-360X480.png" gap:platform="blackberry" width="360" height="480"/>
+	<gap:splash src="assets/images/splash-blackberry/splash-blackberry-320X240.png" gap:platform="blackberry" width="320" height="240"/>
 
 
 	<feature name="http://api.phonegap.com/1.0/geolocation"/>
