@@ -31,9 +31,9 @@
 						<a href='#listar-beneficios' id='boton-listar-beneficios' class='ui-disabled' data-transition="slide"><img src='assets/images/Beneficios-01.png'/></a>
 						<a href='#listar-sucursales' id='boton-listar-sucursales' class='ui-disabled' data-transition="slide"><img src='assets/images/Sucursales-01.png'/></a><br/>
 						<a href='#listar-cajeros' 	 id='boton-listar-cajeros'    class='ui-disabled' data-transition="slide"><img src='assets/images/Cajeros-01.png'/></a>
-						<a href='#notificacionesSMS' data-transition="slide"><img src='assets/images/Avisodepromociones-01.png'/></a><br/>
-						<a href='#preferencias' data-transition="slide"><img src='assets/images/Preferencias-01.png'/></a>
-						<a href='#ayuda' data-transition="slide"><img src='assets/images/Ayuda-01.png'/></a>
+						<a href='#notificacionesSMS' id='boton-notificaciones-sms' data-transition="slide"><img src='assets/images/Avisodepromociones-01.png'/></a><br/>
+						<a href='#preferencias' 	 id='boton-preferencias' data-transition="slide"><img src='assets/images/Preferencias-01.png'/></a>
+						<a href='#ayuda' 			 id='boton-ayuda' data-transition="slide"><img src='assets/images/Ayuda-01.png'/></a>
 					
 		</div>
      </div>
@@ -262,19 +262,6 @@
            	<input data-mini='true' id='registracion-dni' type='number' value='' name='numeroDocumento' class="required" maxlength="8" max="8" />
           </div>
    			
-   			
-   			
-   			
-<!--           <div data-mini='true' data-role='fieldcontain'> -->
-<!--             <label data-mini='true' for='registracion-tiposDocumento'>Tipo de Documento</label> -->
-<!--             <select id='registracion-tiposDocumento' data-mini='true' name='tipoDocumento' data-native-menu="false" class="required" > -->
-<!--           			<option data-placeholder="true" value="-1">Seleccionar..</option> -->
-<!--            	</select> -->
-<!--            	<br/> -->
-<!--            	<input data-mini='true' id='registracion-dni' name='numeroDocumento' type='number' value='' class="required" maxlength="8" max="8" /> -->
-<!--           </div> -->
-          
-          
           <div data-mini='true' data-role='fieldcontain'>
             <label data-mini='true' for='registracion-nombre'>Nombre *</label>
             <input data-mini='true' id='registracion-nombre' name='nombre' type='text' value='' class="required" />
@@ -650,6 +637,9 @@
 	$(document).ready(function () {
 
 		try {
+			if(!navigator.onLine){
+				alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+			}
 			francesGORegisterEvents();	
 		}
 		catch (e) {
