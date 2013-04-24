@@ -57,6 +57,10 @@
 		Preferences.get().latitude = position.coords.latitude;
 		
 		Preferences.get().longitude = position.coords.longitude;
+		
+		alert("Longitud: "+ position.coords.longitude);
+		
+		alert("Latitud:" + position.coords.latitude);
 			
 		Preferences.update();
 	}
