@@ -1,12 +1,9 @@
-   
-
-
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-   	baseUrl = '';
+
    	baseUrl = 'http://192.168.1.118:8080/francesGo2-portal/mobile/';
-   //	baseUrl =  'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-  //		baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+//   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+//   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
    		$.support.cors = true;
@@ -45,12 +42,12 @@
 	
 	function displayError(error) {
 		var errors = {
-			 1:'Permission denied',
-			 2:'Position unavailable',
-			 3:'Request GPS timeout'
+			 1:'La aplicación no tiene los permisos para acceder al GPS',
+			 2:'La posición actual no se encuentra disponible',
+			 3:'GPS desactivado. Por favor activelo'
 		};
-		console.log("Error: " + errors[error.code]);
-		alert("Error: " + errors[error.code]);
+		console.log(errors[error.code]);
+		alert(errors[error.code]);
 	}
 	
 	function savePosition(position) {
@@ -529,9 +526,11 @@
 		
 		var collection ;
 		if(supportLocalStorage()){
-
+			alert('soporta localStorage')
 			collection = localStorage.getObject(this.options.name);
 			
+		}else{
+			alert('no soporta localStorage')
 		}
 		
 		var metadataCollection;
@@ -1568,6 +1567,7 @@ function processCall(xml,services,processCollection){
 	
 	$('#preferencias-eliminar-cache').click(function(e){
 		 if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
+			 alert('llamando al metodo releaseData');
 			 releaseData();
 	     }else{
 	    	 return;
@@ -1628,7 +1628,7 @@ function processCall(xml,services,processCollection){
 			try {
 				tiposDocumento.forEach(function (tipoDocumento) {
 					if(tipoDocumento.id != 6 && tipoDocumento.id != 7){
-						$("#registracion-baja-tiposDocumento").append("<option value='" + tipoDocumento.id + "'>" + tipoDocumento.descripcionLarga +"</option>")
+						$("#registracion-baja-tiposDocumento").append("<option value='" + tipoDocumento.codigoAltamira + "'>" + tipoDocumento.descripcionLarga +"</option>")
 					}
 				})
 				
