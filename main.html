@@ -126,11 +126,12 @@
           </p>
           
        </div>
+       
         <div class='ui-content  show-map' style="height: 50%;width: 100%">
           <div class='map' id='ver-beneficio-mapa'></div>
         </div>
         
-       <div class='legales'>
+        <div class='legales'>
           <div class='padding'>
             <a id='ver-beneficio-legales-link'>Ver Legales</a>
           </div>
@@ -640,6 +641,46 @@
 			if(!navigator.onLine){
 				alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 			}
+			
+			 var screenSize = { 
+			    		width: window.innerWidth || (window.document.documentElement.clientWidth || window.document.body.clientWidth),
+			    		height: window.innerHeight || (window.document.documentElement.clientHeight || window.document.body.clientHeight)
+			    		
+			}
+			    
+		    var mapHeigth = (screenSize.height*45)/100;
+			 
+			 var message = 'Hola mundo';
+			 
+			 var title = "Titulo numero 1";
+			 
+			 var buttonName = "OKAS";
+			 
+			 var callback = function(e){
+				 alert('aca paso algo:S');
+			 }
+			 if(navigator.notification){
+
+				 alert("tiene notificador");
+				 
+				 
+			        navigator.notification.alert(
+			            message,    // message
+			            callback,   // callback
+			            title,      // title
+			            buttonName  // buttonName
+			        );
+
+			    }else{
+	
+			    	alert("no funca el notificador")
+			        alert(message);
+
+			    }
+
+		    
+		    $('.map').css('min-height', mapHeigth+"px");
+			    
 			francesGORegisterEvents();	
 		}
 		catch (e) {
