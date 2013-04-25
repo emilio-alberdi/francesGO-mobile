@@ -1,9 +1,9 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-
- //  	baseUrl = 'http://192.168.1.118:8080/francesGo2-portal/mobile/';
-   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-  // 	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+//   	baseUrl = '';
+   	baseUrl = 'http://192.168.1.107:8080/francesGo2-portal/mobile/';
+//   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+//   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
    		$.support.cors = true;
@@ -58,10 +58,10 @@
 		
 		Preferences.get().longitude = position.coords.longitude;
 		
-		alert("Longitud: "+ position.coords.longitude);
-		
-		alert("Latitud:" + position.coords.latitude);
+		alert("Latitud: " + position.coords.latitude);
 			
+		alert("Longitud: " + position.coords.longitude);
+		
 		Preferences.update();
 	}
 	
@@ -530,7 +530,6 @@
 		
 		var collection ;
 		if(supportLocalStorage()){
-			alert('soporta localStorage')
 			collection = localStorage.getObject(this.options.name);
 			
 		}else{
@@ -1335,8 +1334,24 @@ function processCall(xml,services,processCollection){
 		$("#fin-beneficios").hide();
 		
 		var filter = {}
+		
 		filter.searchText = $("#buscar-beneficios-search").val();
 		
+		var patron = /\w/;
+	    
+		if(filter.searchText && filter.searchText.length > 0){
+			
+			if(!patron.test(filter.searchText)){
+				
+				$("#buscar-beneficios-search").css("border", "1px solid red");   
+				
+				alert('Ingresar solo letras o numeros');
+				
+				return;
+			}
+		}
+	    
+	    
 		filter.numberFirstIndex = 1;
 		filter.numberLastIndex = 50;
 		
@@ -1571,7 +1586,6 @@ function processCall(xml,services,processCollection){
 	
 	$('#preferencias-eliminar-cache').click(function(e){
 		 if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
-			 alert('llamando al metodo releaseData');
 			 releaseData();
 	     }else{
 	    	 return;
@@ -1722,7 +1736,7 @@ function processCall(xml,services,processCollection){
 			 return false;
 		 }
 		 
-		 if(!/^([0-9]{8})+$/.test(dni)){
+		 if(!(/^([0-9])+$/.test(dni) && (dni.toString().length > 4 && dni.toString().length < 9))){
 			 alert('El número de documento ingresado no es un número válido.');
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
@@ -1834,7 +1848,7 @@ function processCall(xml,services,processCollection){
 			 return false;
 		 }
 		 
-		 if(!/^([0-9]{8})+$/.test(dni)){
+		 if(!(/^([0-9])+$/.test(dni) && (dni.toString().length > 4 && dni.toString().length < 9))){
 			 alert('El número de documento ingresado no es un número válido.');
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
@@ -2100,6 +2114,8 @@ function processCall(xml,services,processCollection){
 	$("#buscar-beneficios-link").click(function(e) {
 		
 		try {
+			
+			
 			sendBeneficios();
 			
 		}
@@ -2143,12 +2159,17 @@ function processCall(xml,services,processCollection){
 	$("#ver-beneficio").bind('display-data',function(e) {
 		
 		var beneficio = e.beneficio;
+		
 		var distance;
 		
 		var directions = $('#ver-beneficio-mapa').gmap('get', 'services > DirectionsRenderer');
+		
 		if (directions) {
+			
 			console.log("Ruta al darle 'click' BORRADA OK")
+		
 			directions.setMap(null);
+			
 			directions.setPanel(null);
 		}
 		
@@ -2983,6 +3004,11 @@ function processCall(xml,services,processCollection){
 	$("#buscar-sucursales-link").click(function(e) {
 		try {
 				
+			console.log('validate');
+			
+			var findText = $('#buscar-sucursal-nombre').val();
+			
+			
 			sendSucursales();
 		}catch(e) {
 			console.log("Error on seach", e)
@@ -3103,7 +3129,6 @@ function processCall(xml,services,processCollection){
 	$("#buscar-cajeros-link").click(function(e) {
 		
 		try {
-
 			sendCajeros();
 		}catch(e) {
 			console.log("Error on seach", e)
