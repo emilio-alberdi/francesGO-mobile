@@ -649,12 +649,15 @@
 			}
 			    
 		    var mapHeigth = (screenSize.height*45)/100;
-			 
-		
-
 		    
 		    $('.map').css('min-height', mapHeigth+"px");
-			    
+			
+			if(navigator.onLine){
+					alert('Conectado' )
+				}else{
+					alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+				}
+			
 			francesGORegisterEvents();	
 		}
 		catch (e) {
