@@ -645,11 +645,13 @@
 		
 		$.mobile.loading('show');
 		
+		alert("metodo call");
+		
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
 			  console.log(textStatus, errorThrown);
 			  
-			  alert("error");
+			  alert("error " + this.options.service + " " + textStatus  + " "+ errorThrown );
 			  
 			  if(navigator.onLine){
 				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
@@ -703,12 +705,14 @@
 			checkNavigator(path, data, processCollection, services);
 
 			$.mobile.loading('show');
+			
+			alert("metodo callFilter")
 
 			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 				
 				try{
 					
-					alert("error");
+					alert("error "+ this.options.service + " " + textStatus  + " "+ errorThrown );
 					$.mobile.loading('hide');
 					
 					if(navigator.onLine){
