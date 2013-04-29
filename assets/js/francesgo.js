@@ -649,17 +649,26 @@
 		
 		$.ajax({url:this.options.service, type:'POST', cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 			  
-			  console.log(textStatus, errorThrown);
+			try{
+				
+				console.log(textStatus, errorThrown);
+				
+				alert("error " + this.options.service + " " + textStatus  + " "+ errorThrown );
+				
+				$.mobile.loading('hide');
+				
+				if(navigator.onLine){
+					alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
+				}else{
+					alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+				}
+			}catch(e){
+				alert("error en call: " + e);
+				
+				$.mobile.loading('hide');
+				
+			}
 			  
-			  alert("error " + this.options.service + " " + textStatus  + " "+ errorThrown );
-			  
-			  if(navigator.onLine){
-				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
-			  }else{
-				  alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
-			  }
-			  
-			  $.mobile.loading('hide');
 		}});
 		
 	}
@@ -721,13 +730,16 @@
 						alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 					}
 				}catch(e){
-					alert("otro error" , e);
+					alert("otro error callfilter" + e);
+					$.mobile.loading('hide');
 				}
 			}});
 			
 			
 		}catch(e){
-			console.log('error' + e)
+			console.log('error ' + e);
+			
+			$.mobile.loading('hide');
 		}
 	}
 
