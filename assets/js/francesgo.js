@@ -1,9 +1,9 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-//   	baseUrl = '';
-   	baseUrl = 'http://192.168.1.107:8080/francesGo2-portal/mobile/';
+
+//   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
-//   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
    		$.support.cors = true;
@@ -645,6 +645,8 @@
 			  }else{
 				  alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 			  }
+			  
+			  $.mobile.loading('hide');
 		}});
 		
 	}
@@ -686,15 +688,17 @@
 
 			checkNavigator(path, data, processCollection, services);
 
+			$.mobile.loading('show');
+
 			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 				if(navigator.onLine){
 					  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 				  }else{
 					  alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 				  }
+				$.mobile.loading('hide');
 			}});
 			
-			$.mobile.loading('show');
 			
 		}catch(e){
 			console.log('error' + e)
@@ -1804,6 +1808,7 @@ function processCall(xml,services,processCollection){
 		 $.ajax({url:baseUrl + "mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 
 			 $.mobile.loading('hide');
+			 
 			 if(navigator.onLine){
 				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 			  }else{
@@ -1864,7 +1869,7 @@ function processCall(xml,services,processCollection){
 		 
 		 var nombre = $("#registracion-nombre").val();
 			 
-		 if(!isNaN(nombre)){
+		 if(!/^[a-zA-Z0-9]+$/.test(nombre)){
 			alert("El nombre debe contener solo letras");
 			$('#registracion-nombre').css("border", "1px solid red");
 			return false;
@@ -1872,7 +1877,7 @@ function processCall(xml,services,processCollection){
 		 
 		 var apellido = $("#registracion-apellido").val();
 			 
-		 if(!isNaN(nombre)){
+		 if(!/^[a-zA-Z0-9]+$/.test(apellido)){
 			alert("El apellido debe contener solo letras");
 			$('#registracion-apellido').css("border", "1px solid red");
 			return false;
