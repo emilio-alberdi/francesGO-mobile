@@ -1,6 +1,6 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
- //  	baseUrl = '';
+//   	baseUrl = '';
 //   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
    	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
@@ -494,7 +494,10 @@
 		
 		var callback = function (data) {
 			var collection;
+			
 			alert("success")
+			
+			$.mobile.loading('hide');
 			
 			if(supportLocalStorage()){
 				collection = localStorage.getObject(persistService.options.name);
@@ -703,9 +706,9 @@
 
 			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 				
-			try{
+				try{
 					
-					alert("error" + this.options.service + " " + textStatus+ " " errorThrown);
+					alert("error");
 					$.mobile.loading('hide');
 					
 					if(navigator.onLine){
@@ -1772,9 +1775,10 @@ function processCall(xml,services,processCollection){
 		 var callback = function(data) {
 
 			 alert("success")
-			 $.mobile.changePage("#baja-resultado" ,  { transition: "slide"} )
 		
-			$.mobile.loading('hide');
+			 $.mobile.loading('hide');
+
+			 $.mobile.changePage("#baja-resultado" ,  { transition: "slide"} )
 			 
 			 if(data.message){
 				 $("#baja-registracion-resultado-message").html("<h6>"+data.message+"</h6>");
@@ -1815,9 +1819,9 @@ function processCall(xml,services,processCollection){
 			 
 			 alert("success")
 			 
-			 $.mobile.changePage("#registracion-resultado" , { transition: "slide"} )
-			 
 			 $.mobile.loading('hide');
+			 
+			 $.mobile.changePage("#registracion-resultado" , { transition: "slide"} )
 
 			 if(data.message){
 				 $("#registracion-resultado-message").html("<h6>"+data.message+"</h6>");
