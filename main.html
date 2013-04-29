@@ -650,33 +650,7 @@
 			    
 		    var mapHeigth = (screenSize.height*45)/100;
 			 
-			 var message = 'Hola mundo';
-			 
-			 var title = "Titulo numero 1";
-			 
-			 var buttonName = "OKAS";
-			 
-			 var callback = function(e){
-				 alert('aca paso algo:S');
-			 }
-			 if(navigator.notification){
-
-				 alert("tiene notificador");
-				 
-				 
-			        navigator.notification.alert(
-			            message,    // message
-			            callback,   // callback
-			            title,      // title
-			            buttonName  // buttonName
-			        );
-
-			    }else{
-	
-			    	alert("no funca el notificador")
-			        alert(message);
-
-			    }
+		
 
 		    
 		    $('.map').css('min-height', mapHeigth+"px");
