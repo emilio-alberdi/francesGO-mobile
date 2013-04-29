@@ -1,6 +1,6 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-
+ //  	baseUrl = '';
 //   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
    	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
@@ -494,6 +494,8 @@
 		
 		var callback = function (data) {
 			var collection;
+			alert("success")
+			
 			if(supportLocalStorage()){
 				collection = localStorage.getObject(persistService.options.name);
 				
@@ -557,6 +559,8 @@
 			
 			var callback = function (data) {
 		
+				alert("success")
+				
 				if(supportLocalStorage()){
 					var collection = localStorage.getObject(persistService.options.name);
 					
@@ -618,6 +622,8 @@
 		
 		var callback = function (data) {
 			try {
+				
+				alert("success")
 				$.mobile.loading('hide');				
 				
 				services.forEach(function(persistService) {
@@ -640,6 +646,8 @@
 			  
 			  console.log(textStatus, errorThrown);
 			  
+			  alert("error");
+			  
 			  if(navigator.onLine){
 				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 			  }else{
@@ -659,6 +667,8 @@
 		var callback = function (data) {
 			try {
 				
+				alert("success");
+				
 				$.mobile.loading('hide');
 				
 				services.forEach(function(persistService) {
@@ -671,6 +681,7 @@
 				
 			}
 			catch(e) {
+				alert('error ', e);
 				console.log('error ', e);
 			}
 		}
@@ -691,6 +702,9 @@
 			$.mobile.loading('show');
 
 			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+				
+				alert("error");
+				
 				if(navigator.onLine){
 					  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 				  }else{
@@ -1752,6 +1766,7 @@ function processCall(xml,services,processCollection){
 		
 		 var callback = function(data) {
 
+			 alert("success")
 			 $.mobile.changePage("#baja-resultado" ,  { transition: "slide"} )
 		
 			$.mobile.loading('hide');
@@ -1767,6 +1782,8 @@ function processCall(xml,services,processCollection){
 		 $.mobile.loading('show');
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion-baja.json", type:'POST', data:$('#registracion-baja-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
+			 alert("error");
+			 
 			 if(navigator.onLine){
 				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 			  }else{
@@ -1791,6 +1808,8 @@ function processCall(xml,services,processCollection){
 		
 		 var callback = function(data) {
 			 
+			 alert("success")
+			 
 			 $.mobile.changePage("#registracion-resultado" , { transition: "slide"} )
 			 
 			 $.mobile.loading('hide');
@@ -1807,6 +1826,8 @@ function processCall(xml,services,processCollection){
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 
+			 alert("error");
+			 
 			 $.mobile.loading('hide');
 			 
 			 if(navigator.onLine){
