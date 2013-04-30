@@ -1,6 +1,6 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
-//   	baseUrl = '';
+ //  	baseUrl = '';
 //   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
 //   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
    	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
@@ -143,6 +143,14 @@
 		}
 	};
 	
+	PersistService.prototype.getFilter = function() {
+
+		if(supportLocalStorage()){
+			return localStorage.getObject(this.options.name + "-filter");
+		}else return null;
+		
+	};
+	
 	PersistService.prototype.loadCollection = function(data) {
 		
 		if (!data) {
@@ -189,41 +197,62 @@
 			}
 			
 		}
-		//TODO 
 		else if (this.options.appendLast) {
 			
-			var persitedCollection;
+			var filter = this.getFilter();
 			
-			if(supportLocalStorage()){
-				persitedCollection = localStorage.getObject(this.options.name);
-			}
-		
-			if (!persitedCollection) {
+			if(filter && filter.numberLastIndex && filter.numberLastIndex > 50){
+				
+				var persitedCollection;
+
+				var persitedCollectionConcat ;
 				
 				if(supportLocalStorage()){
-					localStorage.setObject(this.options.name, collection);	
+				
+					persitedCollection = localStorage.getObject(this.options.name);
+					
+					persitedCollectionConcat = localStorage.getObject(this.options.name+"-concat");
+					
+					if(persitedCollection && persitedCollectionConcat ){
+						persitedCollection = persitedCollectionConcat ;
+					}
 				}
-			}
-			else {
-		
-				var collectionToConcat = persitedCollection.concat(collection);
 				
+				if (!persitedCollection) {
+					
+					if(supportLocalStorage()){
+						localStorage.setObject(this.options.name, collection);	
+					}
+				}
+				else {
+					
+					var collectionToConcat = persitedCollection.concat(collection);
+					
 //				collection =  persitedCollection.concat(collection);
-		
-				if(supportLocalStorage()){
-					localStorage.setObject(this.options.name+"-concat", collectionToConcat );	
+					
+					if(supportLocalStorage()){
+						localStorage.setObject(this.options.name+"-concat", collectionToConcat );	
+						
+					}
 					
 				}
-				
+			}else{
+				if(supportLocalStorage()){
+					localStorage.setObject(this.options.name, collection);
+					
+				}
 			}
 			
 		}
 		else if (this.options.merge) {
 			
 			var persistedCollection;
+			var persistedCollectionConcat;
 			
 			if(supportLocalStorage()){
+				
 				persistedCollection = localStorage.getObject(this.options.name);
+				
 				
 			}
 			
@@ -471,14 +500,6 @@
 		}
 	}
 	
-	PersistService.prototype.getFilter = function() {
-
-		if(supportLocalStorage()){
-			return localStorage.getObject(this.options.name + "-filter");
-		}else return null;
-		
-	}	
-
 
 	PersistService.prototype.getFilteredCollection = function(filter, processCollection) {
 
@@ -508,7 +529,7 @@
 				
 			}
 			
-			if(collection && collectionConcat){
+			if(filter && filter.numberLastIndex > 50){
 				collection = persistService.options.filterCollection(data);
 			}
 			
@@ -704,7 +725,7 @@
 				
 			}
 			catch(e) {
-				alert('error ', e);
+				alert('error en callFilter '+ e);
 				console.log('error ', e);
 			}
 		}
