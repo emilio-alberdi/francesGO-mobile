@@ -18,6 +18,7 @@
 	<script type="text/javascript" src="assets/js/jquery-1.8.2.js"></script>
 	<script type="text/javascript" src="assets/js/jquery.mobile-1.2.0.min.js"></script>
 	<script type="text/javascript" src="assets/js/francesgo.js"></script>
+	<script type="text/javascript" src="assets/js/phonegap-1.2.0.js"></script>
   </head>
   <body>
 
@@ -638,9 +639,6 @@
 	$(document).ready(function () {
 
 		try {
-			if(!navigator.onLine){
-				alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
-			}
 			
 			 var screenSize = { 
 			    		width: window.innerWidth || (window.document.documentElement.clientWidth || window.document.body.clientWidth),
@@ -650,19 +648,39 @@
 			    
 		    var mapHeigth = (screenSize.height*45)/100;
 		    
+		    if (mapHeigth < 160){
+		    	
+		    	mapHeigth = 160;
+		    }
+			 
 		    $('.map').css('min-height', mapHeigth+"px");
-			
-			if(navigator.onLine){
-					alert('Conectado' )
-				}else{
-					alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
-				}
-			
+
+// 		    document.addEventListener("deviceready", onDeviceReady, false);
+
+// 			 function onDeviceReady() {
+// 			     checkConnection();
+// 			 }
+	
+// 			 function checkConnection() {
+// 			     var networkState = navigator.network.connection.type;
+	
+// 			     var states = {};
+// 			     states[Connection.UNKNOWN]  = 'Unknown connection';
+// 			     states[Connection.ETHERNET] = 'Ethernet connection';
+// 			     states[Connection.WIFI]     = 'WiFi connection';
+// 			     states[Connection.CELL_2G]  = 'Cell 2G connection';
+// 			     states[Connection.CELL_3G]  = 'Cell 3G connection';
+// 			     states[Connection.CELL_4G]  = 'Cell 4G connection';
+// 			     states[Connection.NONE]     = 'No network connection';
+	
+// 			     alert('Connection type: ' + states[networkState]);
+// 			 }
+
+			    
 			francesGORegisterEvents();	
 		}
 		catch (e) {
 			console.log('start francesGORegisterEvents error' ,e);	
-			alert('start francesGORegisterEvents error ' + e);	
 			
 		}
 		
