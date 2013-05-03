@@ -1,9 +1,9 @@
 	//$("[id^=appFooter]").empty().append($('#footerNav'));
 
- //  	baseUrl = '';
+//   	baseUrl = '';
 //   	baseUrl = 'http://192.168.1.106:8080/francesGo2-portal/mobile/';
-   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
- //  	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
+//   	baseUrl = 'https://bbvawebqa.bancofrances.com.ar/francesGo2-portal/mobile/';
+   	baseUrl = 'http://m.francesgo.com.ar/francesGo2-Portal/mobile/';
    	$( document ).bind( "mobileinit", function() {
 	    // Make your jQuery Mobile framework configuration changes here!
    		$.support.cors = true;
@@ -227,8 +227,6 @@
 				else {
 					
 					var collectionToConcat = persitedCollection.concat(collection);
-					
-//				collection =  persitedCollection.concat(collection);
 					
 					if(supportLocalStorage()){
 						localStorage.setObject(this.options.name+"-concat", collectionToConcat );	
@@ -1749,6 +1747,7 @@ function processCall(xml,services,processCollection){
 	
 	$("#registracion").bind('display-data',function(e) {
 		
+
 		operadoresTelefonicoPersistenceService.getCollection(function(operadoresTelefonico) {
 			
 			operadoresTelefonico.forEach(function (operadorTelefonico) {
@@ -1760,13 +1759,15 @@ function processCall(xml,services,processCollection){
 		})
 		
 		tiposDocumentoPersistenceService.getCollection(function(tiposDocumento) {
+			
 			tiposDocumento.forEach(function (tipoDocumento) {
 				if(tipoDocumento.id != 6 && tipoDocumento.id != 7){
 					$("#registracion-tiposDocumento").append("<option value='" + tipoDocumento.codigoAltamira + "'>" + tipoDocumento.descripcionLarga +"</option>")
 				}
 			})
-	
+
 			$("#registracion-tiposDocumento").selectmenu('refresh', true);
+	
 		})
 		
 		rubrosPersistenceService.getCollection(function(collection) {
@@ -1790,7 +1791,7 @@ function processCall(xml,services,processCollection){
 
 		
 	})
-
+	
 	$("#registracion-baja-confirmation-link").click(function(e){
 		
 		console.log("validate")
