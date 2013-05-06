@@ -1688,6 +1688,28 @@ function processCall(xml,services,processCollection){
 		}
 	})
 	
+	$("#ayuda-link").click(function(e){
+		
+		alert("entro al click con alert trucho")
+		try{
+			var alertDismised = function(data){
+				alert("paso");
+			}
+			var notificationMessage = new Notification();
+			
+			
+			notificationMessage.alert(
+					'Eres el ganador!',     // mensaje (message)
+					alertDismissed,         // función 'callback' (alertCallback)
+					'Game Over',            // titulo (title)
+					'Cerrar'                // nombre del botón (buttonName)
+			);
+		}catch(e){
+			alert(e);
+		}
+		
+	})
+	
 	$('#preferencias-eliminar-cache').click(function(e){
 		 if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
 			 releaseData();
