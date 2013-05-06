@@ -1668,6 +1668,7 @@ function processCall(xml,services,processCollection){
 	registerGMapsToPage('ver-beneficio');
 	
 	$("#ayudar").live("pageshow", function(e){
+
 		
 		try{
 			var alertDismised = function(data){
