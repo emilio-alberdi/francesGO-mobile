@@ -1691,6 +1691,7 @@ function processCall(xml,services,processCollection){
 	$("#ayuda-link").click(function(e){
 		
 		alert("entro al click con alert trucho")
+		
 		try{
 			var alertDismised = function(data){
 				alert("paso");
