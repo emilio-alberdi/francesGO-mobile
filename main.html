@@ -658,15 +658,16 @@
 		    var alertDismised = function(data){
 		    	alert("paso");
 		    }
-		    if(navigator.notification){
-		    	
-		    navigator.notification.alert(
+		    var notificationMessage = new Notification();
+			
+			
+			notificationMessage.alert(
 		    	    'Eres el ganador!',     // mensaje (message)
 		    	    alertDismissed,         // función 'callback' (alertCallback)
 		    	    'Game Over',            // titulo (title)
 		    	    'Cerrar'                // nombre del botón (buttonName)
 		    	    );
-		    }
+		    
 
 // 		    document.addEventListener("deviceready", onDeviceReady, false);
 
