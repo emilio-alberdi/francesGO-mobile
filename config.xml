@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.6.8">
+		version 	= "0.7.1">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -24,8 +24,8 @@
 	<icon src="assets/images/icons/android/icon_48x48.png" gap:platform="android" gap:density="mdpi" />
 	<icon src="assets/images/icons/android/icon_72x72.png" gap:platform="android" gap:density="hdpi" />
 	<icon src="assets/images/icons/android/icon_96x96.png" gap:platform="android" gap:density="xhdpi" />
-	<icon src="assets/images/icons/blackberry/icon.png" gap:platform="blackberry" />
-	<icon src="assets/images/icons/blackberry/icon_48X48.png" gap:platform="blackberry" gap:state="hover"/>
+	<icon src="assets/images/blackberry/icon.png" gap:platform="blackberry" />
+	<icon src="assets/images/blackberry/icon_48X48.png" gap:platform="blackberry" gap:state="hover"/>
 	
 	<feature id="blackberry.ui.Spinner" />
 	<feature id="blackberry.push" />
