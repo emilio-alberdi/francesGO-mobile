@@ -1667,6 +1667,25 @@ function processCall(xml,services,processCollection){
 	registerGMapsToPage('ver-cajero');
 	registerGMapsToPage('ver-beneficio');
 	
+	$("#ayudar").live("pageshow", function(e){
+		
+		try{
+			var alertDismised = function(data){
+				alert("paso");
+			}
+			var notificationMessage = new Notification();
+			
+			
+			notificationMessage.alert(
+					'Eres el ganador!',     // mensaje (message)
+					alertDismissed,         // función 'callback' (alertCallback)
+					'Game Over',            // titulo (title)
+					'Cerrar'                // nombre del botón (buttonName)
+			);
+		}catch(e){
+			alert(e);
+		}
+	})
 	
 	$('#preferencias-eliminar-cache').click(function(e){
 		 if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
