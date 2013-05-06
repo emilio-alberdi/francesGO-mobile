@@ -1,0 +1,1589 @@
+commit 25b51a44760137f8d16e32c2d059c20f1370a0a7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri May 3 15:03:43 2013 -0300
+
+    commit some
+
+commit 5445aac2641e53938a08fd133c7492077bab23e3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri May 3 12:21:30 2013 -0300
+
+    Update francesgo.js
+
+commit 2fe8faaf6ea584b91a7bb124d941b33227b7946e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri May 3 12:20:21 2013 -0300
+
+    Update main.html
+
+commit 354b3b1e7efe1f8aa2e0c691b8b7949326f989b0
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri May 3 12:19:41 2013 -0300
+
+    Update config.xml
+
+commit bf6f0c351e3c877d9e76e66ccc701c8fe0b9e2a8
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 16:14:49 2013 -0300
+
+    Update config.xml
+
+commit 31e3a0856de4d72132a67ea2568536eac87bde7c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 16:14:18 2013 -0300
+
+    Update francesgo.js
+
+commit f2c460b2ac00a5f5c788fdaaf69bf3040d0c298e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 15:27:11 2013 -0300
+
+    Update francesgo.js
+
+commit 71a05405f3185b1042e30d96fc6eeb8f63d94d57
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 15:26:33 2013 -0300
+
+    Update config.xml
+
+commit 5bee6fde7c716d5c8628bba1c309379d0ddea6f3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 12:41:43 2013 -0300
+
+    Update config.xml
+
+commit 4b8fe81aa02bf7665d91cb51b0f032f0d1c5c134
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 12:34:42 2013 -0300
+
+    Update francesgo.js
+
+commit eeb9b13ec461178f83950f4c4c39321fe1f551c3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 30 12:33:52 2013 -0300
+
+    Update main.html
+
+commit f604d778443cf7dfa977f5e37c949e3aba946ce9
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:35:38 2013 -0300
+
+    Update main.html
+
+commit 76020cb69ea32da44c522609bc801a95d126ef81
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:35:03 2013 -0300
+
+    Update main.html
+
+commit 6e8ff302acb3c0fafa239efc182ce7b65862624c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:09:11 2013 -0300
+
+    Update francesgo.js
+
+commit fefb3958c01a84924d4fc0afd3bf08676d7f4fcd
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:08:13 2013 -0300
+
+    Update config.xml
+
+commit 7b3a141da0ba6388f83217a1a489fc711050abf3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:04:04 2013 -0300
+
+    Update config.xml
+
+commit 710a84e9416d394925037070c44992d8796b5448
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 11:01:33 2013 -0300
+
+    Update francesgo.js
+
+commit 2846c03e6d910654dd1f5014d1f6bd2b095fc229
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:52:21 2013 -0300
+
+    Update francesgo.js
+
+commit 7ab9fdb54e42f9826330fab030d0d3348a279c38
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:43:07 2013 -0300
+
+    Update francesgo.js
+
+commit 154a9672d447f35ffd4c5c0e61cbef2d765a556a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:35:48 2013 -0300
+
+    Update main.html
+
+commit f231622ecd1cd4cd1e30345af8f45b7f7a9ef031
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:34:51 2013 -0300
+
+    Update francesgo.js
+
+commit 7b3c5a18fec13455b0e273b3e7499626b5ebc546
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:27:51 2013 -0300
+
+    changed version
+
+commit 4202c33e3b69393c3e6cc569adda902cbb24e0e9
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Apr 29 10:24:21 2013 -0300
+
+    upgrading calls ajax. Hide loading wheel
+
+commit 4a561760201a77fb7393ef86d44824d35a588a40
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 25 15:46:20 2013 -0300
+
+    changed version
+
+commit 60c73263fe53737220d26c882b0ab127db5a0975
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 25 15:45:51 2013 -0300
+
+    added new functionality, for example maps size
+
+commit 7c98eda5d6ecd6a7251a8eebc4a180a6138ac654
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 25 15:44:12 2013 -0300
+
+    Update main.html
+
+commit 731ea2f538581631fce2ff7f4e1d360811000629
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 25 09:58:11 2013 -0300
+
+    Update config.xml
+
+commit dde1cf8d8f665a9878c379c91f070b9f341fe689
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 25 09:57:51 2013 -0300
+
+    Url qa
+
+commit 7e928f9f159619ae28844a391e0e099ed31913c1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 12:20:35 2013 -0300
+
+    Update francesgo.js
+
+commit f71d74bfa710f9af5b2214a0bf8dcb7ad18dc95d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 12:05:22 2013 -0300
+
+    Update francesgo.js
+
+commit 90670793bf76b0b47518053224a011665538e157
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 11:40:51 2013 -0300
+
+    Update config.xml
+
+commit b1bd6bce8d8b12dc261ed7aa571d673bf8196b40
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 11:24:39 2013 -0300
+
+    Update francesgo.js
+
+commit 55d2c5ddfd20387a812a9b928c14fc9c37f0f547
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 09:24:28 2013 -0300
+
+    Update francesgo.js
+
+commit b3b895a2904279aa6fd9de8faacecde78a00191a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 09:23:28 2013 -0300
+
+    Update francesgo.js
+
+commit 81fb37413ba85bd5ba1cb5cab547e09e71a0721c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 09:21:20 2013 -0300
+
+    Update config.xml
+
+commit 17e736f29c7785b25ca00e334d21e7fd7c8fe39d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 08:48:22 2013 -0300
+
+    Update config.xml
+
+commit 296f068963b2072f72ddd67b134efe6c295a2ceb
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 24 08:47:26 2013 -0300
+
+    Update francesgo.js
+
+commit 576a771d018d0b33535ea8906da9593ce6b98e87
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 23 16:42:54 2013 -0300
+
+    Update config.xml
+
+commit ad9e9fd5e58fdb280ef47ae6aad1527931f688b1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 23 10:27:30 2013 -0300
+
+    Update config.xml
+
+commit 267a1f0428ffb7d3dfb7165c0d1898697eb96452
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 23 10:27:12 2013 -0300
+
+    Update francesgo.js
+
+commit 841e6a579f2d1bbc06cdab8f2dda9ca4ac5fb032
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 18 09:44:26 2013 -0300
+
+    Update francesgo.js
+
+commit 2a9bb2ea6185d420a060dfb1379a5f2f07e6d9f8
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 18 09:43:49 2013 -0300
+
+    Update config.xml
+
+commit 1d85384c954c73c5835c7bd041e2b51462155641
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 16 10:34:15 2013 -0300
+
+    changed version
+
+commit 237ecb0ac96d9e94cfaf0458377f849404286e15
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Apr 16 10:27:20 2013 -0300
+
+    fix bug reported in IOS
+
+commit 33cd09db778a1805a2151cc5091ee9de7814d44d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Apr 12 10:21:39 2013 -0300
+
+    changed path to access splash img BB
+
+commit 5f1d95f689eceba53496481be432a1e89ddb3e14
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 11 17:04:11 2013 -0300
+
+    added 1 splash for blackberry
+
+commit d34bb6914c9684065acc5e61771feb9bb4874d50
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 11 16:49:48 2013 -0300
+
+    changed version
+
+commit e379c71be9d17db32d0f29cfe9f711eb71010a8b
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 11 16:48:53 2013 -0300
+
+    added splash image to blackberry
+
+commit 2ae36e51fe97e38fa21c9f4a73e082ee9dc0aa7a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 11 16:00:33 2013 -0300
+
+    fix this bugs:
+    629 - 634
+    reported in redmine
+
+commit ca67bec4f8c1c94dc85dcb2edcfdbfe3af12b35d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Apr 11 09:54:18 2013 -0300
+
+    changed version jquery to 1.8.2 and changed mobile version
+
+commit aec30579764bf1423949bf0505d969453c0eef9c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 3 11:05:01 2013 -0300
+
+    added some alert to test order rubros
+
+commit ce03f0731b3fd3b132d5a376ecda91e1ac4f6dc5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Apr 3 10:36:26 2013 -0300
+
+    added logo and delete alerts
+
+commit 1042c966e8dee5d30aaa60889ed28993c3549443
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 26 13:16:48 2013 -0300
+
+    version changed
+
+commit af3275f99123ce8858b07cb374be3be5706d486d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 26 13:11:04 2013 -0300
+
+    change baseUrl to production
+
+commit 4616c2218aa61648f77427c575358e279873b0e7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 16:34:29 2013 -0300
+
+    change url 	TO QA
+
+commit b614bb5c14e67319e53af137db2dfd56e3036f13
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 16:29:23 2013 -0300
+
+    changed version
+
+commit fcad38c06263ecfbbf6478e2997df5ac039bc895
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 16:28:13 2013 -0300
+
+    commit
+
+commit 5821fb1846be83d76d78755fc5977db9faca3e5a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 11:30:40 2013 -0300
+
+    changed version
+
+commit 0ebf01ff26d20b5a4dcd8e4815ed24179755fd32
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 11:29:49 2013 -0300
+
+    change baseUrl to production
+
+commit c91e4aa524453c92ceb301e9e88e5a93a326d192
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Mar 12 11:08:45 2013 -0300
+
+    commit
+
+commit e5d808d9146dd5776456cc011fbdb4a4df8396a4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 15:47:06 2013 -0300
+
+    change baseUrl to bbva qa
+
+commit 85543d3ef9f949f7ceca5efe43b8ad515837254a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 11:32:34 2013 -0300
+
+    added style for button 'Atras' for all screens.
+
+commit 9d2ddeed4ea0e8666662c8481aaad586806ade42
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 10:03:53 2013 -0300
+
+    added alerts in call xml to test in blackberry 5 and change baseUrl to
+    test
+    local
+
+commit 7d8e3e71e0d28506fefd2675b2487fa53a0a8ae3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 09:58:10 2013 -0300
+
+    change version
+
+commit afc6f993080681dc82d5f01a1bcb1914e660b1b0
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 09:57:08 2013 -0300
+
+    added alerts to test in blackberry 5 and change baseUrl to test local
+
+commit 86e82708acf0986d20abd9c481362fe74679997d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Mar 6 09:55:18 2013 -0300
+
+    added alerts to test in blackberry 5
+
+commit 672570a0973b679d574a0c5339c705a3983082ad
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 17:38:17 2013 -0300
+
+    changed URL to QA
+
+commit 293f696fdd2ccd1010d6e1ce23ce55d1e27fdd8f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 17:28:09 2013 -0300
+
+    cambio de version 0.4.2
+
+commit 926004cd9700975f7ffbdaf765887ce4dc5edf4a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 17:27:27 2013 -0300
+
+    fix errores ortograficos
+
+commit d8e95c3230f5123e75dc36aec1e9c584e4146d34
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 17:12:08 2013 -0300
+
+    version 0.4.1
+
+commit f9a5c87f84be6417afaf86bc6aa8c7e78b542282
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 16:27:10 2013 -0300
+
+    fixed some conflicts and changed version to 0.4.0
+
+commit b35967c75e8fce5780e313d6004d4af7cc8de818
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 28 15:44:23 2013 -0300
+
+    FrancesGo Mobile V-0.3.7
+
+commit 8f567af395451fbd851d6a50b0a615ffb4813d0c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 16:08:52 2013 -0300
+
+    url PRODUCTION
+
+commit 8c670a314dd34e672ab0b454f20254c6018439c7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 16:01:30 2013 -0300
+
+    added line remove into releaseData for sort rubro collection
+
+commit 81f3eeb4f839e1f9de569dfffd27615dc9368b4f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 15:41:47 2013 -0300
+
+    changed baseUrl to qa
+
+commit 66bb1400981f189a0c279abbc759be70fbc457f5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 13:12:35 2013 -0300
+
+    time out
+
+commit aa0998801e9cdd4d3cb93d658cae68ad8f66e728
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 12:43:49 2013 -0300
+
+    changed version
+
+commit 54638cf7db0f8f05a56ddf73a5b9f7859074f103
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 12:43:26 2013 -0300
+
+    added class for visibility
+
+commit c4b757504c529bcd82e100e1938a054b4775227d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 12:42:20 2013 -0300
+
+    added more style
+
+commit 7d001ce23fffaececcf170a59a58be15637d50fc
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 12:29:26 2013 -0300
+
+    added style
+
+commit 6a8c1540a5b123592628671d2ecc882ffbe0d238
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 12:20:25 2013 -0300
+
+    change style
+
+commit 2bbdd67fc73d827d06c0945ce5d202ab56a63a4b
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 10:42:11 2013 -0300
+
+    commit
+
+commit d93d69540ef87402dd62f6fe3397ab1febe56339
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 09:52:26 2013 -0300
+
+    changed version
+
+commit c5bda3c8c3e88155100c1bec3a81adf3ad7f5b4d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Feb 14 09:51:20 2013 -0300
+
+    added method unbind for stop event propagation
+
+commit 90e69bf6bd5064da50a70d51d08a4122e4882bae
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Feb 13 16:10:31 2013 -0300
+
+    migrating version 1.1 to 1.2 jquery mobile
+
+commit 84a3d404448be1585a851eb8fd7a1e3fa32ec5ea
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 30 17:26:35 2013 -0300
+
+    change url to production
+
+commit c386593053681d4f5f767ffe357edc5d066fd775
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 30 16:45:37 2013 -0300
+
+    changed baseUrl to QA
+
+commit 1d59fea774e56e9d0e2cc21b4a4dc7d47f7f1672
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 30 13:24:18 2013 -0300
+
+    clear code framcesgo.js
+
+commit be045f37ae098810f4e20a38ec14b382963956ee
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 30 12:20:45 2013 -0300
+
+    changed version
+
+commit a9e72e3efc3108db434a59a3ac89201963180399
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 30 11:20:17 2013 -0300
+
+    removed alerts and changed to $.ajax call from BlackBerry
+
+commit bfcba8317f87a7023e3e6f258a5c24c0f2d91e26
+Author: Emilio Alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Tue Jan 29 19:24:58 2013 -0300
+
+    Cambio
+
+commit 8f3058e8da52cc91ab38bbafae312ea0fc349a59
+Author: Emilio Alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Tue Jan 29 19:06:46 2013 -0300
+
+    origin attribute
+
+commit f0b2e6a9863b1404ba46bbfdf34871a67926e000
+Author: Emilio Alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Tue Jan 29 18:26:47 2013 -0300
+
+    Change-Id: I6d8e718b2b8e26abee57c7b6c5c6ea46c952a9b6
+
+commit cd9ed4a44b54d8449aeddbc62c064d4bc996ac6a
+Author: Emilio Alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Tue Jan 29 18:04:23 2013 -0300
+
+    1
+
+commit c270004592c3d891922e5e0f8a76f6dae1a79645
+Author: Emilio Alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Tue Jan 29 17:59:20 2013 -0300
+
+    Cambios en la configuracion
+
+commit 59334f99ad11597b93c2f47e7357d9689a4ec999
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:54:46 2013 -0300
+
+    changed call Get to Post
+
+commit dc5bf1f574f8e3584288eaa386344fcbd81f7fa0
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:39:16 2013 -0300
+
+    urlGet
+
+commit 0cb82a92426304a889231a45fb7dbfc7c444f501
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:37:06 2013 -0300
+
+    commit
+
+commit 70c3caac77569b88043c5fa3d20b500d1bd4491f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:32:48 2013 -0300
+
+    changed version number
+
+commit 9185bbdf4602e26f4d006fe3f34cf7eafda2d9b0
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:32:09 2013 -0300
+
+    added method POST in call ajax
+
+commit 5f82da5a69e1af8441f08f67f530bffd316d09e5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 16:27:17 2013 -0300
+
+    changed version
+
+commit b575f6ceff1e27d0cc24e7e2aa0c9cbe2bc8bae2
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 15:45:41 2013 -0300
+
+    change Url
+
+commit 0b06931cbc28d3d47405cd1821f89dca9d92ae90
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 15:42:24 2013 -0300
+
+    changed version
+
+commit 33e3e83a219e59407cbfb28ce859be163d16b176
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 15:38:50 2013 -0300
+
+    added page test.html for test XmlHttpRequest in BlackBerry
+
+commit e4c9905c2b77b7bd462128604bbb0e10d6e9f481
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 13:03:01 2013 -0300
+
+    added div to see data
+
+commit 0858e261c60127ae100d8fe3732956ffd6fb20e8
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 12:20:50 2013 -0300
+
+    ADDED FEATURES
+
+commit e27d978364f286a69fc213e55f62db1a77dc9475
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 11:11:10 2013 -0300
+
+    changed version and author
+
+commit 76f9785fd737ca90353a20d913e2cb3adfbfa4fa
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 10:21:05 2013 -0300
+
+    Added alert
+
+commit eb510a2ac1fd9c560017d869d52634c8ce396f31
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Jan 29 08:40:46 2013 -0300
+
+    change Url to prod
+
+commit adf91ddfb7672920f184e41f2f3c16bc1ab368b5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 17:39:00 2013 -0300
+
+    removing all alerts
+
+commit 8047424d31b45c36983a2d3690f990c10fca1b39
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 17:28:10 2013 -0300
+
+    added alert for see user agent
+
+commit bfb37821fc899a61f5b0efddcf1eda9614468e26
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 17:25:22 2013 -0300
+
+    removing alert
+
+commit 37f78c112fcb643cf3a522a0c5648cad141f1760
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 17:14:20 2013 -0300
+
+    another commit
+
+commit dd89b8f30057421789e6c03917fed299b489b953
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 17:07:55 2013 -0300
+
+    Added more alert
+
+commit 69975ed0895c28e5c5b532d659d1f4b6addb1a59
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 16:58:22 2013 -0300
+
+    added more alert for test
+
+commit e82db3c9b972ee8d7bfd3019b448fe1448d657ca
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 16:51:47 2013 -0300
+
+    change baseUrl to localhost to test
+
+commit 94e0e88088e6e3ede92b634b510f023615526b71
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 16:47:19 2013 -0300
+
+    Added alert for test
+
+commit 964cb5bd8e954ff25cbe91a872a2716294c231eb
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 13:43:48 2013 -0300
+
+    changed version
+
+commit 2b9267e0fbb6ffb767a8eaf02457c2e174f71c05
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 28 13:41:42 2013 -0300
+
+    Added validations and call XmlHttpRequest for BlackBerry
+
+commit 5887bed595d8b31a29a88b95a78fc9c2feee9702
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 25 10:42:46 2013 -0300
+
+    added access and feature in config.xml
+
+commit 34eacf2c382dbcd95756c894f43a813860c8e704
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 25 10:24:09 2013 -0300
+
+    config.xml
+
+commit 4e6a9d1ab2ede25e23ae1f09092cebe994f426b9
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 25 10:06:08 2013 -0300
+
+    add return in function createXMLHTTPRequest
+
+commit c8f2ca56c638f5730f4154c81bde9efa745f4df1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 25 09:39:12 2013 -0300
+
+    added call XMLHTTP for Blackberry
+
+commit 50f25db0a88e6fab6b7dd5e9f007d85b41480791
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 18:18:51 2013 -0300
+
+    asset
+
+commit 783e5166dc3e05a4000db7137b6111003d3ca5d5
+Merge: de1ca16 53c7f7e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 18:14:29 2013 -0300
+
+    asd
+
+commit de1ca16eb2c4c4e20250c5b5ac26eae209796870
+Merge: b7bd42c c3e8f82
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 18:13:45 2013 -0300
+
+    test
+
+commit 53c7f7e079f832a8172a9cc4580e50bbc3fa6935
+Merge: c3e8f82 b7bd42c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 17:48:47 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit c3e8f82d6f87ed26c2003adb84fa6f64a33661d4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 17:48:02 2013 -0300
+
+    config.xml
+
+commit b7bd42cb277a3a986f2c3995564f201f17352c54
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 17:22:00 2013 -0300
+
+    config.xml
+
+commit a964af61b3bb69dadade9e2e5ae8496056ccb977
+Merge: 1945a96 a76ca18
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 17:21:15 2013 -0300
+
+    config.xml
+
+commit 1945a964fe4fca40227d1ff0783683aeac6654ec
+Merge: 70a72e6 07f24ed
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 17:20:35 2013 -0300
+
+    Merge branch 'master' of
+    https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit a76ca18b1a6b23d84e42654edd9f269e898bf53d
+Merge: 07f24ed 70a72e6
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 16:35:00 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit 07f24ed267b4b37c8d05299aad0918ff8c6833b0
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 16:34:31 2013 -0300
+
+    added $.support.cors for test app in BlackBerry
+
+commit 70a72e6b595ee5fde4eb9001a8c7af7ad369e4d1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 16:01:50 2013 -0300
+
+    added $.support.cors for test app in BlackBerry
+
+commit 32b56bc7c0d54343d99095c4b8cbfcdaee040904
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 24 15:36:36 2013 -0300
+
+    changed config.xml to test call to WS from device
+
+commit 86e4207779ac8e05eb4905bfa431b7f6815d4767
+Merge: d8982ec 164132c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 17:24:15 2013 -0300
+
+    change url to production
+
+commit d8982ec5bf1af1556a9606288543ac77579ab087
+Merge: 0b4d895 b59f67e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 17:21:53 2013 -0300
+
+    changed url to production
+
+commit 164132cf4bed77be2d2bd9f88c54c9d40b13b6e9
+Merge: b59f67e 0b4d895
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 17:07:03 2013 -0300
+
+    Merge branch 'master' of
+    https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit b59f67ef3ee901304fa55597a1c406c80fe45aad
+Merge: 561ff57 225d8cf
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 17:02:16 2013 -0300
+
+    added tag for set permissions to request URL in BB
+
+commit 0b4d895886578564c114097a1855e9886a9c3a6b
+Merge: 225d8cf 561ff57
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 16:42:51 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit 225d8cf9f610e2909532d5fae8ba033242cef236
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 16:42:42 2013 -0300
+
+    added tag for set permissions to request URL in BB
+
+commit 561ff572e6f018d08c15d01b42202b541e6499ac
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 15:42:48 2013 -0300
+
+    added tag for compactibility with BB
+
+commit 0f9eb8c72cabdd58337b68ae024cdd2951c29e8c
+Merge: 0098687 6683d48
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 15:40:31 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit 0098687d84a495232a75ceeecff9332fc461a7ba
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 11:58:17 2013 -0300
+
+    Added tag for compactibility with BlackBerry 6+
+
+commit 6683d48853c9619ab5beecb9a1d365e214c96dd2
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 23 11:53:45 2013 -0300
+
+    Added tag for compactibility with BlackBerry 6+
+
+commit 77c1bd7341b0ed96b6f5ca0ee5de5064a1cee835
+Merge: 675249f c2dabd5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:54:52 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit 675249f3ed6380af6e414f6a5b916c87740a10f4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:54:42 2013 -0300
+
+    added validations when a benefict have coords in 0.0
+
+commit c2dabd5161c5300e9a176ce137675c0b8d616d5c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:47:53 2013 -0300
+
+    added validations when a benefict have coords in 0.0
+
+commit 1831ee0a26634527443bafcc977e17b54324458d
+Merge: b1e862e 586d857
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:20:35 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit b1e862ef179d112dcb7346c39237c752842a16e4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:20:20 2013 -0300
+
+    added validations when a benefict have coords in 0.0
+
+commit 586d857c56441dd197185ce6aee7791a3b3d12a4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 17:19:53 2013 -0300
+
+    added validations when a benefict have coords in 0.0
+
+commit f8c49afc89db046800de4a40d30b2855ee57888d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 16:32:36 2013 -0300
+
+    change url to desarrollo
+
+commit 490fafbf4696cfd67b256d17e0dd1651e98c2a0b
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 18 16:11:20 2013 -0300
+
+    added functions in maps
+
+commit 148b610818d8b15e8a461e1c2514148afcaf884d
+Merge: acaa5e4 0976cb4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 17 15:33:01 2013 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit acaa5e40e2a8b04cc2b0bb8abe3d84218766d04f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 17 15:31:19 2013 -0300
+
+    added transictions, fix header in iphone, fix button 'ver mapa', added
+    solution for beneficts with coords in 0.0.
+
+commit 0976cb400ea9a2dde9aeab492f49ab8dc10a0707
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Jan 17 15:21:49 2013 -0300
+
+    added transictions, fix header in iphone, fix button 'ver mapa', added
+    solution for beneficts with coords in 0.0
+
+commit 8eb3379ed16ad1fcaf200912b69f19c18fe8963d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 16 12:56:55 2013 -0300
+
+    changed version
+
+commit 16adeaefa7ec3556c994c8543f3c722c1f7bdd31
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 16 12:46:04 2013 -0300
+
+    test
+
+commit c2c2096070e10113806186fa9b27937b6cc827fb
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Jan 14 11:15:36 2013 -0300
+
+    test
+
+commit c9e78202c7029619fae6eef44b26d695e60cd7d8
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 11 12:02:39 2013 -0300
+
+    change URL local
+
+commit bbb87d59e8d00c6a2523b9ac3dd70bf01237cc96
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Jan 11 11:54:10 2013 -0300
+
+    Added transictions into all pages
+
+commit b44bb2962dd5400fd04127e1b0e06c67b107eb3c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 9 10:13:38 2013 -0300
+
+    change url to QA
+
+commit 2de625b3d57e2858fd408d008aeda299e0c90e37
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Jan 9 10:04:40 2013 -0300
+
+    url prod
+
+commit eaa9e535326ab5690766a9286bccafa91a02df54
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 12:05:32 2012 -0300
+
+    change baseUrl to production
+
+commit e9b625423ef9224d6c8e2e5669e01e3a488c0486
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 11:44:35 2012 -0300
+
+    cambio baseUrl
+
+commit 9fdca313779d89d8ba3e52b1f8aa362fa99ecd95
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 11:41:49 2012 -0300
+
+    cambio baseUrl
+
+commit 92511a8ba1d341581c1632011afaeb61ba205829
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 11:31:55 2012 -0300
+
+    change URL to production
+
+commit 49a08d3683e9f5afa15dba96428792445ccd16dd
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 10:54:07 2012 -0300
+
+    added line into 'listar-cajeros'
+
+commit a5dab8f1d65b2e8003433339b0277816946c44a1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Dec 10 10:05:48 2012 -0300
+
+    added icon fgo to benefict.
+    change .js for more velocity
+
+commit bca9e18f00daa723149b106d0bde10fe06f6fc9c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Dec 4 17:23:14 2012 -0300
+
+    change url for bbvaqa
+
+commit c8722c6463e2ac51fb7bc4864cf0bf286053b1e9
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Dec 4 17:20:45 2012 -0300
+
+    added Scrip for downloading archives for app BlackBerry
+
+commit 7cd497ff5839ca5fb97818bc8a9c087aeff66ec4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Dec 4 16:43:42 2012 -0300
+
+    change base url to local
+
+commit c8d6fc2763bbbddb7c51d4141c919ad7a87c911c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Dec 4 16:36:09 2012 -0300
+
+    Added main.html for compactibility with android <= 2.2
+
+commit c97e7690ec435adf347f76f027c8c30fbc610b7f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Dec 4 12:01:30 2012 -0300
+
+    Fix botton 'ver mas' into beneficios
+
+commit b88bac31ee32d3f72aab8a949f46bae9d2d831ba
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:53:34 2012 -0300
+
+    logica del icono ajax
+
+commit 851edb85d482d4cbe12f967b7cef7e5ebc7ddee6
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:48:10 2012 -0300
+
+    boton 'ver mas'
+
+commit 427736b799ad002ddf42babc1b35323074388fe0
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:39:43 2012 -0300
+
+    logica boton 'ver mas'
+
+commit cd01772149d12165394c7e3c736e9ff697361bc7
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:35:49 2012 -0300
+
+    a
+
+commit 7755838f78d6280d048e0eda63ef76cb03ce4c40
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:22:08 2012 -0300
+
+    change functionality of botton 'ver mas'
+
+commit 0772fa840ffb2a17e31d0d0bc2b14c60cc5ca854
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:09:11 2012 -0300
+
+    change version to 1.4
+
+commit 9624c3b31225e7537de2052a326b560c72084df8
+Author: dguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 29 16:07:52 2012 -0300
+
+    line 1555 change 'collection.lenght' to 'collection.length'
+
+commit 6a81c28f01ea437459cea18afd6c0318b827cc3f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Nov 21 18:21:23 2012 -0300
+
+    url production
+
+commit 36c489d6947aa35581b1afd49604475a620f76cb
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Nov 21 18:18:01 2012 -0300
+
+    url prod
+
+commit 3da2d94e071aae081dc801ecba3ef994e15dd247
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Nov 21 18:13:32 2012 -0300
+
+    url local
+
+commit 47612edaabf3394027e5e68bd9fbf8ee76f234e1
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Wed Nov 21 18:12:31 2012 -0300
+
+    geolocalizacion
+
+commit 0e527e12cf092d4bfa13efc716d9fb1c26577b82
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 15 12:41:16 2012 -0300
+
+    URL local
+
+commit 4df43914090e725c13805096ac400a07f4cdc122
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 15 12:26:55 2012 -0300
+
+    url desa
+
+commit 29d835fbe5d7086bd18d0914e4135ae54175157c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 15 12:16:10 2012 -0300
+
+    urlprod
+
+commit f686143158481f6c2e76ce9f87fbfbfbaa205c4d
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Nov 15 12:06:30 2012 -0300
+
+    Correccion de bug y mejoras en filtros
+
+commit d8648eaf594d79b63884ea7376e25a7a74cb45c4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Nov 6 12:27:22 2012 -0300
+
+    cambio URL prod
+
+commit 056e03880f23350e921fcaff42554a97cc9b5c00
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Nov 6 12:11:18 2012 -0300
+
+    cambio URL qa bbva
+
+commit ad649dc8fa4b03263f7aa8892b77be29f6567d75
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Nov 6 11:55:21 2012 -0300
+
+    init zonas
+
+commit 7020695991a1b28ffc3cac1accc792239f4b33be
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Nov 6 11:45:33 2012 -0300
+
+    cambio URL local
+
+commit 217891b921dcb811dc9c65ebf0c6175c2c8b3e24
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Nov 6 11:42:47 2012 -0300
+
+    Cambios en filtros seleccion de zonas y se solucionaron los bug
+    reportados
+
+commit d8394ba06252418722d3df0cd8dfae23fea9de0f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 30 09:58:27 2012 -0300
+
+    desa
+
+commit 884b1cc646b2a1c84b1ebbabea63e124648b8076
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 30 09:54:48 2012 -0300
+
+    URL LOCAL
+
+commit 5f5dfbd61a7ecd3b6161a231d7f2de94399c8194
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Oct 29 16:34:48 2012 -0300
+
+    Cambio URL desarrollo
+
+commit f813000f6fcbf8f5203021a38c9f50971b778e39
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Mon Oct 29 15:23:55 2012 -0300
+
+    Bug de filtros
+
+commit 73467bbadcbb2ffccc8e049e18bdb5e9cf5ab9e5
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 23 17:25:51 2012 -0300
+
+    Cambio URL produccion
+
+commit 1cb38bc5182c6d15b33c1c5e926fc70849e8f8ac
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 23 17:22:53 2012 -0300
+
+    Cambio URL desarrollo
+
+commit 3d9cbbcabeeb98e0d044ff8561dfec9cf7be7454
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 23 17:13:11 2012 -0300
+
+    Cambio URL a ip local para test
+
+commit 4dc56bdc47cfd71a5b099d891cd4bcf497c9e8cb
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Oct 23 17:00:27 2012 -0300
+
+    FrancesGo Mobile V 1.0
+
+commit 2668dce70208a1da0793b219b1c3fb7991f7c7e7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:36:25 2012 -0300
+
+    cambio URL PROD
+
+commit bacb1e59abac2706ccc22bee52838b37f3a8af5c
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:23:02 2012 -0300
+
+    cambio URL desa
+
+commit 404e23d861b1d9eabff800fd2baa63c2855f072e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:17:35 2012 -0300
+
+    Add logo francesGo
+
+commit 0f0bf1bce94bc46267e77b147cd9949dcf9ee76f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:10:01 2012 -0300
+
+    cambio url
+
+commit dade3340c909a904522cc835b1682aca24e3c7ff
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:09:24 2012 -0300
+
+    FrancesGoMobile
+
+commit 6eb8aca7abcc604c322bb35a32d46579a45c372f
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 18:08:37 2012 -0300
+
+    FrancesGo solucion de los bug de back-legales y calcular ruta
+
+commit 4dcf48e3a3f16271e2b78c489341b8e1eb4c43d3
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 15:16:17 2012 -0300
+
+    Quitando primer llamada mobile-beneficios
+
+commit a1aa2a725277392dd491daca560f75776dfea23e
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 14:04:17 2012 -0300
+
+    FrancesGo Mobile agrego baseUrl de produccion
+
+commit 7e384d0cc0c4b94ae39f30884b041dcdaf30d27a
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 14:00:57 2012 -0300
+
+    FrancesGo Mobile cambio de leyenda del boton 'back' a 'atras'
+
+commit 0e34aa47c4e26cfb87efa0ddad2b93cd7f951ed7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 12:48:14 2012 -0300
+
+    Imagenes del menu principal
+
+commit 9976d7e9a79d2c7f91a8fe95ffc5321e0856b505
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Fri Oct 12 12:40:35 2012 -0300
+
+    FrancesGo Mobile V 0.0.9
+
+commit 54e746cc7bedc678f06c482521a24a1d7f69e478
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Tue Sep 25 12:45:34 2012 -0300
+
+    FrancesGo actualizacion boton 'como llegar?' para beneficios, sucursales
+    y cajeros
+
+commit 83213886e26010575850481842e7275e61b680d7
+Merge: a87e3c3 aad35e2
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Sep 20 18:34:57 2012 -0300
+
+    Merge branch 'master' of https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit a87e3c378b9645846099834a26ac41770d9262c4
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Sep 20 18:32:28 2012 -0300
+
+    FrancesGO
+
+commit aad35e2295f3dc9795dea93f9e8db7a39636f2b7
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Sep 20 18:15:56 2012 -0300
+
+    FrancesGO
+
+commit c949064cb7924a50512921f19abeb73e7ab99644
+Author: darioguzman <dario.guzman@artdecode.com.ar>
+Date:   Thu Sep 20 18:02:45 2012 -0300
+
+    VERSION 0.0.7
+
+commit ddbe3f5bfed7eda99236e38a71c07f613c26a84b
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 16:44:29 2012 -0300
+
+    Nuevo
+
+commit 8d9dae396fb89dffa534ba57098b7c0936317931
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 16:43:36 2012 -0300
+
+    Nueva versión sincronizada con la estructura del portal-mobile
+
+commit 1c9747b90a1285eaae4da686b50408669e7cd079
+Merge: a677243 1e2f3e2
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 14:37:57 2012 -0300
+
+    Merge branch 'master' of
+    https://github.com/emilio-alberdi/francesGO-mobile.git
+    
+    Conflicts:
+    	config.xml
+
+commit a677243fc1cfad204a6cf12588b03bbdb4650f73
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 14:32:45 2012 -0300
+
+    Corregidos caracteres especiales
+
+commit 1e2f3e2d7c884a4ed29f2036aca2d75062e8cfe3
+Author: emilio-alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Fri Aug 17 13:09:52 2012 -0300
+
+    Otra prueba para caracteres especiales.
+
+commit 3a73b7901638eab4d64c20e78f4db3f1b5c31159
+Author: emilio-alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Fri Aug 17 13:08:58 2012 -0300
+
+    Update index.html
+    
+    Otra prueba para los caracteres especiales.
+
+commit 2ace737939c53461111e81230ef9e2f02a366a7c
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 12:52:46 2012 -0300
+
+    Cambiado codigo de version.
+
+commit 84b21285a0d4a91ceece73f0607bded5725dc4dc
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 17 08:26:30 2012 -0300
+
+    Modificado el nro de version
+
+commit acbd94b1a11c7821d0f49d07bffdb426b49cd54e
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Thu Aug 16 18:42:08 2012 -0300
+
+    Agregado utf8 para ver si procesa bien los asentos
+
+commit 7ae374a825d49f7cddf3c2d44e60a069d3c41f12
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Thu Aug 16 16:33:58 2012 -0300
+
+    Agregada configuracion por plataforma
+
+commit f03f318bf28c934358c40bc40731c33854230580
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Thu Aug 16 16:33:03 2012 -0300
+
+    Corregidos los paths del francesgo.js
+
+commit 4b04e4346fac9f3bb34fa0f0f16a27a137fe9537
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Thu Aug 16 16:04:45 2012 -0300
+
+    Modificado para apuntar a QA BBVA
+
+commit eb9d87dfd51ad3b45002e89758fbd5516b154d51
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Thu Aug 16 15:59:25 2012 -0300
+
+    Corregidos los paths a los diferentes recursos del proyecto
+
+commit e8ca38e54d7fcb3ee0fc52071dd38ecfa8fa2cf5
+Merge: 81c4f6f 9c35849
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 13:19:15 2012 -0300
+
+    Merge remote-tracking branch 'origin/master'
+    
+    Conflicts:
+    	index.html
+
+commit 81c4f6f6cbe1f931af6084be5c8b30ba917f4af5
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 12:54:17 2012 -0300
+
+    Corregida la ñ
+
+commit 28510895ad5222505c6c9cab78455c4af82993df
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 12:52:44 2012 -0300
+
+    Cambiado para apuntar a dev
+
+commit 9c3584940d2226984fb3982378081645961906ac
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 12:48:18 2012 -0300
+
+    Cambiado para apuntar a dev
+
+commit 71fd831400f2fb072c7e0e18cbd3c6659a0ecbe2
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 12:34:51 2012 -0300
+
+    actualizado
+
+commit 737e70dc53a0793abedb47bc285e74745bdccc1f
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 11:33:39 2012 -0300
+
+    Arreglado el path a los iconos
+
+commit 392f2b77aef39e5630aada2c6dd9aea6e70f73c8
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 11:29:48 2012 -0300
+
+    Arreglado la ñ en Campañas
+
+commit 9b4fc40ae2bad46095ed056c45f605843f48d117
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Aug 10 11:08:03 2012 -0300
+
+    Agregados los iconos específicos por plataforma.
+
+commit c392ec9226d907ce7a2f1012857fd6d99ee03d82
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Tue Jul 31 10:58:46 2012 -0300
+
+    Changed Service Location to Test
+
+commit 091ac0a2db5087f0c0ddef3edafd9cfed5a41008
+Merge: 57d2b73 9f1eb66
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Jul 27 17:48:47 2012 -0300
+
+    Merge branch 'master' of
+    https://github.com/emilio-alberdi/francesGO-mobile.git
+
+commit 9f1eb66f46e5f3b82e99cc29edc7c248c6361554
+Author: Gustavo Felipe Garcia <gustavo.garcia@artdecode.com.ar>
+Date:   Fri Jul 27 17:46:27 2012 -0300
+
+    Added splash
+
+commit 57d2b7304775a90aa82f32595ee06a992f371c1e
+Author: Gustavo Felipe Garcia <gustavo.garcia@artdecode.com.ar>
+Date:   Fri Jul 27 17:37:44 2012 -0300
+
+    Added splash
+
+commit 904b4f4b4bac730fa4494802b0339407dfdf8f60
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Jul 27 17:05:48 2012 -0300
+
+    Added CSS + main page code
+
+commit a34c18449700c09d26ee251a63380b0d6dc3f7b4
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Jul 27 17:04:44 2012 -0300
+
+    Removed unused stuff
+
+commit 0558a7041357f5f7684684bb5d2e5d6979b281c8
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Jul 27 17:02:46 2012 -0300
+
+    Added FrancesGO-Mobile JSs
+
+commit 3865d6f79f0393f54077963dc40cd528cf99e2e7
+Author: Gustavo Felipe Garcia <gustavofelipegarcia@gmail.com>
+Date:   Fri Jul 27 17:00:14 2012 -0300
+
+    Added images for FrancesGO Mobile
+
+commit 34ca7362b9fe370485eaa640975ac73ee0d7d890
+Author: emilio-alberdi <emilio.alberdi@artdecode.com.ar>
+Date:   Fri Jul 27 14:47:12 2012 -0300
+
+    Update commit.xml
+    
+    Changed information according to new application
+
+commit d88ef41b1b5d13a994b30a0d764148177ce5dd03
+Author: alunny <alunny@gmail.com>
+Date:   Tue Feb 28 15:57:12 2012 -0800
+
+    config.xml changes
+    
+    - no confusing, unimplemented gap:platform tags
+    - real orientation, not pref=autorotate
+
+commit a780d8e6cf9e0dba59ef74f4fbb535d9a855ee08
+Author: Dave Johnson <dave@nitobi.com>
+Date:   Thu Aug 18 15:45:48 2011 -0700
+
+    Remove call to removed isReachable
+
+commit 165a4a954c027d67a6b883db77f1aaa5a7fd7df4
+Merge: 5364c59 1f71799
+Author: Andrew Lunny <andrew.lunny@nitobi.com>
+Date:   Tue Apr 26 10:07:36 2011 -0700
+
+    Merged pull request #1 from dansilivestru/master.
+    
+    Geo location error handler
+
+commit 1f7179941d933f4fb12473346e58923923f3c025
+Author: Dan Silivestru <dan.silivestru@tinyhippos.com>
+Date:   Fri Jan 14 14:50:37 2011 -0500
+
+    added error handler for failed goelocation request
+
+commit 5364c5985ed6f197dc760b737026b6cede98708f
+Author: alunny <andrew.lunny@nitobi.com>
+Date:   Thu Nov 4 23:13:40 2010 -0700
+
+    switching config: "training" to "getting started"
+
+commit 3608b2204032f3ab5d42614689fa64ee6032dab7
+Author: Ryan Betts <ryanbetts@gmail.com>
+Date:   Wed Nov 3 12:14:32 2010 -0700
+
+    some small adjustments
+
+commit 77ac7af62ebc5ebfe32de39b331efdd0cc06ee32
+Author: Ryan Betts <ryanbetts@gmail.com>
+Date:   Wed Nov 3 11:57:04 2010 -0700
+
+    styled the app
+
+commit c5b0bcf86b5da920aaf2a277ad6dd2d9b56d2d48
+Author: alunny <andrew.lunny@nitobi.com>
+Date:   Tue Nov 2 10:52:02 2010 -0700
+
+    readme
+
+commit 769fa31c2fd5048c2e874f7a41264704dfd80a2f
+Author: alunny <andrew.lunny@nitobi.com>
+Date:   Tue Nov 2 10:47:40 2010 -0700
+
+    initial commit

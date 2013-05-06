@@ -2477,6 +2477,13 @@ function processCall(xml,services,processCollection){
 			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
 			
 			$('#objects-mapa-mapa').gmap('option', 'zoomControlOptions', { 'style': google.maps.ZoomControlStyle.SMALL, 'position': google.maps.ControlPosition.RIGHT_BOTTOM });
+		
+			if(isBlackBerry()){
+				$('#ver-beneficio-mapa').gmap('option', 'panControl', true);
+				
+				$('#ver-beneficio-mapa').gmap('addControl', 'control', google.maps.ControlPosition.LEFT_TOP);
+				
+			}
 		})		
 			
 		beneficiosPersistenceService.getCollection(function(collection) {
@@ -2661,6 +2668,12 @@ function processCall(xml,services,processCollection){
 			
 			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
 			
+			if(isBlackBerry()){
+				$('#ver-beneficio-mapa').gmap('option', 'panControl', true);
+				
+				$('#ver-beneficio-mapa').gmap('addControl', 'control', google.maps.ControlPosition.LEFT_TOP);
+				
+			}
 		})			
 	
 			sucursalesPersistenceService.getCollection(function(collection) {
@@ -3282,6 +3295,13 @@ function processCall(xml,services,processCollection){
 			console.log('zoom despues de cambiarlo: '  + zoom)
 			
 			$('#objects-mapa-mapa').gmap('option', 'center', new google.maps.LatLng(Preferences.get().latitude, Preferences.get().longitude));
+		
+			if(isBlackBerry()){
+				$('#ver-beneficio-mapa').gmap('option', 'panControl', true);
+				
+				$('#ver-beneficio-mapa').gmap('addControl', 'control', google.maps.ControlPosition.LEFT_TOP);
+				
+			}
 		})			
 		
 			cajerosPersistenceService.getCollection(function(collection) {
