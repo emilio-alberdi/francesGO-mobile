@@ -1693,6 +1693,7 @@ function processCall(xml,services,processCollection){
 		alert("entro al click con alert trucho")
 		
 		try{
+			
 			var alertDismised = function(data){
 				alert("paso");
 			}
@@ -1701,7 +1702,7 @@ function processCall(xml,services,processCollection){
 			
 			notificationMessage.alert(
 					'Eres el ganador!',     // mensaje (message)
-					alertDismissed,         // función 'callback' (alertCallback)
+					"",         // función 'callback' (alertCallback)
 					'Game Over',            // titulo (title)
 					'Cerrar'                // nombre del botón (buttonName)
 			);
