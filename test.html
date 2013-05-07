@@ -8,30 +8,50 @@
 
     // Wait for PhoneGap to load
     //
-    document.addEventListener("deviceready", onDeviceReady, false);
-
-    // PhoneGap is ready
-    //
-    function onDeviceReady() {
-    	var informacion="Tu SO es: " + device.platform + " Version: " + device.version;
-
-    	alert(informacion);
+    try{
+    	
+	    function onDeviceReady() {
+	    	
+	    	if (typeof navigator.device === "undefined") {
+	    		navigator.device = window.device = new Device();
+	    	}
+	    	
+	    	var informacion="Tu SO es: " + device.platform + " Version: " + device.version;
+	
+	    	alert(informacion);
+	    }
+	    document.addEventListener("deviceready", onDeviceReady(), false);
+	
+	    // PhoneGap is ready
+	    //
+	
+	    // alert dialog dismissed
+    }catch(e){
+    	alert(e);
     }
 
-    // alert dialog dismissed
-    function alertDismissed() {
-        // do something
-    }
-
+	    function alertDismissed() {
+	        // do something
+	    }
     // Show a custom alert
     //
     function showAlert() {
-        navigator.notification.alert(
-            'You are the winner!',  // message
-            alertDismissed,         // callback
-            'Game Over',            // title
-            'Done'                  // buttonName
-        );
+    	
+    	try{
+    		alert("Entro al metodo");
+    		
+    		if(!navigator.notification){
+   		      navigator.notification = new Notification();
+    		}
+	        navigator.notification.alert(
+	            'You are the winner!',  // message
+	            alertDismissed,         // callback
+	            'Game Over',            // title
+	            'Done'                  // buttonName
+	        );
+    	}catch(e){
+    		alert(e);
+    	}
     }
 
     </script>
