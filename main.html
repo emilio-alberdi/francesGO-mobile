@@ -673,21 +673,15 @@
 			 
 		    $('.map').css('min-height', mapHeigth+"px");
 
-		    if(navigator.onLine){
-		    	alert("online");
-		    	alert(navigator.toString());
-		    }else{
-		    	alert("offline")
-		    }
-		    $.ajax({url:"http://www.google.com/", type:'GET',cache: false, success: function(data){
-				alert("Paso")
+		    
+// 		    $.ajax({url:"http://www.google.com/", type:'GET',cache: false, success: function(data){
+// 				alert("Paso")
 		    	francesGORegisterEvents();	
-		    }, error: function(jqXHR, textStatus, errorThrown) {
-		    	alert("fallo");
-		    	window.close();
-		    	return;
-		    }
-		    });
+// 		    }, error: function(jqXHR, textStatus, errorThrown) {
+// 		    	alert("fallo");
+// 		    	return;
+// 		    }
+// 		    });
 			    
 		}
 		catch (e) {

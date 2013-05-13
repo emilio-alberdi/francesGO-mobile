@@ -1697,15 +1697,6 @@ function processCall(xml,services,processCollection){
 	
 	function francesGORegisterEvents() {
 
-		 $.ajax({url:"mobile-banners.json", type:'GET',cache: false, success: function(data){
-				console.log("Paso")
-		    	francesGORegisterEvents();	
-		    }, error: function(jqXHR, textStatus, errorThrown) {
-		    	console.log("fallo");
-		    	return;
-		    }
-		  });	
-	
 	registerGMapsToPage('object-mapa');
 	registerGMapsToPage('objects-mapa');
 	registerGMapsToPage('ver-sucursal');
