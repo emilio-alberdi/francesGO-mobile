@@ -3,7 +3,7 @@
 		xmlns:gap	= "http://phonegap.com/ns/1.0"
 		xmlns:rim	="http://www.blackberry.com/ns/widgets"
 		id		= "ar.com.bbva.francesgo.frontend.mobile"
-		version 	= "0.7.3">
+		version 	= "0.7.4">
 
 	<name>FrancesGO Mobile - Argentina</name>
 
@@ -56,6 +56,8 @@
 	    <rim:permit>read_geolocation</rim:permit>
   	</rim:permissions>
 		
+	<preference name="orientation" value="default" />
+	<rim:orientation mode="auto" />
 
 <!-- 	<gap:splash src="splash.png"/> -->
 
@@ -71,6 +73,15 @@
 	<gap:splash src="splash.png" gap:platform="android" gap:density="mdpi" />
 	<gap:splash src="splash.png" gap:platform="android" gap:density="hdpi" />
 	<gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" />
+	
+	<gap:splash src="splash320x480.png" width="320" height="480" />
+	<gap:splash src="splash640x960.png" width="640" height="960" />
+	<gap:splash src="splash640x1136.png" width="640" height="1136" />
+	<gap:splash src="splash1024x768.png" width="1024" height="768" />
+	<gap:splash src="splash768x1024.png" width="768" height="1024" />
+	<gap:splash src="splash2048x1496.png" width="2048" height="1496" />
+	<gap:splash src="splash1536x2008.png" width="1536" height="2008" />
+		
 	
 <!-- 	splash para BB -->
 
