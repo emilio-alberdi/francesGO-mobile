@@ -47,7 +47,8 @@
 			 3:'GPS desactivado. Por favor activelo'
 		};
 		console.log(errors[error.code]);
-		alert(errors[error.code]);
+		showAlert("Error GPS", errors[error.code]);
+//		alert(errors[error.code]);
 	}
 	
 	function savePosition(position) {
@@ -683,17 +684,17 @@
 				
 				console.log(textStatus, errorThrown);
 				
-				alert("error " + this.options.service + " " + textStatus  + " "+ errorThrown );
+				showAlert("Error", "error " + this.options.service + " " + textStatus  + " "+ errorThrown );
 				
 				$.mobile.loading('hide');
 				
 				if(navigator.onLine){
-					alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
+					showAlert("Error",'Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 				}else{
-					alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+					showAlert("Error", "Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 				}
 			}catch(e){
-				alert("error on call: " + e);
+				showAlert("Error", "Error en el servicio, intentar mas tarde");
 				
 				$.mobile.loading('hide');
 				
@@ -710,6 +711,16 @@
 		
 		var callback = function (data) {
 			try {
+				var message ;
+				
+				if(data.message){
+					
+					if(data.message.indexOf("could not be invoked") >= 0){
+						message = "Por favor, verificar la conectividad a internet y volver a intentarlo";
+					}else{
+						message = "Conexión con el servidor perdida, por favor volver a intentarlo";
+					}
+				}
 				
 				$.mobile.loading('hide');
 				
@@ -723,7 +734,14 @@
 				
 			}
 			catch(e) {
-				alert('error en callFilter '+ e);
+				
+				if(message){
+					
+					showAlert("Error",message);
+				}else{
+					showAlert("Error", "Por favor, verificar la conectividad a internet y volver a intentarlo", "#menu-principal")
+				}
+				
 				console.log('error ', e);
 			}
 		}
@@ -740,7 +758,7 @@
 			}
 
 			checkNavigator(path, data, processCollection, services);
-
+			
 			$.mobile.loading('show');
 			
 			$.ajax({url:this.options.service, type:'POST', data:data,cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
@@ -748,13 +766,15 @@
 				try{
 					$.mobile.loading('hide');
 					
+				
 					if(navigator.onLine){
-						alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
+						showAlert("Error",'Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown );
 					}else{
-						alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+						showAlert("Error","Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 					}
+					
 				}catch(e){
-					alert("Error en el servicio, por favor intente nuevamente mas tarde ");
+					showAlert("Error","Error en el servicio, por favor intente nuevamente mas tarde ");
 					$.mobile.loading('hide');
 				}
 			}});
@@ -807,6 +827,21 @@ function isBlackBerry(){
 	}
 	
 	return blackberry;
+}
+
+function isIOSorAndroid(){
+	var ua = navigator.userAgent;
+
+	var ios ;
+	if (ua.indexOf("Mac") >= 0 || ua.indexOf("Android")) {
+		ios = true;
+	}else{
+		
+		ios = false;
+	}
+	
+	return ios;
+	
 }
 	
 function callFilterForBlackBerry(path, postData, processCollection,services){
@@ -879,7 +914,7 @@ function processCall(xml,services,processCollection){
 			}
 			catch(e) {
 				console.log('error', e);
-				alert('error', e);
+				showAlert("Error",'error');
 			}
 		}
 	}
@@ -1383,29 +1418,6 @@ function processCall(xml,services,processCollection){
 		
 	}
 	
-	function generateBannerForBeneficios(){
-		
-		var page = $("#listar-beneficios");
-		
-		page.append('<div  data-role="footer"  ><img id="bannerImage"  /></div>').trigger('create');
-	
-			bannersPersistenceService.getCollection(function(collection) {
-				
-				if (!collection || collection.length == 0) {
-					return;
-				}
-				
-				var index=Math.floor(Math.random()*collection.length)
-				
-				var nombreArchivo = collection[index].nombreArchivo;
-				
-				var image = page.find('#bannerImage');
-				
-				image.attr("src", baseUrl + 'image-resources/' + nombreArchivo);
-				
-			});
-	}
-	
 	
 	function sendBeneficios(){
 
@@ -1429,7 +1441,7 @@ function processCall(xml,services,processCollection){
 				
 				$("#buscar-beneficios-search").css("border", "1px solid red");   
 				
-				alert('Ingresar solo letras o numeros');
+				showAlert("Verificar campo",'Ingresar solo letras o numeros');
 				
 				return;
 			}
@@ -1658,6 +1670,30 @@ function processCall(xml,services,processCollection){
 
 	}
 	
+	function showAlert(title,message, page){
+		
+		if(isIOSorAndroid()){
+				
+			var data = {};
+			
+			if(page){
+				data.page = page;
+			}else{
+				data.page = this.location.hash;
+			}
+			
+			data.title = title;
+			
+			data.message = message;
+			
+			$("#dialog-error").trigger({type:"display-data", info:data});
+		 	
+			 $.mobile.changePage("#dialog-error",  {transition: "pop", role: "dialog", reverse: false} );
+			
+		}else{
+			alert(message);
+		}
+	}
 	
 	function francesGORegisterEvents() {
 
@@ -1667,57 +1703,39 @@ function processCall(xml,services,processCollection){
 	registerGMapsToPage('ver-cajero');
 	registerGMapsToPage('ver-beneficio');
 	
-	$("#ayudar").live("pageshow", function(e){
-
+	$('#dialog-error').bind('display-data', function(e){
 		
-		try{
-			var alertDismised = function(data){
-				alert("paso");
-			}
-			var notificationMessage = new Notification();
-			
-			
-			notificationMessage.alert(
-					'Eres el ganador!',     // mensaje (message)
-					alertDismissed,         // función 'callback' (alertCallback)
-					'Game Over',            // titulo (title)
-					'Cerrar'                // nombre del botón (buttonName)
-			);
-		}catch(e){
-			alert(e);
-		}
-	})
+		var data = e.info;
+		
+		console.log(data);
+		
+		$("#popup_title").text(data.title);
+		
+		$('#error').html("" +
+				"<h6>"+ data.message+"</h6>" + 
+//				"<a data-role='button' class='boton' id='accept'>Aceptar</a>");
+		"<a data-role='button' class='boton ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c' id='accept' data-corners='true' data-shadow='true' data-iconshadow='true' data-wrapperels='span' data-theme='c'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Aceptar</span></span></a>");
+		$('#accept').click(function(e){
+			$.mobile.changePage(data.page,  { transition: "slide"} );
+		});
+		
+	});
 	
-	$("#ayuda-link").click(function(e){
-		
-		alert("entro al click con alert trucho")
-		
-		try{
-			
-			var alertDismised = function(data){
-				alert("paso");
-			}
-			var notificationMessage = new Notification();
-			
-			
-			notificationMessage.alert(
-					'Eres el ganador!',     // mensaje (message)
-					"",         // función 'callback' (alertCallback)
-					'Game Over',            // titulo (title)
-					'Cerrar'                // nombre del botón (buttonName)
-			);
-		}catch(e){
-			alert(e);
-		}
-		
-	})
 	
 	$('#preferencias-eliminar-cache').click(function(e){
-		 if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
-			 releaseData();
-	     }else{
-	    	 return;
-	     }
+		
+		if(isIOSorAndroid()){
+			
+			 $.mobile.changePage("#dialog-eliminar-cache",  {transition: "pop", role: "dialog", reverse: false} );
+			 
+		}else{
+		
+			if (confirm('¿Esta seguro de eliminar la cache de la aplicacion?')) {
+				releaseData();
+			}else{
+				return;
+			}
+		}
 	})
 	
 	if (Preferences.get().theme && Preferences.get().theme.length > 0) {
@@ -1730,6 +1748,13 @@ function processCall(xml,services,processCollection){
 		
 	console.log('start francesGORegisterEvents ');
 	
+		
+	$('#accept-release').click(function(e){
+		releaseData();
+		
+		$.mobile.changePage("#preferencias",  { transition: "slide"} );
+	});
+		
 	$(".banner").live("pageinit", function(event) {
 		
 		var page = $(this).page()
@@ -1846,15 +1871,19 @@ function processCall(xml,services,processCollection){
 		 
 		 
 	    if(emptyFields.length) {
-	        emptyFields.css("border", "1px solid red");   
-	        alert("Debe seleccionar los campos indicados");
+	        emptyFields.css("border", "1px solid red");
+	        
+	        showAlert("Verificar campos vacios","Debe seleccionar los campos indicados");
+//	        alert("Debe seleccionar los campos indicados");
 	        return false;
 	    }
 	    
 	    var tipoDni = parseInt($('#registracion-baja-tiposDocumento').val())
 	    
 	    if(tipoDni == -1){
-	    	alert("Debe seleccionar un tipo de documento")
+	    	
+	    	showAlert("Error en registración","Debe seleccionar un tipo de documento");
+//	    	alert("Debe seleccionar un tipo de documento")
 	    	$('#registracion-baja-tiposDocumento').css("border", "1px solid red");
 			return false;
 	    }
@@ -1862,13 +1891,17 @@ function processCall(xml,services,processCollection){
 	    var dni = parseInt($('#registracion-baja-dni').val());
 		 
 		 if(isNaN(dni)){
-			 alert("El número de documento debe ser númerico");		
+			
+			 showAlert("Error en campo número de documento","El número de documento debe ser númerico");
+//			 alert("El número de documento debe ser númerico");		
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
 		 }
 		 
 		 if(!(/^([0-9])+$/.test(dni) && (dni.toString().length > 4 && dni.toString().length < 9))){
-			 alert('El número de documento ingresado no es un número válido.');
+			 
+			 showAlert("Error en campo número de documento","El número de documento ingresado no es un número válido.");
+//			 alert('El número de documento ingresado no es un número válido.');
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
 		 }
@@ -1894,14 +1927,15 @@ function processCall(xml,services,processCollection){
 		 $.mobile.loading('show');
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion-baja.json", type:'POST', data:$('#registracion-baja-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
-			 alert("error");
+			 
+			 showAlert("Error","Error en el servidor, por favor intentarlo mas tarde.");
 			 
 			 $.mobile.loading('hide'); 
 
 			 if(navigator.onLine){
-				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
+				 showAlert("Error",'Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 			  }else{
-				  alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+				  showAlert("Error","Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 			  }
 		
 		 }})
@@ -1915,7 +1949,7 @@ function processCall(xml,services,processCollection){
 		var aceptaTerminosLegales = $("#aceptaTerminosLegales").is(':checked') ;
 		
 		if (!aceptaTerminosLegales) {
-			alert("Debe aceptar los términos y condiciones")
+			showAlert("Aceptar","Debe aceptar los términos y condiciones")
 			return;
 		}
 		
@@ -1937,14 +1971,12 @@ function processCall(xml,services,processCollection){
 		 
 		 $.ajax({url:baseUrl + "mobile-registracion.json", type:'POST', data:$('#registracion-form').serialize(),cache: false, success: callback, error: function(jqXHR, textStatus, errorThrown) {
 
-			 alert("error");
-			 
 			 $.mobile.loading('hide');
 			 
 			 if(navigator.onLine){
-				  alert('Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
+				 showAlert("Error",'Error on service ' + this.options.service + " " + textStatus  + " "+ errorThrown )
 			  }else{
-				  alert("Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
+				  showAlert("Error","Su dispositivo no esta conectado a internet, por favor verifique la conectividad");
 			  }
 		 }})
 		 
@@ -1972,21 +2004,28 @@ function processCall(xml,services,processCollection){
 		 
 		 
 		 if(emptyFields.length) {
-	        emptyFields.css("border", "1px solid red");   
-	        alert("Debe seleccionar los campos indicados");
+	        
+			 emptyFields.css("border", "1px solid red");
+	        
+	        showAlert("Verificar campos","Debe seleccionar los campos indicados");
+//	        alert("Debe seleccionar los campos indicados");
 	        return false;
 		 }
 	    
 		 var dni = parseInt($('#registracion-dni').val());
 		 
 		 if(isNaN(dni)){
-			 alert("El número de documento debe ser númerico");		
+			 
+			 showAlert("Error","El número de documento debe ser númerico");
+//			 alert("El número de documento debe ser númerico");		
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
 		 }
 		 
 		 if(!(/^([0-9])+$/.test(dni) && (dni.toString().length > 4 && dni.toString().length < 9))){
-			 alert('El número de documento ingresado no es un número válido.');
+			 
+			 showAlert("Error","El número de documento ingresado no es un número válido.");
+//			 alert('El número de documento ingresado no es un número válido.');
 			 $('#registracion-dni').css("border", "1px solid red");
 			 return false;
 		 }
@@ -1994,23 +2033,28 @@ function processCall(xml,services,processCollection){
 		 var tipoDni = parseInt($('#registracion-tiposDocumento').val())
 
 		 if(tipoDni == -1){
-	    	alert("Debe seleccionar un tipo de documento")
+			 
+			 showAlert("Error","Debe seleccionar un tipo de documento");
+//			 alert("Debe seleccionar un tipo de documento")
 	    	$('#registracion-baja-tiposDocumento').css("border", "1px solid red");
 			return false;
 		 }
 		 
 		 var nombre = $("#registracion-nombre").val();
 			 
-		 if(!/^[a-zA-Z0-9]+$/.test(nombre)){
-			alert("El nombre debe contener solo letras");
+		 if(!/^[a-zA-Z\s]+$/.test(nombre)){
+			 showAlert("Verificar campo nombre","El nombre debe contener solo letras");
+//			alert("El nombre debe contener solo letras");
 			$('#registracion-nombre').css("border", "1px solid red");
 			return false;
 		 }
 		 
 		 var apellido = $("#registracion-apellido").val();
 			 
-		 if(!/^[a-zA-Z0-9]+$/.test(apellido)){
-			alert("El apellido debe contener solo letras");
+		 if(!/^[a-zA-Z\s]+$/.test(apellido)){
+			
+			 showAlert("Verificar campo apellido","El apellido debe contener solo letras");
+//			 alert("El apellido debe contener solo letras");
 			$('#registracion-apellido').css("border", "1px solid red");
 			return false;
 		 }
@@ -2018,7 +2062,8 @@ function processCall(xml,services,processCollection){
 		 var codArea = $('#registracion-codigoAreaCelular').val();
 		 
 		 if(isNaN(parseInt(codArea))){
-			 alert("El codigo de área debe ser númerico");		
+			 showAlert("Error","El codigo de área debe ser númerico");
+//			 alert("El codigo de área debe ser númerico");		
 			 $('#registracion-codigoAreaCelular').css("border", "1px solid red");
 			 return false;
 		 }
@@ -2026,7 +2071,8 @@ function processCall(xml,services,processCollection){
 		 var numeroCelular = $('#registracion-numeroCelular').val();
 		 
 		 if(isNaN(parseInt(numeroCelular))){
-			 alert("El número de celular debe ser númerico");		
+			 showAlert("Error","El número de celular debe ser númerico");
+//			 alert("El número de celular debe ser númerico");		
 			 $('#registracion-codigoAreaCelular').css("border", "1px solid red");
 			 return false;
 		 }
@@ -2034,7 +2080,8 @@ function processCall(xml,services,processCollection){
 		 var operadorCelular = parseInt($('#registracion-operadorCelular').val());
 	
 		if(operadorCelular == -1){
-			alert("Debe seleccionar un operador celular")
+			showAlert("Verificar campo operador celular","Debe seleccionar un operador celular");
+//			alert("Debe seleccionar un operador celular")
 	    	$('#registracion-operadorCelular').css("border", "1px solid red");
 			return false;
 		}
@@ -2042,7 +2089,8 @@ function processCall(xml,services,processCollection){
 		var numeroCompleto = codArea + numeroCelular ;
 		
 		if(numeroCompleto.length != 10){
-			alert("Ingrese un número de celular válido");
+			showAlert("Verificar combinatoria código de área y número de telefono","Ingrese un número de celular válido");
+//			alert("Ingrese un número de celular válido");
 			$('#registracion-numeroCelular').css("border", "1px solid red");
 			return false;
 		}
@@ -2050,7 +2098,8 @@ function processCall(xml,services,processCollection){
 		var rubros = $('#registracion-rubro').val();
 		
 		if(!rubros || rubros == null){
-			alert("Debe seleccionar por lo menos un rubro")
+			showAlert("Error","Debe seleccionar por lo menos un rubro");
+//			alert("Debe seleccionar por lo menos un rubro")
 	    	$('#registracion-rubro').css("border", "1px solid red");
 			return false;
 		}
@@ -2058,7 +2107,8 @@ function processCall(xml,services,processCollection){
 		var zonas = $('#registracion-regionesOrdenables').val();
 		
 		if(!zonas || zonas == null){
-			alert("Debe seleccionar por lo menos una zona")
+			showAlert("Error","Debe seleccionar por lo menos una zona");
+//			alert("Debe seleccionar por lo menos una zona")
 	    	$('#registracion-regionesOrdenables').css("border", "1px solid red");
 			return false;
 		}
@@ -2861,7 +2911,7 @@ function processCall(xml,services,processCollection){
 				var marker = {'position': new google.maps.LatLng(sucursal.latitud , sucursal.longitud), 'bounds': true, icon:'assets/images/sucursal-empresa.gif'}
 			
 		}catch(e){
-			alert(e);
+			alert("Error al abrir la aplicación, intentar más tarde");
 		}
 		$('#ver-sucursal-mapa').gmap('addMarker', marker).click(function() {
 			$('#ver-sucursal-mapa').gmap('openInfoWindow', {'content': sucursalInfo}, this);
@@ -2922,7 +2972,8 @@ function processCall(xml,services,processCollection){
 									});
 							}
 							else {
-								 alert("No se pudo localizar su ubicación actual ");
+								showAlert("Error GPS","No se pudo localizar su ubicación actual ");
+//								 alert("No se pudo localizar su ubicación actual ");
 							 }
 						}
 					);
@@ -3540,7 +3591,8 @@ function processCall(xml,services,processCollection){
 									});
 							}
 							else {
-								 alert("No se pudo localizar su ubicación actual ");
+								 showAlert("Error GPS", "No se pudo localizar su ubicación actual ");
+//								 alert("No se pudo localizar su ubicación actual ");
 							 }
 						}
 					);
@@ -3694,21 +3746,6 @@ function processCall(xml,services,processCollection){
 	});
 	
 
-//	$("#menu-principal").live('pagebeforehide',function()  {
-//		
-//		var filter = cajerosPersistenceService.getFilter();
-//		
-//		filter.tipoCajeros = -1;
-//		
-//		filter.tipoCajeroDescripcion = "Tipo Cajero";
-//		
-//		localStorage.setObject("cajeros-filter", filter);
-//		
-//		$.mobile.loading('hide')
-//		
-//	});
-
-	
 	$(document).ready(function(){
 	   var s = document.createElement("script");
 	   s.type = "text/javascript";
@@ -3770,8 +3807,6 @@ function processCall(xml,services,processCollection){
 	});
 	
 	$.mobile.loading('show');
-	
-//	beneficiosPersistenceService.remove();
 	
 	rubrosPersistenceService.reloadCollection();
 	

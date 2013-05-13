@@ -633,6 +633,23 @@
      
      <!-- ********************* ver-cajeros ************************** -->
    
+   <div data-role='page' id="dialog-error" class='background'>
+		<h1 id="popup_title"></h1>
+		
+		<div id='error' class='background'>
+
+		</div>
+		
+	</div>
+	
+	 <div data-role='page' id="dialog-eliminar-cache" class='background'>
+		<h1 id="popup_title"> ¿Esta seguro de eliminar la cache de la aplicacion?</h1>
+		
+		<div class='background'>
+			<a data-role='button' id='accept-release' class='boton'>Aceptar</a>
+	    	<a data-role='button' class='boton' href='#preferencias'>Cancelar</a>
+		</div>
+	</div>
       
       </body>
 	<script type="text/javascript">
@@ -656,34 +673,21 @@
 			 
 		    $('.map').css('min-height', mapHeigth+"px");
 		    
+		    alert(navigator.onLine ? "online" : "offline");
 		    
-// 		    document.addEventListener("deviceready", onDeviceReady, false);
-
-// 			 function onDeviceReady() {
-// 			     checkConnection();
-// 			 }
-	
-// 			 function checkConnection() {
-// 			     var networkState = navigator.network.connection.type;
-	
-// 			     var states = {};
-// 			     states[Connection.UNKNOWN]  = 'Unknown connection';
-// 			     states[Connection.ETHERNET] = 'Ethernet connection';
-// 			     states[Connection.WIFI]     = 'WiFi connection';
-// 			     states[Connection.CELL_2G]  = 'Cell 2G connection';
-// 			     states[Connection.CELL_3G]  = 'Cell 3G connection';
-// 			     states[Connection.CELL_4G]  = 'Cell 4G connection';
-// 			     states[Connection.NONE]     = 'No network connection';
-	
-// 			     alert('Connection type: ' + states[networkState]);
-// 			 }
-
+		    $.ajax({url:"config.xml", type:'GET',cache: false, success: function(data){
+				console.log("Paso")
+		    	francesGORegisterEvents();	
+		    }, error: function(jqXHR, textStatus, errorThrown) {
+		    	console.log("fallo");
+		    	return;
+		    }
+		    });
 			    
-			francesGORegisterEvents();	
 		}
 		catch (e) {
 			console.log('start francesGORegisterEvents error' ,e);	
-			alert('start francesGORegisterEvents error ' + e)
+			alert('Fallo al inicializar')
 		}
 		
 		

@@ -115,7 +115,7 @@
 }
 .ui-btn-up-a:visited,
 .ui-btn-up-a a.ui-link-inherit {
-	color: #ffffff /*{a-bup-color}*/;
+	color: -moz-fieldtext /*{a-bup-color}*/;
 }
 .ui-btn-hover-a {
 	border: 1px solid #bbbbbb /*{a-bhover-border}*/;
