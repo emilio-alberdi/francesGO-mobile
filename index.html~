@@ -3,8 +3,8 @@
 	<head>
 		<title>FrancesGO Mobile - Argentina</title>
 		<script>
-// 			window.location='./main.html';
-			window.location='./test.html';
+ 			window.location='./main.html';
+//			window.location='./test.html';
 		</script>
 	<body>		
 	</body>
