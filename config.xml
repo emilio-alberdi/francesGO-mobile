@@ -62,26 +62,22 @@
 <!-- 	<gap:splash src="splash.png"/> -->
 
 <!-- Splas para ios -->
-<!-- 	<gap:splash src="splash.png" width="320" height="480" /> -->
-<!-- 	<gap:splash src="splash.png" width="640" height="960" /> -->
-<!-- 	<gap:splash src="splash.png" width="640" height="1136" /> -->
-<!-- 	<gap:splash src="splash.png" width="1024" height="768" /> -->
-<!-- 	<gap:splash src="splash.png" width="768" height="1024" /> -->
+	<gap:splash src="splash.png" width="320" height="480" />
+	<gap:splash src="splash.png" width="640" height="960" />
+	<gap:splash src="splash.png" width="640" height="1136" />
+	<gap:splash src="splash.png" width="1024" height="768" />
+	<gap:splash src="splash.png" width="768" height="1024" />
 
-<!-- 	<!-- splas para android --> -->
-<!-- 	<gap:splash src="splash.png" gap:platform="android" gap:density="ldpi" /> -->
-<!-- 	<gap:splash src="splash.png" gap:platform="android" gap:density="mdpi" /> -->
-<!-- 	<gap:splash src="splash.png" gap:platform="android" gap:density="hdpi" /> -->
-<!-- 	<gap:splash src="splash.png" gap:platform="android" gap:density="xhdpi" /> -->
+ 	<!-- splas para android --> 
+	<gap:splash src="splash-android/splash-200x320.png"    gap:platform="android" gap:density="ldpi"  width="200" height="320" />
+    <gap:splash src="splash-android/splash-320x480.png"    gap:platform="android" gap:density="mdpi"  width="320" height="480" />
+   	<gap:splash src="splash-android/splash-480x800.png"    gap:platform="android" gap:density="hdpi"  width="480" height="800" />
+    <gap:splash src="splash-android/splash-720x1280.png"   gap:platform="android" gap:density="xhdpi" width="720" height="1280" />
+    <gap:splash src="splash-android/splash-320x200.png"    gap:platform="android" gap:density="ldpi"  width="320" height="200" />
+    <gap:splash src="splash-android/splash-480x320.png"    gap:platform="android" gap:density="mdpi"  width="480" height="320" />
+    <gap:splash src="splash-android/splash-800x480.png"    gap:platform="android" gap:density="hdpi"  width="800" height="480" />
+    <gap:splash src="splash-android/splash-1280x720.png"   gap:platform="android" gap:density="xhdpi" width="1280" height="720" />
 	
-	<gap:splash src="splash320x480.png" width="320" height="480" />
-	<gap:splash src="splash640x960.png" width="640" height="960" />
-	<gap:splash src="splash640x1136.png" width="640" height="1136" />
-	<gap:splash src="splash1024x768.png" width="1024" height="768" />
-	<gap:splash src="splash768x1024.png" width="768" height="1024" />
-	<gap:splash src="splash2048x1496.png" width="2048" height="1496" />
-	<gap:splash src="splash1536x2008.png" width="1536" height="2008" />
-		
 	
 <!-- 	splash para BB -->
 
