@@ -75,7 +75,7 @@
     <gap:splash src="splash-android/splash-720x1280.png"   gap:platform="android" gap:density="xhdpi" width="720" height="1280" />
     <gap:splash src="splash-android/splash-320x200.png"    gap:platform="android" gap:density="ldpi"  width="320" height="200" />
     <gap:splash src="splash-android/splash-480x320.png"    gap:platform="android" gap:density="mdpi"  width="480" height="320" />
-    <gap:splash src="splash-android/splash-800x480.png"    gap:platform="android" gap:density="hdpi"  width="800" height="480" />
+    <gap:splash src="splash-android/splash-800x480V2.png"    gap:platform="android" gap:density="hdpi"  width="800" height="480" />
     <gap:splash src="splash-android/splash-1280x720.png"   gap:platform="android" gap:density="xhdpi" width="1280" height="720" />
 	
 	
