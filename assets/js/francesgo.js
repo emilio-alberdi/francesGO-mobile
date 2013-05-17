@@ -959,7 +959,7 @@ function processCall(xml,services,processCollection){
 			
 			if (rubros.length > 0) {
 				
-				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]))
+				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]));
 				
 				if (rubro) {
 					if(rubro.logoSmall){
@@ -1393,8 +1393,11 @@ function processCall(xml,services,processCollection){
 				}
 			}
 			scale = new google.maps.Size(iw,ih) ; 
-			var image = new google.maps.MarkerImage(imageIcon,null,null,null, scale);				
+			
+			var image = new google.maps.MarkerImage(imageIcon,null,null,null, null);	
+			
 			marker.icon = image;
+			
 		}else{
 			var img = new Image();
 			
@@ -1705,19 +1708,24 @@ function processCall(xml,services,processCollection){
 	
 	$('#dialog-error').bind('display-data', function(e){
 		
-		var data = e.info;
-		
-		console.log(data);
-		
-		$("#popup_title").text(data.title);
-		
-		$('#error').html("" +
-				"<h6>"+ data.message+"</h6>" + 
+		try{
+			
+			var data = e.info;
+			
+			console.log(data);
+			
+			$("#popup_title").text(data.title);
+			
+			$('#error').html("" +
+					"<h6>"+ data.message+"</h6>" + 
 //				"<a data-role='button' class='boton' id='accept'>Aceptar</a>");
-		"<a data-role='button' class='boton ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c' id='accept' data-corners='true' data-shadow='true' data-iconshadow='true' data-wrapperels='span' data-theme='c'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Aceptar</span></span></a>");
-		$('#accept').click(function(e){
-			$.mobile.changePage(data.page,  { transition: "slide"} );
-		});
+			"<a data-role='button' class='boton ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c' id='accept' data-corners='true' data-shadow='true' data-iconshadow='true' data-wrapperels='span' data-theme='c'><span class='ui-btn-inner ui-btn-corner-all'><span class='ui-btn-text'>Aceptar</span></span></a>");
+			$('#accept').click(function(e){
+				$.mobile.changePage(data.page,  { transition: "slide"} );
+			});
+		}catch(e){
+			console.log("error" , e);
+		}
 		
 	});
 	
@@ -2381,24 +2389,9 @@ function processCall(xml,services,processCollection){
 		
 		var comercioLogo = beneficiosPersistenceService.getLogo(beneficio);
 		
-		if(!comercioLogo){
-			if (beneficio.listaRubrosAsociados) {
-				
-				var rubros = beneficio.listaRubrosAsociados.split(",");
-				
-				var rubro = rubrosPersistenceService.getRubroPadre(parseInt(rubros[0]))
-				
-				if (rubro && rubro.logoSmall) {
-					comercioLogo = rubro.logoSmall;
-				}
-				
-			}
-			
-		}
-		
 		$("#beneficio-title").html("<span class='float-left'><img class= 'imgLogoFrances'src='assets/images/logo_francesGo.png'/></span>")
 		
-		$("#beneficio-title").append("<span class='float-left'><img width=30, height=30 class='comercioLogo'src='"+baseUrl + comercioLogo +"'/></span>")
+		$("#beneficio-title").append("<span class='float-left'><img width=30, height=30 class='comercioLogo'src='"+ comercioLogo +"'/></span>")
 		
 		$("#beneficio-title").append("<span class='float'>" + beneficio.nombreComercio + "</span>")
 		
@@ -2460,7 +2453,12 @@ function processCall(xml,services,processCollection){
 		
 		var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 	
-		marker = createMarker(beneficio);
+		try{
+			
+			marker = createMarker(beneficio);
+		}catch(e){
+			console.log("error creating marker " , e);
+		}
 		
 		$('#ver-beneficio-mapa').gmap('addMarker', marker).click(function() {
 			$('#ver-beneficio-mapa').gmap('openInfoWindow', {'content': beneficioInfo}, this);
@@ -2605,7 +2603,12 @@ function processCall(xml,services,processCollection){
 					
 					var beneficioInfo = '<div id="infowindow_content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">'+ beneficio.nombreComercio+'</h4><div id="bodyContent"><p>' + beneficio.descripcionPortal + '</p></div></div>'
 					
-					var marker = createMarker(beneficio);
+					try{
+						
+						var marker = createMarker(beneficio);
+					}catch(e){
+						console.log("error creating marker " , e);
+					}
 					
 					marker.bounds = true;
 					
